@@ -35,7 +35,7 @@
   "coste_demo": "No verificado. Para la API en producción hace falta Acrobat Sign Solutions, con precio solo por ventas. Como referencia, Acrobat Pro for teams cuesta 23,99 $/licencia/mes (anual pagado al mes), pero su página no menciona la API.",
   "coste_resumen": "0 € dev; producción: precio por ventas",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Solo si la empresa tiene Acrobat Pro o Standard sin API, o firma en papel o con PDF escaneado, y no piensa contratar Sign Solutions.",
     "alternativas": [
       "DocuSign (MCP oficial y planes con API de precio público)",

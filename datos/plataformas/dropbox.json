@@ -32,7 +32,7 @@
   "coste_demo": "API: 0 € con Basic. Plus: 11,99 €/mes mensual o 9,99 € anual; Standard: 14,50 € mensual o 12 € anual por usuario (dropbox.com/plans, 2026). Qué cifra es mensual y cuál anual lo deduje: la página no lo etiqueta.",
   "coste_resumen": "0 € API (Basic); Plus 9,99 €/mes",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Si los documentos están sin estructura o siguen en carpetas locales. Como el MCP ve todo el Dropbox, antes conviene crear una carpeta o cuenta de trabajo para la IA y subir ahí solo lo relevante.",
     "alternativas": [
       "Carpeta o cuenta dedicada dentro de Dropbox",

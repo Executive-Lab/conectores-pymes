@@ -31,7 +31,7 @@
   "coste_demo": "0 €: la API y los bots son gratis.",
   "coste_resumen": "0 €",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Solo si los canales se usan como gestor de tareas sin estado, responsable ni fecha. Como canal de comunicación o de avisos se conecta tal cual.",
     "alternativas": [
       "Trello o ClickUp para las tareas, con Discord para avisos",

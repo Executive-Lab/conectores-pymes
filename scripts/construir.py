@@ -85,7 +85,10 @@ MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto
          "septiembre", "octubre", "noviembre", "diciembre"]
 
 RE_TERCERO = re.compile(
-    r"\b(distribuidor|partner|informático|gestoría|comercial|franquicia|banco|BSP|Tech Provider|CSM)\b",
+    r"\b(distribuidor|partner|informático|gestoría|comercial|franquicia|banco|BSP|Tech Provider|CSM)\b"
+    # Administrador del tenant de Microsoft o Google (no el admin de un SaaS, que suele ser el propio dueño).
+    r"|Entra ID|\btenant\b|admin\.google\.com|consentimiento de administrador"
+    r"|admin(?:istrador)? de (?:Microsoft|Google|Workspace|Fabric)",
     re.IGNORECASE,
 )
 RE_URL = re.compile(r"https?://[^\s<>\"'\]]+")
@@ -114,7 +117,8 @@ def pide_informatico(p: dict) -> bool:
 
     Criterio: programa de escritorio u on-premise, dificultad 'Difícil', o que
     el texto de 'qué pedir' se dirija a un distribuidor, partner, gestoría,
-    comercial, franquicia, banco o proveedor (BSP)."""
+    comercial, franquicia, banco, proveedor (BSP) o al administrador del
+    tenant (Google Workspace, Microsoft 365: consentimiento de administrador)."""
     return (
         p["tipo"] == "escritorio/on-premise"
         or p["dificultad"] == "Difícil"
@@ -714,7 +718,7 @@ JS = r"""
     var tercero = sel.filter(function (p) { return p.tercero; });
     var migrar = sel.filter(function (p) { return p.veredicto === 'migrar'; });
     r.appendChild(el('div', { 'class': 'resumen-listas' }, [
-      bloqueLista('Piden informático, distribuidor o partner', tercero, 'Ninguna: las puedes conectar tú o quien administra la cuenta.'),
+      bloqueLista('Piden a otra persona (informático, administrador de Microsoft o Google, distribuidor o partner)', tercero, 'Ninguna: las puedes conectar tú.'),
       bloqueLista('Conviene valorar migrar', migrar, 'Ninguna. Puedes conectarlas sin cambiar de herramienta.')
     ]));
     var ordenadas = sel.slice().sort(function (a, b) {
@@ -1257,7 +1261,7 @@ def construir_index(plataformas: list[dict], categorias: list[dict], deriv: dict
       <dt>MCP</dt><dd>Oficial (del fabricante), comunitario (de terceros: úsalo solo en lectura) o no hay.</dd>
       <dt>Demo</dt><dd>Cómo probarla sin pagar: gratis permanente, prueba de N días, sandbox o cuenta de desarrollador, evaluación bajo petición o no hay.</dd>
       <dt>Veredicto</dt><dd>Conectar tal cual; conectar con puente (exportación, base de datos o partner); o valorar migración (conectarla cuesta tanto que puede compensar cambiar). Lee la guía <a href="guias/conectar-o-migrar.html">¿Conectar o migrar?</a>.</dd>
-      <dt>Pide informático o distribuidor</dt><dd>Programa instalado (escritorio u on-premise), dificultad «Difícil», o el acceso lo da un distribuidor, partner, gestoría, comercial, franquicia, banco o proveedor.</dd>
+      <dt>Pide a otra persona</dt><dd>Programa instalado (escritorio u on-premise), dificultad «Difícil», el acceso lo da un distribuidor, partner, gestoría, comercial, franquicia, banco o proveedor, o hace falta el administrador de Microsoft 365 o Google Workspace (consentimiento de la app).</dd>
       <dt>Confianza</dt><dd>Alta, media o baja según la calidad de las fuentes. Lo que no se pudo confirmar aparece como «no verificado».</dd>
     </dl>
   </details>

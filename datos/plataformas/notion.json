@@ -32,7 +32,7 @@
   "demo_resumen": "gratis permanente",
   "coste_resumen": "0 € (Free)",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Cuando Notion es el CRM principal, con pipeline, seguimiento de emails y llamadas, recordatorios o varios comerciales. No tiene objetos CRM, ni registro de actividad, ni deduplicación, y su MCP no se puede dejar en solo lectura. Si es solo gestor o wiki, conectar tal cual.",
     "alternativas": [
       "HubSpot Free CRM (gratis, MCP oficial)",

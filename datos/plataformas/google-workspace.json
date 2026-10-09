@@ -40,7 +40,7 @@
   "coste_demo": "APIs: 0 €. Business Starter: 6,80 €/usuario/mes en plan flexible (pago mensual), sin IVA. Con compromiso anual sale un 16 % más barato. La web enseña además una promoción temporal a 5,44 € (workspace.google.com/intl/es/pricing, consultada el 9-oct-2026).",
   "coste_resumen": "0 € API; Workspace 6,80 €/u/mes",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Solo si la empresa trabaja con cuentas @gmail.com personales o con Excel sueltos y carpetas en el PC. En ese caso conviene pasar a Workspace (consola de admin, app interna sin verificación, MCP oficial) y a Drive y Sheets compartidos.",
     "alternativas": [
       "Google Workspace Business Starter con unidad compartida",

@@ -31,7 +31,7 @@
   "coste_demo": "Professional: 19,99 $/mes con pago anual o 29,99 $ mensual, por 750 tareas (unas 375 llamadas MCP).",
   "coste_resumen": "0 € (100 tareas); Pro 19,99 $/mes",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Cuando el uso por MCP sea alto: a 2 tareas por llamada, 1.000 llamadas al mes son 2.000 tareas, y la IA suele encadenar varias llamadas por petición.",
     "alternativas": [
       "n8n self-hosted (sin coste por ejecución)",

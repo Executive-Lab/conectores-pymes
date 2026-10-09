@@ -29,13 +29,13 @@
     "Exportar a CSV: Data Export semanal o Data Loader."
   ],
   "rpa": "no hace falta: API y MCP cubren CRM, casos y objetos personalizados.",
-  "dificultad": "Fácil",
+  "dificultad": "Media",
   "permisos_acotados": "Crear un usuario de integración con licencia 'Salesforce Integration' (5 gratis en Enterprise, Performance y Unlimited; 1 en Developer Edition, según guías de terceros) y perfil 'Minimum Access - API Only Integrations'. Darle un permission set con licencia 'Salesforce API Integration' y solo 'Read' en los objetos necesarios, con seguridad a nivel de campo. Usarlo como 'Run As' del flujo client credentials en una ECA solo con el scope 'api'. Para el MCP, activar solo sobject-reads y limitar la ECA a usuarios aprobados por permission set. NO se puede acotar: el scope 'api' no distingue lectura de escritura (lo limita el usuario, no el token); el MCP hereda lo que pueda hacer el usuario conectado; la cuota de API es de toda la organización; la licencia de integración no cubre todos los objetos (algunos de Industries o personalizados piden un permission set adicional, según la comunidad).",
   "pedir_al_informatico": "Que el administrador cree un usuario 'IA-lectura' con licencia Salesforce Integration y un permission set de solo lectura en Cuentas, Contactos, Oportunidades y Casos. Que active en API Catalog > MCP Servers solo el servidor sobject-reads y cree una External Client App con scopes mcp_api y refresh_token, restringida a ese usuario. Para n8n, otra External Client App con client credentials y 'Run As' ese mismo usuario.",
   "demo_gratis": "Developer Edition gratis y permanente: incluye API (unas 15.000 llamadas/día y 5 MB de datos según fuentes de terceros, no verificado), Hosted MCP Servers, Agentforce y Data 360 desde 2026; no es para uso comercial. Además, prueba de Sales Cloud de 30 días sin tarjeta (página de precios UE). La Free Suite (2 usuarios) no parece incluir API (no verificado).",
   "demo_resumen": "sandbox/cuenta dev",
   "coste_demo": "Precios oficiales en euros (página española, consultada el 9-oct-2026), por usuario y mes, sin mención al IVA: Starter Suite 25 € (mensual o anual), Pro Suite 100 € (anual), Core 195 €, Advanced (Avanzado) 395 € y Max 550 € (anual). Core, Advanced y Max se anunciaron el 3-sep-2026 y sustituyen en la práctica a Enterprise y Unlimited para clientes nuevos. Plan más barato con API: Pro Suite más el complemento Web Services API (25 US$/usuario/mes según la página; precio en euros no verificado). Con API incluida y MCP alojado: Core, 195 €/usuario/mes con pago anual.",
-  "coste_resumen": "0 € (Developer Edition); 195 €/usuario/mes (Core, anual)",
+  "coste_resumen": "0 € dev; API: Pro+complemento o Core",
   "migracion": {
     "veredicto": "conectar tal cual"
   },

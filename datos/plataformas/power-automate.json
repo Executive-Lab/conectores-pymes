@@ -34,7 +34,7 @@
   "coste_demo": "Power Automate Premium: 13,00 €/usuario/mes con pago anual, sin IVA. Process (bot desatendido): 130 €/bot/mes con pago anual (microsoft.com/es-es, oct-2026). El coste de Copilot Studio para la vía MCP no está verificado.",
   "coste_resumen": "0 € dev plan; Premium 13 €/u/mes",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Cuando los procesos viven en Power Automate Desktop (RPA) o cuando no hay licencias Premium y solo se necesita que el arnés lance flujos.",
     "alternativas": [
       "Pasar los flujos de escritorio a flujos de nube con disparador HTTP",

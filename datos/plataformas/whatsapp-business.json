@@ -37,7 +37,7 @@
   "coste_demo": "La Cloud API directa no tiene cuota fija; Meta cobra por cada plantilla entregada según el país del destinatario. España, en EUR y sin IVA, con tarifas desde el 1-jul-2026: marketing entre 0,051 y 0,059 € y utilidad/autenticación unos 0,0166 €. Estas cifras son de terceros; no pude abrir el CSV de Meta, así que están sin verificar. Mensajes de servicio (respuestas libres en la ventana de 24 h): gratis hasta el 30-sep-2026. Según varios BSP (Vonage, Wati, SendPulse, respond.io), desde el 1-oct-2026 los 1.000 primeros al mes por número siguen gratis y el resto se cobra a tarifa de utilidad; además, las plantillas de utilidad dentro de la ventana dejan de ser gratis. La página de precios de Meta que pude leer todavía no lo recoge: verificar. Lo que se envía desde la app en coexistencia sigue siendo gratis. Si hay BSP, se suma su cuota (no verificada).",
   "coste_resumen": "0 € fijo; ~0,017-0,06 €/plantilla",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Si solo usan la app WhatsApp Business y quieren que la IA lea o responda, hay que pasar el número a la Cloud API en coexistencia. Siguen con la app en el móvil, pero: necesita app 2.24.17 o superior y alta mediante partner; el envío queda en 20 msg/s fijos; se desactivan las listas de difusión, los mensajes temporales y los de 'ver una vez'; los grupos no se sincronizan; y si el móvil pasa unos 14 días sin abrir la app, se desconecta.",
     "alternativas": [
       "Número nuevo dedicado solo a la API, sin coexistencia",

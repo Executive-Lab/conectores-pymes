@@ -34,7 +34,7 @@
   "coste_demo": "0 €: la API es gratis.",
   "coste_resumen": "0 €",
   "migracion": {
-    "veredicto": "valorar migración",
+    "veredicto": "conectar tal cual",
     "cuando_migrar": "Solo si los grupos se usan como gestor de tareas o como archivo: el bot no lee el historial y, con privacy mode, solo ve comandos y menciones. Como canal de avisos o de entrada de peticiones se conecta tal cual.",
     "alternativas": [
       "Trello o ClickUp para las tareas, con Telegram solo para avisos",
