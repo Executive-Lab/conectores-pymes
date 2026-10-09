@@ -1,0 +1,49 @@
+{
+  "id": "a3innuva-nomina",
+  "nombre": "a3innuva Nómina",
+  "nombre_completo": "a3innuva Nómina (Wolters Kluwer; misma API para a3Equipo, a3asesor rr.hh. y a3ERP nómina CLOUD)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "A3",
+    "a3nom",
+    "a3innuva nómina",
+    "a3Equipo",
+    "Wolters Kluwer"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON. Lectura de empresas, empleados (datos, contratos, IRPF, salario) y pagas calculadas (solo GET). Escritura: alta de empleado, cambios de datos y conceptos variables.",
+    "auth": "OAuth 2.0 Authorization Code con WKA más Ocp-Apim-Subscription-Key; token de 60 min con refresh.",
+    "requisitos": "Conectia contratado (su Apikey no sirve para Contabilidad). No sirve para instalaciones on-premise.",
+    "docs_url": "https://a3developers.wolterskluwer.es/doc/a3innuva-n%C3%B3mina/como-empezar/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP. Desde el 11-6-2026 existe 'a3innuva Nómina Expert AI', un agente dentro del programa que no se conecta a un arnés externo."
+  },
+  "otras_vias": [
+    "Enlace contable de nómina: SUENLACE.DAT (A3CON) o fichero Importia .json.zip",
+    "Integraciones de a3Marketplace (p. ej. Factorial)"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Media",
+  "permisos_acotados": "Sí se puede acotar: desde julio de 2025 la API aplica los permisos de 'Acceso a Tareas' del usuario, endpoint a endpoint (403 si no tiene acceso). Con un perfil restringido se bloquean, por ejemplo, los datos retributivos. No separa lectura de escritura. Datos personales sensibles: decidir con RGPD qué ve el agente.",
+  "pedir_al_informatico": "Que activen Conectia para Nómina, pidan el client OAuth y creen un usuario con perfil restringido y solo las Tareas necesarias, sin datos retributivos si no hacen falta.",
+  "demo_gratis": "Demo bajo petición a comercial; no hay prueba oficial con plazo.",
+  "coste_demo": "Precio del producto y de Conectia no publicados (no verificado).",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Sin precio público + Conectia",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No por integración: tiene la mejor API de la familia a3."
+  },
+  "verifactu": "No aplica: es nómina.",
+  "fuentes": [
+    "https://a3developers.wolterskluwer.es/doc/a3innuva-n%C3%B3mina/como-empezar/",
+    "https://a3developers.wolterskluwer.es/doc/a3innuva-n%C3%B3mina/changelog/",
+    "https://www.wolterskluwer.com/es-es/news/lanzamiento-a3innuva-nomina-expert-ai"
+  ],
+  "confianza": "alta"
+}

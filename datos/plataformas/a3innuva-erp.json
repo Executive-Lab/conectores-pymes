@@ -1,0 +1,54 @@
+{
+  "id": "a3innuva-erp",
+  "nombre": "a3innuva ERP / Facturación",
+  "nombre_completo": "a3innuva Facturación / a3innuva ERP (Wolters Kluwer, nube)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "A3",
+    "a3innuva facturación",
+    "a3innuva ERP",
+    "Wolters Kluwer"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON, la misma API que a3factura (api/saleInvoices, webhooks y métodos VERI*FACTU).",
+    "auth": "Solo OAuth 2.0 Authorization Code con WKA más Ocp-Apim-Subscription-Key (la autenticación básica de a3factura no vale aquí).",
+    "requisitos": "Conectia contratado y client OAuth gestionado por Wolters Kluwer. Los partners publican en a3Marketplace por la vía AppPartner.",
+    "docs_url": "https://a3developers.wolterskluwer.es/doc/a3factura/autenticacion/a3innuvaerp/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP ni nodo n8n. MCP propio o n8n con HTTP Request."
+  },
+  "otras_vias": [
+    "Importia para la parte contable",
+    "Conecta3 (ETL de partner) para tiendas online",
+    "Apps de a3Marketplace"
+  ],
+  "rpa": "no hace falta: hay API.",
+  "dificultad": "Media",
+  "permisos_acotados": "La API actúa con los permisos del usuario WKA y la Apikey va por producto; no hay scopes documentados. OJO: un POST de factura la EMITE y genera el registro VERI*FACTU, así que el agente solo prepara datos o borradores y la emisión la aprueba una persona.",
+  "pedir_al_informatico": "Que activen Conectia para a3innuva ERP, pidan el client OAuth, creen un usuario dedicado y confirmen la modalidad (VERI*FACTU o no) y la serie de facturación, con una empresa de pruebas.",
+  "demo_gratis": "Demo autoconsumible y cita con especialista. No hay prueba gratuita oficial con plazo.",
+  "coste_demo": "Desde 26 €/mes (modular) según Wolters Kluwer; Conectia aparte sin precio público.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Desde 26 €/mes + Conectia",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Solo si faltan funciones del negocio (almacén avanzado, producción) o Conectia no compensa.",
+    "alternativas": [
+      "a3ERP",
+      "Holded u Odoo"
+    ],
+    "coste_esfuerzo_migracion": "Alto: cambiar de sistema de facturación supone nueva cadena VERI*FACTU y nueva declaración responsable."
+  },
+  "verifactu": "Wolters Kluwer declara a3innuva ERP adaptado al RRSIF y enlaza la declaración responsable. Modalidad VERI*FACTU (recomendada) o no VERI*FACTU; módulo SII.",
+  "fuentes": [
+    "https://a3developers.wolterskluwer.es/doc/a3factura/autenticacion/a3innuvaerp/",
+    "https://a3developers.wolterskluwer.es/doc/conectia/",
+    "https://www.wolterskluwer.com/es-es/solutions/a3innuva-erp"
+  ],
+  "confianza": "alta"
+}

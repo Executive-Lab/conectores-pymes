@@ -1,0 +1,52 @@
+{
+  "id": "a3factura",
+  "nombre": "a3factura",
+  "nombre_completo": "a3factura (Wolters Kluwer, facturación en la nube para autónomos y pymes)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "A3",
+    "a3 factura",
+    "Wolters Kluwer"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON: api/saleInvoices (POST emite, PUT modifica, GET consulta, /pdf), métodos VERI*FACTU (QR, XML, sendResponse) y webhooks (InvoiceStatus).",
+    "auth": "Básica (login con usuario y contraseña de a3factura, token de 1 h y selección de empresa) o, solo partners, por token de aplicación. Siempre con Ocp-Apim-Subscription-Key.",
+    "requisitos": "Conectia contratado. Para probar hace falta licencia en producción.",
+    "docs_url": "https://a3developers.wolterskluwer.es/doc/a3factura/guia-rapida/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP ni nodo n8n. Los webhooks (HTTPS 443, respuesta 2xx en < 5 s) sirven para disparar flujos de n8n."
+  },
+  "otras_vias": [
+    "Puede actuar como 'Sistema Informático de Facturación' de software de terceros (emite y firma VERI*FACTU por ellos)",
+    "Enlace con la asesoría (a3asesor o a3innuva)"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Media",
+  "permisos_acotados": "Con la autenticación básica se usan las credenciales de un usuario: crear uno dedicado (roles internos no verificados). El token va ligado a la empresa seleccionada. POST saleInvoices EMITE la factura y devuelve el QR VERI*FACTU: siempre con aprobación humana.",
+  "pedir_al_informatico": "Contratar Conectia y generar la Apikey, crear un usuario dedicado (no el del gerente), revisar series y actividad, confirmar la modalidad VERI*FACTU y decidir quién aprueba cada emisión.",
+  "demo_gratis": "Prueba de 30 días con todas las funciones y sin tarjeta (páginas oficiales). La API exige Conectia.",
+  "coste_demo": "a3factura go 9,95 €/mes y pro 39 €/mes, más 6 €/mes por usuario extra (+IVA), 2 meses gratis en anual. Conectia aparte sin precio público.",
+  "demo_resumen": "prueba 30 días",
+  "coste_resumen": "9,95-39 €/mes + Conectia",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Si necesita contabilidad o almacén integrados, el paso natural es a3innuva ERP (misma API).",
+    "alternativas": [
+      "a3innuva ERP",
+      "Holded"
+    ]
+  },
+  "verifactu": "Adaptado, con declaración responsable pública. La API devuelve QR, XML y respuesta de la AEAT, y avisa por webhook de cada cambio de estado.",
+  "fuentes": [
+    "https://a3developers.wolterskluwer.es/doc/a3factura/guia-rapida/",
+    "https://a3developers.wolterskluwer.es/doc/a3factura/autenticacion/a3factura/",
+    "https://a3developers.wolterskluwer.es/doc/sif/intro/",
+    "https://www.wolterskluwer.com/es-es/solutions/a3factura/precios-y-versiones"
+  ],
+  "confianza": "alta"
+}

@@ -1,0 +1,56 @@
+{
+  "id": "a3erp",
+  "nombre": "a3ERP",
+  "nombre_completo": "a3ERP (Wolters Kluwer, Windows cliente-servidor)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "A3",
+    "a3 ERP",
+    "A3ERP",
+    "Wolters Kluwer"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "limitada",
+    "estilo": "Sin API web oficial pública. Lo oficial es a3ERPActiveX, librería COM local (maestros, documentos de compra y venta, apuntes, cartera). REST de partners: Link API | a3ERP (Link Soluciones, con Swagger), A3ERP API (a3erpapi.appcloud.es) y APIs unificadas (Chift con agente local; Unified.to en beta).",
+    "auth": "ActiveX: usuario y contraseña de a3ERP por empresa. Partners: según el producto (JWT en A3ERP API).",
+    "requisitos": "Acceso al servidor de a3ERP. Chift exige a3ERP 14.5.2+, .NET Framework 4.8 y agente en el mismo servidor. Link API por planes de llamadas (precio no público).",
+    "docs_url": "https://media.a3software.com/a3responde/files/18879-a3erpactivex_manual.pdf"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP ni nodo n8n. MCP propio sobre una API de partner, o lectura de solo lectura de la base de datos con un MCP de BD (puente)."
+  },
+  "otras_vias": [
+    "Enlace contable con la asesoría: ENVIO-A3ERP.ZIP o SUENLACE.DAT",
+    "Lectura SQL de solo lectura sobre vistas (puente)",
+    "Excel2Conta y similares generan SUENLACE.DAT desde Excel",
+    "Conectores de partners (Conecta HUB, Conecta3)"
+  ],
+  "rpa": "escritorio: posible (Power Automate Desktop, UiPath) pero frágil; solo como último recurso.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "a3ERPActiveX no tiene scopes: hereda los permisos del usuario de a3ERP (uno dedicado por empresa). Para leer, login SQL de solo lectura sobre vistas (práctica estándar, no documentada por Wolters Kluwer). Para escribir, documento en borrador o fichero que valida una persona.",
+  "pedir_al_informatico": "Versión exacta (15+ para el RRSIF), si está en servidor propio o alojado, usuario a3ERP dedicado, usuario SQL de solo lectura si se acepta, si ya hay Link API u otro conector, declaración responsable de la versión y empresa de pruebas.",
+  "demo_gratis": "Solo demo comercial a través de distribuidores.",
+  "coste_demo": "Sin tarifa oficial (presupuesto del distribuidor).",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Sin tarifa pública (presupuesto)",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Si la versión es anterior a la 15 o no tiene mantenimiento (sin RRSIF antes de 2027), o si se quiere API oficial en la nube y la empresa cabe en un ERP SaaS.",
+    "alternativas": [
+      "a3innuva ERP (mismo fabricante, API Conectia)",
+      "Odoo u Holded según tamaño"
+    ],
+    "coste_esfuerzo_migracion": "Alto: implantación, maestros, histórico y formación; varios meses."
+  },
+  "verifactu": "Partners indican que la versión 15.00.00 se adapta al RRSIF con declaración del productor. Pedir la declaración de la versión concreta (no vista directamente).",
+  "fuentes": [
+    "https://media.a3software.com/a3responde/files/18879-a3erpactivex_manual.pdf",
+    "https://www.linksoluciones.com/software-pyme/a3erp/link-api-a3erp/",
+    "https://docs.chift.eu/connectors/accounting/a3erp",
+    "https://a3sides.es/blog/preguntas-frecuentes-version-15-00-00-de-a3erp-y-reglamento-antifraude-rrsif/"
+  ],
+  "confianza": "media"
+}

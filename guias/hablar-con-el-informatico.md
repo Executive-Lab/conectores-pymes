@@ -1,8 +1,20 @@
+---
+type: article
+title: Cómo hablar con tu informático (o tu distribuidor) para conectar tus herramientas
+description: Guía para alumnos — qué pedir, con qué palabras y qué no aceptar, según tengas una herramienta web, Google/Microsoft, un programa instalado o WhatsApp.
+tags: [guia-alumnos, informatico, seguridad, plantillas]
+timestamp: 2026-10-09T10:30:00Z
+topic: guias
+status: draft
+sources: []
+score: 0.0
+---
+
 # Cómo hablar con tu informático (o tu distribuidor) para conectar tus herramientas
 
 > Para: alumnos de Executive Lab. Copia el texto que te toque, cambia lo que va entre `<…>` y envíalo.
 
-## En resumen
+## Overview
 
 La mayoría de las veces no necesitas a nadie: si tu herramienta es web, la clave la generas tú (ver [cómo conectar una plataforma](./conectar-una-plataforma-con-rsc.md)). Necesitas a tu informático en tres casos:
 
@@ -83,7 +95,7 @@ Pregunta:
 | VPN | Túnel privado para llegar a la red de la oficina sin abrirla a internet. |
 | RPA | Robot que usa la pantalla como una persona. Último recurso. |
 
-## Relacionado
+## Related
 
 - [Cómo conectar una plataforma a tu arnés RSC](./conectar-una-plataforma-con-rsc.md).
 - [Catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/): qué pedir para cada plataforma concreta.

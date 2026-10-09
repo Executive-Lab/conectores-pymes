@@ -1,0 +1,58 @@
+{
+  "id": "a3innuva-contabilidad",
+  "nombre": "a3innuva Contabilidad",
+  "nombre_completo": "a3innuva Contabilidad (Wolters Kluwer, nube)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "A3",
+    "a3innuva",
+    "a3 innuva",
+    "Wolters Kluwer",
+    "a3con nube"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON tras Azure API Management (https://a3api.wolterskluwer.es/a3innuva-contabilidad), con Swagger y webhooks de facturas emitidas, recibidas y diario. Recursos: empresas, cuentas, diario (GET/POST/DELETE), facturas emitidas y recibidas (POST/PUT/DELETE), clientes, cobros y cuentas bancarias.",
+    "auth": "OAuth 2.0 Authorization Code con Wolters Kluwer Account (WKA), más las cabeceras Ocp-Apim-Subscription-Key y 'context' (correlationId de la empresa). Access token de 1 h y refresh de 30 días.",
+    "requisitos": "Módulo Conectia contratado (de pago, sin precio público). La Apikey se genera en Mi Wolters Kluwer > Conectia y vale para un solo producto. El client OAuth lo da de alta Wolters Kluwer por formulario. La redirect_uri tiene que ser https.",
+    "docs_url": "https://a3developers.wolterskluwer.es/doc/a3innuva-contabilidad/apis-contabilidad/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP oficial ni comunitario y sin nodo nativo de n8n. Se monta un MCP propio sobre la API, o en n8n con HTTP Request y MCP Server Trigger."
+  },
+  "otras_vias": [
+    "a3innuva Importia (suscripción aparte): importa desde Excel facturas expedidas y recibidas, asientos y plan contable, con plantillas de asignación y 'deshacer fichero importado'",
+    "Enlace contable .json.zip desde a3innuva Nómina",
+    "SDK público en C# de Importia (es-wolters-kluwer/a3innuva.Importia.SDK; alcance no verificado)"
+  ],
+  "rpa": "no hace falta: hay API e Importia.",
+  "dificultad": "Media",
+  "permisos_acotados": "La API actúa con los permisos del usuario WKA que la autoriza; no hay scopes de solo lectura documentados (no verificado). Usuario dedicado con acceso solo a las empresas necesarias. Asientos y facturas admiten estado Draft: el agente crea en borrador y una persona lo pasa a Completed.",
+  "pedir_al_informatico": "Que activen Conectia para a3innuva Contabilidad y generen la Apikey, que pidan a Wolters Kluwer el client OAuth con nuestra redirect_uri, y que creen un usuario dedicado con acceso solo a nuestra empresa y una empresa de pruebas.",
+  "demo_gratis": "Demo funcional bajo petición para no clientes (Conectia). La duración de la prueba del producto no está verificada en fuente oficial.",
+  "coste_demo": "Producto para pymes desde 26 €/mes según Wolters Kluwer. Conectia e Importia sin precio público.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Desde 26 €/mes + Conectia",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Solo si Conectia e Importia salen caros para el volumen, o si hace falta un alta 100 % autoservicio.",
+    "alternativas": [
+      "Importia con Excel revisado por una persona",
+      "Holded u Odoo si se cambia toda la gestión"
+    ],
+    "coste_esfuerzo_migracion": "Alto y sin justificación: es un SaaS con API."
+  },
+  "verifactu": "Es contabilidad, no facturación: solo aplica el mandato genérico del art. 29.2.j LGT. Las facturas se emiten desde a3innuva Facturación/ERP.",
+  "fuentes": [
+    "https://a3developers.wolterskluwer.es/doc/a3innuva-contabilidad/apis-contabilidad/",
+    "https://a3developers.wolterskluwer.es/doc/a3innuva-contabilidad/OAuth/",
+    "https://a3developers.wolterskluwer.es/doc/conectia/",
+    "https://taasupportportal.wolterskluwer.com/es/es-es/articulo/como-subir-fich-3555452",
+    "https://github.com/es-wolters-kluwer/a3innuva.Importia.SDK",
+    "https://www.wolterskluwer.com/es-es/solutions/a3innuva-contabilidad-pymes"
+  ],
+  "confianza": "alta"
+}

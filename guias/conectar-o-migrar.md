@@ -1,9 +1,21 @@
+---
+type: article
+title: ¿Conectar o migrar? Cuándo compensa cambiar de herramienta
+description: Guía para alumnos — señales de que una herramienta frena el arnés, cuándo NO conviene cambiar, cómo hacer la cuenta y cómo migrar sin perder datos ni el ejercicio contable.
+tags: [guia-alumnos, migracion, erp, decision]
+timestamp: 2026-10-09T11:00:00Z
+topic: guias
+status: draft
+sources: []
+score: 0.0
+---
+
 # ¿Conectar o migrar? Cuándo compensa cambiar de herramienta
 
 > Para: alumnos de Executive Lab que tienen un programa "cerrado" (ERP o contabilidad antiguos, TPV, software instalado) y dudan entre conectarlo como sea o cambiarlo.
 > El veredicto de cada plataforma está en el [catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/).
 
-## En resumen
+## Overview
 
 El arnés solo es tan bueno como los datos a los que llega. Si tu programa principal no deja sacar datos (sin API, sin exportación, sin base de datos accesible), cada automatización pasa por copiar y pegar o por un robot frágil: es un palo en las ruedas. A veces la respuesta es **conectarlo con un puente** (exportación nocturna, usuario de base de datos de solo lectura, módulo del distribuidor). Otras veces es **migrar** a algo que se conecta de serie. Esta guía ayuda a decidir.
 
@@ -50,6 +62,19 @@ El arnés solo es tan bueno como los datos a los que llega. Si tu programa princ
 6. **Conecta el destino al arnés desde el primer día** (`01-TOOLS/<DESTINO>/` y `test_connection`). Así el valor se ve enseguida.
 7. **Forma al equipo** y fija quién es el responsable del nuevo sistema.
 
+## La tercera vía: construirlo tú
+
+En la comunidad hay alumnos que, en vez de conectar o migrar, **sustituyen** su programa por uno propio hecho con Claude Code: un CRM a medida, un ERP sencillo, el punto de venta de un obrador, o el reemplazo de una plataforma de 1.000 €/mes. A veces es muy buena idea y a veces sale caro de mantener.
+
+Compensa si se cumplen todas estas condiciones:
+
+- **El alcance es pequeño y estable**: una función concreta, no "todo el ERP".
+- **Alguien lo mantiene**: código en un repositorio, copias de seguridad, actualizaciones de seguridad y alguien que lo entienda si tú no estás.
+- **Empiezas leyendo** los datos del sistema viejo (exportación o puente) y conviven un tiempo.
+- **No factura**: si emite facturas, tu programa también tiene que cumplir Veri\*factu y la factura electrónica. Casi nunca compensa construir la facturación: conéctala.
+
+No compensa si el programa es sectorial y tiene obligaciones legales (prevención de riesgos, nóminas, contabilidad oficial) o si solo lo entiende una persona.
+
 ## Destinos típicos
 
 | Si tienes… | Destinos a valorar | Por qué |
@@ -59,7 +84,7 @@ El arnés solo es tan bueno como los datos a los que llega. Si tu programa princ
 | App WhatsApp Business para pedidos o reservas | WhatsApp Business Platform (Cloud API), directamente con Meta o un proveedor | No es cambiar de herramienta: es pasar a la versión con API. |
 | Notion o Airtable usado como CRM | Un CRM con API y MCP (HubSpot, Zoho, Clientify…) cuando haya más de 2-3 comerciales o pipeline real | Mientras sea pequeño, Notion o Airtable se conectan bien y no hace falta cambiar. |
 
-## Relacionado
+## Related
 
 - [Catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/): veredicto conectar o migrar por plataforma.
 - [Cómo conectar una plataforma](./conectar-una-plataforma-con-rsc.md) · [Hablar con el informático](./hablar-con-el-informatico.md).

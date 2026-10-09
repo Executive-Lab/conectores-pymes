@@ -1,0 +1,56 @@
+{
+  "id": "a3asesor",
+  "nombre": "a3asesor (eco, con, ren…)",
+  "nombre_completo": "a3asesor eco / con / ren / soc / nom / ges (Wolters Kluwer, escritorio para asesorías)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "A3",
+    "a3eco",
+    "a3con",
+    "a3asesor",
+    "Wolters Kluwer",
+    "gestoría"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "no",
+    "estilo": "Sin API pública para eco, con, ren ni soc (a3developers no los incluye). Solo a3asesor rr.hh. entra en la API de a3innuva Nómina en la nube.",
+    "auth": "No aplica.",
+    "requisitos": "No aplica.",
+    "docs_url": "https://a3developers.wolterskluwer.es/doc/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP. Conectores de lectura de terceros (Advisorsy: API REST de solo lectura para a3ECO y a3nom; DataLoop: vuelca a SQL Server Express) que se podrían exponer con un MCP propio."
+  },
+  "otras_vias": [
+    "Enlace contable de entrada SUENLACE.DAT (Utilidades > Importar/Exportar > Enlace Contable) con botón 'Chequeo'",
+    "a3ASESOR Importador de datos (módulo Excel) e Importador ASESOR de Link Soluciones",
+    "a3asesor Bank: extractos Excel, CSV, Norma 43 o PDF",
+    "Lectura: Advisorsy, DataLoop"
+  ],
+  "rpa": "escritorio: posible pero frágil; no hace falta para escribir porque existe SUENLACE.DAT.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Es una vía por fichero, y eso es una ventaja: el agente solo escribe en una carpeta de intercambio y una persona de la gestoría pasa el Chequeo e importa. Los conectores de lectura son de solo lectura por diseño.",
+  "pedir_al_informatico": "A la gestoría: código de empresa y longitud de cuentas, versión de eco/con, si llevan SII, carpeta donde dejar el fichero, quién pasa el Chequeo e importa, copia de seguridad antes y los ficheros de ejemplo SUENLAC5.TXT y SUENLAC5.EJE.",
+  "demo_gratis": "Solo demo comercial para asesorías a través de distribuidores.",
+  "coste_demo": "Licencias por módulos, sin tarifa pública.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Sin tarifa pública (por módulos)",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "No lo decide la pyme: es la herramienta de la gestoría. La pyme entrega ficheros de enlace bien formados.",
+    "alternativas": [
+      "a3innuva Contabilidad (si la gestoría quiere nube con API e Importia)"
+    ]
+  },
+  "verifactu": "eco y con son contabilidad (solo art. 29.2.j LGT). a3asesor ges (facturación del despacho) entra en el RRSIF; declaración específica no encontrada.",
+  "fuentes": [
+    "https://taasupportportal.wolterskluwer.com/es/es-es/articulo/enlace-contable-3554295",
+    "https://media.a3software.com/a3responde/files/5081-Enlace_contable_de_entrada_16012024.pdf",
+    "https://softwariza3.es/a3asesor-importador-de-datos/",
+    "https://www.advisorsy.es/conector-a3/"
+  ],
+  "confianza": "alta"
+}
