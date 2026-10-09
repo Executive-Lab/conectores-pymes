@@ -19,8 +19,8 @@
   },
   "otras_vias": [
     "Integración nativa Haddock > Holded: envía a Holded las facturas de compra ya procesadas, con su PDF, usando una API key de Holded. Después se leen por la API de Holded.",
+    "Exportación a Excel o CSV desde la web (verificada): resumen y totales de documentos, desglose por líneas de producto, resumen de IVA línea a línea, exportación en formato Holded y listado de productos; los PDF originales en ZIP. La FAQ no menciona los escandallos.",
     "Integraciones de TPV: Ágora (agente local), Revo, Square, LastApp, HioPOS (por FTP que configura el distribuidor), Numier, BDP y otras",
-    "Exportación a Excel o CSV desde la web: no verificada",
     "No se encontró nodo en n8n, Make ni Zapier"
   ],
   "rpa": "navegador: para escandallos y márgenes, si no hay exportación ni API de lectura, solo queda un RPA de navegador sobre la web",
@@ -44,7 +44,8 @@
     "https://pos-api.haddock.app/docs",
     "https://support.haddock.app/en/article/holded-connect-and-send-documents-en3z46/",
     "https://support.haddock.app/en/article/hiopos-connect-pos-tnuuwm/",
-    "https://haddock.app/precios"
+    "https://haddock.app/precios",
+    "https://support.haddock.app/en/article/export-faq-1dt1xab/"
   ],
   "confianza": "media"
 }

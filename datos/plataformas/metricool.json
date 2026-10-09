@@ -15,7 +15,7 @@
   },
   "mcp": {
     "estado": "oficial",
-    "detalle": "Servidor remoto en https://ai.metricool.com/mcp, disponible en TODOS los planes, incluido Free (se aplican los límites del plan). Autenticación por OAuth, o por cabecera X-Mc-Auth: esta vía usa la API y requiere Advanced. Lee y escribe: métricas e informes, crear, programar y publicar posts, Smartlinks, Inbox y comentarios, reseñas de Google Business Profile, campañas de Ads y autolists; lectura de Canva y Drive conectados. Tiene conector en el directorio de Claude."
+    "detalle": "Servidor remoto en https://ai.metricool.com/mcp, disponible en TODOS los planes, incluido Free (se aplican los límites del plan). Autenticación por OAuth, o por cabecera X-Mc-Auth: esta vía usa la API y requiere Advanced. Consulta la configuración de las marcas y las métricas (incluida la analítica de las cuentas publicitarias conectadas) y consulta, crea y edita publicaciones programadas o para revisión. NO gestiona campañas de anuncios ni lee los comentarios del Inbox: eso es solo de la API (planes Advanced y Custom); lectura de Canva y Drive conectados. Tiene conector en el directorio de Claude."
   },
   "otras_vias": [
     "Integraciones oficiales con Make y Zapier (requieren Advanced)",

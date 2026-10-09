@@ -46,6 +46,8 @@ ORDEN_CATEGORIAS = [
 
 # slug -> descripción corta para la portada (el orden es el de la portada)
 GUIAS = {
+    "por-donde-empiezo": "La puerta de entrada: qué hacer primero según tus herramientas "
+    "y tu nivel, y qué guía leer después.",
     "conectar-una-plataforma-con-rsc": "Las cinco vías (MCP, API con clave, app OAuth, "
     "programa instalado y RPA), cómo elegir y cómo hacerlo con permisos acotados.",
     "hablar-con-el-informatico": "Qué pedir, con qué palabras y qué no aceptar: "
