@@ -15,8 +15,7 @@ score: 0.0
 > Para: dueños y directivos con un programa instalado o antiguo (ERP, contabilidad, TPV, software de prevención, channel manager) que «no se puede conectar».
 > Conseguirás: elegir en 10 minutos la vía más segura para sacar datos de tu programa (y, si hace falta, meterlos) sin romper nada.
 
-## Overview
-
+## En resumen
 Una **API** es una ventanilla por la que otro programa pide datos a tu programa. Muchos programas de pyme no la tienen. Eso no significa que no se puedan conectar: significa que hay que usar **otra puerta**. Este es el «kit puente»: seis puertas, ordenadas de mejor a peor.
 
 - **Cuánto tarda:** una carta al fabricante, un día. Una exportación programada, una tarde con tu informático. Una base de datos de solo lectura, una o dos semanas. RPA, semanas de pruebas.
@@ -252,8 +251,7 @@ Datos de programas concretos: fichas del catálogo de conectividad (sage-50, con
 4. Anthropic, «Claude in Chrome permissions guide»: https://support.claude.com/en/articles/12902446 — consultado el 2026-10-09.
 5. Foro de UiPath, hilos sobre Community Edition (fuente secundaria, no oficial): https://forum.uipath.com/t/community-edition-small-companies/121827 — consultado el 2026-10-09. No verificado en la página de licencias de UiPath.
 
-## Related
-
+## Relacionado
 - [Cómo conectar una plataforma](./conectar-una-plataforma-con-rsc.md)
 - [Hablar con el informático](./hablar-con-el-informatico.md)
 - [¿Conectar o migrar?](./conectar-o-migrar.md)

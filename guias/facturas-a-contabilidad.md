@@ -12,8 +12,7 @@ score: 0.0
 
 # Receta: facturas y tickets a contabilidad
 
-## Overview
-
+## En resumen
 Las facturas llegan por email, a una carpeta, por WhatsApp o en papel (foto). El sistema extrae proveedor, NIF, fecha, número, base, tipo y cuota de IVA, retención y total; los valida (cuadres, NIF, duplicados); propone la cuenta contable; **una persona aprueba**; y se registra **como borrador** por la API del programa o con su **fichero de importación oficial**. Nunca se escribe directamente en la base de datos de un programa contable: rompe la integridad, el soporte y la cadena de Veri\*factu.
 
 ## Arquitectura
@@ -71,6 +70,5 @@ Odoo Community (facturas de proveedor en borrador por JSON-2) + n8n self-hosted 
 - Tomar "sin respuesta" como "no": la factura se pierde. Debe quedar pendiente y avisar.
 - Confiar en la cuenta propuesta sin el histórico del proveedor: guarda la cuenta usada por proveedor.
 
-## Related
-
+## Relacionado
 - [Cómo se monta](./como-se-monta.md) · [Catálogo: ERP y contabilidad](https://executive-lab.github.io/conectores-pymes/) · [¿Conectar o migrar?](./conectar-o-migrar.md)

@@ -14,8 +14,7 @@ score: 0.0
 
 > Para: alumnos de Executive Lab. Copia el texto que te toque, cambia lo que va entre `<…>` y envíalo.
 
-## Overview
-
+## En resumen
 La mayoría de las veces no necesitas a nadie: si tu herramienta es web, la clave la generas tú (ver [cómo conectar una plataforma](./conectar-una-plataforma-con-rsc.md)). Necesitas a tu informático en tres casos:
 
 - **Google Workspace o Microsoft 365**, porque hace falta un administrador.
@@ -95,7 +94,6 @@ Pregunta:
 | VPN | Túnel privado para llegar a la red de la oficina sin abrirla a internet. |
 | RPA | Robot que usa la pantalla como una persona. Último recurso. |
 
-## Related
-
+## Relacionado
 - [Cómo conectar una plataforma a tu arnés RSC](./conectar-una-plataforma-con-rsc.md).
 - [Catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/): qué pedir para cada plataforma concreta.

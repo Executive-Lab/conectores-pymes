@@ -12,8 +12,7 @@ score: 0.0
 
 # Receta: fuente única de la operación
 
-## Overview
-
+## En resumen
 Cada proyecto, evento u obra tiene **una página viva** con estado, tareas hechas y pendientes, responsable, proveedores, presupuesto frente a gasto, documentos y próximos hitos. Nadie la rellena a mano: el arnés **lee** cada mañana las herramientas donde ya se trabaja (Trello, ClickUp, Jira, Drive, CRM, ERP) y la actualiza. El equipo y la dirección la consultan; los responsables reciben solo lo suyo.
 
 ## La pieza clave ya existe: la wiki `02-DOCS`
@@ -65,6 +64,5 @@ Trello Free (MCP oficial) + Google Drive + Jira Free → `/estado-operacion` a m
 - La página se convierte en otro sitio que actualizar a mano: si hace falta escribir en ella, falta una fuente.
 - Avisos a todos de todo: cada persona solo lo suyo, o se dejan de leer.
 
-## Related
-
+## Relacionado
 - [Cómo se monta](./como-se-monta.md) · [Catálogo: proyectos y documentos](https://executive-lab.github.io/conectores-pymes/)

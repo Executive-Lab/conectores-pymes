@@ -15,8 +15,7 @@ score: 0.0
 > Para: el informático del alumno, o el formador que lo acompaña. La versión para el dueño de la pyme es [Mi programa no tiene API](./mi-programa-no-tiene-api.md) (vías 2 y 3).
 > Verificado el 2026-10-09. Las versiones y los precios cambian: compruébalos antes de instalar.
 
-## Overview
-
+## En resumen
 Objetivo: que el agente **lea** los datos de un programa de escritorio (SQL Server o Access) **sin poder escribir**, **sin abrir puertos** y **sin perder el soporte** del fabricante. Para escribir no se usa el puente: se usa el [fichero de importación oficial](./escribir-en-contabilidad-por-importacion.md).
 
 La garantía real de "solo lectura" está **en la base de datos** (un login con permisos mínimos y vistas curadas). El "modo solo lectura" de los servidores MCP es casi siempre un filtro de sentencias: ayuda, pero no basta.
@@ -129,6 +128,5 @@ Lo ideal: que el robot **solo exporte**, y que el resto lo haga el arnés sobre 
 5. Checklist "qué pedir al informático o al distribuidor" y el test de solo lectura.
 6. Guía de cuándo negociar con Chift en vez de montar el puente.
 
-## Related
-
+## Relacionado
 - [Mi programa no tiene API](./mi-programa-no-tiene-api.md) (versión para el dueño) · [Escribir en contabilidad por importación](./escribir-en-contabilidad-por-importacion.md) · [Catálogo](https://executive-lab.github.io/conectores-pymes/)

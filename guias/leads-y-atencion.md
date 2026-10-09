@@ -12,8 +12,7 @@ score: 0.0
 
 # Receta: leads y atención al cliente
 
-## Overview
-
+## En resumen
 Entra un contacto (formulario web, email, anuncio de Meta o Google, WhatsApp). Se crea o actualiza su ficha en el CRM. La IA lo califica y redacta la propuesta o la respuesta **con el conocimiento del negocio** (catálogo, precios, casos, tono). Una persona la revisa y la envía, o la aprueba con un botón. Se registra todo en la ficha.
 
 ## Arquitectura
@@ -62,6 +61,5 @@ Formulario de Wix o WordPress (gratis) → n8n → HubSpot Free (MCP oficial) �
 - Duplicar contactos: buscar por email o teléfono antes de crear.
 - Enviar en automático desde el primer día: perder un cliente por una propuesta mala cuesta más que el tiempo ahorrado.
 
-## Related
-
+## Relacionado
 - [Cómo se monta](./como-se-monta.md) · [WhatsApp a pedidos](./whatsapp-a-pedidos.md) · [Catálogo: CRM](https://executive-lab.github.io/conectores-pymes/)

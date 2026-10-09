@@ -15,8 +15,7 @@ score: 0.0
 > Para: alumnos de Executive Lab, sin necesidad de saber programar.
 > Qué plataforma va por qué vía: [catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/).
 
-## Overview
-
+## En resumen
 "Conectar" una herramienta significa que tu agente pueda **leer** (y, solo si tú lo apruebas, **escribir**) en ella sin que tú copies y pegues. En RSC cada herramienta conectada vive en una carpeta: `01-TOOLS/<HERRAMIENTA>/`. Dentro están la llave (`.env`), una prueba que confirma que la llave funciona (`test_connection`) y los scripts que la usan. Algunas herramientas se conectan además como **MCP** (un enchufe estándar para agentes) en `.mcp.json`.
 
 Hay cinco vías. Siempre se intenta la primera que funcione.
@@ -85,7 +84,6 @@ El agente mueve el ratón y teclea como una persona. Funciona con cualquier cosa
 6. **Datos de clientes con cuidado (RGPD).** Lo que extraigas va a `out/`, que no se sube a git. Si mandas datos personales a un proveedor de IA, revisa que tengas contrato de encargo de tratamiento.
 7. **Revoca y rota.** Si una llave se filtra o alguien se va, se revoca en el panel y se genera otra. Anótalo en `CREDENTIALS.md`.
 
-## Related
-
+## Relacionado
 - [Hablar con el informático](./hablar-con-el-informatico.md): textos listos para pedir acceso.
 - [Catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/): vía, dificultad y permisos de cada plataforma.

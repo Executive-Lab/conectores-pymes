@@ -15,8 +15,7 @@ score: 0.0
 > Para: dueños y directivos de pyme que usan Holded, Sage, Contasol, Odoo, Business Central, SAP, un CRM u otro programa de gestión.
 > Conseguirás: saber qué vía te toca, dar a tu agente un acceso de solo lectura y no romper la contabilidad por el camino.
 
-## Overview
-
+## En resumen
 En clase salen unos veinte programas distintos y el curso no se ata a ninguno. Este manual ordena todos con el mismo criterio. Una **API** es una ventanilla por la que otro programa pide datos. Un **MCP** es un enchufe estándar para que el agente use esa ventanilla sin que programes nada.
 
 Resumen de lo que hay (datos del catálogo, verificados el 2026-10-09):
@@ -227,7 +226,6 @@ Fichas del catálogo (`catalogo/datos/plataformas`, verificadas el 2026-10-09) p
 5. Salesforce, MCP alojado (fuentes secundarias): https://salesforcetime.com/2026/07/15/how-to-connect-claude-with-salesforce-hosted-mcp-servers/ y https://www.cleanlist.ai/blog/2026-10-05-salesforce-mcp-server-review (consultados el 2026-10-09).
 6. Sage Active, sin MCP: https://developer.sage.com/sageactive/ (403; búsqueda sin resultados de MCP, 2026-10-09). El dato de «sin fecha» viene de la ficha.
 
-## Related
-
+## Relacionado
 - [Conectar una plataforma](./conectar-una-plataforma-con-rsc.md) · [Hablar con el informático](./hablar-con-el-informatico.md) · [¿Conectar o migrar?](./conectar-o-migrar.md)
 - [Catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/)

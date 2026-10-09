@@ -15,8 +15,7 @@ score: 0.0
 > Para: alumnos de Executive Lab que ya tienen (o van a montar) su arnés RSC y dudan de qué pieza crear.
 > Conseguirás: una regla para cada decisión, para dejar de preguntarte «¿esto es una skill o un agente?» y no acabar con un Frankenstein.
 
-## Overview
-
+## En resumen
 Desde abril es la duda número uno en clase y en el foro. Las preguntas se repiten: «¿skill o agente?», «¿un arnés o varios?», «¿qué pasa si cambio de ordenador?», «¿cómo lo dejo trabajando solo?», «¿cómo encadeno varios arneses?», «se me acaban los tokens».
 Parte de la confusión viene de que el equipo ha dado dos respuestas que parecen opuestas: «arneses modulares» y «mantenerlo todo junto». **No se contradicen.** Hablan de capas distintas:
 - **Dentro de un arnés: modular.** Una skill por tarea, cada una pequeña y con nombre claro.
@@ -250,8 +249,7 @@ n8n o Make para pasos fijos entre aplicaciones y a una hora, sin que tu ordenado
 8. Anthropic, Claude Code Desktop: Scheduled tasks — https://code.claude.com/docs/en/desktop-scheduled-tasks (consultado el 2026-10-09)
 9. Anthropic, Claude Code: Manage costs — https://code.claude.com/docs/en/costs (consultado el 2026-10-09)
 
-## Related
-
+## Relacionado
 - [Conectar una plataforma](./conectar-una-plataforma-con-rsc.md)
 - [MCP y API](./mcp-api-y-demas-sin-tecnicismos.md)
 - [Planes, privacidad y costes](./planes-privacidad-y-costes.md)

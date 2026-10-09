@@ -14,8 +14,7 @@ score: 0.0
 
 > Para: alumnos de Executive Lab y formadores. Datos de la documentación oficial de Claude Code a 2026-10-09: revisa antes de cada edición del curso.
 
-## Overview
-
+## En resumen
 Toda automatización del arnés tiene cuatro piezas:
 
 1. **La skill: el QUÉ.** Qué datos mirar, qué calcular, con qué formato y qué reglas seguir. Es un fichero `.claude/skills/<nombre>/SKILL.md` y no cambia según cómo se dispare.
@@ -76,6 +75,5 @@ En una routine o en un `claude -p` nadie puede pulsar "sí". Tres patrones, de m
 | [Leads y atención al cliente](./leads-y-atencion.md) | Responder rápido y bien a cada contacto | n8n + skill de propuesta + aprobación |
 | [Fuente única de la operación](./fuente-unica.md) | Saber qué está hecho, qué falta y quién | Wiki `02-DOCS` + MCP de lectura + routine diaria + subagentes |
 
-## Related
-
+## Relacionado
 - [Cómo conectar una plataforma](./conectar-una-plataforma-con-rsc.md) · [Catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/)

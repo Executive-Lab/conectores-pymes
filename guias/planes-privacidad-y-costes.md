@@ -17,8 +17,7 @@ score: 0.0
 
 **Fecha de consulta: 2026-10-09.** Precios, límites y condiciones cambian a menudo (este año ha habido varios cambios de precio y de política). Antes de pagar o de subir datos de clientes, repasa la fuente oficial de la sección Fuentes. Lo que no se ha podido confirmar en la fuente del proveedor va marcado como **no verificado**.
 
-## Overview
-
+## En resumen
 La contradicción de clase («la licencia importa poco» frente a «Enterprise es lo seguro») se resuelve así. Las dos frases son medias verdades.
 
 - **Lo que importa es el contrato, no el nombre del plan.** Un plan personal te da una política de privacidad. Un plan de empresa o la API te dan además un **DPA** (*Data Processing Addendum*, contrato de encargado de tratamiento: el documento que dice que el proveedor solo trata tus datos por encargo tuyo, como una gestoría con su cláusula de confidencialidad). Sin DPA, el RGPD te complica subir datos personales de clientes.
@@ -234,8 +233,7 @@ Todas consultadas el 2026-10-09.
 14. Precios de Copilot (guías de terceros, no oficiales): https://www.primend.com/blog/microsoft-365-copilot-gets-even-more-accessible/ y https://office-watch.com/2026/microsoft-365-plans-overview/
 15. Comisión Europea, marco de la IA: https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai
 
-## Related
-
+## Relacionado
 - [Conectar una plataforma con RSC](./conectar-una-plataforma-con-rsc.md)
 - [Hablar con el informático](./hablar-con-el-informatico.md)
 - [Conectar o migrar](./conectar-o-migrar.md)

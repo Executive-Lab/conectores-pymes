@@ -15,8 +15,7 @@ score: 0.0
 > Para: dueños y directivos con Microsoft 365 de empresa que quieren que su agente lea correo, calendario, ficheros y Teams.
 > Conseguirás: el conector activo en días y no en semanas, una petición lista para tu administrador y las alternativas si IT solo deja Copilot.
 
-## Overview
-
+## En resumen
 - **Qué puedes hacer.** Que Claude lea tu correo de Outlook, tu calendario, Teams, OneDrive y SharePoint, y que lea Excel guardado en la nube. También montar recetas (resumen del lunes, briefing diario) con Outlook en lugar de Gmail.
 - **Cuánto tarda.** Para ti, 5 minutos. El cuello de botella es una persona: el **administrador global del tenant** (el «tenant» es la oficina digital de tu empresa dentro de Microsoft) tiene que dar un permiso único. Un alumno tardó más de 10 días porque nadie sabía quién ni cómo. Con el texto de más abajo, se resuelve en una conversación.
 - **Quién actúa.** Tú, el administrador de Microsoft 365 y, en planes Team o Enterprise de Claude, el propietario de la organización en Claude.
@@ -246,8 +245,7 @@ Lo que cabe en Copilot y Power Automate, y presenta la petición a IT con el tex
 6. Microsoft, «Overview of Selected Permissions in OneDrive and SharePoint», https://learn.microsoft.com/en-us/graph/permissions-selected-overview, consultado el 2026-10-09.
 7. Microsoft, «Outlook.com connector», https://learn.microsoft.com/en-us/connectors/outlook/, consultado el 2026-10-09.
 
-## Related
-
+## Relacionado
 - [Cómo conectar una plataforma a tu arnés RSC](./conectar-una-plataforma-con-rsc.md)
 - [Hablar con el informático](./hablar-con-el-informatico.md)
 - [Conectar o migrar](./conectar-o-migrar.md)

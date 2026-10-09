@@ -15,8 +15,7 @@ score: 0.0
 > Para: alumnos de Executive Lab que se han perdido con las siglas y quieren saber qué diferencia hay entre un MCP y una API.
 > Conseguirás: entender cada pieza con una imagen de oficina, saber si tu programa tiene API y elegir entre conector, MCP, script o n8n/Make.
 
-## Overview
-
+## En resumen
 Casi todas las dudas son la misma: «¿qué diferencia hay entre un MCP y una API?», «me he perdido con lo del MCP», «¿se puede crear un MCP para cualquier herramienta?». La respuesta corta: **una API es la ventanilla de un programa; un MCP es un manual de uso de esa ventanilla escrito para agentes de IA**. Una no sustituye a la otra. Muchos MCP funcionan por dentro llamando a una API.
 
 Lo que necesitas saber, en cinco líneas:
@@ -200,8 +199,7 @@ Todas consultadas el 2026-10-09.
 5. Model Context Protocol, «What is MCP?»: https://modelcontextprotocol.io/docs/getting-started/intro
 6. OpenAI, «MCP and connectors» (documentación para desarrolladores): https://developers.openai.com/api/docs/mcp
 
-## Related
-
+## Relacionado
 - [Cómo conectar una plataforma a tu arnés RSC](./conectar-una-plataforma-con-rsc.md): las cinco vías y los pasos.
 - [Mi programa no tiene API](./mi-programa-no-tiene-api.md)
 - [Hablar con el informático](./hablar-con-el-informatico.md)

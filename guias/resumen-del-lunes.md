@@ -12,8 +12,7 @@ score: 0.0
 
 # Receta: el resumen del lunes
 
-## Overview
-
+## En resumen
 Cada lunes a las 7:30 llega un email con: ventas de la semana frente a la anterior, caja y saldo, facturas pendientes de cobro y de pago (con antigüedad), stock bajo mínimos y pedidos abiertos. Tres alertas como mucho, cada una con el dato que la justifica. Ni una cifra inventada: si una fuente falla, el email lo dice.
 
 ## Arquitectura
@@ -87,6 +86,5 @@ Odoo Community en Docker con datos de demostración + Google Sheets como "stock"
 - Routine sin el dominio en *Allowed domains*: devuelve 403 y el "verde" no significa éxito. Revisa la transcripción.
 - Hora a las :00 en punto: arranca con retraso.
 
-## Related
-
+## Relacionado
 - [Cómo se monta](./como-se-monta.md) · [Catálogo](https://executive-lab.github.io/conectores-pymes/) · [Conectar una plataforma](./conectar-una-plataforma-con-rsc.md)

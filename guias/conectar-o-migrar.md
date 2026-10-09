@@ -15,8 +15,7 @@ score: 0.0
 > Para: alumnos de Executive Lab que tienen un programa "cerrado" (ERP o contabilidad antiguos, TPV, software instalado) y dudan entre conectarlo como sea o cambiarlo.
 > El veredicto de cada plataforma está en el [catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/).
 
-## Overview
-
+## En resumen
 El arnés solo es tan bueno como los datos a los que llega. Si tu programa principal no deja sacar datos (sin API, sin exportación, sin base de datos accesible), cada automatización pasa por copiar y pegar o por un robot frágil: es un palo en las ruedas. A veces la respuesta es **conectarlo con un puente** (exportación nocturna, usuario de base de datos de solo lectura, módulo del distribuidor). Otras veces es **migrar** a algo que se conecta de serie. Esta guía ayuda a decidir.
 
 ## Señales de que tu herramienta frena (cuantas más, más sentido tiene migrar)
@@ -84,7 +83,6 @@ No compensa si el programa es sectorial y tiene obligaciones legales (prevenció
 | App WhatsApp Business para pedidos o reservas | WhatsApp Business Platform (Cloud API), directamente con Meta o un proveedor | No es cambiar de herramienta: es pasar a la versión con API. |
 | Notion o Airtable usado como CRM | Un CRM con API y MCP (HubSpot, Zoho, Clientify…) cuando haya más de 2-3 comerciales o pipeline real | Mientras sea pequeño, Notion o Airtable se conectan bien y no hace falta cambiar. |
 
-## Related
-
+## Relacionado
 - [Catálogo de conectividad](https://executive-lab.github.io/conectores-pymes/): veredicto conectar o migrar por plataforma.
 - [Cómo conectar una plataforma](./conectar-una-plataforma-con-rsc.md) · [Hablar con el informático](./hablar-con-el-informatico.md).

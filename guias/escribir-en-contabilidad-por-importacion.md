@@ -15,8 +15,7 @@ score: 0.0
 > Para: alumnos con asesoría o contabilidad propia, sus gestorías y formadores. Es la "vía 4" de [Mi programa no tiene API](./mi-programa-no-tiene-api.md) y el último paso de la receta [Facturas a contabilidad](./facturas-a-contabilidad.md).
 > Verificado el 2026-10-09. Las posiciones exactas de los formatos de ancho fijo cambian según la versión: genera siempre un fichero de muestra desde el propio programa y compáralo.
 
-## Overview
-
+## En resumen
 El agente **no escribe** en el programa contable. Lee las facturas o los tickets, propone los asientos, y **genera el fichero de importación oficial** del programa en `01-TOOLS/<PROGRAMA>/out/`. Una persona lo revisa, pasa la validación del programa e importa con su botón. Así:
 
 - no se rompe la integridad del programa ni su soporte;
@@ -57,6 +56,5 @@ Efectos en esta vía:
 4. **Una factura ya emitida en otro sistema solo entra en contabilidad.** No se reemite importándola en el módulo de facturación de otro programa: se duplicarían registros.
 5. **Comunicar estados** (aceptación, rechazo, pago en 4 días hábiles) será una escritura nueva y obligatoria. Buena candidata a automatizar, con aprobación humana.
 
-## Related
-
+## Relacionado
 - [Facturas a contabilidad](./facturas-a-contabilidad.md) · [Facturas emitidas y Veri\*factu](./facturas-emitidas-y-verifactu.md) · [Mi programa no tiene API](./mi-programa-no-tiene-api.md) · [Kit puente técnico](./kit-puente-tecnico.md) · fichas `a3asesor`, `a3innuva-contabilidad`, `sage-50`, `sage-200`, `contasol-factusol`, `holded` y `odoo` del [catálogo](https://executive-lab.github.io/conectores-pymes/)

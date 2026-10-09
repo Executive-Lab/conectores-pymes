@@ -14,8 +14,7 @@ score: 0.0
 
 > Para: pymes, autónomos y gestorías que emiten facturas y quieren dejar de rehacerlas a mano. La receta de [facturas recibidas](./facturas-a-contabilidad.md) cubre lo que te llega; esta cubre lo que **emites**. Datos legales a 2026-10-09.
 
-## Overview
-
+## En resumen
 El agente **prepara** la factura (datos, líneas, importes, cliente) y un **programa de facturación que cumple el reglamento la emite**. Esa frontera es la clave de la receta:
 
 - **Preparar** (borrador, datos, cálculo, aviso de cobro): lo puede hacer tu agente, tu Excel o un script.
@@ -196,8 +195,7 @@ Solo si necesitas reacción inmediata o aprobación por mensaje. Para el cierre 
 
 No verificado: texto de las FAQ de la AEAT sobre software propio; texto íntegro del RD 238/2026; norma que formalice el aplazamiento; sanciones.
 
-## Related
-
+## Relacionado
 - [Facturas a contabilidad](./facturas-a-contabilidad.md) · [Presupuestos, pedidos y albaranes](./presupuestos-pedidos-albaranes.md) · [Cómo se monta](./como-se-monta.md)
 - [ERP, contabilidad y CRM](./conectar-erp-contabilidad-crm.md) · [Mi programa no tiene API](./mi-programa-no-tiene-api.md) · [Excel y hojas de cálculo](./excel-y-hojas-de-calculo.md) · [Conectar WhatsApp](./conectar-whatsapp.md) · [Conectar o migrar](./conectar-o-migrar.md) · [Planes, privacidad y costes](./planes-privacidad-y-costes.md)
 - [Catálogo](https://executive-lab.github.io/conectores-pymes/)

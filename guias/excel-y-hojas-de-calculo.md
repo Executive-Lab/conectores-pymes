@@ -15,8 +15,7 @@ score: 0.0
 > Para: dueños y directivos cuyo negocio vive en Excel y correo, sin necesidad de programar.
 > Conseguirás: que la IA analice tus hojas sin inventarse cifras, un Excel que entienda, el fichero en la nube para que un agente lo lea, y criterio para saber cuándo toca dar el salto a una base de datos.
 
-## Overview
-
+## En resumen
 - **Por qué importa.** Entre los alumnos con datos, 33 de 88 trabajan con «Excel y correo», y 16 lo dicen tal cual: «todo en Excel y email». Excel es el primer «sistema» de la pyme. Si tu agente lee bien tu Excel, ya tienes medio arnés montado.
 - **Dónde está el valor.** La conexión es sencilla (5 minutos). Lo difícil es **trabajar bien**: que los cálculos sean fiables, que la hoja esté ordenada y que no se cuelen datos sensibles.
 - **Quién actúa.** Tú. Si el Excel está en Microsoft 365 o Google Workspace, el administrador solo interviene para permitir un complemento o un conector.
@@ -212,8 +211,7 @@ El complemento edita el libro abierto, con avisos de sobreescritura; la web sirv
 8. Catálogo del proyecto, ficha `google-workspace`, verificada el 2026-10-09 (https://developers.google.com/workspace/guides/configure-mcp-servers).
 9. Catálogo del proyecto, ficha `power-bi`, verificada el 2026-10-09 (https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing).
 
-## Related
-
+## Relacionado
 - [Conectar Microsoft 365](./conectar-microsoft-365.md)
 - [Cómo conectar una plataforma a tu arnés RSC](./conectar-una-plataforma-con-rsc.md)
 - [Hablar con el informático](./hablar-con-el-informatico.md)

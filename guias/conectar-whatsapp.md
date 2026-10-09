@@ -15,8 +15,7 @@ score: 0.0
 > Para: dueños y directivos de pyme que hoy atienden clientes con la app WhatsApp Business en el móvil.
 > Conseguirás: saber qué vía es legal y estable, seguir usando tu móvil y que pedidos, reservas y leads entren solos en tu sistema, con una persona al mando.
 
-## Overview
-
+## En resumen
 La app WhatsApp Business **no tiene API**. Una API es una ventanilla por la que otro programa pide o entrega datos, y esa ventanilla no existe en la app [1]. Para automatizar hay que usar la **WhatsApp Business Platform** (la «Cloud API» de Meta), que sí la tiene.
 
 Desde la **coexistencia** puedes dar de alta tu número actual en la Platform y **seguir usando la app en el móvil** [2]. Es la vía recomendada para casi todos los alumnos.
@@ -210,8 +209,7 @@ Número de prueba de Meta + n8n (self-hosted gratis, desde 20 €/mes en la nube
 9. n8n, nodo WhatsApp Business Cloud: https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.whatsapp/ y https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.whatsapptrigger/ — consultado el 2026-10-09.
 10. Telegram, Bot API: https://core.telegram.org/bots/api — consultado el 2026-10-09 (datos de la ficha del catálogo `telegram`, no releída en la web).
 
-## Related
-
+## Relacionado
 - [Cómo conectar una plataforma a tu arnés RSC](./conectar-una-plataforma-con-rsc.md)
 - [Hablar con el informático](./hablar-con-el-informatico.md)
 - [Conectar o migrar](./conectar-o-migrar.md)

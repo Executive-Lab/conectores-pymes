@@ -14,8 +14,7 @@ score: 0.0
 
 > Para: pymes que reciben pedidos por WhatsApp o correo, preparan presupuestos de obra o de servicio, o casan albaranes con facturas. Es el hueco más grande de las peticiones: 104 alumnos lo piden y el sector más numeroso es industria, construcción e instalaciones.
 
-## Overview
-
+## En resumen
 Lo que dicen los alumnos, parafraseado:
 
 - «Los pedidos llegan por WhatsApp o por correo, alguien los copia a mano en un Excel y luego en el programa de gestión» (varios distribuidores).
@@ -182,8 +181,7 @@ Por eso hay aprobación y campo `dudas`. Cada corrección se apunta en el catál
 3. Peticiones y casos de alumnos del fichero `operaciones.txt` (clases, foro, perfiles e informes de proceso, parafraseados).
 4. Rentman: no consultado en fuente oficial en esta redacción.
 
-## Related
-
+## Relacionado
 - [Cómo se monta](./como-se-monta.md) · [Facturas a contabilidad](./facturas-a-contabilidad.md) · [Facturas emitidas y Veri*factu](./facturas-emitidas-y-verifactu.md)
 - [ERP, contabilidad y CRM](./conectar-erp-contabilidad-crm.md) · [Mi programa no tiene API](./mi-programa-no-tiene-api.md) · [Excel y hojas de cálculo](./excel-y-hojas-de-calculo.md) · [Conectar Microsoft 365](./conectar-microsoft-365.md) · [Conectar WhatsApp](./conectar-whatsapp.md) · [MCP, API y demás](./mcp-api-y-demas-sin-tecnicismos.md) · [Planes, privacidad y costes](./planes-privacidad-y-costes.md)
 - [Catálogo](https://executive-lab.github.io/conectores-pymes/)

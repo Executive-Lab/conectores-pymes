@@ -12,8 +12,7 @@ score: 0.0
 
 # Receta: WhatsApp a pedidos y reservas
 
-## Overview
-
+## En resumen
 El cliente escribe por WhatsApp. El asistente entiende el pedido o la reserva, consulta stock o disponibilidad, confirma con el cliente, lo registra (pedido en borrador en el ERP o fila en la hoja) y avisa al negocio. Si no entiende algo o el cliente lo pide, pasa la conversación a una persona.
 
 ## Lo que hay que saber antes
@@ -72,6 +71,5 @@ Número de prueba de Meta + n8n self-hosted + Google Sheets como stock. Caso del
 - Bot que no sabe callarse cuando el dueño contesta a mano: hace falta la pausa por chat.
 - Plantillas no aprobadas el día del lanzamiento: se piden con días de antelación.
 
-## Related
-
+## Relacionado
 - [Cómo se monta](./como-se-monta.md) · [Hablar con el informático (plantilla F, BSP)](./hablar-con-el-informatico.md)

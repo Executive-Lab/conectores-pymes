@@ -15,8 +15,7 @@ score: 0.0
 > Para: dueños y directivos que trabajan con Gmail, Drive, Calendar y Sheets (cuenta personal o de empresa) y quieren que su agente lea correo, agenda y ficheros.
 > Conseguirás: el conector activo en minutos, una solución para varias cuentas, una petición lista para tu administrador de Workspace y una base de datos ligera en Sheets sin sustos.
 
-## Overview
-
+## En resumen
 - **Qué puedes hacer.** Que Claude o ChatGPT busquen y lean correos, eventos y ficheros de Drive; que preparen borradores y eventos; y que tus flujos (n8n, Apps Script) lean hojas de Sheets.
 - **Cuánto tarda.** Con cuenta personal, 5 minutos y lo haces tú. Con Workspace de empresa, depende de una persona: el **administrador de Workspace** (la persona que entra en admin.google.com, el «portero» de tu oficina digital). Con el texto de más abajo se resuelve en una conversación.
 - **Quién actúa.** Tú, tu administrador de Workspace y, en planes Team o Enterprise de Claude, el propietario (Owner) de la organización en Claude.
@@ -240,8 +239,7 @@ No por la API [12]. Conecta la fuente de datos.
 12. Catálogo del proyecto, ficha `data-studio`, y https://developers.google.com/looker-studio/integrate/api, verificada el 2026-10-09.
 13. Catálogo del proyecto, ficha `google-analytics`, y https://github.com/googleanalytics/google-analytics-mcp, verificada el 2026-10-09.
 
-## Related
-
+## Relacionado
 - [Cómo conectar una plataforma a tu arnés RSC](./conectar-una-plataforma-con-rsc.md)
 - [Conectar Microsoft 365](./conectar-microsoft-365.md)
 - [Hablar con el informático](./hablar-con-el-informatico.md)
