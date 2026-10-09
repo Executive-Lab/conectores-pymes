@@ -65,8 +65,8 @@ Cada lunes a las 06:17 UTC el workflow **Verificación semanal** (`verificar.yml
 1. Elige con `scripts/seleccionar.py` las 10 fichas con el `verificado_el` más antiguo.
 2. Lanza Claude con [`anthropics/claude-code-action`](https://github.com/anthropics/claude-code-action). Claude solo puede buscar en la web, leer páginas y ficheros, y editar `datos/plataformas/` y `datos/cambios/`. No puede ejecutar comandos.
 3. Claude re-verifica con fuentes primarias el MCP, la API, los permisos, los precios, la demo y Verifactu. Cambia solo lo que haya cambiado, pone la fecha de hoy en `verificado_el`, añade las fuentes nuevas, marca «no verificado» lo que no puede confirmar y deja un resumen en `datos/cambios/<fecha>.md`.
-4. Se ejecuta `validar.py` y se abre un **pull request** con los cambios. Nunca se escribe directamente en `main`. Si la validación falla, el PR se abre como borrador y el job termina en error.
-5. Cuando una persona revisa y fusiona el PR, el workflow **Publicar web** actualiza la web.
+4. Se ejecuta `validar.py`, los cambios se suben a una rama `verificacion/<fecha>-<n>` y se abre un **issue** con el resumen y el enlace para **crear el PR con un clic**. Nunca se escribe directamente en `main`. Si la validación falla, el issue lo avisa y el job termina en error.
+5. Una persona crea el PR desde el enlace, lo revisa y lo fusiona; entonces el workflow **Publicar web** actualiza la web.
 
 También se puede lanzar a mano desde la pestaña **Actions** → **Verificación semanal** → **Run workflow**, con un campo opcional `ids` (por ejemplo `holded,sage-50`) para verificar solo esas fichas.
 
@@ -77,11 +77,10 @@ También se puede lanzar a mano desde la pestaña **Actions** → **Verificació
    - `CLAUDE_CODE_OAUTH_TOKEN`: el token de una suscripción de Claude (Pro, Max, Team o Enterprise). Se genera en tu ordenador con `claude setup-token`.
 
    Si falta, la verificación semanal se para al principio con un mensaje que explica qué configurar. La web se sigue publicando igual.
-2. **Permiso para abrir pull requests.** En *Settings → Actions → General → Workflow permissions*, marca «Allow GitHub Actions to create and approve pull requests». Si la organización lo bloquea, hay que activarlo antes en los ajustes de la organización.
-3. **GitHub Pages.** En *Settings → Pages*, elige *Source: GitHub Actions*. Después lanza una vez **Publicar web** desde Actions (o haz un push a `main`).
-4. **Recomendado:** protege la rama `main` (pull request obligatorio) para que nada llegue a la web sin revisión.
+2. **GitHub Pages.** En *Settings → Pages*, elige *Source: GitHub Actions*. Después lanza una vez **Publicar web** desde Actions (o haz un push a `main`).
+3. **Recomendado:** protege la rama `main` (pull request obligatorio) para que nada llegue a la web sin revisión.
 
-Los pull requests que abre el workflow usan el token del propio workflow, así que no disparan otros workflows. Al fusionarlos sí se publica la web, porque el push a `main` lo hace una persona.
+No hace falta permitir que GitHub Actions cree pull requests (la organización lo tiene bloqueado): el workflow solo sube una rama y abre un issue; el PR lo crea una persona.
 
 ## Licencia
 

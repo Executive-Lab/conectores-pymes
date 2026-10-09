@@ -16,7 +16,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
   issues: write
 
 concurrency:
@@ -176,35 +175,43 @@ jobs:
             echo "Antes de fusionar, comprueba cada cambio en su fuente. Al fusionar, el workflow «Publicar web» actualiza la web."
           } > "$RUNNER_TEMP/cuerpo-pr.md"
 
-      - name: Abrir el pull request
-        id: pr
-        uses: peter-evans/create-pull-request@5f6978faf089d4d20b00c7766989d076bb2fc7f1 # v8.1.1
-        with:
-          branch: verificacion/${{ steps.seleccion.outputs.fecha }}-${{ github.run_number }}
-          base: main
-          add-paths: |
-            datos/plataformas/*.json
-            datos/cambios/*.md
-          commit-message: "Verificación semanal del ${{ steps.seleccion.outputs.fecha }}"
-          title: "Verificación semanal del ${{ steps.seleccion.outputs.fecha }}"
-          body-path: ${{ runner.temp }}/cuerpo-pr.md
-          labels: verificacion
-          draft: ${{ steps.validacion.outcome != 'success' }}
-
-      - name: Resumen
-        if: always()
+      # La organización no deja que Actions cree PR: se sube una rama y se abre un issue
+      # con el enlace para crear el PR. Una persona lo crea con un clic y lo revisa.
+      - name: Subir la rama y abrir el issue de revisión
+        id: rama
         env:
-          PR_URL: ${{ steps.pr.outputs.pull-request-url }}
-          PR_OP: ${{ steps.pr.outputs.pull-request-operation }}
+          GH_TOKEN: ${{ github.token }}
+          FECHA: ${{ steps.seleccion.outputs.fecha }}
+          VALIDACION: ${{ steps.validacion.outcome }}
         run: |
-          if [ -n "$PR_URL" ]; then
-            echo "Pull request ($PR_OP): $PR_URL" | tee -a "$GITHUB_STEP_SUMMARY"
-          else
-            echo "No se ha abierto ningún pull request (sin cambios o el job se ha parado antes)." | tee -a "$GITHUB_STEP_SUMMARY"
+          RAMA="verificacion/${FECHA}-${GITHUB_RUN_NUMBER}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$RAMA"
+          git add -- 'datos/plataformas/*.json' 'datos/cambios/*.md'
+          if git diff --cached --quiet; then
+            echo "Sin cambios en los datos: no se sube rama ni se abre issue." | tee -a "$GITHUB_STEP_SUMMARY"
+            exit 0
           fi
+          git commit -q -m "Verificación semanal del ${FECHA}"
+          git push -q "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/${RAMA}"
+          COMPARAR="https://github.com/${GITHUB_REPOSITORY}/compare/main...${RAMA}?expand=1"
+          {
+            echo "**Crear el PR con un clic:** ${COMPARAR}"
+            echo
+            if [ "$VALIDACION" != "success" ]; then
+              echo "> ⚠️ validar.py ha fallado: corrige los datos en la rama antes de fusionar."
+              echo
+            fi
+            cat "$RUNNER_TEMP/cuerpo-pr.md"
+          } > "$RUNNER_TEMP/cuerpo-issue.md"
+          gh label create verificacion --color ec4429 --description "Verificación semanal del catálogo" --force >/dev/null 2>&1 || true
+          URL=$(gh issue create --title "Verificación semanal del ${FECHA}: revisar y crear PR" --body-file "$RUNNER_TEMP/cuerpo-issue.md" --label verificacion)
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+          echo "Rama: ${RAMA} · Issue: ${URL} · PR: ${COMPARAR}" | tee -a "$GITHUB_STEP_SUMMARY"
 
       - name: Fallar si los datos no son válidos
         if: steps.validacion.outcome == 'failure'
         run: |
-          echo "::error title=Datos no válidos::validar.py ha fallado tras la verificación. El PR se ha abierto como borrador; no lo fusiones hasta corregirlo."
+          echo "::error title=Datos no válidos::validar.py ha fallado tras la verificación. Corrige los datos en la rama antes de crear o fusionar el PR."
           exit 1
