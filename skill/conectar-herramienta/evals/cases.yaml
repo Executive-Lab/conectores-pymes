@@ -1,0 +1,42 @@
+skill: conectar-herramienta
+
+should_trigger:
+  - prompt: "Quiero conectar mi Sage 50 al agente para que me haga un resumen de cobros cada lunes."
+    why: Programa de escritorio sin API; hay que elegir el puente (exportación o BD de solo lectura), los permisos y el texto para el informático.
+  - prompt: "¿Se puede conectar InstalWin? Es el programa que usamos en la instaladora."
+    why: Software vertical sin API pública; el método decide entre exportación, BD de solo lectura o RPA, y si compensa migrar.
+  - prompt: "Mi TPV es ICG y no veo ninguna API. ¿Qué le pido al distribuidor?"
+    why: El núcleo es la petición al distribuidor con permisos acotados (exportación por FTP o usuario SQL de solo lectura).
+  - prompt: "Tenemos Contasol en local, ¿me compensa pasarme a Holded u Odoo para conectarlo todo?"
+    why: Decisión de conectar o migrar, con Veri*factu y la factura electrónica B2B como disparadores.
+  - prompt: "Los pedidos me llegan por WhatsApp Business y quiero que entren solos en Business Central."
+    why: Paso de la app a la Cloud API en coexistencia y elección de la vía para el ERP (MCP oficial de Business Central).
+  - prompt: "Connect our Holded account to the harness with read-only access."
+    why: English; the tool connection decision (API v2 token with module-level read permissions) plus the 01-TOOLS setup.
+
+should_not_trigger:
+  - prompt: "Escríbeme en TypeScript un cliente para la API de Holded con paginación y reintentos."
+    route_to: api-connector-builder
+    why: La vía ya está decidida; es escribir el cliente de una API.
+  - prompt: "Audita mi carpeta 01-TOOLS y monta la wiki 02-DOCS del proyecto."
+    route_to: harness
+    why: Gobierno del plano de control entero, no la conexión de una herramienta.
+  - prompt: "¿Merece la pena automatizar la conciliación bancaria o lo sigo haciendo a mano?"
+    route_to: automation-strategy
+    why: Decisión de si automatizar un proceso, no de cómo conectar una herramienta.
+  - prompt: "Dame el JSON importable de n8n para pasar los leads de Meta Ads a HubSpot."
+    route_to: automation-flows
+    why: Diseño de un flujo concreto en una plataforma de automatización.
+  - prompt: "Mi agente de atención al cliente ha respondido a un email con instrucciones raras, ¿cómo lo blindo?"
+    route_to: agent-safety
+    why: Acotar un agente que ya corre frente a prompt injection.
+
+capability:
+  - scenario: "Una asesoría con Contasol en local recibe la documentación de sus clientes en PDF por email y WhatsApp y quiere que el agente la contabilice. Decide la vía, los permisos, qué pedir y a quién, cómo probarlo gratis y si compensa migrar."
+    must:
+      - "Distingue Contasol local de Contasol Nube y explica que la API de DELSOL solo llega a la Nube."
+      - "Para escribir, propone generar el fichero de importación oficial que revisa e importa una persona; nunca escribir en la base de datos."
+      - "Propone una credencial de solo lectura por empresa y área, o una copia nocturna o exportación si sigue en local."
+      - "Incluye el mensaje listo para el distribuidor o el informático."
+      - "Da un veredicto de conectar o migrar con las fechas de Veri*factu y de la factura electrónica B2B, marcadas como 'verificar'."
+      - "No pide claves en el chat."

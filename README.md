@@ -43,6 +43,12 @@ python3 scripts/construir.py    # genera sitio/ (index.html, catalogo.json, esqu
 
 Para ver la web en local: `python3 -m http.server -d sitio 8000` y abre http://localhost:8000.
 
+## La skill `conectar-herramienta`
+
+En [`skill/conectar-herramienta/`](skill/conectar-herramienta/SKILL.md) está el **método** convertido en una skill de Claude Code (formato compatible con [RSC](https://github.com/ericrisco/rsc-harness)): vías (MCP, API, app OAuth, puente, RPA), permisos acotados, qué pedir y a quién, cómo probarlo gratis y si conviene conectar, migrar o construir. Usa este catálogo (`catalogo.json`) como fuente de datos.
+
+Para usarla en tu proyecto: copia la carpeta a `.claude/skills/conectar-herramienta/` y dile a tu agente *«conecta mi <herramienta>»*.
+
 ## Cómo contribuir
 
 1. Edita el JSON de la plataforma en `datos/plataformas/<id>.json` (o crea uno nuevo copiando otro de la misma categoría). El `id` va en minúsculas con guiones y coincide con el nombre del fichero.
