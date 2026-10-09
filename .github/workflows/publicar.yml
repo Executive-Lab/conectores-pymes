@@ -1,0 +1,63 @@
+# Publica la web en GitHub Pages cada vez que cambian los datos, las guías o los scripts.
+name: Publicar web
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "datos/**"
+      - "guias/**"
+      - "scripts/**"
+      - ".github/workflows/publicar.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un solo despliegue a la vez; no se cancela el que está en marcha.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    name: Validar y construir
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el repositorio
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Preparar Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - name: Validar los datos
+        run: python3 scripts/validar.py
+
+      - name: Construir la web
+        run: python3 scripts/construir.py --salida sitio
+
+      - name: Configurar GitHub Pages
+        uses: actions/configure-pages@v6
+
+      - name: Subir la web como artefacto de Pages
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: sitio
+
+  desplegar:
+    name: Desplegar en GitHub Pages
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: Desplegar
+        id: despliegue
+        uses: actions/deploy-pages@v5

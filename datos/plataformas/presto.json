@@ -1,0 +1,59 @@
+{
+  "id": "presto",
+  "nombre": "Presto",
+  "nombre_completo": "Presto (RIB Spain; presupuestos y mediciones, formato FIEBDC-3/BC3)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "RIB Presto",
+    "BC3",
+    "FIEBDC"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "limitada",
+    "estilo": "API COM local para complementos (ProgID Presto.App.25 o Presto.App.26), con ejemplos en VB, VBScript y C#. El escritorio no tiene API REST; la WebAPI solo existe con Presto Server/Cloud.",
+    "auth": "COM: sin autenticación; funciona dentro de la sesión de Windows con Presto abierto y licenciado (llave). WebAPI: usuario y contraseña (no verificado).",
+    "requisitos": "Presto licenciado en un PC Windows. La WebAPI exige además una licencia de Presto Server/Cloud y un servidor IIS (precio no público).",
+    "docs_url": "https://www.rib-software.com/es/rib-presto/api-de-presto"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "NeoNexAI/presto-mcp-server (PyPI presto-mcp-server v2.2.0, 9-jul-2026, MIT, 0 estrellas, 18 herramientas). Trabaja por COM contra la obra abierta y también leyendo ficheros BC3 sin Presto instalado. Puede escribir (presto_set_field, presto_set_precio, presto_execute_option). El autor reconoce que la parte COM solo se ha probado con un objeto simulado, no con un Presto real, y no tiene un modo global de solo lectura. RIB no tiene MCP oficial."
+  },
+  "otras_vias": [
+    "Exportar e importar BC3/FIEBDC-3: es texto estándar y se puede procesar sin Presto.",
+    "Integración bidireccional con Excel.",
+    "Primavera, Revit (Cost-it) e IFC (IFCost).",
+    "Ficheros de obra propietarios; no se ha encontrado una base de datos SQL documentada.",
+    "No hay nodo de n8n ni app de Make o Zapier."
+  ],
+  "rpa": "no hace falta: COM y BC3 cubren casi todo. Solo haría falta RPA de escritorio para funciones que el COM no exponga.",
+  "dificultad": "Media",
+  "permisos_acotados": "Trabajar sobre una copia o sobre un BC3 exportado. En el MCP, habilitar solo las herramientas presto_bc3_* y las de lectura (quitar set_field, set_precio y execute_option). Con WebAPI, un usuario propio en Presto Server. NO se puede acotar: el COM da control total sobre la obra abierta, no tiene modo de solo lectura ni permite limitar por capítulos o partidas.",
+  "pedir_al_informatico": "A RIB o al distribuidor: que confirmen la versión (25 o 26), el ProgID COM y si la licencia permite automatización externa, y que den precio de Presto Server/Cloud con WebAPI. Al informático: un PC Windows con Presto y Claude Code, y una carpeta compartida con las exportaciones BC3 de las obras.",
+  "demo_gratis": "'Presto Demo' descargable rellenando el formulario de RIB (limitaciones no verificadas). Licencia académica gratuita 'Te presto un Presto', solo para estudiantes matriculados. Para clase: ficheros BC3 y el MCP en modo BC3, sin Presto instalado.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "Sin precio público: se compra a RIB Spain o a distribuidores, más el servicio de actualización. La WebAPI exige Presto Server/Cloud (precio no público).",
+  "coste_resumen": "COM incluido; precio no público",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Casi nunca: Presto con BC3 es el estándar de hecho en España. Solo compensa si hace falta colaboración web o una API REST y Presto Server/Cloud sale más caro que cambiar.",
+    "alternativas": [
+      "Presto Server/Cloud con WebAPI (misma herramienta; opción preferente)",
+      "Arquímedes de CYPE (BC3; API no verificada)",
+      "Procore (API REST con OAuth, pero es gestión de obra, no mediciones BC3)"
+    ],
+    "coste_esfuerzo_migracion": "Licencias bajas, pero alto coste en formación, plantillas y bases de precios. Riesgo: perder la compatibilidad BC3 con clientes y administraciones."
+  },
+  "verifactu": "No aplica: Presto genera presupuestos y certificaciones, no emite facturas (no verificado que ningún módulo facture).",
+  "fuentes": [
+    "https://www.rib-software.com/es/rib-presto/api-de-presto",
+    "https://www.rib-software.com/es/rib-presto",
+    "https://www.rib-software.com/es/soporte/presto/mejoras-versiones",
+    "https://www.rib-software.com/es/te-presto-un-presto",
+    "https://github.com/NeoNexAI/presto-mcp-server",
+    "https://pypi.org/pypi/presto-mcp-server/json"
+  ],
+  "confianza": "media"
+}

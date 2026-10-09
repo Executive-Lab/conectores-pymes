@@ -1,0 +1,55 @@
+{
+  "id": "acceso-remoto",
+  "nombre": "Acceso remoto (RDP, AnyDesk, TeamViewer)",
+  "nombre_completo": "Accesos remotos (RDP, AnyDesk o TeamViewer) como vía de RPA a un ERP de escritorio",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "RDP",
+    "AnyDesk",
+    "TeamViewer",
+    "Escritorio remoto"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "limitada",
+    "estilo": "RDP es un protocolo de pantalla y no da acceso a los datos del ERP. La Web API REST de TeamViewer gestiona usuarios, grupos, dispositivos, sesiones e informes de conexión, pero no los datos del ERP. La API de AnyDesk no se ha verificado (su web devolvió 403).",
+    "auth": "TeamViewer: OAuth 2.0 o script tokens con los permisos que se eligen al crearlos (no se pueden editar después). RDP: usuario y contraseña de Windows, con NLA y MFA a través de RD Gateway y RADIUS.",
+    "requisitos": "La API de TeamViewer solo está en los planes Business, Premium, Corporate y Tensor, con pago anual.",
+    "docs_url": "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/for-developers/use-the-teamviewer-api/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "TeamViewer tiene un MCP oficial (alojado en tvone-mcp.azurewebsites.net/mcp o autoalojado desde github.com/teamviewer/TV_Remote_MCP) con OAuth. Gestiona dispositivos, usuarios, políticas e informes y también puede iniciar sesiones de control remoto. No documenta modo de solo lectura; en Copilot Studio usa scopes del tipo Computers.View. No existe MCP para operar el ERP dentro de la sesión: eso sería Claude computer use o un RPA de escritorio."
+  },
+  "otras_vias": [
+    "Antes de montar RPA, pedir al proveedor del ERP API, ODBC o acceso de solo lectura a la base de datos, o exportaciones programadas (CSV/Excel)",
+    "RemoteApp (solo la aplicación del ERP) detrás de RD Gateway",
+    "Herramientas de RPA de escritorio sobre la sesión remota"
+  ],
+  "rpa": "escritorio: es el único camino si el ERP no tiene API, base de datos accesible ni exportación. Es frágil (cambios de pantalla, resolución, ventanas emergentes) y trabaja con credenciales de sesión completa.",
+  "dificultad": "Muy difícil",
+  "permisos_acotados": "Usuario de Windows dedicado, sin permisos de administrador, que solo vea el ERP (mejor con RemoteApp que con escritorio completo). Usuario del ERP con un rol de solo consulta. RDP nunca expuesto a Internet: VPN o RD Gateway con TLS, MFA por RADIUS y políticas RD CAP/RAP. AnyDesk o TeamViewer: lista blanca de IDs, 2FA obligatorio, contraseña de acceso desatendido única y registro de sesiones. Token de la API de TeamViewer solo con permisos de informes. CISA (AA23-025A) recomienda inventariar las herramientas de acceso remoto y permitir solo las aprobadas. No se puede limitar lo que el robot ve o hace dentro de la sesión más allá de los permisos de los usuarios de Windows y del ERP.",
+  "pedir_al_informatico": "Pide un usuario de Windows y otro del ERP exclusivos para el robot, solo de consulta, accesibles por VPN o RD Gateway con MFA (nunca el puerto 3389 abierto). Antes de montar el RPA, pregunta al proveedor del ERP si hay exportación programada o acceso de solo lectura a la base de datos.",
+  "demo_gratis": "RDP viene incluido en Windows Pro y Server. TeamViewer y AnyDesk son gratis solo para uso personal no comercial (no verificado). La API y el MCP de TeamViewer exigen un plan de pago.",
+  "coste_demo": "RDP 0 € si ya tienes Windows Pro. La API y el MCP de TeamViewer van desde el plan Business, con suscripción anual (el precio sale en el selector de licencias y no se publica).",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € RDP; API TeamViewer: plan Business",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Migra el ERP, no la herramienta de acceso remoto, si el ERP no ofrece API, base de datos ni exportación y el RPA se rompe a menudo o necesita credenciales amplias. También en la próxima renovación de licencia o servidor, o si hay que adaptarlo a Verifactu.",
+    "alternativas": [
+      "ERP en la nube con API pública, por ejemplo Holded, Odoo o Sage (no verificados)"
+    ],
+    "coste_esfuerzo_migracion": "Alto: migración de datos maestros e histórico, formación y meses de convivencia entre los dos sistemas."
+  },
+  "fuentes": [
+    "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/for-developers/use-the-teamviewer-api/",
+    "https://www.teamviewer.com/en/global/support/knowledge-base/teamviewer-remote/teamviewer-ai/teamviewer-mcp-interface/",
+    "https://www.teamviewer.com/en/resources/trust-center/statement/",
+    "https://www.teamviewer.com/en/pricing/overview/",
+    "https://learn.microsoft.com/en-us/windows-server/remote/remote-desktop-services/rds-plan-access-from-anywhere",
+    "https://www.cisa.gov/news-events/cybersecurity-advisories/aa23-025a"
+  ],
+  "confianza": "media"
+}

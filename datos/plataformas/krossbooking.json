@@ -1,0 +1,52 @@
+{
+  "id": "krossbooking",
+  "nombre": "Kross Booking",
+  "nombre_completo": "Kross Booking / Krossbooking (PMS + channel manager, Solutions Plus srl, Bari)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "Krossbooking"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "limitada",
+    "estilo": "No verificado. Capterra y SoftwareAdvice listan 'API' entre sus funciones y el dominio api.krossbooking.com responde, pero no hay documentación pública. Conduit tiene una integración que sincroniza reservas y huéspedes.",
+    "auth": "No verificada",
+    "requisitos": "Hay que pedirla al proveedor. La página de precios no menciona la API.",
+    "docs_url": "Sin documentación pública"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP."
+  },
+  "otras_vias": [
+    "Conectores de terceros (Conduit para mensajería con huéspedes)",
+    "Exportación desde el panel: no verificada",
+    "Los datos también están en las extranets de las OTA (Booking, Airbnb) y en los correos de confirmación, que se pueden procesar",
+    "Apps propias de Kross para cerraduras (Kross Kdoor, Kross Guest App)"
+  ],
+  "rpa": "navegador: si el proveedor no da API ni exportación",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Si dan clave de API, que sea exclusiva para el arnés. Para un RPA, usa un usuario del panel dedicado con el rol mínimo (no se ha verificado si existen roles). No se sabe si se puede acotar a solo lectura.",
+  "pedir_al_informatico": "Pide a Kross Booking (Solutions Plus srl) la documentación de su API, cómo se emite la clave, si hay acceso de solo lectura y si tiene coste adicional.",
+  "demo_gratis": "Demo gratuita de 30 días que se pide por formulario. No consta si incluye la API.",
+  "coste_demo": "Basic 4 €/mes por habitación o apartamento (sin channel manager) y Premium 6 €/mes por unidad (PMS, channel manager y motor de reservas). Mínimo 3 unidades, pago mensual y sin costes de activación. Más de 20 unidades: precio a medida. La API no aparece en los precios.",
+  "demo_resumen": "prueba 30 días",
+  "coste_resumen": "18 €/mes (Premium, mín. 3 uds)",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Si el proveedor no da API ni exportación y necesitas automatizar check-in, limpiezas, mensajes o la facturación de reservas.",
+    "alternativas": [
+      "PMS de alquiler vacacional con API pública documentada, por ejemplo Smoobu, Hostaway o Lodgify (no verificados)"
+    ],
+    "coste_esfuerzo_migracion": "Medio: hay que reconectar los canales OTA (riesgo de overbooking durante la transición), migrar las reservas futuras y las tarifas y formar al equipo."
+  },
+  "fuentes": [
+    "https://www.krossbooking.com/en",
+    "https://www.krossbooking.com/en/price",
+    "https://www.softwareadvice.co.uk/software/25143/kross-booking-suite",
+    "https://conduit.ai/integrations/kross-booking",
+    "https://api.krossbooking.com/"
+  ],
+  "confianza": "baja"
+}

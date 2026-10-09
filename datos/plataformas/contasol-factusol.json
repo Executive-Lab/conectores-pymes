@@ -1,0 +1,68 @@
+{
+  "id": "contasol-factusol",
+  "nombre": "Contasol / Factusol",
+  "nombre_completo": "Contasol / Factusol (TeamSystem Software DELSOL: 'TS Contasol', 'TS Factusol')",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Contasol",
+    "Factusol",
+    "TS Contasol",
+    "TS Factusol",
+    "DELSOL",
+    "Software DELSOL"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "limitada",
+    "estilo": "API web propia de DELSOL que solo llega a los datos alojados en su Nube (Azure): Factusol, Contasol, Nominasol y Delsol Nube. Las referencias de endpoints no son públicas; la documentación 'con ejemplos en los principales lenguajes' se entrega tras el alta. Que sea REST/JSON es probable, pero no está verificado.",
+    "auth": "Dos pasos. (1) Cuenta de fabricante (código de fabricante + email registrado), que se pide con el formulario de sdelsol.com/api. (2) El cliente crea un 'Acceso por API' en Archivo > Seguridad > Acceso por API, eligiendo empresa, área y permisos, y recibe por email el código de cliente, la base de datos y la contraseña.",
+    "requisitos": "La empresa debe estar en la Nube de DELSOL (modalidad de pago); las empresas guardadas en local no son accesibles por API. El alta de fabricante es gratuita según Chift; no se publican plazos ni criterios de aprobación. No hay cuotas de API ni rate limit documentados.",
+    "docs_url": "https://www.sdelsol.com/api/ ; https://docs.chift.eu/connectors/accounting/contasol"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No hay MCP oficial ni comunitario: Glama no da resultados para 'factusol' ni 'contasol' y no hay repos en GitHub. Habría que construir un MCP propio sobre la API de la Nube."
+  },
+  "otras_vias": [
+    "BD local: la web oficial de Factusol habla de 'Bases de datos MS-Access'; el motor de Contasol no está verificado. Se puede leer por ODBC/OLEDB desde el PC o servidor Windows, siempre sobre una copia.",
+    "Exportar a PDF/XLSX en Contasol; enlace Factusol→Contasol (las facturas pasan como asientos); JSON hacia TeamSystem Renta.",
+    "Chift (API unificada): conector de Contasol solo para la Nube. Exige acceso completo de lectura y escritura.",
+    "Integraciones listadas por DELSOL: Inmatic, FacturaTech, YOOZ, FS2PS (WordPress/PrestaShop), Shopify/Woo, Power BI.",
+    "n8n/Make/Zapier: sin nodo nativo. Webhooks: no documentados."
+  ],
+  "rpa": "escritorio: solo si los datos están en local y no se permite leer la base de datos Access. Con la Nube no hace falta.",
+  "dificultad": "Media",
+  "permisos_acotados": "En Archivo > Seguridad > Acceso por API se elige empresa y área. Chift confirma que hay accesos de solo lectura y parciales, así que para el arnés: un acceso de solo lectura por empresa y área. NO se puede acotar: por tabla o por registro (no documentado). Tampoco hay sandbox (usar una empresa de pruebas). Chift exige lectura y escritura totales. En la base de datos Access local no hay permisos granulares: quien abre el fichero lo ve todo, así que se trabaja sobre una copia. Si los datos están en local, la dificultad real sube a Difícil.",
+  "pedir_al_informatico": "Confirmar si la empresa está en la Nube de DELSOL. Si lo está, crear en Archivo > Seguridad > Acceso por API un acceso de SOLO LECTURA para nuestro código de fabricante, limitado a la empresa y el área acordadas, y reenviarnos el email con las credenciales. Si está en local, dejar cada noche una copia de la base de datos (o un export XLSX) en una carpeta compartida.",
+  "demo_gratis": "Prueba gratuita de 30 días sin tarjeta, eligiendo 'En la Nube' (máximo 5 usuarios y 2 empresas, en Azure). Según Chift, la API funciona en la empresa de prueba con un código de fabricante, que es gratuito. La página de prueba sigue diciendo que la versión local es gratuita 'sin límite de tiempo ni de operaciones', pero la web de 2026 ya no presenta los programas como gratuitos: confirmarlo con DELSOL.",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "Los precios de la Nube no son públicos: solo hay un configurador ('Impuestos no incluidos') y una promoción del 50% durante 2 meses en contratos anuales. Un distribuidor anuncia Factusol 2026 en nube entre 24,20 € y 652,58 € con IVA, sin indicar periodicidad. La API no tiene coste para el fabricante (según Chift). Hace falta alta de fabricante (gratuita), no de distribuidor.",
+  "coste_resumen": "Nube: precio no público; API 0 €",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Si el cliente está en local, el primer paso es pasarse a la Nube del MISMO programa: es la única forma de tener API sin cambiar de software. Cambiar de programa solo compensa si la gestoría usa otro y hay doble trabajo, si hacen falta webhooks o un MCP listo para usar, si la versión es antigua (Factusol anterior a la 2025.0.13, sin VERI*FACTU) o si la Nube anual sale más cara que un SaaS con API autoservicio.",
+    "alternativas": [
+      "TS Contasol/Factusol en la Nube (mismo proveedor)",
+      "Holded (API key autoservicio; Make y Zapier nativos)",
+      "Microsoft Dynamics 365 Business Central (API + MCP oficial)"
+    ],
+    "coste_esfuerzo_migracion": "De local a Nube: días, más la suscripción anual (precio no público). A otro ERP: 4-12 semanas (maestros, saldos de apertura, plan de cuentas). Riesgos: perder el histórico contable detallado y romper la numeración de las series VERI*FACTU (hay que cerrar la serie y abrir una nueva)."
+  },
+  "verifactu": "Factusol: adaptado. Software del Sol, S.A.U. firmó la declaración responsable el 29-jul-2025 para la versión 2025.0.13 y posteriores. Solo trabaja en modalidad VERI*FACTU (no tiene modo no verificable) y necesita certificado digital en cada equipo que factura, con Windows 10 o superior. TeamSystem tiene otra declaración aparte para 'TeamSystem API'. Contasol no emite facturas, así que VERI*FACTU recae en Factusol.",
+  "fuentes": [
+    "https://docs.chift.eu/connectors/accounting/contasol",
+    "https://www.sdelsol.com/api/",
+    "https://www.sdelsol.com/",
+    "https://www.sdelsol.com/precios/",
+    "https://www.sdelsol.com/contratar/",
+    "https://www.sdelsol.com/prueba-gratuita/contasol/",
+    "https://www.sdelsol.com/programa-facturacion-factusol/",
+    "https://www.sdelsol.com/integraciones/",
+    "https://www.teamsystem.es/verifactu/declaracion-responsable/factusol/pdf/",
+    "https://www.teamsystem.es/verifactu/declaracion-responsable/vtsapi/pdf/",
+    "https://guiafacturacion.es/software/factusol/",
+    "https://glama.ai/mcp/servers?query=factusol"
+  ],
+  "confianza": "media"
+}

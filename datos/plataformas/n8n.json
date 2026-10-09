@@ -1,0 +1,47 @@
+{
+  "id": "n8n",
+  "nombre": "n8n",
+  "nombre_completo": "n8n",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "API pública REST de n8n.",
+    "auth": "Cabecera X-N8N-API-KEY. Solo Enterprise tiene scopes por clave; en los demás planes la clave da acceso total.",
+    "requisitos": "Cloud: planes Starter, Pro y Enterprise; NO está disponible en la prueba de Cloud. Self-hosted: todas las ediciones, Community incluida.",
+    "docs_url": "https://docs.n8n.io/api/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "EXPONE de dos formas. (1) Nodo MCP Server Trigger: publica como herramientas los Tool nodes y subflujos de un workflow. Usa SSE o streamable HTTP, con autenticación None, Bearer o Header. En queue mode necesita una sola réplica de webhook. (2) MCP a nivel de instancia (https://<dominio>/mcp-server/http), en beta desde nov-2025 y, según n8n.io/mcp, incluido en todos los planes, Community también. Hay que activarlo en la instancia y luego en cada workflow. Autenticación por OAuth o token personal. Herramientas: search_workflows y execute_workflow y, desde la 2.13, también crear y editar workflows y data tables, es decir, ESCRIBE. Desde la 2.24 se puede acotar por proyecto o carpeta. CONSUME MCP con el nodo MCP Client Tool del AI Agent, con filtro de herramientas."
+  },
+  "otras_vias": [
+    "Nodo Webhook",
+    "API pública REST",
+    "Más de 400 nodos nativos y HTTP Request",
+    "Exportar e importar workflows en JSON"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "MCP de instancia: exponer solo los workflows marcados como 'Available in MCP' y conectar con un usuario de n8n dedicado; desde la 2.24, limitado a un proyecto o carpeta. Trigger: un workflow MCP por caso de uso, siempre con Bearer o Header, nunca None, y credenciales separadas por workflow. Se pueden revocar clientes OAuth y rotar tokens. NO se puede acotar: todos los clientes ven todos los workflows expuestos; search_workflows resume TODOS los workflows visibles para el usuario; el MCP de instancia trae crear y editar sin una opción documentada de 'solo ejecutar'; y las API keys no tienen scopes fuera de Enterprise.",
+  "pedir_al_informatico": "Activa el MCP de instancia y crea un usuario de n8n solo para la IA, con acceso únicamente al proyecto de los flujos que vamos a exponer, y marca solo esos como 'Available in MCP'. Publícalo por HTTPS con el proxy sin buffering y dame acceso por OAuth, no la API key general.",
+  "demo_gratis": "Self-hosted Community gratis (licencia Sustainable Use, válida para uso interno), con MCP Server Trigger, MCP de instancia y API, y sin límite de ejecuciones. Claude Code conecta a localhost; claude.ai necesita una URL pública o un túnel. La prueba de Cloud dura 14 días y da 1.000 ejecuciones, pero no incluye API.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "Cloud Starter: 20 €/mes con pago anual (2.500 ejecuciones); unos 24 € con pago mensual según fuentes secundarias, no confirmado. Self-hosted: 0 € más el hosting.",
+  "coste_resumen": "0 € self-hosted; Cloud 20 €/mes",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://docs.n8n.io/integrations/builtin/core-nodes/n8n-nodes-langchain.mcptrigger/",
+    "https://docs.n8n.io/integrations/builtin/cluster-nodes/sub-nodes/n8n-nodes-langchain.toolmcp/",
+    "https://docs.n8n.io/connect/connect-to-n8n-mcp-server",
+    "https://community.n8n.io/t/introducing-instance-level-mcp-access-in-n8n-beta/223178",
+    "https://n8n.io/mcp/",
+    "https://docs.n8n.io/api/",
+    "https://n8n.io/pricing/"
+  ],
+  "confianza": "alta"
+}

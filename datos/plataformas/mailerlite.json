@@ -1,0 +1,44 @@
+{
+  "id": "mailerlite",
+  "nombre": "MailerLite",
+  "nombre_completo": "MailerLite",
+  "categoria": "crm-email",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST",
+    "auth": "API token por Bearer (Integraciones > MailerLite API > Generar nuevo token)",
+    "requisitos": "En Free, la API es 'Limitada, sin envío'. Límite global de 120 peticiones por minuto; las importaciones, 5 por minuto. El token va ligado al usuario que lo crea y deja de funcionar si se borra ese usuario.",
+    "docs_url": "https://developers.mailerlite.com/docs/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto https://mcp.mailerlite.com/mcp (Streamable HTTP, v4.14.0, protocolo 2025-11-25) con login OAuth. Unas 77 herramientas de suscriptores, campañas, grupos, segmentos, automatizaciones, plantillas, e-commerce y webhooks. Lee y escribe, incluido borrar y 'forget' de suscriptores. Conector verificado en el directorio de Claude desde mar-2026. En Free, el MCP es 'Limitado'."
+  },
+  "otras_vias": [
+    "Nodo nativo MailerLite y su Trigger en n8n",
+    "Make y Zapier",
+    "Webhooks",
+    "Exportar a CSV"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "No hay scopes ni token de solo lectura documentados, y el MCP no tiene modo solo lectura. Mitigación: crear el token o la conexión MCP desde un usuario dedicado con un rol de equipo limitado (los roles por plan no están verificados) y revisar cada llamada de escritura. Lo que no se acota: el token da el acceso del usuario a toda la cuenta, incluido borrar suscriptores.",
+  "pedir_al_informatico": "Conecta el MCP oficial desde un usuario de equipo dedicado, no desde el propietario. Y configura Claude para que pida confirmación antes de cualquier herramienta delete, forget o schedule.",
+  "demo_gratis": "Free permanente: 250 suscriptores, 2.500 emails al mes, 2 usuarios. API 'Limitada, sin envío' y MCP 'Limitado'. Prueba premium de 14 días sin tarjeta, que permite enseñar el MCP completo.",
+  "coste_demo": "Comfort: desde 12 $/mes según la FAQ oficial; el pago anual ahorra un 10%. Importe anual exacto y precio en € no verificados.",
+  "demo_resumen": "prueba 14 días",
+  "coste_resumen": "0 € (Free, API limitada)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.mailerlite.com/mcp",
+    "https://developers.mailerlite.com/docs/",
+    "https://claude.com/connectors/mailerlite",
+    "https://www.mailerlite.com/pricing"
+  ],
+  "confianza": "media"
+}

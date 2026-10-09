@@ -1,0 +1,48 @@
+{
+  "id": "zoom",
+  "nombre": "Zoom",
+  "nombre_completo": "Zoom",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST más webhooks, con scopes granulares del tipo recurso:acción:detalle[:admin].",
+    "auth": "Server-to-Server OAuth (a nivel de cuenta; token de 1 h sin refresh) o General app con OAuth de usuario. JWT está retirado desde 2023.",
+    "requisitos": "App en el Zoom App Marketplace. Para S2S, quien la crea necesita un rol que lo permita, y solo puede añadir los scopes de ese rol. Las cuentas Free tienen límites diarios (Light: 4/s y 6.000/día). Basic no tiene grabación en la nube, así que las APIs de grabación no devuelven nada.",
+    "docs_url": "https://developers.zoom.us/docs/internal-apps/s2s-oauth/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Zoom MCP Server remoto alojado por Zoom, con gateways regionales (mcp.zoom.us, mcp-eu.zoom.us) y servidores por producto (Meetings: https://zoom.us/mcp/meeting/streamable; también Chat, Docs, Whiteboard, Calendar, Mail…). OAuth 2.1 con PKCE y SIN registro dinámico: hay que crear a mano una General app con la URL de callback del cliente. Pide rol de admin o de desarrollador y licencias del producto. Zoom no publica si está en beta o GA, ni la lista de herramientas. Según MintMCP (no confirmado): Meetings solo lee, Team Chat escribe, y hace falta Workplace Pro o superior."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Zoom (reuniones CRUD); los eventos entran por el nodo Webhook",
+    "Webhooks o Event Subscriptions (p. ej. recording.completed)",
+    "Make y Zapier",
+    "Descarga manual de grabaciones y transcripciones"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Media",
+  "permisos_acotados": "Lo más acotado es una General app autorizada por un usuario dedicado, con scopes de usuario SIN ':admin' y de lectura (p. ej. meeting:read:list_meetings, cloud_recording:read:list_recording_files): solo ve sus reuniones. Con S2S, solo scopes ':read' y una app por integración, creada por un usuario con rol mínimo. NO se puede acotar: los scopes ':admin' de S2S abarcan a todos los usuarios de la cuenta, S2S no pide consentimiento, y los límites de API se comparten en toda la cuenta.",
+  "pedir_al_informatico": "Crea en el Marketplace de Zoom una General app con scopes de solo lectura de reuniones y grabaciones, autorizada por un usuario técnico dedicado. Pásame el Client ID y el Secret por un canal seguro.",
+  "demo_gratis": "La cuenta Basic gratuita permite crear una app y llamar a la API (listar y crear reuniones de 40 min) con los límites Free. No tiene grabaciones en la nube. Lo más probable es que el MCP oficial exija licencia de pago (no verificado). Duración de la prueba de Pro: no verificada.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "Zoom Workplace Pro: 16,99 $/usuario/mes con pago mensual o 14,16 $ con pago anual (zoom.us/pricing, 2026). Precio en € no verificado.",
+  "coste_resumen": "0 € (Basic); Pro 14,16 $/u/mes anual",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.zoom.us/docs/mcp/",
+    "https://developers.zoom.us/docs/mcp/servers/",
+    "https://developers.zoom.us/docs/internal-apps/s2s-oauth/",
+    "https://developers.zoom.us/docs/internal-apps/oauth-scopes-granular/",
+    "https://developers.zoom.us/docs/api/rate-limits/",
+    "https://zoom.us/es/pricing",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.zoom/",
+    "https://docs.mintmcp.com/docs/zoom-remote-mcp-setup"
+  ],
+  "confianza": "media"
+}

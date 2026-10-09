@@ -1,0 +1,15 @@
+{
+  "id": "ads-ecommerce-bi",
+  "nombre": "Publicidad, analítica, contenido, ecommerce, pagos, web y BI",
+  "hallazgos": [
+    "Varias guías ya no valen por cambios de 2026. Google Ads quitó el developer token el 9-sep-2026: el acceso va ahora por proyecto de Google Cloud y verificación de marca. Shopify no deja crear apps personalizadas desde el admin desde el 1-ene-2026 (Dev Dashboard, tokens de 24 h). Looker Studio vuelve a llamarse Data Studio desde abr-2026.",
+    "Fecha límite inmediata: desde el 31-oct-2026 el MCP de Stripe rechaza las claves sk_ y las rk_ sin etiqueta Agent. Hay que revisar cualquier configuración de clase antes de esa fecha.",
+    "Once de las trece tienen ya un MCP oficial o un conector oficial en Claude. Solo quedan fuera CapCut, que no tiene API, y Data Studio, cuya API no devuelve datos.",
+    "Riesgo principal: los MCP con OAuth actúan con todos los permisos de quien los autoriza, y casi ninguno tiene modo solo lectura (Meta pide ads_management y business_management; Metricool, Canva y Wix por OAuth dan acceso completo). El mínimo privilegio se consigue con un usuario dedicado con rol limitado, no con scopes.",
+    "Solo lectura de verdad hay en: los MCP oficiales de Google Ads y GA4, las claves restringidas o de agente de Stripe, los scopes read_* de Shopify, las API keys de Wix limitadas a un sitio y el rol Colaborador de WordPress.",
+    "Pagos: según terceros, el MCP de PayPal permite reembolsar y aceptar disputas sin confirmación obligatoria; Stripe sí la exige para reembolsos. En clase, usar siempre sandbox.",
+    "Trampas para las demos: la cuenta demo de GA4 no funciona por API; las cuentas de prueba de Google Ads no tienen métricas; la prueba de Power BI exige email de empresa, y en Mac no hay Desktop ni MCP local.",
+    "Pendientes de verificar: precios en € de Canva, CapCut y Wix, Data Studio Pro, comisiones de PayPal y los nodos nativos de n8n."
+  ],
+  "verificado_el": "2026-10-09"
+}

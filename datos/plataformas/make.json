@@ -1,0 +1,47 @@
+{
+  "id": "make",
+  "nombre": "Make",
+  "nombre_completo": "Make",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Integromat"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "Make API, REST.",
+    "auth": "Token de API con scopes, u OAuth.",
+    "requisitos": "La Make API empieza en el plan Core, de pago.",
+    "docs_url": "https://developers.make.com/api-documentation"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "EXPONE con el Make MCP Server, en la nube y por streamable HTTP. Autenticación por OAuth (https://mcp.make.com) o token MCP en la URL o como Bearer. Dos familias de herramientas: (a) ejecutar escenarios (scope mcp:use), en TODOS los planes, solo con escenarios activos y programados 'on-demand'; (b) gestionar la cuenta (escenarios, conexiones, webhooks, data stores), solo en planes de pago, con lectura y escritura. Timeout: 25 s con OAuth y 40 s con token. Las MCP toolboxes, en todos los planes, son servidores dedicados con los escenarios que elijas, cada herramienta en 'Read only' o 'Read & write' y claves revocables. CONSUME con la app MCP Client, en beta abierta."
+  },
+  "otras_vias": [
+    "Webhooks personalizados",
+    "Make API",
+    "Más de 3.000 apps y módulo HTTP",
+    "Exportar blueprints en JSON"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Lo mejor es una MCP toolbox con solo los escenarios necesarios, en Read only los de consulta y con una clave por cliente. Con un token MCP, filtrar en la URL por scenarioId, teamId u organizationId y dar solo mcp:use. Que cada escenario use conexiones de mínimo privilegio. NO se puede acotar: mcp:use abre por defecto TODOS los escenarios activos on-demand de todas las organizaciones, y los filtros de la URL no frenan las herramientas de gestión.",
+  "pedir_al_informatico": "Crea una MCP toolbox con solo los escenarios X e Y (activos, on-demand, con entradas y salidas descritas), márcalos Read only si solo consultan y dame una clave solo para mí. No me des un token con scopes de gestión.",
+  "demo_gratis": "Plan Free para siempre: 1.000 créditos al mes, con ejecución de escenarios por MCP y toolboxes, pero sin herramientas de gestión ni Make API. Cada ejecución por MCP gasta créditos como cualquier otra.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "Core: 9 $/mes con pago anual por 10.000 créditos. Unos 10,59 $ con pago mensual según fuentes secundarias, sin verificar del todo.",
+  "coste_resumen": "0 € (Free); Core 9 $/mes",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.make.com/mcp-server",
+    "https://developers.make.com/mcp-server/make-cloud-mcp-server/tool-access-control",
+    "https://help.make.com/make-mcp-server.md",
+    "https://help.make.com/mcp-toolboxes?hl=en",
+    "https://www.make.com/en/pricing"
+  ],
+  "confianza": "alta"
+}

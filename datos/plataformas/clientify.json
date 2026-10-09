@@ -1,0 +1,50 @@
+{
+  "id": "clientify",
+  "nombre": "Clientify",
+  "nombre_completo": "Clientify",
+  "categoria": "crm-email",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST v2 (https://api-plus.clientify.com/v2/, OpenAPI publicado). Sigue existiendo la v1 en api.clientify.net.",
+    "auth": "API key en la cabecera Authorization. Se obtiene en Ajustes > API (new.clientify.com/settings/api).",
+    "requisitos": "Hay que ser administrador de la cuenta y contratar el complemento de API ('Acceso por API Key'). Límites de peticiones: no publicados en la portada de la documentación.",
+    "docs_url": "https://api-plus.clientify.com/api/docs/v2/overview/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No he encontrado MCP oficial; la documentación de la API v2 no lo menciona. Solo hay puentes de terceros: Zapier MCP (zapier.com/mcp/clientify), Pipedream MCP (3 acciones) y Jentic. Habría que construir un MCP propio sobre la API v2."
+  },
+  "otras_vias": [
+    "6 webhooks fijos, uno por entidad (se crean y borran, no se editan)",
+    "Zapier nativo",
+    "App de Make 'Clientify by Maxmel Tech' (aparentemente de terceros)",
+    "n8n: sin nodo nativo; usar HTTP Request",
+    "Exportar a CSV"
+  ],
+  "rpa": "no hace falta si se contrata el complemento de API; navegador solo si el dueño se niega a pagarlo",
+  "dificultad": "Media",
+  "permisos_acotados": "No se puede acotar: según la documentación, la API key da acceso completo a los datos de la cuenta ('trátala como una contraseña'), no tiene scopes y solo la genera el admin. Mitigación: guardar la key solo en n8n o en un proxy propio y exponer a Claude únicamente flujos concretos (leer contacto, crear tarea). No darle nunca la key en bruto al agente.",
+  "pedir_al_informatico": "Activa el complemento 'Acceso por API Key', genera la clave en Ajustes > API y guárdala solo en las credenciales de n8n. Que Claude acceda a través de flujos n8n de solo lectura, nunca con la clave directa.",
+  "demo_gratis": "Prueba de 7 días sin tarjeta. No hay plan gratuito. No verificado si el complemento de API está disponible durante la prueba.",
+  "coste_demo": "Plan único: 39 €/mes en pago anual (468 €/año) o 65 €/mes en pago mensual, más impuestos. A eso se suma el complemento 'Acceso por API Key': 12 €/mes en anual o 20 €/mes en mensual. El precio del complemento sale de un fragmento de la página oficial de precios; no pude leer la tabla completa, así que está parcialmente verificado.",
+  "demo_resumen": "prueba 7 días",
+  "coste_resumen": "39 €/mes + 12 € API (anual)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://api-plus.clientify.com/api/docs/v2/overview/",
+    "https://api-plus.clientify.com/api/docs/v2/",
+    "https://newapi.clientify.com/view/metadata/2sB2xCgUJc",
+    "https://developer.clientify.com/view/metadata/2s9Y5VV4wj",
+    "https://www.clientify.com/precios",
+    "https://zapier.com/mcp/clientify",
+    "https://mcp.pipedream.com/app/clientify",
+    "https://apps.make.com/clientify-i97a73",
+    "https://n8n.io/integrations/clientify/ (404, sin integración)"
+  ],
+  "confianza": "media"
+}

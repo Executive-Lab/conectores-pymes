@@ -1,0 +1,52 @@
+{
+  "id": "hubspot",
+  "nombre": "HubSpot",
+  "nombre_completo": "HubSpot (incluye Service Hub)",
+  "categoria": "crm-email",
+  "alias": [
+    "HubSpot CRM",
+    "Service Hub"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST",
+    "auth": "Service keys (Bearer, con scopes por objeto, se gestionan en Desarrollo > Claves; en beta pública según el changelog), apps privadas legacy (token estático con scopes, solo superadmin) u OAuth2",
+    "requisitos": "Disponible en todas las cuentas, Free incluido. La tabla de límites agrupa 'Free y Starter': 100 peticiones cada 10 s por app y 250.000 al día por cuenta. Para crear una service key hace falta ser superadmin o tener el permiso 'Developer tools'.",
+    "docs_url": "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/account-service-keys"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto https://mcp.hubspot.com, disponible para todas las cuentas desde el 13-abr-2026 (antes beta desde sep-2025). Usa OAuth 2.1 con PKCE: hay que crear una 'MCP Auth App' en Desarrollo y usar su client ID y secret. Lee contactos, empresas, negocios, tickets, presupuestos, facturas, campañas, landings y actividades. Crea y actualiza contactos, empresas, negocios, tickets, productos, line items y actividades; el resto es solo lectura. Respeta los permisos del usuario. Si la cuenta tiene activados los 'datos sensibles', se bloquean las actividades. La propia documentación se contradijo sobre la escritura (corregida el 15-abr-2026). Hay además un MCP de desarrollador local, que es otra cosa."
+  },
+  "otras_vias": [
+    "Nodos nativos HubSpot y HubSpot Trigger en n8n",
+    "Make y Zapier nativos",
+    "Webhooks (solo con app, no con service key)",
+    "Exportar a CSV"
+  ],
+  "rpa": "no hace falta: API y MCP cubren CRM y tickets",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Para scripts y n8n, una service key solo con scopes .read: crm.objects.contacts.read, crm.objects.companies.read, crm.objects.deals.read, crm.objects.tickets.read (no uséis el scope legacy 'tickets', que da lectura y escritura), crm.objects.owners.read y conversations.read. La key no puede tener más scopes que su creador, se rota cada 6 meses y sobrevive a la baja de quien la creó. Para el MCP, conectar con un usuario dedicado con permisos de solo ver o limitados a sus registros. Lo que no se acota: el MCP no tiene interruptor de solo lectura; hereda lo que pueda hacer el usuario.",
+  "pedir_al_informatico": "Crea un usuario dedicado 'IA' con permisos de solo ver y conecta con él el MCP de HubSpot (MCP Auth App). Para n8n, crea una service key solo con scopes .read y rótala cada 6 meses.",
+  "demo_gratis": "Capa gratuita permanente (Free CRM, hasta 2 usuarios y 1.000 contactos según la FAQ). La API (100/10 s, 250.000/día) y el MCP están incluidos. Además, las cuentas de prueba de desarrollador son gratis (hasta 10) con prueba de 90 días de funciones Enterprise, renovable con llamadas API. Para demos de Service Hub con tickets, es la mejor opción.",
+  "coste_demo": "0 €: la API va en Free. Starter Customer Platform: la página oficial muestra 'desde 7 US$/licencia/mes' (promoción para nuevos clientes, 'ahorra hasta 65%') y 20 US$/licencia/mes. Service Hub Starter desde 7 US$/mes. No verificado qué precio corresponde a pago mensual y cuál a anual.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (Free CRM)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.hubspot.com/changelog/remote-hubspot-mcp-server-is-now-generally-available",
+    "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/account-service-keys",
+    "https://developers.hubspot.com/changelog/service-keys",
+    "https://developers.hubspot.com/docs/apps/legacy-apps/private-apps/overview",
+    "https://developers.hubspot.com/docs/apps/developer-platform/build-apps/authentication/scopes",
+    "https://developers.hubspot.com/docs/developer-tooling/platform/usage-guidelines",
+    "https://developers.hubspot.com/docs/getting-started/account-types",
+    "https://www.hubspot.es/pricing/crm/starter",
+    "https://tldv.io/blog/hubspot-mcp/"
+  ],
+  "confianza": "alta"
+}

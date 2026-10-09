@@ -1,0 +1,49 @@
+{
+  "id": "sendcloud",
+  "nombre": "Sendcloud",
+  "nombre_completo": "Sendcloud",
+  "categoria": "hosteleria-nicho",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST v3 (la v2 queda como legado), con webhooks (cambio de estado del paquete, devoluciones e integraciones) y Event Subscriptions. Los límites de peticiones están documentados.",
+    "auth": "HTTP Basic con clave pública y secreta, u OAuth2 client credentials (scope 'api', token de 1 hora)",
+    "requisitos": "Autoservicio: Ajustes > Integraciones > Sendcloud API > Conectar, y las claves se generan solas. No se pudo confirmar en qué planes se incluye la API.",
+    "docs_url": "https://sendcloud.dev"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "https://mcp.sendcloud.com/mcp (Streamable HTTP) con OAuth 2.0 y CIMD (Cursor no es compatible). 24 toolsets que cubren la API v3. Las herramientas GET están anotadas como de solo lectura y las POST/DELETE como destructivas. Se filtra con ?toolsets=. Ojo: crear un envío lo factura."
+  },
+  "otras_vias": [
+    "Más de 100 integraciones de e-commerce y más de 160 transportistas (SEUR, MRW, Correos Express y Correos, con contrato propio)",
+    "Nodo nativo en n8n no encontrado: usar HTTP Request (no verificado)",
+    "Colecciones de Postman"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crea una integración 'Sendcloud API' exclusiva para el arnés, con sus propias claves y revocable aparte. Solo existe el scope 'api', así que no hay clave de solo lectura. En el MCP, limita los toolsets (por ejemplo ?toolsets=parcel-tracking,parcel-statuses,analytics,reporting) y mantén la confirmación para cualquier herramienta POST. No se puede: clave de solo lectura ni IP allowlist (no documentada).",
+  "pedir_al_informatico": "Pide una integración 'Sendcloud API' exclusiva para el arnés y conecta el MCP oficial limitado a los toolsets de seguimiento e informes.",
+  "demo_gratis": "Plan Free gratis para siempre (1 usuario). 'Acceso a la API' aparece en la tabla de planes, pero no se pudo confirmar que el Free lo incluya. Prueba de 14 días de los planes de pago sin tarjeta. Las etiquetas de prueba con 'unstamped letter' no se cobran.",
+  "coste_demo": "Free 0 €. Lite 28 €/mes (+0,11 € por etiqueta), Growth 87 €/mes, Premium 175 €/mes. Un 20 % menos con pago anual.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (Free); Lite 28 €/mes",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No aplica.",
+    "alternativas": [],
+    "coste_esfuerzo_migracion": "No aplica."
+  },
+  "fuentes": [
+    "https://sendcloud.dev/llms.txt",
+    "https://sendcloud.dev/docs/getting-started/mcp-server.md",
+    "https://sendcloud.dev/docs/getting-started/authentication.md",
+    "https://sendcloud.dev/docs/getting-started/how-to-create-your-api-keys.md",
+    "https://sendcloud.dev/docs/getting-started/creating-test-labels.md",
+    "https://www.sendcloud.com/es/precios/",
+    "https://www.sendcloud.com/es/transportistas/"
+  ],
+  "confianza": "alta"
+}

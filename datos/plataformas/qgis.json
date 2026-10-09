@@ -1,0 +1,51 @@
+{
+  "id": "qgis",
+  "nombre": "QGIS",
+  "nombre_completo": "QGIS (y PyQGIS)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "PyQGIS"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "sí",
+    "estilo": "SDK de Python (PyQGIS) y C++. La línea de comandos qgis_process ejecuta algoritmos de Processing sin interfaz y devuelve JSON. QGIS Server publica OGC WMS, WFS y OGC API.",
+    "auth": "No aplica (local)",
+    "requisitos": "Gratis, licencia GPL. Última versión 4.2.3 (25-09-2026); versión LTR 3.44.15.",
+    "docs_url": "https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "jjsantos01/qgis_mcp (marzo 2025, unas 600 estrellas, probado en QGIS 3.22, ejecuta código Python arbitrario). nkarasiak/qgis-mcp, con plugin en el repositorio oficial de plugins, más de 100 herramientas, QGIS 3.28 a 4.x y actualizado en marzo de 2026. QGIS Salah MCP (v1.1, mayo 2026, socket TCP 8765). Todos leen y escriben. Ninguno es oficial del proyecto QGIS."
+  },
+  "otras_vias": [
+    "Ficheros: GeoPackage, Shapefile, GeoJSON, CSV, ráster",
+    "PostGIS",
+    "Modelos de Processing",
+    "n8n autoalojado: nodo Execute Command con qgis_process"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "No hay modelo de permisos: todo corre con los permisos del usuario del sistema operativo. Usa un usuario de Windows o Linux dedicado (o una VM), trabaja sobre copias de las capas, usa en PostGIS un usuario de base de datos de solo lectura, y haz que los plugins MCP escuchen solo en localhost. Evita las herramientas de ejecución de código arbitrario. No se puede limitar qué algoritmos ejecuta el MCP, salvo eligiendo un servidor con menos herramientas.",
+  "pedir_al_informatico": "Pide QGIS LTR instalado en un usuario de Windows dedicado, con acceso de solo lectura a las capas originales y una carpeta de salida aparte. Si hay PostGIS, pide también un usuario de base de datos de solo lectura.",
+  "demo_gratis": "Gratis y permanente, sin límites (software libre).",
+  "coste_demo": "0 €",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 €",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No aplica.",
+    "alternativas": [],
+    "coste_esfuerzo_migracion": "No aplica."
+  },
+  "fuentes": [
+    "https://qgis.org/download/",
+    "https://docs.qgis.org/latest/en/docs/user_manual/processing/standalone.html",
+    "https://glama.ai/mcp/servers/jjsantos01/qgis_mcp",
+    "https://plugins.qgis.org/plugins/qgis_mcp_plugin/",
+    "https://vibeindex.ai/mcp/nkarasiak/qgis-mcp",
+    "https://plugins.qgis.org/plugins/qgis_salah_mcp_plugin/"
+  ],
+  "confianza": "alta"
+}

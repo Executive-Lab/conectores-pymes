@@ -1,0 +1,57 @@
+{
+  "id": "google-analytics",
+  "nombre": "Google Analytics 4",
+  "nombre_completo": "Google Analytics 4",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "GA4",
+    "Google Analytics"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/gRPC (Data API v1 + Admin API)",
+    "auth": "OAuth2 o service account",
+    "requisitos": "Gratis. Hace falta un proyecto de Google Cloud con Data API y Admin API activadas. Cuotas de una propiedad estándar: 200.000 tokens/día, 40.000/hora y 10 peticiones concurrentes (Analytics 360: 10 veces más).",
+    "docs_url": "https://developers.google.com/analytics/devguides/reporting/data/v1/quotas"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "googleanalytics/google-analytics-mcp, marcado como 'Experimental'. Corre en local (pipx run analytics-mcp); no hay endpoint remoto. Solo lectura: no puede tocar la configuración. Herramientas: get_account_summaries, get_property_details, list_google_ads_links, run_report, run_funnel_report, get_custom_dimensions_and_metrics y run_realtime_report. Scope analytics.readonly, con Application Default Credentials."
+  },
+  "otras_vias": [
+    "Nodo nativo Google Analytics en n8n (no re-verificado)",
+    "Export a BigQuery",
+    "Conector nativo con Data Studio",
+    "Export CSV desde la interfaz",
+    "Make/Zapier"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Scope analytics.readonly. Crear una service account (o un usuario dedicado) y darle el rol 'Lector' (Viewer) solo en la propiedad necesaria; si no hacen falta, añadir las restricciones de datos 'Sin métricas de coste' y 'Sin métricas de ingresos'. Lo que NO se puede acotar: el acceso por informe o por dimensión, más allá de esas dos restricciones.",
+  "pedir_al_informatico": "Que añada el email de la service account del arnés como 'Lector' en la propiedad GA4 de la web (no en toda la cuenta) y active la Analytics Data API en el proyecto de Google Cloud.",
+  "demo_gratis": {
+    "opcion": "Capa gratuita permanente: crear una propiedad GA4 propia en una web de pruebas.",
+    "api_incluida": "sí",
+    "limites": "Cuotas de tokens de propiedad estándar. OJO: la cuenta demo de Google (Google Merchandise Store / Flood-It!) NO se puede usar con la Data API: devuelve error de permisos."
+  },
+  "demo_resumen": "gratis permanente",
+  "coste_demo": {
+    "plan": "GA4 estándar",
+    "precio": "0 €",
+    "facturacion": "n/a",
+    "verificado": "sí (Analytics 360 es de pago y no publica precio)"
+  },
+  "coste_resumen": "0 €",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.google.com/analytics/devguides/MCP",
+    "https://github.com/googleanalytics/google-analytics-mcp",
+    "https://developers.google.com/analytics/devguides/reporting/data/v1/quotas",
+    "https://support.google.com/analytics/answer/6367342"
+  ],
+  "confianza": "alta"
+}

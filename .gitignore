@@ -1,0 +1,22 @@
+# Web generada: la construye el workflow «Publicar web» (python3 scripts/construir.py)
+sitio/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Sistema y editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# Secretos: nunca en el repositorio
+.env
+.env.*
+
+# Temporales
+.tmp/

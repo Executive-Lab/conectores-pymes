@@ -1,0 +1,15 @@
+{
+  "id": "crm-email",
+  "nombre": "CRM, bases no-code y email marketing",
+  "hallazgos": [
+    "9 de 11 plataformas ya tienen MCP remoto oficial. HubSpot salió de beta el 13-abr-2026 y MailerLite llegó al directorio de Claude en mar-2026. Las excepciones son Clientify, que no tiene ninguno, y Mailchimp, cuyo MCP oficial solo busca en su documentación.",
+    "Casi todos los MCP por OAuth hacen todo lo que puede hacer el usuario que se conecta. Solo se pueden limitar en el propio servidor Klaviyo (parámetros read-only y toolsets), Zoho (tiene un servidor aparte solo de lectura), monday (con una app OAuth propia) y Airtable (scopes del token). En los demás, la defensa es un usuario dedicado con un rol mínimo.",
+    "Riesgo principal: claves sin scopes que dan la cuenta entera (Clientify, Mailchimp, MailerLite, ActiveCampaign y el token personal de monday). Norma de clase: esas claves se guardan en n8n y Claude solo llega a través de flujos concretos.",
+    "Las llamadas MCP gastan la cuota de API (monday 1.000/día en planes bajos, Airtable Free 1.000/mes, créditos de Zoho). Una demo en directo con agente puede agotarla, así que conviene usar cuentas de prueba o sandbox (HubSpot, GoHighLevel).",
+    "La documentación oficial se contradice en HubSpot (qué puede escribir el MCP), GoHighLevel (PIT o OAuth según la página) y monday (si la API va en Free y Basic). Hay que comprobarlo en una cuenta real antes de cada clase.",
+    "Hay riesgo de prompt injection: notas, emails y respuestas de formularios guardados en el CRM llegan al modelo. Klaviyo es el único con un interruptor para desactivar las herramientas que leen ese contenido.",
+    "Varias páginas de precios se sirven geolocalizadas o se cargan de forma dinámica, y no pude verificar los precios en € de Zoho, ActiveCampaign, Klaviyo y Mailchimp.",
+    "Pendientes de verificar: varios precios en € (Zoho, ActiveCampaign, Klaviyo y Mailchimp), porque las páginas de precios se sirven geolocalizadas o se cargan de forma dinámica."
+  ],
+  "verificado_el": "2026-10-09"
+}

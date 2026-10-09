@@ -1,0 +1,51 @@
+{
+  "id": "dropbox",
+  "nombre": "Dropbox",
+  "nombre_completo": "Dropbox",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "API HTTP (RPC/JSON y endpoints de contenido) con apps de scopes ('scoped apps').",
+    "auth": "OAuth 2 con token de corta duración más refresh token y PKCE. Dos tipos de acceso: 'App folder' (solo /Apps/<app>) o 'Full Dropbox'. Scopes: files.metadata.read, files.content.read/write, sharing.read/write, entre otros.",
+    "requisitos": "Cualquier cuenta, también Basic, puede crear la app. En estado 'development' admite hasta 500 usuarios; al llegar a 50 hay 2 semanas para pedir 'production'.",
+    "docs_url": "https://docs.dropboxapi.com/dropbox-api/docs/developer-resources/developer-guide"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Dropbox remote MCP en https://mcp.dropbox.com/mcp, en beta abierta (actualizado el 18-mar-2026), con registro dinámico de clientes. Lee y ESCRIBE: listar, buscar, leer contenido (texto de PDF y Word), crear, mover, copiar, borrar (a la papelera), crear enlaces compartidos y file requests. Exige acceso Full Dropbox con scopes de escritura y de compartir. Aparte está el MCP de Dropbox Dash (búsqueda)."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Dropbox (App folder o Full Dropbox)",
+    "Webhooks de cambios en ficheros",
+    "Make y Zapier",
+    "Cliente de escritorio que sincroniza una carpeta local"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Lo más acotado es una app propia 'App folder' con solo files.metadata.read y files.content.read: solo ve /Apps/<app>, y el dueño mete ahí lo que quiere compartir. Se usa desde n8n o un script. Otra opción es una cuenta dedicada con acceso de solo lectura a una carpeta compartida. NO se puede acotar el MCP oficial desde el servidor: tiene Full Dropbox con escritura y compartir. Hay que bloquear en el cliente las herramientas Delete, Move, CreateSharedLink y CreateFile, o conectarlo con una cuenta dedicada.",
+  "pedir_al_informatico": "Crea una app 'App folder' con solo files.metadata.read y files.content.read y pásame el refresh token. Si usamos el MCP oficial, conéctalo con una cuenta dedicada que solo tenga la carpeta de trabajo, nunca con la del director.",
+  "demo_gratis": "La API funciona en la cuenta Basic gratuita (2 GB). No está confirmado que el MCP funcione en Basic: la página de precios solo menciona la integración con IA en Plus y planes superiores. Hay prueba gratuita de Professional, Standard y Advanced, de duración no verificada. Los límites de API no son públicos.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "API: 0 € con Basic. Plus: 11,99 €/mes mensual o 9,99 € anual; Standard: 14,50 € mensual o 12 € anual por usuario (dropbox.com/plans, 2026). Qué cifra es mensual y cuál anual lo deduje: la página no lo etiqueta.",
+  "coste_resumen": "0 € API (Basic); Plus 9,99 €/mes",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Si los documentos están sin estructura o siguen en carpetas locales. Como el MCP ve todo el Dropbox, antes conviene crear una carpeta o cuenta de trabajo para la IA y subir ahí solo lo relevante.",
+    "alternativas": [
+      "Carpeta o cuenta dedicada dentro de Dropbox",
+      "Google Drive o SharePoint si la empresa ya usa Workspace o M365"
+    ]
+  },
+  "fuentes": [
+    "https://help.dropbox.com/integrations/connect-dropbox-mcp-server",
+    "https://help.dropbox.com/integrations/set-up-MCP-server",
+    "https://docs.dropboxapi.com/dropbox-api/docs/developer-resources/developer-guide",
+    "https://docs.dropboxapi.com/dropbox-api/docs/oauth",
+    "https://www.dropbox.com/plans",
+    "https://docs.n8n.io/integrations/builtin/credentials/dropbox/"
+  ],
+  "confianza": "media"
+}

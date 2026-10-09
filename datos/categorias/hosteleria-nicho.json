@@ -1,0 +1,15 @@
+{
+  "id": "hosteleria-nicho",
+  "nombre": "Hostelería, TPV, software vertical, logística y pagos",
+  "hallazgos": [
+    "En los TPV españoles la API existe pero no es de autoservicio. Ágora necesita el módulo Integration Services activado por el distribuidor, Revo exige un client-token que emite la propia Revo, e ICG/HIOPOS no tiene API pública (solo FTP o acuerdos con partners). El dueño depende siempre de su distribuidor.",
+    "Casi nadie ofrece credenciales de solo lectura. Los tokens de Ágora, Revo, Sendcloud, SEUR, MRW y Correos Express dan acceso total. Solo se puede aplicar mínimo privilegio de verdad en Akeneo (rol de Web API más permisos por categoría), en el MCP de Podia (modo solo lectura), en Sendcloud (filtro ?toolsets=) y en los tokens de TeamViewer.",
+    "Hay MCP oficial en Podia (OAuth, todos los planes), Sendcloud (OAuth, 24 toolsets), Akeneo (alojado, acceso a través del CSM) y TeamViewer. No se encontró ninguno en los TPV españoles, Redsys ni los transportistas. Revo solo tiene la capa comercial de unified.to.",
+    "Redsys no documenta ninguna API de consulta. La lectura se hace con la notificación online (un POST por operación hacia n8n) o exportando .xlsx del portal. Su clave de firma también autoriza devoluciones, así que nunca debe llegar al LLM.",
+    "En logística, SEUR, MRW (SOAP SAGEC con credenciales de franquicia) y Correos Express (REST sin documentación pública) solo sirven a clientes con contrato. Sendcloud agrega los tres con contrato propio y tiene MCP oficial: con un solo conector se cubren todos.",
+    "Verifactu: el RDL 15/2025 fija el 1-1-2027 para sociedades y el 1-7-2027 para el resto, y Hacienda anunció el 5-10-2026 una posible nueva ampliación. Es el momento natural para decidir si se migra un TPV antiguo de Windows sin acceso a sus datos.",
+    "Escritorio remoto como RPA es la vía de más riesgo: credenciales de sesión completa y sin scopes. El MCP de TeamViewer puede iniciar sesiones remotas. TeamViewer sufrió en 2024 un ataque de APT29 limitado a su red corporativa, y CISA alerta del abuso de AnyDesk y otras herramientas de acceso remoto. Mínimos: usuario dedicado, VPN o RD Gateway con MFA y nunca el puerto 3389 abierto.",
+    "Pendiente de comprobar: si existen MCP comunitarios para Ágora, Haddock, ICG, Krossbooking, Global Mapper, IBER, Redsys y los transportistas, y la API de Krossbooking."
+  ],
+  "verificado_el": "2026-10-09"
+}

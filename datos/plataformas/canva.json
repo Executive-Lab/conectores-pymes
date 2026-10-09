@@ -1,0 +1,55 @@
+{
+  "id": "canva",
+  "nombre": "Canva",
+  "nombre_completo": "Canva",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (Connect APIs, con OpenAPI pública)",
+    "auth": "OAuth2 con código de autorización (PKCE según terceros); Client ID y secreto desde el Developer Portal",
+    "requisitos": "Registrar la integración en el Developer Portal (con MFA obligatorio, según terceros). Integración pública: revisión de Canva antes de que la usen personas ajenas al equipo. Integración privada: solo con plan Enterprise, y el tipo no se puede cambiar después. Autofill de plantillas de marca: Enterprise (según terceros). Las APIs en preview no pasan la revisión.",
+    "docs_url": "https://www.canva.dev/docs/connect/creating-integrations/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto en https://mcp.canva.com/mcp (Streamable HTTP, OAuth por usuario). Viene preconfigurado en Claude, ChatGPT y otros; funciona con cualquier plan, aunque algunas funciones piden Pro o Enterprise. Para un cliente propio: Developer Portal (autoservicio) o lista de espera con aprobación. Lee y escribe: generar, editar, buscar y exportar diseños, gestionar assets y marca, comentarios. Aparte existe un Dev MCP local, solo con documentación para desarrolladores de apps Canva."
+  },
+  "otras_vias": [
+    "Nodo oficial de Canva para n8n (verificado, cubre todas las acciones de Connect API)",
+    "Webhooks de Connect API",
+    "Make/Zapier (no verificado)",
+    "Export manual PNG/PDF/MP4"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "MCP: OAuth por usuario, actúa con los permisos de esa cuenta; no hay modo solo lectura documentado y Canva no publica los scopes del MCP. Connect API: pedir solo los scopes necesarios (design:meta:read, design:content:read, asset:read, brandtemplate:meta:read, brandtemplate:content:read, profile:read) y añadir los de escritura solo si hacen falta. Usar un miembro del equipo dedicado, sin rol de administrador y con acceso solo a las carpetas necesarias. Lo que NO se puede: restringir el MCP a solo lectura.",
+  "pedir_al_informatico": "Activar el conector oficial de Canva en Claude con una cuenta de Canva dedicada (miembro del equipo, no admin). Para automatizar con n8n, crear una integración en el Developer Portal solo con scopes de lectura.",
+  "demo_gratis": {
+    "opcion": "Plan Free permanente: el MCP funciona con cualquier plan. Crear la integración en el Developer Portal es gratis.",
+    "api_incluida": "sí para el MCP; para la Connect API sí en desarrollo, pero publicarla exige revisión, y usarla solo en el equipo sin revisión exige Enterprise",
+    "limites": "Límites de llamadas y caducidad de tokens no verificados (según terceros, el token dura 4 h). Algunas funciones (p. ej. redimensionar) piden Pro."
+  },
+  "demo_resumen": "gratis permanente",
+  "coste_demo": {
+    "plan": "Free para el MCP; Pro; Enterprise para integración privada",
+    "precio": "Pro: unos 12 €/mes o 110 €/año en España (NO verificado: canva.com bloqueó la consulta). Enterprise: precio a medida.",
+    "facturacion": "mensual o anual (no verificado)",
+    "verificado": "no"
+  },
+  "coste_resumen": "0 € MCP; API privada solo Enterprise",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://canva.dev/docs/mcp/",
+    "https://www.canva.dev/docs/connect/creating-integrations/",
+    "https://www.canva.dev/docs/connect/",
+    "https://www.canva.dev/blog/developers/automate-canva-with-n8n/",
+    "https://www.canva.dev/blog/developers/canva-and-coding-agents-platforms/",
+    "https://www.scalekit.com/blog/canva-mcp-vs-api"
+  ],
+  "confianza": "media"
+}

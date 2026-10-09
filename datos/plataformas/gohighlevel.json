@@ -1,0 +1,53 @@
+{
+  "id": "gohighlevel",
+  "nombre": "GoHighLevel",
+  "nombre_completo": "GoHighLevel (HighLevel / LeadConnector)",
+  "categoria": "crm-email",
+  "alias": [
+    "HighLevel",
+    "LeadConnector",
+    "GHL"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (API v2; la v1 ya no tiene soporte y se está retirando la creación de API keys antiguas)",
+    "auth": "Private Integration Token (PIT) con scopes, que se crea en Ajustes > Private Integrations de la subcuenta o de la agencia. O bien OAuth2 con app del Marketplace.",
+    "requisitos": "Según el centro de ayuda, Starter y Unlimited tienen 'Basic API' (claves de subcuenta) y Agency Pro tiene 'Advanced API' (claves de agencia y OAuth). La página de precios solo menciona API a partir de Unlimited. Los PIT no se refrescan solos: hay que rotarlos a mano.",
+    "docs_url": "https://marketplace.gohighlevel.com/docs/Authorization/PrivateIntegrationsToken/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Hay dos documentaciones oficiales que no coinciden. (1) Centro de ayuda, actualizado el 9-jul-2026: endpoint https://services.leadconnectorhq.com/mcp/ con PIT más las cabeceras Authorization y locationId, 36 herramientas (unas 24 de lectura y 12 de escritura); dice que OAuth está 'planificado'. (2) Docs del Marketplace (v3): endpoints por cliente, como /mcp/anthropic/v2 para Claude, solo con OAuth; 4 meta-herramientas que dan acceso a más de 550 operaciones en 38 dominios, de lectura y escritura, con confirmación extra en operaciones irreversibles. La conexión a varias subcuentas de agencia está todavía en despliegue."
+  },
+  "otras_vias": [
+    "Nodo nativo HighLevel en n8n (contactos, oportunidades, tareas, calendario)",
+    "Zapier (LeadConnector) y Make",
+    "Webhooks y workflows nativos",
+    "Exportar a CSV"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "PIT de subcuenta (no de agencia) marcando solo los scopes 'View', como contacts.readonly u opportunities.readonly. Con menos scopes, el MCP expone menos herramientas. Con OAuth, el usuario elige la subcuenta y aprueba los scopes al conectar, y puede revocar después. Lo que no se acota: no hay modo solo lectura global. Un PIT de agencia da acceso a todas las subcuentas. El PIT es estático hasta que alguien lo rota.",
+  "pedir_al_informatico": "Crea un Private Integration Token en la subcuenta del negocio, no en la agencia, solo con permisos 'View'. Pásalo a Claude junto con el locationId y rótalo cada trimestre.",
+  "demo_gratis": "Prueba de 14 días en Starter, Unlimited y Agency Pro. Para formación también existe el Sandbox (App Test Account) del Developer Portal del Marketplace: se crea al instante, permite PIT, tiene 10.000 peticiones/día y 25 cada 10 s, máximo 2 subcuentas y email/SMS desactivados, y puede borrarse a los 6 meses. No verificado que sea gratuito.",
+  "coste_demo": "Starter: 97 $/mes o 970 $/año (la API básica está incluida según el centro de ayuda; la página de precios no lo indica). Unlimited: 297 $/mes o 2.970 $/año, con 'Basic API Access' en la página de precios.",
+  "demo_resumen": "prueba 14 días",
+  "coste_resumen": "97 $/mes (Starter)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://help.gohighlevel.com/support/solutions/articles/155000005741-how-to-setup-and-use-the-highlevel-mcp-server",
+    "https://marketplace.gohighlevel.com/docs/other/mcp/index.html",
+    "https://marketplace.gohighlevel.com/docs/2021-07-28/other/mcp",
+    "https://marketplace.gohighlevel.com/docs/oauth/SandboxPIT",
+    "https://marketplace.gohighlevel.com/docs/oauth/SandboxAccount",
+    "https://marketplace.gohighlevel.com/docs/2023-02-21/Authorization/PrivateIntegrationsToken",
+    "https://help.gohighlevel.com/support/solutions/articles/48001060529-highlevel-api-documentation",
+    "https://www.gohighlevel.com/pricing",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.highlevel/"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "correos-express",
+  "nombre": "Correos Express",
+  "nombre_completo": "Correos Express (API de envíos)",
+  "categoria": "hosteleria-nicho",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "limitada",
+    "estilo": "REST JSON: los endpoints de grabación de envíos y de seguimiento en www.cexpr.es/wspsc/... existen y responden 401 sin credenciales. No hay documentación pública.",
+    "auth": "Usuario y contraseña de cliente (probablemente HTTP Basic, no verificado)",
+    "requisitos": "Ser cliente con contrato. Las credenciales y el manual se piden al comercial. El plugin oficial de WordPress se cerró en noviembre de 2021 por un 'Security Issue'.",
+    "docs_url": "Sin documentación pública"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP. Vía alternativa: el MCP oficial de Sendcloud con contrato propio."
+  },
+  "otras_vias": [
+    "Sendcloud (Correos Express disponible con contrato propio)",
+    "Módulos de e-commerce que se piden al comercial"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Media",
+  "permisos_acotados": "Las credenciales son de la cuenta y permiten grabar envíos (que se facturan). Pide un usuario exclusivo para la integración y en el arnés expón solo el seguimiento. No se sabe si existe acceso solo de consulta.",
+  "pedir_al_informatico": "Pide a tu comercial de Correos Express credenciales exclusivas para la integración y el manual de las APIs REST de grabación y seguimiento, o sube tu contrato a Sendcloud.",
+  "demo_gratis": "No hay sandbox público. Para clase, puedes enseñarlo a través de Sendcloud.",
+  "coste_demo": "Contrato con Correos Express. La API no tiene coste publicado.",
+  "demo_resumen": "no hay",
+  "coste_resumen": "Contrato Correos Express",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Sin documentación pública, Sendcloud suele ser más barato de mantener que una integración directa.",
+    "alternativas": [
+      "Sendcloud como capa única"
+    ],
+    "coste_esfuerzo_migracion": "Bajo: se conserva el contrato."
+  },
+  "fuentes": [
+    "https://www.cexpr.es/wspsc/apiRestGrabacionEnviok8s/json/grabacionEnvio",
+    "https://www.cexpr.es/wspsc/apiRestSeguimientoEnviosk8s/json/seguimientoEnvio",
+    "https://wordpress.org/plugins/correos-express/",
+    "https://www.sendcloud.com/es/transportistas/"
+  ],
+  "confianza": "baja"
+}

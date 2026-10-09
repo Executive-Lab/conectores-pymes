@@ -1,0 +1,49 @@
+{
+  "id": "discord",
+  "nombre": "Discord",
+  "nombre_completo": "Discord",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST más Gateway (WebSocket) con intents. Slash commands y webhooks de canal para publicar.",
+    "auth": "Token del bot, sacado del Developer Portal. Se instala por OAuth2 con los scopes bot y applications.commands más un entero de permisos. Los webhooks de canal llevan su propia URL con token.",
+    "requisitos": "Gratis. Los intents privilegiados (MESSAGE_CONTENT, GUILD_MEMBERS, GUILD_PRESENCES) se activan con un interruptor mientras la app tenga menos de 10.000 usuarios únicos; por encima hay revisión anual. Esta regla rige desde el 10-jun-2026; antes el corte era de 100 servidores.",
+    "docs_url": "https://docs.discord.com/developers/events/gateway"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "No hay MCP oficial. Los comunitarios usan el token del bot en local, sin OAuth: saseq/discord-mcp (Java), PaSympa discord-mcp (TypeScript, también moderación y roles) y @discord-mcp/core. Todos leen y escriben, con madurez variable."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Discord (credencial de bot, OAuth2 o webhook). No tiene trigger nativo",
+    "Webhooks de canal (solo publicar)",
+    "Make y Zapier"
+  ],
+  "rpa": "no hace falta: el bot lee el historial y publica. Automatizar cuentas de usuario (self-bots) está prohibido.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear un rol para el bot con solo View Channel, Read Message History y Send Messages, y aplicarlo solo en los canales autorizados con overrides; nunca Administrator. Desactivar 'Public Bot'. Activar MESSAGE_CONTENT solo si de verdad hace falta. Para solo publicar, basta un webhook de canal. No seguir a ciegas la doc de n8n, que pide Manage Roles y Manage Channels. NO se puede acotar: no hay token de solo lectura, el token vale en todos los servidores donde esté el bot, y el límite de 50 req/s es global.",
+  "pedir_al_informatico": "Crea una app de bot privada (Public Bot desactivado) con un rol que solo vea los canales X e Y, con leer historial y enviar. Activa Message Content solo si te lo pido, y si basta con avisos, dame una URL de webhook del canal.",
+  "demo_gratis": "Gratis para siempre con la API completa: servidor de pruebas, bot limitado a un canal y nodo de n8n. Límites: 50 req/s globales más límites por ruta.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 €: la API y los bots son gratis.",
+  "coste_resumen": "0 €",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Solo si los canales se usan como gestor de tareas sin estado, responsable ni fecha. Como canal de comunicación o de avisos se conecta tal cual.",
+    "alternativas": [
+      "Trello o ClickUp para las tareas, con Discord para avisos",
+      "Canal de foro de Discord con etiquetas"
+    ]
+  },
+  "fuentes": [
+    "https://docs.discord.com/developers/events/gateway",
+    "https://docs.discord.com/developers/gateway/getting-started-with-privileged-intent-review",
+    "https://support-dev.discord.com/hc/en-us/articles/40281523410967-Changes-to-Privileged-Intent-Access-for-Discord-Apps",
+    "https://docs.discord.com/developers/topics/rate-limits",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.discord/"
+  ],
+  "confianza": "alta"
+}

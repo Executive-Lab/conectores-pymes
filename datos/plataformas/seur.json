@@ -1,0 +1,47 @@
+{
+  "id": "seur",
+  "nombre": "SEUR",
+  "nombre_completo": "SEUR (API de envíos)",
+  "categoria": "hosteleria-nicho",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "Nueva API REST de SEUR (envíos, etiquetas, puntos de recogida, manifiestos y API de tracking), según el changelog del plugin oficial 'SEUR' para WooCommerce (v2.2.29, 2026), que pasó de SOAP a REST.",
+    "auth": "Datos de alta de cliente que entrega SEUR (incluido el CCC). El esquema exacto (OAuth u otro) no se ha verificado.",
+    "requisitos": "Hay que ser cliente con contrato. No se encontró un portal de desarrolladores público.",
+    "docs_url": "https://wordpress.org/plugins/seur/ (no hay portal de API público)"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP. Vía alternativa: el MCP oficial de Sendcloud con contrato SEUR propio."
+  },
+  "otras_vias": [
+    "Sendcloud (SEUR disponible subiendo el contrato propio)",
+    "Plugins para PrestaShop, Magento y WooCommerce",
+    "SEUR Print, SEUR Pro y software que instala SEUR"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Media",
+  "permisos_acotados": "Las credenciales son de la cuenta y permiten crear envíos (que se facturan). Pide credenciales separadas para la integración y en el arnés expón solo el tracking. Si vas por Sendcloud: clave por integración y MCP con ?toolsets=parcel-tracking. No se puede tener una credencial solo de consulta (no documentada).",
+  "pedir_al_informatico": "Pide a tu comercial de SEUR credenciales de API exclusivas para la integración y la documentación de la API REST (tracking y envíos), o sube tu contrato SEUR a Sendcloud.",
+  "demo_gratis": "No hay sandbox público: hay que ser cliente. Para clase, puedes enseñar SEUR a través de Sendcloud (plan Free).",
+  "coste_demo": "Hace falta contrato SEUR con tarifa negociada. La API no tiene coste publicado.",
+  "demo_resumen": "no hay",
+  "coste_resumen": "Contrato SEUR (tarifa negociada)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Si tienes varias agencias, un agregador (Sendcloud) suele salir más a cuenta que mantener cada API por separado.",
+    "alternativas": [
+      "Sendcloud como capa única"
+    ],
+    "coste_esfuerzo_migracion": "Bajo: se conserva el contrato SEUR."
+  },
+  "fuentes": [
+    "https://wordpress.org/plugins/seur/",
+    "https://www.seur.com/es/empresas/integracion-con-seur/",
+    "https://www.sendcloud.com/es/transportistas/"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "confluence",
+  "nombre": "Confluence",
+  "nombre_completo": "Confluence (Atlassian Cloud)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Atlassian"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST v2, con la v1 todavía en algunas operaciones. Búsqueda con CQL.",
+    "auth": "Igual que Jira: OAuth 2.0 (3LO) con scopes clásicos o granulares, API token con scopes (de 1 a 365 días) o service account.",
+    "requisitos": "Incluida en el plan Free, sin coste.",
+    "docs_url": "https://developer.atlassian.com/cloud/confluence/rest/v2/intro/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "El mismo Atlassian Rovo MCP Server (https://mcp.atlassian.com/v2/mcp, GA desde el 04-02-2026). Grupos de herramientas: read_confluence (leer, exportar, descargar adjuntos), search_confluence (CQL) y write_confluence. Este último crea y edita páginas, pero TAMBIÉN cambia permisos y restricciones y activa enlaces públicos. Respeta los permisos de espacio y de página. Solo Cloud. Mismos límites y créditos Rovo que Jira."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Confluence (páginas, adjuntos, CQL, espacios)",
+    "Automatización de Confluence y webhooks vía Forge",
+    "Make y Zapier",
+    "Exportación a PDF, Word, HTML o XML"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "En Rovo MCP server > Permissions, apagar Write en Confluence y dejar Read y Search: write_confluence puede abrir permisos y crear enlaces públicos, o sea, provocar una fuga de datos. Usar un usuario o service account que solo pueda VER los espacios necesarios, con token read:confluence:agent-interface y search:confluence:agent-interface. NO se puede acotar: los scopes no filtran por espacio ni por página, y con OAuth el agente ve todo lo que ve la persona.",
+  "pedir_al_informatico": "Deja Confluence en solo lectura para el MCP (Rovo MCP server > Permissions, sin Write) y crea un usuario o service account que solo pueda ver los espacios X. Nunca le des permisos de administración de espacio.",
+  "demo_gratis": "Confluence Free, gratis para siempre (hasta 10 usuarios según terceros), con API y Rovo MCP. La búsqueda enriquecida podría estar limitada sin créditos Rovo (no verificado).",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € con Free. Precio de Standard no verificado: unos 5-6 $/usuario/mes según fuentes antiguas, con subida del 7-10 % en octubre de 2026.",
+  "coste_resumen": "0 € (Free)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://github.com/atlassian/atlassian-mcp-server",
+    "https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/",
+    "https://support.atlassian.com/security-and-access-policies/docs/configure-atlassian-mcp-server-permissions/",
+    "https://developer.atlassian.com/cloud/rovo-mcp/guides/authentication-and-authorization/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.confluence/",
+    "https://www.adaptavist.com/blog/atlassian-price-updates-effective-october-2026"
+  ],
+  "confianza": "media"
+}

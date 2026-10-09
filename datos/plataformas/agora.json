@@ -1,0 +1,54 @@
+{
+  "id": "agora",
+  "nombre": "Ágora",
+  "nombre_completo": "Ágora (Ágora POS de IGT Microelectronics, agorapos.com)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "Ágora POS",
+    "Agora POS"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/HTTP local en el servidor Ágora (JSON o XML) a través del módulo Integration Services. Datos: ventas, cierres, productos, pedidos, medios de pago y transacciones. Puerto 8984 por defecto según conectores de terceros. Sin paginación ni límites de peticiones publicados.",
+    "auth": "Token o código propio que se escribe al activar 'Integración por API HTTP' en Ágora Server Config > Herramientas > Activar módulos adicionales > Configurar servicios de integración. Sin OAuth ni scopes.",
+    "requisitos": "Ágora 6.0.6 o superior y una licencia con el módulo Integration Services, que suele activar el distribuidor. El servidor Ágora tiene que estar encendido. La API vive en la red del local, no en la nube. No hay documentación oficial pública: se pide al distribuidor.",
+    "docs_url": "Sin portal oficial público. Guías de terceros: https://help.deliverect.com/en/articles/7979177-igt-agora-obtain-the-api-token y https://support.haddock.app/en/article/agora-connector-new-and-recommended-17aizdf/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP, ni oficial ni comunitario. Pendiente de comprobar en directorios de MCP. Habría que construir un MCP propio que solo llame a los endpoints de exportación de la API local."
+  },
+  "otras_vias": [
+    "Conectores de terceros que ya leen la API local: Haddock (agente Windows que sube las ventas por HTTPS saliente), Deliverect, Recipok y Chift (API unificada de TPV)",
+    "Integraciones nativas que lista Ágora: Gstock, tSpoonLab, CoverManager, Skello, SIHOT, Haddock y otras",
+    "ACMS (gestión central) para consolidar varios locales",
+    "No se encontró nodo nativo en n8n, Make ni Zapier: usar HTTP Request de n8n a través de un agente local o un túnel"
+  ],
+  "rpa": "no hace falta: la API local cubre ventas, cierres, productos y pagos",
+  "dificultad": "Media",
+  "permisos_acotados": "El token da acceso completo de importación y exportación. No hay scopes ni token de solo lectura documentados. Se acota por red: el puerto 8984 nunca abierto a Internet, el firewall de Windows solo deja entrar desde localhost o desde la IP del agente, y un agente o proxy local solo reenvía peticiones de exportación (GET) y empuja los datos hacia fuera (el mismo patrón que usa el conector de Haddock). Usa un token largo y exclusivo para el arnés, para poder revocarlo por separado. No se puede acotar por tabla ni por terminal; con ACMS solo se puede filtrar por Workplace ID (local).",
+  "pedir_al_informatico": "Pide al distribuidor de Ágora que active Integration Services con un token exclusivo para el arnés y que te entregue la documentación de los endpoints de exportación de ventas y cierres. Que el puerto 8984 quede cerrado a Internet y solo sea accesible desde el equipo del agente.",
+  "demo_gratis": "No hay prueba gratuita ni versión de evaluación pública: la web solo ofrece 'Solicita una demo' por formulario. La API no se puede probar sin una licencia con Integration Services. Para una clase en directo, pide al distribuidor un servidor de demostración con el módulo activado.",
+  "coste_demo": "Basic 34 €/mes por establecimiento (1 dispositivo), Starter Plus 62 €/mes, Professional 90 €/mes. Pago mensual, sin IVA, sin precio anual publicado. 'Servicios de integración' aparece en la tabla de planes, pero no se pudo confirmar en qué planes va incluido. La instalación y la configuración las cobra aparte el distribuidor autorizado.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Desde 34 €/mes + distribuidor",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Solo si el distribuidor no activa Integration Services o si pasar a la versión 6.0.6 o superior cuesta más que cambiar de TPV.",
+    "alternativas": [
+      "Cegid Revo XEF (API REST en la nube y documentada)"
+    ],
+    "coste_esfuerzo_migracion": "En general no aplica."
+  },
+  "fuentes": [
+    "https://help.deliverect.com/en/articles/7979177-igt-agora-obtain-the-api-token",
+    "https://support.haddock.app/en/article/agora-connector-new-and-recommended-17aizdf/",
+    "https://www.chift.eu/blog/agora-pos-api-integration-how-to-connect-set-up-and-follow-best-practices",
+    "https://recipok.com/wp-content/uploads/2024/05/Integracion-de-Agora-con-Recipok-Presentacion-1.pdf",
+    "https://www.agorapos.com/pricing/",
+    "https://www.agorapos.com/integraciones/"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,22 @@
+{
+  "id": "ofimatica-mensajeria",
+  "nombre": "Ofimática, mensajería, proyectos, firma y automatización",
+  "hallazgos": [
+    "En 2026 el MCP oficial remoto es lo normal: Google (preview), Microsoft Work IQ (preview, con licencia Copilot), Slack (feb-2026), Atlassian Rovo (GA feb-2026), Trello, Dropbox (beta), Zoom, ClickUp, DocuSign, n8n, Make y Zapier. Sin MCP oficial: WhatsApp, Telegram, Discord y Acrobat Sign.",
+    "Pocos MCP oficiales se pueden dejar en solo lectura desde el servidor: Atlassian (interruptores de admin), toolboxes de Make, modo managed de Zapier y el conector M365 de Claude (lectura por defecto). En cambio, Dropbox exige Full Dropbox con escritura, ClickUp no tiene scopes, el scope 'signature' de DocuSign lee y envía, y write_confluence puede cambiar permisos y crear enlaces públicos.",
+    "Patrón de mínimo privilegio que vale en todas: cuenta técnica dedicada con acceso solo a lo necesario, scopes de lectura, caducidad corta y tokens en un gestor de secretos. Las palancas más finas están en Microsoft (Sites.Selected y *.SelectedOperations.Selected, RBAC for Applications de Exchange) y Google (Controles de API con 'Datos específicos', drive.file, cuenta de servicio con una carpeta compartida).",
+    "WhatsApp: la app no tiene API. La vía oficial es la Cloud API en coexistencia, dada de alta por un partner o BSP, y las librerías no oficiales (whatsapp-web.js, Baileys, whatsmeow) arriesgan el bloqueo permanente del número. Desde el 15-ene-2026 Meta prohíbe los asistentes de IA generalistas, y según varios BSP desde el 1-oct-2026 cobra los mensajes de servicio a partir de 1.000 al mes por número (verificar en Meta).",
+    "Costes ocultos: Work IQ exige M365 Copilot; la Make API y sus herramientas de gestión solo van en planes de pago; la API de n8n no está en la prueba de Cloud; Rovo cobra créditos por las búsquedas enriquecidas desde el 31-ago-2026; y cada llamada MCP en Zapier cuesta 2 tareas.",
+    "Riesgo de prompt injection: correos, documentos y chats que lee el agente pueden traer instrucciones escondidas (Google lo advierte de forma explícita). La combinación peligrosa es leer correo y poder enviar o compartir: separar los servidores de lectura y de escritura y exigir aprobación humana.",
+    "Cupos que rompen demos en clase: ClickUp Free (100 llamadas MCP cada 24 h por workspace), Zapier Free (unas 50 llamadas), conversations.history en apps de Slack fuera del Marketplace (1 petición/min) y OAuth de Google en Testing (tokens de 7 días). Mejor una cuenta o workspace por alumno.",
+    "n8n como capa de integración: MCP Server Trigger para exponer workflows concretos, MCP de instancia (OJO: también crea y edita workflows) y MCP Client Tool para consumir. Nunca dejar la autenticación en None, y usar un usuario de n8n dedicado."
+  ],
+  "asistentes_ia": [
+    "ChatGPT: puede añadir servidores MCP remotos propios con OAuth y pide confirmación antes de escribir; no he verificado en qué planes está (las páginas de OpenAI devolvieron 403). Fuente: https://developers.openai.com/apps-sdk/deploy/connect-chatgpt",
+    "Claude: conectores MCP remotos en Free (1 conector propio), Pro, Max, Team y Enterprise; en Team y Enterprise los activa el Owner. Claude Code usa claude mcp add --transport http. Trae conectores nativos de Google Workspace, Microsoft 365 (solo lectura por defecto), Slack y DocuSign, entre otros. Fuente: https://support.claude.com/en/articles/11175166-getting-started-with-custom-connectors-using-remote-mcp",
+    "Gemini: Gemini CLI consume MCP (stdio, SSE y HTTP, con OAuth). Según su doc, desde el 18-jun-2026 Antigravity CLI lo sustituye en el nivel gratuito y en Google One. No verificado si la app Gemini consume MCP. Fuente: https://geminicli.com/docs/tools/mcp-server/",
+    "NotebookLM: la versión de consumo no tiene API pública verificada. NotebookLM Enterprise en Google Cloud sí tiene API REST en preview (cuadernos, fuentes, audio overviews), sin MCP. Fuente: https://docs.cloud.google.com/gemini/enterprise/notebooklm-enterprise/docs/api-notebooks",
+    "Microsoft Copilot: Copilot Studio consume MCP (GA, streamable HTTP, sujeto a DLP), los agentes declarativos de M365 Copilot aceptan MCP como plugin, y los Work IQ MCP piden licencia de M365 Copilot. Fuente: https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-mcp-plugins"
+  ],
+  "verificado_el": "2026-10-09"
+}

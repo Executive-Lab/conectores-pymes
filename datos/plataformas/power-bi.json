@@ -1,0 +1,58 @@
+{
+  "id": "power-bi",
+  "nombre": "Power BI",
+  "nombre_completo": "Power BI",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "Microsoft Fabric"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (Power BI REST y Fabric REST; consultas DAX)",
+    "auth": "OAuth2 con Microsoft Entra ID (delegado) o service principal (app registration con secreto o certificado)",
+    "requisitos": "Para compartir hace falta licencia Pro o PPU, o capacidad Fabric. Registrar una app en Entra. El admin de Fabric activa 'Service principals can use Fabric APIs' (antes 'Allow service principals to use Power BI APIs'), acotado a un grupo de seguridad, y añade el service principal al área de trabajo. Las APIs de administración tienen un interruptor aparte.",
+    "docs_url": "https://learn.microsoft.com/en-us/power-bi/developer/mcp/mcp-servers-overview"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "1) Power BI Authoring MCP, que lee y escribe modelos semánticos y ejecuta DAX (máximo 100.000 filas). Versión hospedada en preview en https://api.fabric.microsoft.com/v1/mcp/powerbi/authoring: Entra como usuario, exige el tenant setting 'Users can use the Power BI Model Context Protocol server endpoint'. Versión local GA (@microsoft/powerbi-modeling-mcp): admite service principal y Power BI Desktop, pero NO funciona en macOS. 2) Fabric IQ MCP (GA), para preguntas sobre los datos: https://fabriciq.svc.cloud.microsoft/v1/mcp/FabricIQ, solo login delegado (sin service principal), scopes Item.Read.All, Item.Execute.All y Dataset.Read.All, respeta RLS y OLS. 3) El MCP de consumo antiguo (preview) sigue documentado. Docs actualizadas en sep-2026."
+  },
+  "otras_vias": [
+    "Power Automate (nativo de Microsoft)",
+    "n8n: sin nodo nativo; nodo comunitario n8n-nodes-powerbi o HTTP Request",
+    "Export de informes a PDF/PPTX por API, suscripciones por email",
+    "Make/Zapier (no verificado)"
+  ],
+  "rpa": "no hace falta (Power BI Desktop solo existe en Windows; en Mac se usa el servicio web y el MCP hospedado)",
+  "dificultad": "Media",
+  "permisos_acotados": "Consulta: usuario o service principal dedicado con rol 'Viewer' en un área de trabajo separada, más permiso Build solo en el modelo semántico necesario (Build = solo consultas DAX; Write = cambios). Si se usa el MCP de autoría, dar Write solo en un modelo de pruebas y trabajar con ficheros PBIP bajo Git. Activar los tenant settings acotados a un grupo de seguridad (para el ajuste del MCP, no verificado). Lo que NO se puede acotar: los scopes delegados son '.All' (el límite real lo ponen los permisos del usuario), Fabric IQ no admite service principal, y no hay un interruptor estándar que bloquee operaciones destructivas.",
+  "pedir_al_informatico": "Que el admin de Microsoft 365/Fabric cree un grupo 'IA-lectura' y active para ese grupo el endpoint MCP de Power BI (y las APIs para service principals si se usa n8n). Que dé a ese usuario o service principal rol Viewer + Build solo en el área de trabajo y el modelo que se quieren consultar.",
+  "demo_gratis": {
+    "opcion": "Cuenta gratuita de Fabric (sin tarjeta) + prueba de Power BI Pro de 60 días (duración según terceros) + capacidad de prueba de Fabric (la página oficial no da la duración).",
+    "api_incluida": "sí",
+    "limites": "Exige email de empresa o centro educativo (no Gmail). Al terminar la prueba se pierde el uso compartido. En Mac no hay Desktop ni MCP local."
+  },
+  "demo_resumen": "prueba 60 días",
+  "coste_demo": {
+    "plan": "Power BI Pro",
+    "precio": "14 $ por usuario al mes (PPU: 24 $); el precio en € no está verificado",
+    "facturacion": "anual ('paid yearly')",
+    "verificado": "sí (USD)"
+  },
+  "coste_resumen": "Pro 14 $/usuario/mes (anual)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://learn.microsoft.com/en-us/power-bi/developer/mcp/mcp-servers-overview",
+    "https://learn.microsoft.com/en-us/power-bi/developer/mcp/power-bi-authoring-mcp",
+    "https://learn.microsoft.com/en-us/fabric/iq/connectors/fabric-iq-mcp",
+    "https://learn.microsoft.com/en-us/power-bi/developer/embedded/embed-service-principal",
+    "https://learn.microsoft.com/en-us/fabric/fundamentals/roles-workspaces",
+    "https://www.microsoft.com/en-us/power-platform/products/power-bi/pricing",
+    "https://github.com/And-Rochaa/n8n-nodes-powerbi"
+  ],
+  "confianza": "alta"
+}

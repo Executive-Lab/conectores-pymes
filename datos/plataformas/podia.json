@@ -1,0 +1,48 @@
+{
+  "id": "podia",
+  "nombre": "Podia",
+  "nombre_completo": "Podia",
+  "categoria": "hosteleria-nicho",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "limitada",
+    "estilo": "No se encontró API REST pública documentada (ni la página de precios ni la de integraciones la mencionan). El acceso programático es el MCP oficial y Zapier.",
+    "auth": "OAuth (MCP). No admite tokens personales para el MCP.",
+    "requisitos": "MCP incluido en todos los planes ('pueden aplicarse límites futuros'). Zapier solo en Shaker y Earthquaker.",
+    "docs_url": "https://help.podia.com/en/collections/19733020-mcp"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "https://app.podia.com/mcp con OAuth. Al conectar se elige el nivel 'Solo lectura' o 'Lectura y escritura'. Cubre productos, cursos, páginas, emails, contactos y ventas. Subidas de hasta 10 MB y sin vídeo. Algunos cambios son inmediatos e irreversibles; otros quedan como borrador."
+  },
+  "otras_vias": [
+    "Zapier (5 disparadores y 4 acciones) en los planes Shaker y Earthquaker",
+    "Integraciones de email, Discord y Stripe/PayPal",
+    "Exportación CSV: no verificada"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Conecta el MCP en 'Solo lectura'. Los permisos sensibles (editar la web, gestionar usuarios) vienen apagados por defecto. Mantén la confirmación de cada acción en el cliente (sin aprobación automática). La conexión hereda lo que ve el usuario que conecta: usa un miembro del equipo con acceso limitado, no el propietario. Se revoca en Admin > Settings > Integrations y las conexiones sin uso caducan. No se puede limitar a un producto o curso concreto.",
+  "pedir_al_informatico": "Conecta Podia al arnés con su MCP oficial en modo 'Solo lectura', usando un usuario de equipo que no sea el propietario.",
+  "demo_gratis": "Prueba de 14 días con todas las funciones, sin tarjeta. El MCP está incluido.",
+  "coste_demo": "Mover 42 $/mes (504 $/año), con MCP y un 5 % de comisión. Shaker 84 $/mes (1.008 $/año), con Zapier y sin comisión.",
+  "demo_resumen": "prueba 14 días",
+  "coste_resumen": "0 € 14 días; luego 42 $/mes (Mover)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No aplica.",
+    "alternativas": [],
+    "coste_esfuerzo_migracion": "No aplica."
+  },
+  "fuentes": [
+    "https://www.podia.com/pricing",
+    "https://www.podia.com/integrations",
+    "https://help.podia.com/en/articles/16680176-connecting-podia-to-your-ai-tool",
+    "https://help.podia.com/en/articles/16735102-podia-mcp-security-privacy",
+    "https://help.podia.com/en/articles/16665832-podia-mcp-faqs",
+    "https://help.podia.com/en/collections/12186897-zapier"
+  ],
+  "confianza": "alta"
+}

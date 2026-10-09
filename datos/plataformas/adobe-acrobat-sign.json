@@ -1,0 +1,54 @@
+{
+  "id": "adobe-acrobat-sign",
+  "nombre": "Adobe Acrobat Sign",
+  "nombre_completo": "Adobe Acrobat Sign",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Adobe Sign",
+    "EchoSign"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST v6; el endpoint depende del shard de la cuenta (eu1, na1…). Webhooks y envío masivo (MegaSign).",
+    "auth": "OAuth 2.0 Authorization Code con una API Application de dominio CUSTOMER. El access token dura 1 h y el refresh 60 días. Los scopes llevan modificador: :self (solo el usuario), :group (admin de grupo, Business/Enterprise) o :account (admin de cuenta). Ejemplos: agreement_read, agreement_send, library_read, webhook_*.",
+    "requisitos": "La Developer Edition gratuita trae API. En producción hace falta un plan Acrobat Sign Solutions, con precio solo por ventas. No verificado si Acrobat Pro o Standard for teams incluyen la API. Límites por endpoint y usuario (429 con Retry-After).",
+    "docs_url": "https://developer.adobe.com/acrobat-sign/docs/overview/developer_guide/"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "No he encontrado MCP oficial de Adobe. Opciones de terceros: Zapier MCP (listar acuerdos, ver estado, PDF de auditoría), Cequence AI Gateway y repos comunitarios sin auditar. Leen y escriben según cómo se configuren."
+  },
+  "otras_vias": [
+    "Webhooks (acuerdo completado, rechazado o expirado)",
+    "n8n: sin nodo nativo; se hace con HTTP Request y Webhook",
+    "Zapier (app y MCP) y Make",
+    "Integraciones nativas con Microsoft 365 y Salesforce"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Media",
+  "permisos_acotados": "Usar solo el modificador :self con un usuario dedicado que no sea admin: agreement_read:self y library_read:self, y añadir agreement_send:self solo si tiene que enviar. App de dominio CUSTOMER. Nunca :group ni :account. NO se puede acotar: no hay filtro por carpeta, plantilla o tipo de acuerdo; agreement_read ve todos los acuerdos del usuario.",
+  "pedir_al_informatico": "Crea un usuario dedicado (no admin) y una API Application CUSTOMER con agreement_read:self, más agreement_send:self si vamos a enviar. Confirma con Adobe que nuestro plan incluye API y webhooks.",
+  "demo_gratis": "Acrobat Sign Developer Edition: gratis y con API (verificado). Las limitaciones (marca de agua, sin validez legal) no aparecen en la página actual: no verificado. Las pruebas de Acrobat Pro son de Acrobat, no de la API de Sign.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "No verificado. Para la API en producción hace falta Acrobat Sign Solutions, con precio solo por ventas. Como referencia, Acrobat Pro for teams cuesta 23,99 $/licencia/mes (anual pagado al mes), pero su página no menciona la API.",
+  "coste_resumen": "0 € dev; producción: precio por ventas",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Solo si la empresa tiene Acrobat Pro o Standard sin API, o firma en papel o con PDF escaneado, y no piensa contratar Sign Solutions.",
+    "alternativas": [
+      "DocuSign (MCP oficial y planes con API de precio público)",
+      "Subir a Acrobat Sign Solutions"
+    ]
+  },
+  "fuentes": [
+    "https://developer.adobe.com/acrobat-sign/docs/overview/developer_guide/gstarted",
+    "https://developer.adobe.com/acrobat-sign/docs/overview/developer_guide/oauth",
+    "https://developer.adobe.com/acrobat-sign/docs/overview/developer_guide/apiusage",
+    "https://www.adobe.com/acrobat/business/developer-form.html",
+    "https://www.adobe.com/acrobat/pricing/business.html",
+    "https://zapier.com/mcp/adobe-acrobat-sign"
+  ],
+  "confianza": "media"
+}

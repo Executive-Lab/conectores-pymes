@@ -1,0 +1,62 @@
+{
+  "id": "sage-50",
+  "nombre": "Sage 50",
+  "nombre_completo": "Sage 50 España ('Sage Contabilidad', heredero de ContaPlus/FacturaPlus)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Sage Contabilidad",
+    "ContaPlus",
+    "FacturaPlus",
+    "Sage 50c",
+    "Sage 50cloud"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "limitada",
+    "estilo": "No hay API REST pública. En el foro de Sage España, una respuesta (verificada, pero no de Sage) habla de 'librerías de conexión' para desarrolladores y de un add-on oficial de pago llamado 'eConnect'. No hay documentación oficial que lo confirme.",
+    "auth": "No aplica (librerías locales en Windows o acceso a la base de datos).",
+    "requisitos": "El add-on se compra a través del distribuidor (precio no publicado). Las librerías funcionan en el mismo equipo o red que Sage 50.",
+    "docs_url": "no hay pública"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP oficial ni comunitario para la edición española. El 'Sage 50 UK MCP Server' de CData es para otro producto (Sage 50 Accounts UK) y no sirve."
+  },
+  "otras_vias": [
+    "BD directa: SQL Server Express, que Sage 50 instala en el equipo servidor. Las credenciales se ven en la Consola de administración con el usuario Supervisor; las actualizaciones han cambiado la contraseña por defecto (foro).",
+    "Add-on 'Importación/Exportación de asientos' con un fichero .txt de estructura fija (foro). Exportar a Excel desde los listados (no verificado).",
+    "Integradores comerciales que leen la base de datos (p. ej. Base.com).",
+    "n8n/Make/Zapier: ni nodo ni app (la app 'Sage Accounting' de Zapier es otro producto)."
+  ],
+  "rpa": "escritorio: solo como último recurso para escribir sin el add-on. Para leer basta SQL.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Crear un login SQL propio (ni 'sa' ni el usuario de Sage) con GRANT SELECT solo sobre las tablas o vistas necesarias, o leer de una copia nocturna. NO se puede: escribir por SQL (rompe la integridad y se salta la cadena de registros VERI*FACTU) ni dar permisos por módulo dentro de Sage. Abrir SQL Express a la red (TCP/IP y firewall) amplía la superficie de ataque. Las actualizaciones pueden cambiar el esquema o la contraseña. En la modalidad cloud alojada no está verificado que haya acceso a la base de datos.",
+  "pedir_al_informatico": "Un login SQL 'ia_lectura' con solo SELECT sobre las tablas que digamos, accesible únicamente desde la máquina del arnés y nunca expuesto a Internet. Preguntar además al distribuidor cuánto cuestan el add-on eConnect o las librerías de conexión, por si hace falta escribir (crear clientes o asientos).",
+  "demo_gratis": "No verificado si hoy hay versión de evaluación descargable; en cualquier caso no traería API. Para practicar con SQL, el informático puede montar una copia de la base de datos en un SQL Server Express de pruebas.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "Ningún plan incluye API. El más barato es Essential: 45 €/mes sin IVA con contrato y pago anual (540 €/año). Standard: 102 €/mes. Premium: 152 €/mes. eConnect, aparte y solo a través del distribuidor (no verificado).",
+  "coste_resumen": "sin API; desde 45 €/mes (anual)",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Compensa migrar si se sigue en ContaPlus/FacturaPlus o en un Sage 50 sin suscripción vigente (sin VERI*FACTU), si toca renovar el contrato anual, si se quiere automatizar la escritura (crear facturas) sin pagar add-ons ni recurrir a RPA, si se trabaja desde varios sitios sin servidor, o si la gestoría ya usa Sage Active o pide acceso en la nube.",
+    "alternativas": [
+      "Sage Active (mismo fabricante; API GraphQL autoservicio; 25-49 €/mes)",
+      "Holded u Odoo (API autoservicio; nodos nativos en Make, Zapier o n8n)"
+    ],
+    "coste_esfuerzo_migracion": "Licencia: de 540 €/año (Sage 50 Essential) a 300-588 €/año (Sage Active). Implantación: 2-6 semanas para una pyme, traspasando maestros y saldos (no verificado que haya migrador automático de Sage 50 a Sage Active). Riesgos: funciones de Premium (contabilidad presupuestaria, envases), stock e histórico; Sage Active no está disponible en los territorios forales ni en Canarias."
+  },
+  "verifactu": "Sage España dice que 'Sage 50 y Sage Active son la solución' y que están 'adaptados de forma nativa' (citado por guiafacturacion.es). Declaración responsable y versión mínima no verificadas: pedirlas por escrito. Los ContaPlus/FacturaPlus antiguos se presumen no adaptados (no verificado).",
+  "fuentes": [
+    "https://communityhub.sage.com/es/sage-50/f/discusion-general/261763/verificar-la-existencia-de-clientes-previamente-a-la-importacion-exportacion-de-asientos/627602",
+    "https://communityhub.sage.com/es/sage-50/f/discusion-general/259891/usuario-sql-server-para-acceder/621699",
+    "https://descargas.sage.es/sage50/documentacion/ManualInstalacionSage50c.pdf",
+    "https://descargas.sage.es/sage50/documentacion/Requisitos_Hardware_Sage50.pdf",
+    "https://grupo.sage.es/comunicados/producto/servicios/documents/ServiciosProfesionales_S50.pdf",
+    "https://www.sage.com/es-es/productos/sage-50cloud/precios/",
+    "https://www.cdata.com/drivers/sageuk/mcp",
+    "https://guiafacturacion.es/software/sage/",
+    "https://base.com/es-MX/integraciones/sage50/"
+  ],
+  "confianza": "media"
+}

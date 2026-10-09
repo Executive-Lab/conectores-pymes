@@ -1,0 +1,53 @@
+{
+  "id": "metricool",
+  "nombre": "Metricool",
+  "nombre_completo": "Metricool",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST",
+    "auth": "Token de API (cabecera X-Mc-Auth, más userId y blogId en cada llamada), desde Configuración de la cuenta > API",
+    "requisitos": "La API REST solo está en los planes Advanced y Custom.",
+    "docs_url": "https://app.metricool.com/resources/apidocs/index.html"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto en https://ai.metricool.com/mcp, disponible en TODOS los planes, incluido Free (se aplican los límites del plan). Autenticación por OAuth, o por cabecera X-Mc-Auth: esta vía usa la API y requiere Advanced. Lee y escribe: métricas e informes, crear, programar y publicar posts, Smartlinks, Inbox y comentarios, reseñas de Google Business Profile, campañas de Ads y autolists; lectura de Canva y Drive conectados. Tiene conector en el directorio de Claude."
+  },
+  "otras_vias": [
+    "Integraciones oficiales con Make y Zapier (requieren Advanced)",
+    "n8n: sin nodo oficial; HTTP Request o el MCP Client Tool con X-Mc-Auth",
+    "Export de informes a CSV/PDF"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "No hay scopes ni modo solo lectura: el MCP y la API dan un acceso equivalente a iniciar sesión (publicar, responder, tocar anuncios). Mitigaciones: un usuario dedicado con acceso solo a la marca necesaria (la gestión de equipo depende del plan; no verificado), aprobación manual de herramientas en el cliente IA, y revocar desde el cliente cuando no se use. Lo que NO se puede: limitarlo a solo lectura.",
+  "pedir_al_informatico": "Conectar el MCP oficial (https://ai.metricool.com/mcp) por OAuth desde Claude con un usuario que solo vea la marca de la empresa, y dejar activada la confirmación antes de cada publicación.",
+  "demo_gratis": {
+    "opcion": "Plan Free permanente con MCP incluido.",
+    "api_incluida": "no (la API REST es solo de Advanced; el MCP sí está en Free)",
+    "limites": "1 marca, 20 posts programados al mes, 30 días de analítica, sin LinkedIn ni X. La página de precios no menciona prueba gratuita."
+  },
+  "demo_resumen": "gratis permanente",
+  "coste_demo": {
+    "plan": "Advanced (incluye API), hasta 15 marcas",
+    "precio": "Desde 43 €/mes con pago anual o 54 €/mes mensual, IVA no incluido (53 $ / 67 $)",
+    "facturacion": "anual o mensual. El reparto 43=anual / 54=mensual lo deduzco yo: la página no etiqueta los bloques",
+    "verificado": "sí (precios); facturación inferida"
+  },
+  "coste_resumen": "Advanced desde 43 €/mes (anual, sin IVA)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://help.metricool.com/es/acceso-mcp-vs-api-cual-es-la-diferencia-5y3ib",
+    "https://help.metricool.com/es/how-to-connect-metricools-mcp-eqp9h",
+    "https://metricool.com/pricing/",
+    "https://help.metricool.com/can-i-use-metricool-with-n8n-45ex9",
+    "https://www.scalekit.com/blog/metricool-mcp-vs-api"
+  ],
+  "confianza": "alta"
+}

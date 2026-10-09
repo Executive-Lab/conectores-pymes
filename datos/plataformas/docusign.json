@@ -1,0 +1,45 @@
+{
+  "id": "docusign",
+  "nombre": "DocuSign",
+  "nombre_completo": "DocuSign",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "eSignature REST API v2.1, más las APIs Click, Navigator, Maestro y Admin. Webhooks con DocuSign Connect.",
+    "auth": "OAuth 2.0. Authorization Code cuando hay un usuario delante; JWT Grant con impersonación para servidor a servidor. Scopes: signature, extended e impersonation (sacados de conocimiento previo y de los ejemplos oficiales; la página de scopes no cargaba).",
+    "requisitos": "Cuenta developer gratis (entorno demo). Para producción hay que pasar el Go-Live de la integration key (un mínimo de llamadas correctas en demo; no verificado en 2026) y tener una cuenta de producción de pago con API.",
+    "docs_url": "https://developers.docusign.com/docs/esign-rest-api/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Docusign MCP Server. Producción: https://mcp.docusign.com/mcp (en el directorio de conectores de Claude, verificado por Anthropic, desde feb-2026). Demo: https://mcp-d.docusign.com/mcp, con app propia en Apps and Keys. Unas 20 herramientas. Lectura: sobres, destinatarios, plantillas, acuerdos, workflows. Escritura: createEnvelope, updateEnvelope, lanzar o cancelar workflows. OAuth por usuario, respetando sus permisos. El blog de Docusign lo da como GA; una guía de abril de 2026 aún hablaba de beta."
+  },
+  "otras_vias": [
+    "DocuSign Connect (webhooks)",
+    "PowerForms y plantillas",
+    "n8n: nodo comunitario o HTTP Request",
+    "Zapier y Make"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Media",
+  "permisos_acotados": "No existe scope de solo lectura: 'signature' lee y envía como el usuario. Usar Authorization Code con un usuario dedicado, perfil de remitente (no admin) y acceso solo a las plantillas y carpetas compartidas necesarias. Evitar JWT con impersonation, que permite actuar como cualquier usuario que haya dado su consentimiento, y no pedir 'extended' si no hace falta. NO se puede acotar: no hay filtro por plantilla ni por sobre, y no he visto modo de solo lectura en el MCP, así que hay que confirmar cada createEnvelope desde el cliente.",
+  "pedir_al_informatico": "Crea un usuario de Docusign solo para el asistente, con perfil de remitente (no administrador) y acceso solo a las plantillas X. La integration key debe usar Authorization Code, no JWT con impersonación global.",
+  "demo_gratis": "Cuenta developer gratis y sin caducidad: entorno demo con la API completa y el MCP de demo (mcp-d.docusign.com). Los sobres no tienen validez legal. Límites de la demo no verificados.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "0 € con la cuenta developer. eSignature Standard: 23 €/usuario/mes con pago anual; Business Pro: 38 € (la página es-ES indica que ambos incluyen API). Planes API en en-US: Starter 50 $/mes (40 sobres), Intermediate 300 $ y Advanced 480 $. No verificado si Standard basta para una integración propia en producción.",
+  "coste_resumen": "0 € dev; Standard 23 €/u/mes anual",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://www.docusign.com/blog/developers/claude-docusign-mcp-connector-guide",
+    "https://claude.com/connectors/docusign",
+    "https://developers.docusign.com/platform/mcp-server/",
+    "https://ecom.docusign.com/plans-and-pricing/esignature",
+    "https://ecom.docusign.com/en-US/plans-and-pricing/developer"
+  ],
+  "confianza": "media"
+}

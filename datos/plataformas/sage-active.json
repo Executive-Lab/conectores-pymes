@@ -1,0 +1,56 @@
+{
+  "id": "sage-active",
+  "nombre": "Sage Active",
+  "nombre_completo": "Sage Active",
+  "categoria": "erp-contabilidad",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "GraphQL (Public API V2). Endpoint para España y Portugal: https://api.es.active.sage.com/graphql. Si falla una regla de negocio responde igualmente HTTP 200 con los errores en el cuerpo. Consultas paginadas.",
+    "auth": "OAuth 2.0 en nombre de un usuario: authorization code con client_secret (app web) o PKCE. No hay client credentials, así que hace falta el consentimiento del usuario y guardar el refresh token. Cada llamada lleva tres cabeceras: Bearer, x-api-key (subscription key) y X-OrganizationId. Según un repo de la comunidad: scopes RDSA (lectura), WDSA (escritura) y offline_access; el token dura 8 h; límite de 3000 peticiones por app y minuto.",
+    "requisitos": "Una suscripción activa de Sage Active (ES/FR/DE/PT) con un usuario activado. Las claves se generan en autoservicio en 'Your Sage Active' > Configuración > API pública > Claves de aplicación, que da el Client ID, el Client Secret y la Subscription Key. No hace falta ser partner. Sage presenta la API como incluida ('API abierta'); que sea gratis y sin límite no está confirmado.",
+    "docs_url": "https://developer.sage.com/sageactive/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No hay MCP oficial. En nov-2025 Sage dijo que Sage Active 'will progressively evolve to support agentic and MCP capabilities', sin fecha. Su AI Gateway/MCP solo está disponible (GA) para Intacct desde mayo de 2026, en UK/US/CA/AU/ZA, no en España. No hay MCP comunitario en Glama ni en npm. Existe una skill comunitaria para Claude Code (github.com/chkdskman/skill-sage-active-api), pero es documentación de la API, no un MCP. Habría que construir un MCP propio sobre GraphQL, que puede ser de solo lectura si se pide solo el scope RDSA."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo (verificado). Se puede usar HTTP Request con una credencial OAuth2 genérica contra el endpoint GraphQL.",
+    "Make/Zapier: no hay app de Sage Active (no verificado del todo). La app 'Sage Accounting' de Zapier es otro producto.",
+    "Webhooks: no documentados en lo revisado (no verificado).",
+    "Importar y exportar Excel desde la interfaz (no verificado)."
+  ],
+  "rpa": "no hace falta: la API lee y escribe.",
+  "dificultad": "Media",
+  "permisos_acotados": "Pedir solo el scope RDSA (lectura), no WDSA. Autorizar la app con un usuario dedicado de Sage Active, porque el token hereda los permisos del usuario que da el consentimiento. X-OrganizationId elige la empresa en cada llamada. NO se puede acotar (según lo disponible): no hay scopes por módulo más allá de lectura y escritura; el token llega a todas las organizaciones del usuario; el Client Secret y la Subscription Key valen para toda la app. No verificado si hay roles de usuario finos.",
+  "pedir_al_informatico": "Que el administrador de Sage Active cree un usuario dedicado 'IA-lectura' y registre una aplicación en Configuración > API pública > Claves de aplicación. Que nos pase el Client ID, el Client Secret y la Subscription Key por un canal seguro; la app se autorizará solo con el scope RDSA (lectura).",
+  "demo_gratis": "Prueba gratuita de 30 días según fuentes secundarias (puede pedir tarjeta; no verificado). No hay plan gratuito permanente ni sandbox público: la doc manda usar el entorno de producción. No verificado que la cuenta de prueba pueda generar claves de API.",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "Starter: 25 €/mes sin IVA (12,50 €/mes los 3 primeros meses), pago mensual sin permanencia, 1 empresa y 300 facturas al año (0,05 € por factura extra). Las fuentes no coinciden en los usuarios incluidos (5 o 2). La API va incluida y no hace falta partner. Essentials: 49 €/mes.",
+  "coste_resumen": "25 €/mes (Starter, sin IVA)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No hace falta migrar para conectar. Solo habría que salir si la empresa factura en el País Vasco, Navarra, Canarias, Ceuta o Melilla (según guiafacturacion.es, Sage Active no se comercializa allí; no verificado oficialmente) o si supera los límites de facturas o de usuarios del plan.",
+    "alternativas": [
+      "Sage Active Essentials (si Starter se queda corto)",
+      "Holded u Odoo (si se quiere API key autoservicio y nodos nativos)"
+    ],
+    "coste_esfuerzo_migracion": "No aplica. Construir el conector propio (OAuth + GraphQL + MCP de solo lectura) son unos días de desarrollo. Riesgos: mantener el refresh token y seguir los cambios de versión de la API."
+  },
+  "verifactu": "Sage dice que Starter 'cumple con la normativa Verifactu' (citado por guiafacturacion.es). Declaración responsable no verificada: sage.com bloqueó la descarga. Hay que pedirla por escrito.",
+  "fuentes": [
+    "https://developer.sage.com/sageactive/guides/authentication/",
+    "https://developer.sage.com/sageactive/quickstart/create-an-app/",
+    "https://developer.sage.com/sageactive/concepts/environments/",
+    "https://developer.sage.com/sageactive/guides/devcenter/register-developer",
+    "https://raw.githubusercontent.com/chkdskman/skill-sage-active-api/main/skills/sage-active-api/references/00-endpoints-auth.md",
+    "https://www.sage.com/es-es/productos/sage-active/starter/",
+    "https://www.cpapracticeadvisor.com/2025/11/05/sage-launches-ai-developer-solutions-next-stage-in-sages-platform-journey/172363/",
+    "https://www.comparethecloud.net/news/sage-intacct-adds-ai-gateway-3-way-ap-matching-and-saas-analytics-overhaul-in-may-2026-release",
+    "https://guiafacturacion.es/software/sage/"
+  ],
+  "confianza": "media"
+}

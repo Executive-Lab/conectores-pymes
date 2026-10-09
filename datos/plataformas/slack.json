@@ -1,0 +1,46 @@
+{
+  "id": "slack",
+  "nombre": "Slack",
+  "nombre_completo": "Slack",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "Web API (REST/JSON), Events API o Socket Mode, e incoming webhooks.",
+    "auth": "OAuth 2.0 con token de bot (xoxb) o de usuario (xoxp) y scopes granulares.",
+    "requisitos": "Crear la app es gratis. En el plan Free caben como máximo 10 apps. Desde el 29-may-2025, las apps de distribución comercial que no están en el Marketplace tienen conversations.history y replies limitados a 1 petición por minuto y 15 mensajes. Las apps internas del propio workspace y las del Marketplace mantienen Tier 3.",
+    "docs_url": "https://docs.slack.dev/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Slack MCP server remoto en https://mcp.slack.com/mcp (Streamable HTTP), publicado el 17-feb-2026. Usa OAuth confidencial con token de USUARIO. No admite SSE ni registro dinámico: el cliente tiene que ser una app interna o del Marketplace. Claude.ai, Claude Code, Cursor y Perplexity vienen como clientes socios. Lee: búsqueda de mensajes, ficheros, usuarios y canales, historial de canales e hilos, canvases y listas. Escribe: envía y programa mensajes, crea conversaciones, reacciones, canvases y listas, y sube ficheros. Cada herramienta pide sus scopes (p. ej. search:read.public, channels:history, chat:write). El admin aprueba los clientes con el flujo normal de aprobación de apps y todo queda en los audit logs. La documentación no dice plan mínimo."
+  },
+  "otras_vias": [
+    "n8n: nodos nativos Slack y Slack Trigger",
+    "Incoming webhooks (publicar en un solo canal)",
+    "Make y Zapier",
+    "Exportación del workspace por el admin"
+  ],
+  "rpa": "no hace falta: hay API y MCP oficiales.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Para automatizaciones, app interna con token de BOT: el bot solo lee los canales a los que se le invita. Scopes de lectura (channels:history, channels:read, users:read) y sin chat:write si no tiene que escribir. Para solo avisar, un incoming webhook atado a un canal. En el MCP oficial, quitar los scopes de mensajes directos (im:history, search:read.im, mpim:*) y dejar los de escritura como opcionales; el admin puede exigir aprobación de apps. NO se puede acotar: un token de usuario ve todo lo que ve la persona; search:read.* no se limita por canal; no hay token de solo lectura por canal.",
+  "pedir_al_informatico": "Aprueba una app interna de Slack con solo los scopes de lectura que necesitamos y añade su bot únicamente a los canales X e Y. Para el MCP oficial, aprueba el cliente Claude sin scopes de mensajes directos y revisa los audit logs.",
+  "demo_gratis": "Plan Free para siempre con API (máx. 10 apps, 90 días de historial visible). El Slack Developer Program (gratis) da además un sandbox con funciones Enterprise: hasta 8 usuarios, 2 sandboxes activos y 6 meses prorrogables (el básico, 1 mes). No verificado si el MCP oficial exige plan de pago.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € con Free. Pro: 6,75 €/usuario/mes con pago anual u 8,25 € mensual; Business+: 15 € anual o 18 € mensual (slack.com/intl/es-es/pricing, oct-2026).",
+  "coste_resumen": "0 € (Free); Pro 6,75 €/u/mes anual",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://docs.slack.dev/ai/mcp-server",
+    "https://docs.slack.dev/changelog/2026/02/17/slack-mcp",
+    "https://docs.slack.dev/changelog/2025/05/29/rate-limit-changes-for-non-marketplace-apps",
+    "https://docs.slack.dev/reference/methods/conversations.history",
+    "https://docs.slack.dev/tools/developer-sandboxes",
+    "https://slack.com/intl/es-es/pricing"
+  ],
+  "confianza": "alta"
+}

@@ -1,0 +1,46 @@
+{
+  "id": "trello",
+  "nombre": "Trello",
+  "nombre_completo": "Trello",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (/1/...) más webhooks.",
+    "auth": "API key (desde el Power-Up Admin Portal) más un token de usuario, que se pide con scope=read|write|account y expiration=1hour|1day|30days|never. La propuesta de OAuth 2.0 con scopes finos (RFC-89) no está confirmada como publicada.",
+    "requisitos": "Gratis en todos los planes. Para obtener la key hay que ser admin de un workspace.",
+    "docs_url": "https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Trello MCP remoto de Atlassian en https://mcp.trello.com/v1 (repo atlassian/trello-mcp-server). OAuth 2.0 con consentimiento: se elige el workspace y los permisos Read, Write y Search. No acepta token de API. Lee y escribe tableros, listas, tarjetas, checklists y comentarios, y busca. NO borra para siempre: solo archiva. Funciona en todos los planes, Free incluido. El MCP Rovo de Atlassian NO cubre Trello. La fecha de lanzamiento (2026) no está confirmada oficialmente."
+  },
+  "otras_vias": [
+    "n8n: nodos nativos Trello y Trello Trigger",
+    "Webhooks",
+    "Make y Zapier",
+    "Exportación JSON (CSV en planes de pago)"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Con la API: token con scope=read y caducidad de 30 días o menos, nunca 'never', generado con un miembro dedicado que solo esté en los tableros autorizados. Se revoca desde la cuenta. Con el MCP: elegir un solo workspace y solo Read y Search. En Enterprise, el admin puede limitar read_trello y write_trello. NO se puede acotar: no hay token por tablero (el token ve todo lo que ve el usuario) y un token 'never' no caduca nunca.",
+  "pedir_al_informatico": "Crea un usuario técnico de Trello, invítalo solo a los tableros X e Y y genera un token con scope=read que caduque en 30 días. Si usamos el MCP, autoriza solo ese workspace y sin Write.",
+  "demo_gratis": "Plan Free para siempre con API y MCP: 10 tableros y 10 colaboradores por workspace. Demo: conectar el MCP en Claude Code, crear tarjetas hablando y ver que solo archiva, no borra. Límites: 300 peticiones cada 10 s por key y 100 cada 10 s por token.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € con Free. Standard: 6 $/usuario/mes mensual o 5 $ anual (trello.com/pricing, 2026). Precio en € no verificado.",
+  "coste_resumen": "0 € (Free)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://support.atlassian.com/trello/docs/connect-trello-to-ai-assistants-with-trello-mcp/",
+    "https://github.com/atlassian/trello-mcp-server",
+    "https://developer.atlassian.com/cloud/trello/guides/rest-api/authorization",
+    "https://developer.atlassian.com/cloud/trello/guides/rest-api/rate-limits/",
+    "https://trello.com/pricing",
+    "https://docs.n8n.io/integrations/builtin/credentials/trello/"
+  ],
+  "confianza": "alta"
+}

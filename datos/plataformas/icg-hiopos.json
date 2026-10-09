@@ -1,0 +1,62 @@
+{
+  "id": "icg-hiopos",
+  "nombre": "ICG / HIOPOS",
+  "nombre_completo": "ICG Software / HIOPOS (FrontRest, FrontRetail, ICGManager en Windows; HioPos en la nube)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "ICG",
+    "HIOPOS",
+    "HioPos",
+    "FrontRest",
+    "FrontRetail",
+    "ICGManager"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "no",
+    "estilo": "No se encontró ninguna API pública documentada. Las integraciones conocidas pasan por partners o distribuidores: exportación por FTP (HioPos > Haddock) y claves API de terceros que se introducen en la configuración del TPV (MergePort, para pedidos online).",
+    "auth": "No aplica (no hay API pública)",
+    "requisitos": "Todo pasa por el distribuidor o partner de ICG/HIOPOS. La web no tiene página de integraciones, API ni desarrolladores.",
+    "docs_url": "Sin documentación pública"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP."
+  },
+  "otras_vias": [
+    "Exportación por FTP que configura el distribuidor (así lo hace Haddock con HioPos)",
+    "Terceros que ya extraen ventas: Sinqro (Data Sync), Shiftbase (facturación), MergePort (pedidos)",
+    "Base de datos local en FrontRest e ICGManager: un manual de FrontRest de 2011 indica Microsoft SQL Server Express. La versión actual no se ha verificado. Se leería con un usuario de solo lectura y con el permiso del distribuidor.",
+    "En el catálogo aparece ICGCMExchange (su función de intercambio de datos no se ha verificado)"
+  ],
+  "rpa": "escritorio (FrontRest o ICGManager en Windows) si no hay exportación ni acceso a la base de datos; navegador para el portal de HioPos",
+  "dificultad": "Difícil",
+  "permisos_acotados": "SQL Server: un login dedicado que solo pueda hacer SELECT sobre vistas de ventas preparadas por el distribuidor (o como mucho db_datareader en esa base de datos), nunca 'sa', y accesible solo desde la LAN o el agente. FTP: un servidor o carpeta del cliente donde el TPV solo pueda escribir y el arnés solo pueda leer. En HioPos no hay scopes porque no hay API.",
+  "pedir_al_informatico": "Pide a tu distribuidor ICG/HIOPOS una exportación automática de ventas (fichero o FTP) hacia un servidor tuyo. En FrontRest o ICGManager, pide además un usuario de SQL Server de solo lectura sobre vistas de ventas y que confirme por escrito que no afecta al soporte.",
+  "demo_gratis": "No hay prueba ni precios publicados. Las demos se piden por contacto comercial, por WhatsApp o a través de un partner. No hay API que probar.",
+  "coste_demo": "No publicado: licencias y precios a través del distribuidor. No hay plan con API pública.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Precio vía distribuidor (no público)",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Valora migrar si el distribuidor no da exportación ni acceso a la base de datos, si toca renovar el hardware o la licencia de Windows, o si la versión instalada necesita una actualización de pago para Verifactu. Plazos según el RDL 15/2025: 1-1-2027 para sociedades y 1-7-2027 para el resto. Hacienda anunció el 5-10-2026 una posible nueva ampliación.",
+    "alternativas": [
+      "Cegid Revo XEF (API REST documentada)",
+      "Ágora (API local con Integration Services)",
+      "HioPos en la nube (mismo grupo y con herramientas de migración desde Windows, pero también sin API pública)"
+    ],
+    "coste_esfuerzo_migracion": "Medio o alto: semanas de puesta en marcha, formación de sala y cocina, posible cambio de hardware (iPad en Revo) y el histórico de ventas se queda en el sistema antiguo. Hay que exportarlo antes de cambiar."
+  },
+  "fuentes": [
+    "https://www.icg.es/",
+    "https://www.icg.es/productos/software/",
+    "https://www.hiopos.com/en/who-we-are",
+    "https://www.hiopos.com/es/",
+    "https://support.haddock.app/en/article/hiopos-connect-pos-tnuuwm/",
+    "https://www.scribd.com/document/84450829/FrontRest-2011-User-Guide",
+    "https://www.mergeport.com/?p=5277",
+    "https://sede.agenciatributaria.gob.es/Sede/iva/sistemas-informaticos-facturacion-verifactu/nota-informativa-ampliacion-plazo-adaptacion-facturacion.html"
+  ],
+  "confianza": "baja"
+}

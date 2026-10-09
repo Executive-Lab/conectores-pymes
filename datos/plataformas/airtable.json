@@ -1,0 +1,48 @@
+{
+  "id": "airtable",
+  "nombre": "Airtable",
+  "nombre_completo": "Airtable",
+  "categoria": "crm-email",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST",
+    "auth": "Personal Access Token (scopes más bases o workspaces concretos) u OAuth. En Enterprise, tokens de cuenta de servicio.",
+    "requisitos": "Todos los planes. Llamadas al mes por workspace: Free 1.000, Team 100.000, Business ilimitadas. Además, 5 peticiones por segundo por base y 50 por segundo por usuario con PAT.",
+    "docs_url": "https://airtable.com/developers/web/guides/personal-access-tokens"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto https://mcp.airtable.com/mcp con OAuth o PAT por Bearer. Incluido en todos los planes; consume la cuota de API. Lee registros, esquemas y automatizaciones. Escribe: crea y actualiza registros (máximo 10 por petición), bases, interfaces y automatizaciones en borrador. Las bases de desarrollo devuelven 403. En Enterprise se puede bloquear o permitir por client ID."
+  },
+  "otras_vias": [
+    "Nodo nativo Airtable y Airtable Trigger en n8n",
+    "Make y Zapier",
+    "Webhooks (scope webhook:manage)",
+    "Exportar vistas a CSV",
+    "Automatizaciones nativas"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "PAT con solo data.records:read y schema.bases:read (más workspacesAndBases:read si el MCP lo pide), limitado a las bases concretas. Cada petición tiene que cumplir a la vez scope y recurso. Ojo: según terceros, limitar a bases concretas puede romper las herramientas del MCP que trabajan a nivel de workspace. Lo que no se acota: el PAT actúa como su creador y sigue vivo aunque esa persona deje la empresa. Por eso conviene crearlo desde un colaborador dedicado con permiso de solo lectura en la base.",
+  "pedir_al_informatico": "Crea un PAT en airtable.com/create/tokens con data.records:read y schema.bases:read, solo para la base de clientes. Mejor si lo creas desde un usuario dedicado con acceso de solo lectura.",
+  "demo_gratis": "Free permanente con API y MCP incluidos, pero solo 1.000 llamadas al mes por workspace y 1.000 registros por base. Una demo en directo con agente puede gastar el cupo.",
+  "coste_demo": "Team: 20 $/colaborador/mes en pago anual o 24 $ en mensual, con 100.000 llamadas al mes. Moneda en $; precio en € no verificado.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (Free, 1.000 llamadas/mes)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://support.airtable.com/docs/using-the-airtable-mcp-server",
+    "https://airtable.com/developers/web/guides/personal-access-tokens",
+    "https://airtable.com/developers/web/api/scopes",
+    "https://airtable.com/developers/web/api/rate-limits",
+    "https://support.airtable.com/docs/airtable-plans",
+    "https://airtable.com/pricing",
+    "https://www.truefoundry.com/blog/airtable-mcp-server"
+  ],
+  "confianza": "alta"
+}

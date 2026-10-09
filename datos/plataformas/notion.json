@@ -1,0 +1,53 @@
+{
+  "id": "notion",
+  "nombre": "Notion",
+  "nombre_completo": "Notion (como CRM y como gestor)",
+  "categoria": "crm-email",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST",
+    "auth": "Conexión interna con token estático (solo la crean los propietarios del workspace), OAuth2 para conexiones públicas o Personal Access Token (actúa como el usuario que lo crea)",
+    "requisitos": "La documentación de API no indica restricción por plan. Límite aproximado de 3 peticiones por segundo según guías de terceros. Las páginas hay que compartirlas explícitamente con la conexión.",
+    "docs_url": "https://developers.notion.com/docs/authorization"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Notion MCP alojado por Notion (mcp.notion.com) con OAuth: búsqueda, lectura, creación y edición de páginas y bases de datos. Actúa con todos los permisos del usuario conectado y no tiene modo solo lectura. El servidor local makenotion/notion-mcp-server está obsoleto y sin mantenimiento. La lista de apps de IA aprobadas solo existe en el plan Enterprise."
+  },
+  "otras_vias": [
+    "Nodo nativo Notion en n8n",
+    "Make y Zapier",
+    "Webhooks de la API",
+    "Exportar a CSV o Markdown"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Para n8n o scripts, conexión interna con solo la capacidad 'Read content', sin 'Update' ni 'Insert', 'No user information', y compartida solo con la base de datos del CRM. Ojo: hereda acceso a todas las páginas hijas. Para el MCP alojado: usuario o invitado dedicado que solo tenga acceso a esas páginas. Lo que no se acota: el MCP alojado no tiene scopes ni modo solo lectura (hace lo mismo que el usuario), y fuera de Enterprise no se puede restringir qué clientes de IA se conectan.",
+  "pedir_al_informatico": "Crea una conexión interna con solo 'Read content' y compártela únicamente con la base de datos de clientes. Si usamos el MCP de Notion, que sea con un usuario que solo vea esas páginas.",
+  "demo_gratis": "Plan Free permanente; la API funciona porque la documentación no pone restricción de plan. Límites del Free: bloques limitados si hay 2 o más miembros, 7 días de historial, archivos de 5 MB. No verificado si el MCP alojado tiene alguna limitación en Free.",
+  "coste_demo": "0 € con Free. Plus: 9,50 €/licencia/mes y Business: 19,50 €/licencia/mes según la página de precios en €. Dice que el pago anual ahorra hasta un 20%; no verificado si esos importes son del pago anual o del mensual.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (Free)",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Cuando Notion es el CRM principal, con pipeline, seguimiento de emails y llamadas, recordatorios o varios comerciales. No tiene objetos CRM, ni registro de actividad, ni deduplicación, y su MCP no se puede dejar en solo lectura. Si es solo gestor o wiki, conectar tal cual.",
+    "alternativas": [
+      "HubSpot Free CRM (gratis, MCP oficial)",
+      "Zoho CRM Free (gratis 3 usuarios, MCP de solo lectura)"
+    ]
+  },
+  "fuentes": [
+    "https://developers.notion.com/docs/mcp",
+    "https://www.notion.com/help/notion-mcp",
+    "https://github.com/makenotion/notion-mcp-server",
+    "https://developers.notion.com/docs/authorization",
+    "https://developers.notion.com/reference/capabilities",
+    "https://www.notion.com/pricing",
+    "https://www.gamut.so/blog/notion-mcp-server-setup-guide",
+    "https://docs.secureauth.com/ai/resources/notion/"
+  ],
+  "confianza": "alta"
+}

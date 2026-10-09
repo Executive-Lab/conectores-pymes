@@ -1,0 +1,56 @@
+{
+  "id": "sap-business-one",
+  "nombre": "SAP Business One",
+  "nombre_completo": "SAP Business One",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "SAP B1"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "sí",
+    "estilo": "Service Layer REST/OData v4 (https://servidor:50000/b1s/v2/); OData v3 obsoleto desde el FP 2405. También existe la DI API (COM, solo Windows), que es antigua.",
+    "auth": "POST /Login con CompanyDB, usuario y contraseña de B1, que devuelve las cookies B1SESSION y ROUTEID. SSO opcional (OIDC) con el SAP B1 Authentication Server.",
+    "requisitos": "Viene incluido en B1 10.0, tanto en HANA como en SQL Server. Cada usuario que entra por la API consume una licencia de B1 con nombre. La licencia solo se compra a un partner, que normalmente instala y configura el Service Layer.",
+    "docs_url": "https://help.sap.com/doc/056f69366b5345a386bb8149f1700c19/10.0/en-US/Service%20Layer%20API%20Reference.html"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "Ninguno es oficial de SAP, y todos van contra el Service Layer. leonardows1/sap-b1-servicelayer-mcp: solo lectura por defecto (SAP_B1_READONLY=true) y SQL limitado a SELECT. jhsementes/mcp-sap: escritura desactivada por defecto. HelpCode-ai/sap-business-one-mcp-server: AGPL-3.0; su ficha dice que no está probado contra un sistema real. glauberbessa/mcpserverforsapb1: CRUD con confirmación humana. CData: solo lectura, con driver de pago. Comercial de partner: CompuTec AppEngine 3.2509 o superior trae MCP con un permiso de B1 específico para escribir y OIDC."
+  },
+  "otras_vias": [
+    "BD directa en SQL Server o HANA: lectura con un login de solo lectura. Escribir directamente está prohibido por SAP y se pierde el soporte.",
+    "DI API COM para add-ons de Windows.",
+    "Data Transfer Workbench para importar plantillas CSV/Excel.",
+    "Sin webhooks nativos. n8n/Make/Zapier: sin nodo nativo verificado (HTTP Request contra el Service Layer). Terceros: CData, CompuTec."
+  ],
+  "rpa": "no hace falta: el Service Layer lee y escribe.",
+  "dificultad": "Media",
+  "permisos_acotados": "Usuario de B1 dedicado (p. ej. IA_LECTURA) con las Autorizaciones generales en 'Solo lectura' en los módulos necesarios y 'Sin autorización' en el resto. Data Ownership para limitar documentos por propietario. MCP en modo solo lectura. NO se puede acotar: los endpoints SQL leen todo lo que permita la base de datos; no hay tokens con alcance ni caducidad (son usuario y contraseña, y varios MCP los guardan en texto plano); el usuario consume una licencia; el Service Layer no debe exponerse a Internet sin VPN o proxy inverso. Que el Service Layer respete las autorizaciones del usuario solo lo confirma CompuTec (confianza media).",
+  "pedir_al_informatico": "Al partner: un usuario de B1 dedicado y de solo lectura con acceso al Service Layer v2 (OData v4) desde la red interna o por VPN. Que confirme versión y FP, si el Service Layer está instalado y cuánto cuesta la licencia de ese usuario.",
+  "demo_gratis": "No hay prueba pública verificable. Opciones: demo guiada por un partner, licencias de desarrollo con la base de datos de demostración OEC Computers para partners PartnerEdge (no verificado) o el driver CData en prueba. Para clase, pedir un entorno de demostración a un partner.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "Sin precio oficial público. Licencia perpetua o suscripción por usuario, solo a través de partner. El Service Layer no tiene coste extra. Cifras no verificadas.",
+  "coste_resumen": "partner: no verificado",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Si se sigue en la 9.x sin Service Layer y actualizar a la 10.0 cuesta parecido a migrar, si el partner no da soporte ni usuarios de API a un precio razonable, o si se quiere SaaS sin servidor propio.",
+    "alternativas": [
+      "Microsoft Dynamics 365 Business Central (API + MCP oficial)",
+      "Odoo (API JSON-2 + MCP nativo; nodo n8n)",
+      "Holded (pymes pequeñas)"
+    ],
+    "coste_esfuerzo_migracion": "10-80 k€ y 3-6 meses (estimación no verificada). Riesgos: add-ons verticales del partner, localización y migración del histórico."
+  },
+  "verifactu": "B1 tiene localización española, pero su adaptación a VERI*FACTU no está verificada: pedir al partner la declaración responsable, tanto la de SAP como la de los add-ons de facturación. Quien está en el SII está exento.",
+  "fuentes": [
+    "https://help.sap.com/doc/056f69366b5345a386bb8149f1700c19/10.0/en-US/Service%20Layer%20API%20Reference.html",
+    "https://learn.computec.one/docs/appengine/administrators-guide/configuration-and-administration/mcp-server-for-sap-business-one",
+    "https://github.com/leonardows1/sap-b1-servicelayer-mcp",
+    "https://glama.ai/mcp/servers?query=sap%20business%20one",
+    "https://glama.ai/mcp/servers/HelpCode-ai/sap-business-one-mcp-server",
+    "https://glama.ai/mcp/servers/CDataSoftware/sap-business-one-mcp-server-by-cdata"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,55 @@
+{
+  "id": "wix",
+  "nombre": "Wix",
+  "nombre_completo": "Wix",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST + SDK de JavaScript",
+    "auth": "API keys (en el API Keys Manager; solo las crean propietarios y copropietarios) u OAuth para apps",
+    "requisitos": "Gratis. Cada llamada indica la cabecera wix-site-id o wix-account-id. La clave dura hasta que se revoca o se rota.",
+    "docs_url": "https://dev.wix.com/docs/overview/auth-permissions/authentication-methods"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto en https://mcp.wix.com/mcp (HTTP o SSE). Autenticación por OAuth en el navegador, o por API key + wix-account-id (pensado para n8n). Viene integrado como conector en Claude. Lee y escribe: buscar documentación, generar código, llamar APIs REST sobre los sitios, crear, actualizar y publicar sitios, subir imágenes y gestionar la cuenta. Todas las herramientas vienen activadas por defecto."
+  },
+  "otras_vias": [
+    "Nodos de Wix para n8n (paquete comunitario @wix/n8n-nodes-wix, hecho por Wix: trigger + acciones)",
+    "Webhooks",
+    "Velo (código backend)",
+    "Automatizaciones de Wix",
+    "Make/Zapier"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Usar API key en lugar de OAuth: elegir solo los scopes necesarios (los de lectura si existen para esa área) y limitar 'Site access' a un único sitio; rotar la clave de vez en cuando. Activar la aprobación manual de herramientas en el cliente IA. Lo que NO se puede: con OAuth, el MCP actúa con los permisos de la cuenta que inicia sesión y no se acota (según terceros, como propietario o administrador).",
+  "pedir_al_informatico": "Que el propietario cree en el API Keys Manager una clave 'IA-lectura' con solo los permisos necesarios y acceso a un único sitio, y que se use con el MCP mediante las cabeceras Authorization y wix-account-id.",
+  "demo_gratis": {
+    "opcion": "Plan Free permanente, sin tarjeta.",
+    "api_incluida": "sí. La documentación no liga las API keys ni el MCP a ningún plan, pero no lo dice de forma explícita.",
+    "limites": "Algunas funciones (cobros reales en la tienda, dominio propio) requieren plan Premium. Los planes de pago tienen reembolso en 14 días."
+  },
+  "demo_resumen": "gratis permanente",
+  "coste_demo": {
+    "plan": "Light",
+    "precio": "17 $/mes (precio de referencia en USD en wix.com/plans; precio en € no verificado)",
+    "facturacion": "anual, pagado por adelantado",
+    "verificado": "parcial"
+  },
+  "coste_resumen": "0 € (plan Free; no verificado)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://dev.wix.com/docs/api-reference/articles/ai-tools/wix-mcp/about-the-wix-mcp",
+    "https://dev.wix.com/docs/overview/auth-permissions/authentication-methods",
+    "https://dev.wix.com/docs/develop-websites/articles/workspace-tools/developer-tools/integrations/about-n8n-integration",
+    "https://www.wix.com/plans",
+    "https://www.scalekit.com/blog/wix-mcp-vs-api"
+  ],
+  "confianza": "alta"
+}

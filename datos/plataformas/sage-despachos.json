@@ -1,0 +1,58 @@
+{
+  "id": "sage-despachos",
+  "nombre": "Sage Despachos Connected",
+  "nombre_completo": "Sage Despachos Connected (SDC)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "SDC",
+    "Sage Despachos"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "no",
+    "estilo": "No hay API pública documentada: no aparece en developer.sage.com, ni en las notas de versión 2026.80.000 y 2026.82.000, ni en el foro de SDC (no confirmado con Sage).",
+    "auth": "No aplica.",
+    "requisitos": "Solo a través de Sage o del distribuidor. Un material de formación de Sage de 2021-2022 cita un módulo de 'Conectividad' con Microsoft 365/OneDrive y con ISV (Portal del Cliente, DigitalDocs, AutoDespro); es antiguo y no está verificado para 2026.",
+    "docs_url": "no hay"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No hay MCP oficial ni comunitario (revisados glama.ai y npm, oct-2026). El AI Gateway/MCP de Sage solo existe para Sage Intacct."
+  },
+  "otras_vias": [
+    "BD directa: casi seguro SQL Server en el servidor del despacho (no verificado). Sage no lo soporta como vía de integración.",
+    "Sage Despachos Online (alojado por Sage): sin acceso a la base de datos (no verificado).",
+    "Exportar listados e informes a Excel/PDF (no verificado en detalle).",
+    "ISV del ecosistema Sage para portal del cliente y gestión documental (fuente de 2021).",
+    "n8n: sin nodo nativo (verificado). Make/Zapier: sin app (no verificado)."
+  ],
+  "rpa": "escritorio: es una aplicación Windows (o escritorio remoto en Despachos Online) sin API, así que automatizar pantallas queda como último recurso.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Si está en un servidor propio: login SQL de solo lectura sobre vistas concretas o sobre una copia nocturna de la base de datos. NO se puede acotar: la base de datos contiene los datos fiscales y laborales de TODOS los clientes del despacho (RGPD); separar por cliente con SQL es difícil y no está soportado. En Despachos Online no hay ninguna vía técnica que acotar.",
+  "pedir_al_informatico": "Pedirlo a la gestoría, no al informático de la pyme, porque el programa es de la gestoría: que exporte periódicamente modelos, balances y nóminas en Excel o PDF a una carpeta compartida. Si la gestoría quiere automatizar, que pregunte a su distribuidor de Sage si SDC tiene API o un conector ISV homologado.",
+  "demo_gratis": "Sin versión de evaluación pública (no verificado). Solo demos comerciales a través de Sage o del distribuidor.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "No hay plan con API. Precio solo a través del distribuidor (no publicado, no verificado).",
+  "coste_resumen": "sin API; distribuidor: no verificado",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Para la pyme, casi nunca: el software es de la gestoría. A la gestoría le compensa si su versión se queda sin soporte, si tiene que dar acceso digital a sus clientes o si sus clientes se pasan a Sage Active y quiere trabajar sobre la misma nube.",
+    "alternativas": [
+      "Sage Active para la contabilidad de clientes pyme dentro del ecosistema Sage (API GraphQL)",
+      "Otras suites cloud para despachos con API pública (no evaluadas aquí)"
+    ],
+    "coste_esfuerzo_migracion": "Alto para un despacho: meses de trabajo, migrar el histórico de cientos de clientes y formar al equipo. Riesgo de interrumpir la campaña de impuestos. Para la pyme, cero: no migra."
+  },
+  "verifactu": "Solo afecta a las facturas que el despacho emite a sus propios clientes (módulo de Gestión Interna). La versión 2026.82.000 trae una mejora sobre 'emisión de facturas sin estar en VERIFACTU'. No se ha localizado la declaración responsable. La redacción comercial de Sage para despachos ('te adaptas... cuando sea necesario') no equivale a estar adaptado, según guiafacturacion.es: hay que pedirla por escrito.",
+  "fuentes": [
+    "https://communityhub.sage.com/es/sage-despachos-connected/",
+    "https://communityhub.sage.com/es/sage-despachos-connected/f/anuncios/270207/nueva-version-sage-despachos-connected-2026-82-000",
+    "https://communityhub.sage.com/es/sage-despachos-connected/f/anuncios/270026/nueva-version-sage-despachos-connected-2026-80-000",
+    "https://grupo.sage.es/comunicados/bi/fy21-22/formacion_land/documents/Sage-SDC_Curso-webinar-Cambio-Plataforma-2h.pdf",
+    "https://guiafacturacion.es/software/sage/",
+    "https://docs.n8n.io/llms.txt",
+    "https://glama.ai/mcp/servers?query=sage%20active"
+  ],
+  "confianza": "baja"
+}

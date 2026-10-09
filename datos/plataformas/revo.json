@@ -1,0 +1,53 @@
+{
+  "id": "revo",
+  "nombre": "Revo",
+  "nombre_completo": "Revo XEF / Revo RETAIL (Cegid Revo, TPV en iPad)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "Revo XEF",
+    "Revo RETAIL",
+    "Cegid Revo"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST JSON. XEF: /api/external/v2 (catálogo, clientes, mesas, tarjetas regalo), informes v3 (/api/external/v3/reports), loyalty y webhooks. RETAIL: revoretail.works/api/external con catálogo, pedidos, informes y webhooks. Límites: XEF 120 peticiones/min y 2 MB por petición; catálogo de RETAIL 40/min.",
+    "auth": "XEF: cabeceras tenant (usuario de la cuenta), Authorization: Bearer (token de cuenta creado en revoxef.works/account/tokens) y client-token (token de integrador que entrega Revo). RETAIL: cabecera username y Bearer token.",
+    "requisitos": "Cuenta Revo activa. El client-token se pide a Revo con el formulario API Request (community.revo.works/integration) y Revo lo valida. Hay entorno de integraciones (integrations.revoxef.works).",
+    "docs_url": "https://api.revo.works/sections/xef.html"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "No hay MCP oficial. unified.to (tercero comercial) ofrece una API unificada y un servidor MCP para Cegid Revo Xef: lectura de items, colecciones y locales, contactos con escritura y un passthrough que permite cualquier método. Prueba de 30 días y precio por uso."
+  },
+  "otras_vias": [
+    "Webhooks de productos, pedidos, pagos, turnos y otros",
+    "Chift (partner certificado de Revo, con client_id OAuth2)",
+    "Más de 100 integraciones (delivery, contabilidad, BI, PMS, Haddock)",
+    "No se encontró nodo nativo en n8n: usar HTTP Request"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Media",
+  "permisos_acotados": "Los tokens no tienen scopes documentados: un mismo token puede leer y escribir catálogo, pedidos y clientes. Crea un token exclusivo para el arnés y revócalo desde la cuenta cuando no se use. No uses el token de la cuenta maestra, que accede a los informes de toda la cadena. En el conector o MCP propio, expón solo los GET de informes v3 y prueba antes en integrations.revoxef.works. Revo no documenta tokens de solo lectura.",
+  "pedir_al_informatico": "Pide a Revo (Cegid) un client-token con el formulario de integraciones y crea en tu cuenta un token exclusivo para el arnés. Pregunta si pueden emitirlo de solo lectura.",
+  "demo_gratis": "No hay prueba gratuita: Cegid ofrece una demo personalizada sin compromiso. Los integradores aprobados tienen el entorno integrations.revoxef.works. unified.to tiene una prueba de 30 días de su capa MCP.",
+  "coste_demo": "Precios no publicados (contacto comercial). Versiones One, Basic, Plus y Pro. La API no tiene coste publicado, pero exige el client-token de Revo.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "No publicado; client-token de Revo",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No aplica.",
+    "alternativas": [],
+    "coste_esfuerzo_migracion": "No aplica."
+  },
+  "fuentes": [
+    "https://api.revo.works/",
+    "https://api.revo.works/sections/xef.html",
+    "https://api.revo.works/sections/retail.html",
+    "https://docs.chift.eu/connectors/pos/revo",
+    "https://unified.to/integrations/revoxef",
+    "https://www.cegid.com/ib/es/productos/tpv-hosteleria-software-restaurantes/"
+  ],
+  "confianza": "alta"
+}

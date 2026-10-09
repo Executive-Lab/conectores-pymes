@@ -1,0 +1,54 @@
+{
+  "id": "akeneo",
+  "nombre": "Akeneo PIM",
+  "nombre_completo": "Akeneo PIM",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "Akeneo"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (y GraphQL para Apps)",
+    "auth": "Connections: OAuth2 password grant (client_id y secret más usuario y contraseña de la conexión). El token dura 1 hora y el refresh token 14 días. Apps: OAuth2 con autorización.",
+    "requisitos": "Autoservicio: la conexión se crea en Connect > Connection settings. Hay SaaS (Growth y Enterprise, con presupuesto) y Community Edition autoalojada de código abierto.",
+    "docs_url": "https://api.akeneo.com"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor alojado en https://server.mcp.akeneo.cloud/mcp. Herramientas: get_products, get_families, get_attributes, upsert_products y más. Lee y escribe productos, modelos, familias, atributos, categorías, assets y workflows; locales y monedas solo en lectura. Usa las credenciales de una Connection. La disponibilidad puede variar según el paquete y se pide al CSM. Resultados de búsqueda lo describían como beta por invitación (mcp@akeneo.com), pero las páginas actuales ya no lo dicen. Instancia SaaS."
+  },
+  "otras_vias": [
+    "Exportación e importación CSV/XLSX con jobs del PIM",
+    "Nodos comunitarios de n8n (n8n-nodes-akeneo v0.1.2, flagbit/akeneo-node-n8n). No hay nodo oficial.",
+    "Pipedream, elastic.io, Celigo, iPaaS.com",
+    "No se encontró app de Make: usar el módulo HTTP con OAuth"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crea una Connection dedicada con un rol solo de Web API (sin permisos de interfaz): 'Overall Web API access' más solo los permisos 'List…'. En Enterprise, añade un grupo de usuarios con 'Allowed to view products' y sin edit ni own en las categorías (así un PATCH devuelve 403), y oculta los grupos de atributos o los locales sensibles. El MCP actúa con los permisos de esa conexión: activa solo las herramientas necesarias y evita upsert_products. No se puede: los permisos por categoría, atributo o locale son solo de Enterprise, y en Community Edition el control es más grueso.",
+  "pedir_al_informatico": "Pide que creen en Akeneo una Connection exclusiva para el arnés con un rol de solo lectura en Web API y que soliciten al CSM de Akeneo el acceso al MCP oficial.",
+  "demo_gratis": "Community Edition: gratis y permanente si la alojas tú. Incluye la API REST, pero no el MCP oficial (alojado y orientado a SaaS). Su soporte oficial terminó el 30-9-2026 según terceros; Akeneo dice lo contrario. SaaS: prueba de 14 días del paquete Growth anunciada en akeneo.com (no se ha verificado si sigue vigente).",
+  "coste_demo": "Growth y Enterprise sin precio público (solo presupuesto). Terceros hablan de unos 45.000 $/año para Growth (dato no oficial). La API se incluye. El MCP depende del paquete.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (CE autoalojado); SaaS a presupuesto",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No aplica.",
+    "alternativas": [],
+    "coste_esfuerzo_migracion": "No aplica."
+  },
+  "fuentes": [
+    "https://api.akeneo.com/mcp/overview.html",
+    "https://api.akeneo.com/mcp/getting-started.html",
+    "https://api.akeneo.com/mcp/capabilities.html",
+    "https://api.akeneo.com/documentation/permissions.html",
+    "https://api.akeneo.com/documentation/authentication.html",
+    "https://www.bluestonepim.com/blog/akeneo-community-edition-eol-2026",
+    "https://help.akeneo.com/pim/serenity/supported-versions-table.html",
+    "https://github.com/flagbit/akeneo-node-n8n",
+    "https://akeneo.com/start-free-trial"
+  ],
+  "confianza": "alta"
+}

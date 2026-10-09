@@ -1,0 +1,58 @@
+{
+  "id": "prevengos",
+  "nombre": "Prevengos",
+  "nombre_completo": "Prevengos (Nedatec Consulting, Murcia; prevención de riesgos laborales)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Nedatec"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "no",
+    "estilo": "No hay API ni webservice documentados. Es una aplicación cliente/servidor para Windows (VB6/VB.Net) con un portal web ASP.Net en IIS. Habla de integración con RRHH 'en tiempo real o diferido', pero no explica cómo.",
+    "auth": "No aplica.",
+    "requisitos": "No aplica.",
+    "docs_url": "https://www.prevengos.com/arquitectura"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin resultados en Glama para 'prevengos'."
+  },
+  "otras_vias": [
+    "BD directa: Microsoft SQL Server 2014 o superior (admite Express).",
+    "Importar trabajadores desde RRHH e importar analíticas.",
+    "Exportar a contabilidad (clientes, ventas, domiciliaciones) y exportar conciertos SERPA.",
+    "Portal web para empresas, trabajadores, contratas y control de acceso. Informes en Word y Excel.",
+    "No hay nodo de n8n ni app de Make o Zapier."
+  ],
+  "rpa": "escritorio (cliente Windows por Terminal Server o Citrix) o navegador (portal web), solo si no hay acceso a la base de datos.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Login de SQL Server con db_datareader solo sobre vistas creadas para la integración que excluyan las tablas de vigilancia de la salud (datos de salud, categoría especial del art. 9 del RGPD). Nunca escribir en la base de datos. NO se puede acotar: los roles de la aplicación no se aplican en la base de datos, y sin vistas no se pueden anonimizar los datos médicos. Usar la base de datos directamente queda fuera del soporte de Nedatec, y el servidor necesita una llave USB de seguridad.",
+  "pedir_al_informatico": "Preguntar a Nedatec (soporte@prevengos.com) si tienen API, webservice o integración con RRHH documentada, y si dan el esquema o vistas de solo lectura en SQL Server sin datos médicos con soporte. Si la pyme es cliente de un servicio de prevención que usa Prevengos, pedir a ese servicio exportaciones periódicas o acceso al portal web.",
+  "demo_gratis": "Demo online bajo petición desde el formulario de contacto; no hay prueba descargable.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "Según su página del Kit Digital (sin fecha): alquiler de 1.000 a 12.000 €/año o compra de 2.000 a 120.000 €, sin desglose. Sin API. Venta directa de Nedatec.",
+  "coste_resumen": "sin API; 1.000-12.000 €/año",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Solo si eres un servicio de prevención (ajeno o propio) y necesitas SaaS sin Terminal Server ni llave USB, o una API. Nunca a mitad de un ciclo de reconocimientos. Ojo: una pyme normal solo suele ver Prevengos como el portal de su servicio de prevención, así que no puede migrarlo.",
+    "alternativas": [
+      "Plataformas CAE con API para coordinar actividades empresariales (Dokify, Nalanda, CTAIMA; APIs no verificadas)",
+      "Otro software SaaS para servicios de prevención (no verificado)"
+    ],
+    "coste_esfuerzo_migracion": "Alto: 10-100 k€ y 3-9 meses (estimación no verificada). Riesgos: migrar el historial de vigilancia de la salud (datos sensibles con obligación de conservarlos) y que el destino no tenga módulos como SERPA, higiene o ergonomía."
+  },
+  "verifactu": "Solo aplica si se factura desde su módulo de Gestión económica. No se ha encontrado publicada la adaptación a VERI*FACTU: pedir la declaración responsable. Si se factura desde otro ERP, no aplica.",
+  "fuentes": [
+    "https://www.prevengos.com/",
+    "https://www.prevengos.com/arquitectura",
+    "https://www.prevengos.com/arquitectura/requerimientos",
+    "https://www.prevengos.com/areas",
+    "https://www.prevengos.com/servicios/kit-digital",
+    "https://www.nedatec.com/",
+    "https://www.softwaredoit.es/nedatec-prevengos/nedatec-prevengos.html",
+    "https://glama.ai/mcp/servers?query=prevengos"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,49 @@
+{
+  "id": "mrw",
+  "nombre": "MRW",
+  "nombre_completo": "MRW (API de envíos SAGEC)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "SAGEC"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "SOAP (servicio web SAGEC MRWEnvio.asmx): TransmEnvio, TransmEnvioEC, GetEtiquetaEnvio, CancelarEnvio, GetPointsByCP y las variantes internacionales. Tiene entorno de test en sagec-test.mrw.es. Este WSDL no incluye seguimiento (será otro servicio, no verificado).",
+    "auth": "Cabecera SOAP AuthInfo con CodigoFranquicia, CodigoAbonado, CodigoDepartamento, UserName y Password",
+    "requisitos": "Ser abonado de MRW. Las credenciales y los módulos se piden a la oficina o franquicia.",
+    "docs_url": "https://sagec.mrw.es/MRWEnvio.asmx?WSDL"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP. Vía alternativa: el MCP oficial de Sendcloud con contrato MRW propio."
+  },
+  "otras_vias": [
+    "Sendcloud (MRW disponible con contrato propio)",
+    "Módulos para OpenCart, PrestaShop, WooCommerce, Magento y Shopify, que se piden a la oficina MRW"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Media",
+  "permisos_acotados": "Las credenciales permiten crear y cancelar envíos; no hay modo de solo lectura. Pide un CodigoDepartamento y un usuario exclusivos para la integración, para aislarla y poder revocarla. Prueba primero en sagec-test.",
+  "pedir_al_informatico": "Pide a tu franquicia MRW un usuario SAGEC exclusivo para integración (con un departamento propio), acceso al entorno de test y la documentación del servicio de seguimiento.",
+  "demo_gratis": "Existe un entorno de test (sagec-test.mrw.es), pero las credenciales solo las da la franquicia a sus abonados.",
+  "coste_demo": "Contrato MRW a través de la franquicia. La API no tiene coste publicado.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_resumen": "Contrato MRW vía franquicia",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "SOAP es una tecnología antigua: si no quieres mantener un cliente SOAP, sube el contrato MRW a Sendcloud y trabaja con su REST y su MCP.",
+    "alternativas": [
+      "Sendcloud como capa única"
+    ],
+    "coste_esfuerzo_migracion": "Bajo: se conserva el contrato MRW."
+  },
+  "fuentes": [
+    "https://sagec.mrw.es/MRWEnvio.asmx",
+    "https://sagec-test.mrw.es/MRWEnvio.asmx?WSDL",
+    "https://www.mrw.es/integracion/",
+    "https://www.sendcloud.com/es/transportistas/"
+  ],
+  "confianza": "alta"
+}

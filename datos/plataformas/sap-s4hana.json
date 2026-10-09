@@ -1,0 +1,63 @@
+{
+  "id": "sap-s4hana",
+  "nombre": "SAP S/4HANA",
+  "nombre_completo": "SAP S/4HANA (Cloud Public Edition y on-premise/Private)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "S/4HANA",
+    "S4HANA"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "APIs OData v2/v4 (y algunas SOAP) catalogadas en SAP Business Accelerator Hub. En on-premise van por SAP Gateway y cada servicio OData hay que activarlo.",
+    "auth": "Public Edition: Communication User con usuario y contraseña o certificado X.509; se puede configurar OAuth 2.0 en el Communication System. On-premise: usuario y contraseña, X.509, SAML u OAuth 2.0. Si el agente está en la nube y el sistema en la oficina, a través de BTP Destination y Cloud Connector.",
+    "requisitos": "Incluida en la suscripción o licencia; no hace falta ser partner. La configura un administrador: en Public Edition con Communication System, Communication Arrangement y Communication Scenario; en on-premise con un usuario técnico, un rol PFCG y el servicio OData activado. RIESGO CONTRACTUAL: la SAP API Policy v4.2026a (abril de 2026) restringe el uso de las APIs desde sistemas de IA autónomos o generativos que planifican o ejecutan secuencias de llamadas, salvo por 'arquitecturas avaladas por SAP' (Joule Studio, el MCP Gateway de Integration Suite). SAP dice que la política solo define por dónde debe pasar ese tráfico. No verificado si aplica a on-premise.",
+    "docs_url": "https://api.sap.com/products/SAPS4HANACloud/apis/all ; https://help.sap.com/doc/sap-api-policy/latest/en-US/API_Policy_latest.pdf"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "SAP no tiene un MCP oficial al que Claude Code pueda apuntar para leer datos de S/4HANA sin pasar por BTP. Lo oficial: MCP para desarrollar (cap-js/mcp-server, sin datos de negocio), el MCP Gateway de SAP Integration Suite (anunciado en TechEd en nov-2025; consume créditos BTP; disponibilidad no verificada) y Joule Studio con MCP/A2A. El acuerdo SAP-Anthropic de mayo de 2026 integra Claude dentro de Joule, no como acceso externo. De un tercero hay uno oficial: AWS for SAP MCP Server en Bedrock AgentCore (OData, escritura solo si el operador la activa). Comunitarios: oisee/odata_mcp_go (Go, opciones --read-only y --read-only-but-functions, MIT, v1.6.0) y lemaiwo/btp-sap-odata-to-mcp-server (Node en BTP, XSUAA, MIT)."
+  },
+  "otras_vias": [
+    "BD directa: imposible en Public Edition; en on-premise, SAP no lo soporta ni es recomendable.",
+    "Exportar a Excel desde Fiori; publicar custom CDS views como API OData de solo lectura.",
+    "Eventos: SAP Business Events y Event Mesh a través de BTP (equivalen a webhooks).",
+    "n8n: sin nodo nativo verificado (HTTP Request contra OData). El 12-may-2026 se anunció n8n gestionado dentro de Joule Studio, con disponibilidad prevista para el tercer trimestre de 2026, no verificada.",
+    "Conectores de terceros: CData, Workato, StackOne y Apideck."
+  ],
+  "rpa": "no hace falta: OData cubre lectura y escritura.",
+  "dificultad": "Media",
+  "permisos_acotados": "Public Edition: un Custom Communication Scenario solo con los servicios inbound necesarios y un Communication User dedicado a cada integración. Para solo lectura, exponer custom CDS views como API. On-premise: usuario técnico de tipo Sistema con un rol PFCG que tenga S_SERVICE solo para los servicios elegidos, actividad 03 (visualizar) y restricción por niveles organizativos (BUKRS, VKORG). NO se puede acotar: muchos escenarios estándar dan lectura y escritura de todas sus APIs y no filtran por sociedad. Además, la API Policy puede obligar a pasar por BTP aunque los permisos estén bien.",
+  "pedir_al_informatico": "Un Communication Arrangement con un Custom Communication Scenario que solo tenga las APIs necesarias (mejor custom CDS views de solo lectura) y un Communication User dedicado con certificado u OAuth. Que el partner confirme por escrito si la integración con IA cumple la SAP API Policy v4.2026a o si tiene que pasar por Integration Suite.",
+  "demo_gratis": "Sandbox de SAP Business Accelerator Hub: gratis con una cuenta SAP, clave en la cabecera APIKey contra sandbox.api.sap.com y datos de prueba. Se le puede apuntar odata_mcp_go en modo --read-only. La prueba de S/4HANA Cloud (14 o 30 días según la página) usa un tenant compartido sin Communication Arrangements, así que no sirve para probar la API.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "Sandbox: 0 €. Licencia sin precio público: suscripción anual con SAP o con un partner (GROW with SAP), con la API incluida. El MCP Gateway y BTP consumen créditos BTP (importe no verificado).",
+  "coste_resumen": "0 € sandbox; licencia no pública",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Nunca por la IA. Solo si la pyme está sobredimensionada (menos de 50 empleados y procesos simples) y paga una suscripción desproporcionada, si el on-premise se queda sin mantenimiento y actualizar cuesta lo mismo que cambiar, o si la API Policy impide el caso de uso y no se quiere pagar BTP.",
+    "alternativas": [
+      "Microsoft Dynamics 365 Business Central (API + MCP oficial)",
+      "Odoo (API JSON-2 + MCP nativo; nodo n8n)",
+      "SAP Business One (para seguir en SAP con menos coste)"
+    ],
+    "coste_esfuerzo_migracion": "Entre seis y siete cifras y 12-24 meses (estimación no verificada). Riesgos: funciones que el destino no tiene (MRP, Project System, localizaciones) y formar de nuevo a toda la plantilla."
+  },
+  "verifactu": "Quien está en el SII queda excluido de VERI*FACTU, y muchas empresas con S/4HANA lo están. Para el resto, SAP Document and Reporting Compliance (no verificado): pedir la declaración responsable al partner.",
+  "fuentes": [
+    "https://news.sap.com/2025/11/new-agentic-capabilities-sap-btp-supercharge-developers/",
+    "https://erp.today/sap-anthropic-claude-joule-mcp/",
+    "https://help.sap.com/doc/sap-api-policy/latest/en-US/API_Policy_latest.pdf",
+    "https://cdata.com/blog/sap-api-policy-ai-strategy",
+    "https://docs.aws.amazon.com/mcp-sap/latest/awsforsapmcp/introduction.md",
+    "https://github.com/oisee/odata_mcp_go",
+    "https://github.com/lemaiwo/btp-sap-odata-to-mcp-server",
+    "https://github.com/cap-js/mcp-server",
+    "https://n8n.io/sap-partnership/",
+    "https://developers.sap.com/tutorials/hcp-abh-test-locally.html",
+    "https://www.sap.com/products/erp/s4hana/trial.html"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "zapier",
+  "nombre": "Zapier",
+  "nombre_completo": "Zapier",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "limitada",
+    "estilo": "No hay una API general para que el cliente gestione o ejecute sus Zaps. La vía para el arnés es Zapier MCP más webhooks de entrada.",
+    "auth": "MCP por OAuth (clientes de chat) o 'connection token' por servidor (clientes de código).",
+    "requisitos": "MCP incluido en todos los planes, sin cargo aparte: consume tareas del plan.",
+    "docs_url": "https://docs.zapier.com/mcp/get-started/connect"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "EXPONE con Zapier MCP (mcp.zapier.com): acciones de más de 9.000 apps. Dos modos. 'Agentic', el de serie: la IA descubre y ACTIVA acciones por su cuenta. 'Managed': un conjunto fijo de herramientas en el que se pueden fijar valores de campos. Hay acciones de lectura y de escritura. Cada llamada correcta cuesta 2 tareas; las fallidas no cuentan. No he verificado si los Zaps pueden consumir MCP como cliente."
+  },
+  "otras_vias": [
+    "Webhooks by Zapier (no verificado si es de pago)",
+    "Más de 8.000 integraciones",
+    "Zapier Tables, Interfaces y Agents"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Usar el modo managed: solo las acciones permitidas, con los campos sensibles fijados (destinatario, cuenta, carpeta). Por ejemplo, permitir 'crear borrador' pero no 'enviar'. Un servidor y un token por caso de uso. NO se puede acotar: en modo agentic la IA activa acciones nuevas; no hay interruptor de servidor de solo lectura; el token es de larga duración.",
+  "pedir_al_informatico": "Crea en mcp.zapier.com un servidor en modo managed con solo estas acciones y los campos sensibles fijados, conectado con una cuenta de servicio de mínimo privilegio, y vigila el consumo de tareas.",
+  "demo_gratis": "Plan Free para siempre: 100 tareas al mes, compartidas con Zaps y agentes; da para unas 50 llamadas MCP. Al agotarse, el MCP se para hasta el mes siguiente.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "Professional: 19,99 $/mes con pago anual o 29,99 $ mensual, por 750 tareas (unas 375 llamadas MCP).",
+  "coste_resumen": "0 € (100 tareas); Pro 19,99 $/mes",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Cuando el uso por MCP sea alto: a 2 tareas por llamada, 1.000 llamadas al mes son 2.000 tareas, y la IA suele encadenar varias llamadas por petición.",
+    "alternativas": [
+      "n8n self-hosted (sin coste por ejecución)",
+      "Make (créditos por módulo)"
+    ]
+  },
+  "fuentes": [
+    "https://docs.zapier.com/mcp/get-started/connect",
+    "https://docs.zapier.com/mcp/features/usage.md",
+    "https://docs.zapier.com/mcp/overview/how-tools-work",
+    "https://zapier.com/pricing"
+  ],
+  "confianza": "alta"
+}

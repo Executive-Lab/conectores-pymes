@@ -1,0 +1,60 @@
+{
+  "id": "sage-200",
+  "nombre": "Sage 200",
+  "nombre_completo": "Sage 200 España (sucesor de Sage Murano)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Murano",
+    "Sage Murano"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "limitada",
+    "estilo": "REST con Swagger/OpenAPI. Hay una API local en el servidor (según la comunidad, con Swagger en el puerto 9994 de la IP del servidor) y una vía cloud con Sage ID. La URL de documentación que cita Unified.to (sage200.sage.es/api/sales) hoy devuelve 404.",
+    "auth": "OAuth2 con Sage ID más claves de desarrollador (client_id, secret, subscription). En la comunidad española no consiguen obtener el token y Sage no ha respondido oficialmente.",
+    "requisitos": "Hay que inscribirse en el 'API 200 Developer Program' ('non-certified developers' direct requests won't be processed'): crear cuenta, registrar la app, suscribirse a la API y obtener las claves. Coste no publicado. La instalación de Sage 200 necesita el servicio de API, que configura el partner.",
+    "docs_url": "https://developer.sage.com/200c/guides"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "No hay MCP oficial. Opciones de terceros: (1) Unified.to ofrece 'Sage 200 Sales (Spain)' con API y servidor MCP en beta (comercial; contactos, facturas, presupuestos, pedidos y artículos; no especifica si lee o escribe). (2) El 'Sage 200 MCP Server' de CData (MIT, solo lectura) necesita su driver JDBC de pago y probablemente cubre la edición UK; para España no está verificado."
+  },
+  "otras_vias": [
+    "BD directa: SQL Server on-premise. Hoy, la vía más fiable es un login de solo lectura sobre vistas.",
+    "Importar y exportar ficheros desde la aplicación (no verificado en detalle).",
+    "APIs unificadas: Unified.to (beta para España) y Breww (acceso anticipado). Apideck todavía no soporta Sage 200 Spain (9-oct-2026).",
+    "n8n/Make/Zapier: ni nodo ni app nativa (n8n verificado)."
+  ],
+  "rpa": "no hace falta: con SQL de solo lectura y, cuando funcione, la API, queda cubierto.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Para leer: login SQL con SELECT solo sobre vistas concretas, idealmente en una réplica. Por API: un usuario de Sage 200 con perfil restringido (no verificado que la API respete los perfiles). NO se puede acotar fácilmente: separar empresas en SQL si comparten base de datos (no verificado). Escribir por SQL está descartado (integridad, VERI*FACTU, soporte). Las claves del programa de desarrolladores no tienen scopes de solo lectura documentados.",
+  "pedir_al_informatico": "Pedir al partner de Sage 200 que confirme si la instalación tiene activo el servicio de API (Swagger en el puerto 9994) y si nos puede dar de alta o certificar en el API 200 Developer Program, con presupuesto. Mientras tanto, un login SQL de solo lectura sobre las vistas que necesitemos.",
+  "demo_gratis": "No hay prueba pública descargable; las demos son a través del partner. El programa de desarrolladores da credenciales de prueba, pero exige estar certificado y la comunidad reporta problemas para conseguirlas. CData y Unified.to tienen su propia prueba gratis, pero necesitan una instancia de Sage 200.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "Precio solo a través del distribuidor (no verificado). El coste del programa de desarrolladores no es público.",
+  "coste_resumen": "partner: no verificado",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Compensa migrar si se sigue en Murano o en un 200c sin mantenimiento ni adaptación a VERI*FACTU, si el partner no puede activar la API o si toca una renovación grande. También si la empresa ha encogido y le sobra ERP (en ese caso, Sage Active). Si el ERP está al día, quedarse y conectar por SQL de solo lectura.",
+    "alternativas": [
+      "Sage 200 actualizado, con la API activada por el partner (no migrar)",
+      "Microsoft Dynamics 365 Business Central (API + MCP oficial)",
+      "Odoo (API JSON-2 + MCP nativo)"
+    ],
+    "coste_esfuerzo_migracion": "Alto: proyecto de 3-9 meses con consultoría, del orden de decenas de miles de euros (estimación, no verificada). Riesgos: personalizaciones del partner, histórico, parada de la operación y formación."
+  },
+  "verifactu": "No verificado: guiafacturacion.es deja Sage 200 fuera de su análisis y no hay declaración responsable pública. Pedírsela por escrito al partner, con la versión mínima.",
+  "fuentes": [
+    "https://developer.sage.com/200c/guides",
+    "https://communityhub.sage.com/es/sage-200/f/discusion-general/254556/acceso-api",
+    "https://developer-community.sage.com/topic/382-sage-200cloud-spain-api/",
+    "https://unified.to/integrations/sage200sales.md",
+    "https://breww.com/docs/sage-200-spain-accountancy-integration/",
+    "https://www.apideck.com/accounting-software/sage-200-spain",
+    "https://www.cdata.com/drivers/sage200/mcp/",
+    "https://github.com/CDataSoftware/sage-200-mcp-server-by-cdata",
+    "https://www.sage.com/es-es/productos/sage-murano/"
+  ],
+  "confianza": "baja"
+}

@@ -1,0 +1,53 @@
+{
+  "id": "stripe",
+  "nombre": "Stripe",
+  "nombre_completo": "Stripe",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST",
+    "auth": "Claves de API: restringidas (rk_), de agente (restringidas con la etiqueta Agent) o secretas (sk_, no recomendadas). OAuth para el MCP.",
+    "requisitos": "Cuenta de Stripe gratuita; no hay revisión ni aprobación.",
+    "docs_url": "https://docs.stripe.com/keys"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto en https://mcp.stripe.com. Autenticación por OAuth (se eligen cuentas o sandboxes y los permisos por entorno) o por clave de agente como Bearer; se instala también con 'stripe agent setup'. Lee y escribe mediante stripe_api_read y stripe_api_write sobre unos 150 métodos: clientes, pagos, reembolsos, facturas, suscripciones, cupones, payment links, disputas, payouts y Treasury (preview). Exige confirmación humana para reembolsos y pagos salientes. A partir del 31-oct-2026 RECHAZA las claves secretas completas y las restringidas sin etiqueta Agent. El admin puede desactivar el MCP para todo el equipo, por separado en live y en sandbox."
+  },
+  "otras_vias": [
+    "Nodos nativos Stripe y Stripe Trigger en n8n (no re-verificado)",
+    "Webhooks",
+    "Sigma e informes, export CSV",
+    "Make/Zapier"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear una clave restringida con etiqueta Agent y permisos por recurso None/Read/Write; por ejemplo, Read en Charges, Customers, Invoices y Balance, y None en todo lo demás. Estas claves quedan sujetas a reglas de aprobación para transferencias, reembolsos y cambios de configuración. Añadir una política de acceso por IP, ASN o país. Con OAuth, conceder solo el entorno necesario. Las sesiones se pueden revocar. Lo que NO se puede: limitar por cliente concreto o por importe.",
+  "pedir_al_informatico": "Crear en Stripe una 'clave de agente' de solo lectura (rk_) para el arnés, con política de acceso a la IP del servidor, y sustituir cualquier clave sk_ antes del 31-oct-2026.",
+  "demo_gratis": {
+    "opcion": "Sandbox gratuito y permanente (claves rk_test_ / sk_test_ y tarjetas de prueba).",
+    "api_incluida": "sí (API y MCP funcionan en sandbox)",
+    "limites": "Los pagos son simulados; Identity no hace verificaciones reales."
+  },
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": {
+    "plan": "Estándar (sin cuota)",
+    "precio": "0 €/mes; 1,5 % + 0,25 € por tarjeta estándar del EEE",
+    "facturacion": "por transacción",
+    "verificado": "sí"
+  },
+  "coste_resumen": "0 €/mes (1,5 % + 0,25 € por cobro)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://docs.stripe.com/mcp",
+    "https://docs.stripe.com/keys",
+    "https://docs.stripe.com/keys/restricted-api-keys",
+    "https://stripe.com/es/pricing"
+  ],
+  "confianza": "alta"
+}

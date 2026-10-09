@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://executive-lab.github.io/conectores-pymes/esquema.json",
+  "title": "Plataforma del catálogo Conectores para pymes",
+  "description": "Cómo se conecta una herramienta de pyme a un arnés de IA: API, MCP, otras vías, permisos, demo, coste, migración y fuentes. Un fichero por plataforma en datos/plataformas/<id>.json.",
+  "type": "object",
+  "required": [
+    "id",
+    "nombre",
+    "nombre_completo",
+    "categoria",
+    "alias",
+    "verificado_el",
+    "tipo",
+    "api",
+    "mcp",
+    "otras_vias",
+    "rpa",
+    "dificultad",
+    "permisos_acotados",
+    "pedir_al_informatico",
+    "demo_gratis",
+    "demo_resumen",
+    "coste_demo",
+    "coste_resumen",
+    "migracion",
+    "fuentes",
+    "confianza"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "description": "Identificador estable en kebab-case. Coincide con el nombre del fichero. No cambia aunque cambie el nombre comercial.",
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "nombre": {
+      "description": "Nombre corto para la web (p. ej. 'Sage 50').",
+      "type": "string",
+      "minLength": 1
+    },
+    "nombre_completo": {
+      "description": "Nombre completo con aclaraciones (el campo 'plataforma' de la investigación original).",
+      "type": "string",
+      "minLength": 1
+    },
+    "categoria": {
+      "description": "Slug de la categoría; existe un fichero datos/categorias/<categoria>.json.",
+      "type": "string",
+      "enum": [
+        "erp-contabilidad",
+        "hosteleria-nicho",
+        "crm-email",
+        "ads-ecommerce-bi",
+        "ofimatica-mensajeria"
+      ]
+    },
+    "alias": {
+      "description": "Otros nombres con los que la gente busca la herramienta.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "verificado_el": {
+      "description": "Fecha (ISO 8601, AAAA-MM-DD) de la última verificación con fuentes primarias.",
+      "type": "string",
+      "format": "date",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+    },
+    "tipo": {
+      "type": "string",
+      "enum": ["SaaS", "híbrido", "escritorio/on-premise"]
+    },
+    "api": {
+      "type": "object",
+      "required": ["existe", "estilo", "auth", "requisitos", "docs_url"],
+      "properties": {
+        "existe": { "type": "string", "enum": ["sí", "limitada", "no"] },
+        "estilo": { "type": "string" },
+        "auth": { "type": "string" },
+        "requisitos": { "type": "string" },
+        "docs_url": {
+          "description": "Una o varias URL separadas por ' ; ', o texto como 'no hay pública'.",
+          "type": "string"
+        }
+      }
+    },
+    "mcp": {
+      "type": "object",
+      "required": ["estado", "detalle"],
+      "properties": {
+        "estado": { "type": "string", "enum": ["oficial", "comunitario", "ninguno"] },
+        "detalle": { "type": "string" }
+      }
+    },
+    "otras_vias": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "rpa": {
+      "description": "Si hace falta RPA y de qué tipo. Empieza por 'no hace falta' cuando no es necesario.",
+      "type": "string"
+    },
+    "dificultad": {
+      "type": "string",
+      "enum": ["Fácil", "Media", "Difícil", "Muy difícil"]
+    },
+    "permisos_acotados": { "type": "string" },
+    "pedir_al_informatico": { "type": "string" },
+    "demo_gratis": {
+      "description": "Texto libre o, en algunas categorías, un objeto con el detalle.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "opcion": { "type": "string" },
+            "api_incluida": { "type": "string" },
+            "limites": { "type": "string" }
+          },
+          "additionalProperties": { "type": "string" },
+          "minProperties": 1
+        }
+      ]
+    },
+    "demo_resumen": {
+      "anyOf": [
+        {
+          "type": "string",
+          "enum": [
+            "gratis permanente",
+            "sandbox/cuenta dev",
+            "evaluación bajo petición",
+            "no hay"
+          ]
+        },
+        { "type": "string", "pattern": "^prueba [0-9]+ días$" }
+      ]
+    },
+    "coste_demo": {
+      "description": "Texto libre o, en algunas categorías, un objeto con el detalle.",
+      "oneOf": [
+        { "type": "string" },
+        {
+          "type": "object",
+          "properties": {
+            "plan": { "type": "string" },
+            "precio": { "type": "string" },
+            "facturacion": { "type": "string" },
+            "verificado": { "type": "string" }
+          },
+          "additionalProperties": { "type": "string" },
+          "minProperties": 1
+        }
+      ]
+    },
+    "coste_resumen": { "type": "string" },
+    "migracion": {
+      "type": "object",
+      "required": ["veredicto"],
+      "properties": {
+        "veredicto": {
+          "type": "string",
+          "enum": [
+            "conectar tal cual",
+            "conectar con puente (export/BD/partner)",
+            "valorar migración"
+          ]
+        },
+        "cuando_migrar": { "type": "string" },
+        "alternativas": { "type": "array", "items": { "type": "string" } },
+        "coste_esfuerzo_migracion": { "type": "string" }
+      }
+    },
+    "verifactu": {
+      "description": "Estado de adaptación a VERI*FACTU (solo software que factura en España).",
+      "type": "string"
+    },
+    "fuentes": {
+      "description": "URL de las fuentes consultadas. Puede llevar una nota tras un espacio.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "pattern": "^https?://" }
+    },
+    "confianza": {
+      "type": "string",
+      "enum": ["alta", "media", "baja"]
+    }
+  }
+}

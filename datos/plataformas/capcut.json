@@ -1,0 +1,55 @@
+{
+  "id": "capcut",
+  "nombre": "CapCut",
+  "nombre_completo": "CapCut",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "no",
+    "estilo": "n/a. Según terceros, la 'Open Platform' solo ofrece plugins dentro del editor y una API estrecha de texto a vídeo y plantillas; no hay API de edición.",
+    "auth": "n/a",
+    "requisitos": "No hay API pública de edición. No encontré documentación oficial accesible.",
+    "docs_url": "no encontrada"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "VectCutAPI (antes CapCutAPI; Apache-2.0, unas 2.200 estrellas, último push sep-2026) y envoltorios como Atx-Guy/capcut-mcp-server. Generan borradores (ficheros 'dfd_') en el disco que luego se abren en CapCut escritorio. No renderizan MP4, no publican y dependen de un formato de borradores no documentado que puede cambiar. Solo crean borradores; no leen nada de la cuenta. Necesitan Python 3.10+ y FFmpeg en local."
+  },
+  "otras_vias": [
+    "Exportar el vídeo a mano a una carpeta vigilada por n8n",
+    "Publicar desde Metricool en lugar de desde CapCut"
+  ],
+  "rpa": "escritorio (o navegador en la versión web): renderizar, exportar y publicar solo se puede desde la interfaz",
+  "dificultad": "Muy difícil",
+  "permisos_acotados": "No aplica: no hay credenciales ni scopes. Los MCP comunitarios ejecutan código de terceros con acceso al disco local. Desde CapCut no se puede acotar nada.",
+  "pedir_al_informatico": "No intentar conectar CapCut. Usarlo solo para el montaje final y automatizar lo de antes y después (guion, subtítulos, publicación) con herramientas que sí tienen API.",
+  "demo_gratis": {
+    "opcion": "La app es gratuita, pero no hay demo de integración posible (solo el apaño comunitario en local).",
+    "api_incluida": "no",
+    "limites": "n/a"
+  },
+  "demo_resumen": "no hay",
+  "coste_demo": {
+    "plan": "Ningún plan incluye API",
+    "precio": "Precio de CapCut Pro no verificado",
+    "facturacion": "n/a",
+    "verificado": "no"
+  },
+  "coste_resumen": "No hay plan con API",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Si se quiere que la IA genere o edite vídeo de forma automatizada: CapCut no tiene API usable.",
+    "alternativas": [
+      "Canva (edición de vídeo + MCP oficial)",
+      "Editor de vídeo por API tipo Shotstack o Creatomate (no verificado en esta investigación)"
+    ]
+  },
+  "fuentes": [
+    "https://www.usecarly.com/blog/capcut-mcp/",
+    "https://aituber.app/blog/capcut-mcp-claude/",
+    "https://github.com/Atx-Guy/capcut-mcp-server"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "jira",
+  "nombre": "Jira",
+  "nombre_completo": "Jira (Atlassian Cloud)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Atlassian"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST: Cloud platform v3 y Jira Software (Agile). Webhooks y apps Forge.",
+    "auth": "Tres opciones. App OAuth 2.0 (3LO) con scopes clásicos o granulares. API token personal con scopes (recomendado), que caduca entre 1 y 365 días. O service accounts: hasta 5 gratis por organización.",
+    "requisitos": "Incluida en el plan Free (hasta 10 usuarios), sin revisión ni coste.",
+    "docs_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Atlassian Rovo MCP Server, GA desde el 04-02-2026, en https://mcp.atlassian.com/v2/mcp. El SSE /v1/sse dejó de tener soporte el 30-06-2026. Autenticación: OAuth 2.1 o API token, si el admin lo habilita. Respeta los permisos del usuario. Grupos de herramientas: read_jira, write_jira y search_jira (JQL); delete_jira y manage_jira vienen apagados de serie. Solo Cloud: Data Center no lo tiene y llega a fin de vida el 28-03-2029. Límite por sitio: 500 llamadas/h en Free y 1.000/h en Standard. Desde el 31-08-2026 las búsquedas enriquecidas consumen créditos Rovo; los excedentes se facturan a 0,01 $/crédito desde el 03-12-2026."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Jira Software más su trigger",
+    "Webhooks y Jira Automation (Free: 100 ejecuciones al mes)",
+    "Make y Zapier",
+    "Exportación CSV"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Tres capas. Admin: en Atlassian Administration > Rovo > Rovo MCP server > Permissions, dejar Jira con Read y Search y sin Write; ahí también están la lista de dominios permitidos, el interruptor de API tokens, la lista de IPs permitidas y el audit log. Token: service account o token con scopes read:jira:agent-interface y search:jira:agent-interface (o read:jira-work para la REST) y caducidad corta. Jira: usuario dedicado que solo esté en los proyectos necesarios. NO se puede acotar: los scopes no filtran por proyecto (eso solo lo hacen los permisos del usuario), con OAuth el agente ve todo lo que ve la persona, y la lista de dominios no se aplica a los API tokens.",
+  "pedir_al_informatico": "En Administración de Atlassian > Rovo MCP server, deja Jira solo con Read y Search, con delete y manage apagados, y activa el audit log. Crea una service account con acceso solo al proyecto X y un token de lectura que caduque en 30-90 días.",
+  "demo_gratis": "Jira Free, gratis para siempre: hasta 10 usuarios, con API y Rovo MCP (500 llamadas/h). Sin créditos Rovo, la búsqueda enriquecida podría no funcionar (no verificado); JQL y las lecturas no gastan créditos.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € con Free. Standard: unos 7,91 $/usuario/mes según terceros, con subida del 7-10 % prevista para el 13-10-2026. No verificado: la página oficial solo da precio en la calculadora.",
+  "coste_resumen": "0 € (Free, 10 usuarios)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://github.com/atlassian/atlassian-mcp-server",
+    "https://developer.atlassian.com/cloud/rovo-mcp/",
+    "https://support.atlassian.com/atlassian-rovo-mcp-server/docs/supported-tools/",
+    "https://support.atlassian.com/security-and-access-policies/docs/configure-atlassian-mcp-server-permissions/",
+    "https://www.atlassian.com/blog/announcements/atlassian-rovo-mcp-ga",
+    "https://support.atlassian.com/user-management/docs/manage-api-tokens-for-service-accounts/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.jira/",
+    "https://www.easy8.com/blog/jira-price-increase"
+  ],
+  "confianza": "alta"
+}

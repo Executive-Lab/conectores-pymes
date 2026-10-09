@@ -1,0 +1,59 @@
+{
+  "id": "meta-ads",
+  "nombre": "Meta Ads",
+  "nombre_completo": "Meta Ads",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "Facebook Ads",
+    "Instagram Ads",
+    "Business Manager"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (Graph API / Marketing API)",
+    "auth": "OAuth2 (token de usuario) o token de system user del Business Manager",
+    "requisitos": "Gratis. API directa: crear app en developers.facebook.com con el caso de uso Marketing API. El nivel por defecto es 'Limited access': según Meta es solo para desarrollo, no para apps en producción con anunciantes reales, y tiene un límite de llamadas alto por cuenta. 'Full access' exige App Review, al menos 500 llamadas correctas en 15 días y menos del 15 % de errores. Business Verification hace falta si se accede a datos sensibles. Con solo la cuenta publicitaria propia bastan ads_read y ads_management con acceso estándar. Los tokens de system user exigen que la app y el system user sean del mismo Business Manager: 1 system user + 1 admin en Limited, 10 + 1 en Full.",
+    "docs_url": "https://developers.facebook.com/docs/marketing-api/get-started/authorization"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Meta Ads AI Connectors: servidor remoto en https://mcp.facebook.com/ads, más una CLI. Según la prensa salió en beta abierta el 29-abr-2026 y en jul-2026 se abrió a cualquier app; la página oficial no muestra etiqueta de estado. No hace falta app propia: login OAuth con Facebook Login for Business. Lee y escribe: informes, crear y editar campañas, conjuntos y anuncios, catálogos, señales y datasets, tests A/B y de lift, registro de actividad (unas 29 herramientas, según terceros). Pide los permisos ads_mcp_management, ads_read, ads_management, catalog_management, business_management, pages_show_list e instagram_basic. No hay garantía de estabilidad durante la beta."
+  },
+  "otras_vias": [
+    "n8n: nodo genérico 'Facebook Graph API' + HTTP Request; Facebook Lead Ads Trigger (no re-verificado)",
+    "Make/Zapier: módulos de Facebook Ads (no verificado)",
+    "Informes programados y export CSV desde Ads Manager"
+  ],
+  "rpa": "no hace falta: el MCP oficial y la API cubren informes y gestión",
+  "dificultad": "Fácil",
+  "permisos_acotados": "El MCP no documenta un modo solo lectura y su OAuth incluye ads_management y business_management. Se acota con la persona que autoriza. En Business Manager, crear un usuario (o un system user para la API) con acceso parcial a UNA sola cuenta publicitaria y solo la tarea 'Ver rendimiento', que equivale a ads_read; con él, las escrituras deberían fallar (no verificado para el MCP). En la API directa, pedir solo ads_read. Lo que NO se puede acotar: elegir qué herramientas del MCP se exponen, limitar el acceso a una campaña concreta, o tener más de 1 system user en Limited access.",
+  "pedir_al_informatico": "Que el admin del Business Manager cree un usuario o system user con acceso solo a la cuenta publicitaria X y la tarea 'Ver rendimiento', y que con ese usuario se autorice https://mcp.facebook.com/ads en Claude. Si la IA va a crear campañas, que lo haga en una cuenta aparte y siempre en estado PAUSED.",
+  "demo_gratis": {
+    "opcion": "No hay plan de pago: API y MCP gratis. Se prueba con la cuenta publicitaria propia del alumno; leer informes no gasta nada y crear campañas en PAUSED tampoco consume presupuesto.",
+    "api_incluida": "sí",
+    "limites": "Limited access: solo desarrollo y límite de llamadas alto por cuenta. MCP en beta. No he verificado que existan cuentas sandbox de Marketing API en 2026."
+  },
+  "demo_resumen": "gratis permanente",
+  "coste_demo": {
+    "plan": "Ninguno",
+    "precio": "0 €; solo se paga la inversión en anuncios",
+    "facturacion": "n/a",
+    "verificado": "sí"
+  },
+  "coste_resumen": "0 € (solo inversión en anuncios)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview",
+    "https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-get-started",
+    "https://developers.facebook.com/docs/marketing-api/get-started/authorization",
+    "https://developers.facebook.com/docs/marketing-api/system-users/overview",
+    "https://ppc.land/meta-opens-its-ad-system-to-claude-and-chatgpt-with-new-ai-connectors/",
+    "https://ppc.land/meta-opens-ads-mcp-to-any-app-cutting-integration-code-to-zero/",
+    "https://mcp.directory/blog/meta-ads-cli-mcp"
+  ],
+  "confianza": "media"
+}

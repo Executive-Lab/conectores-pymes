@@ -1,0 +1,54 @@
+{
+  "id": "paypal",
+  "nombre": "PayPal",
+  "nombre_completo": "PayPal",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST",
+    "auth": "OAuth2 client credentials (Client ID + secreto por app)",
+    "requisitos": "Cuenta business. Crear la app en Developer Dashboard > Apps & Credentials, con apps separadas para Sandbox y Live. Funciones como Transaction Search se activan en la configuración de cada app. Gratis.",
+    "docs_url": "https://developer.paypal.com/apps-scopes-and-credentials"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto en https://mcp.paypal.com (rutas /sse y /http) y de sandbox en https://mcp.sandbox.paypal.com; servidor local @paypal/mcp (Node 18+, '--tools=all'). Doc actualizada el 30-jun-2026. Lee y escribe: catálogo, disputas (incluida aceptar una disputa), facturas (crear, enviar, cancelar), pagos (crear pedido, capturar, reembolsar), informes y transacciones, seguimiento de envíos y suscripciones."
+  },
+  "otras_vias": [
+    "Nodos nativos PayPal y PayPal Trigger en n8n (no re-verificado)",
+    "Webhooks",
+    "Informes de actividad en CSV",
+    "Make/Zapier"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear una app REST dedicada a la IA y activar solo las funciones necesarias (p. ej. Transaction Search, con scope reporting/search/read); el campo 'scope' de la respuesta del token muestra lo concedido. Lo que NO se puede: no hay claves de solo lectura como en Stripe; la página oficial del MCP no documenta cómo elegir herramientas (solo '--tools=all'); y, según terceros, PayPal no impone confirmación humana antes de reembolsos o de aceptar disputas.",
+  "pedir_al_informatico": "Crear en developer.paypal.com una app REST nueva 'IA-informes' con solo Transaction Search activado y probar primero con el MCP de sandbox. No conectar el MCP en Live con herramientas de reembolso o disputas sin aprobación humana.",
+  "demo_gratis": {
+    "opcion": "Sandbox gratuito y permanente, con cuentas de prueba de comprador y vendedor y endpoint MCP propio.",
+    "api_incluida": "sí",
+    "limites": "Solo transacciones simuladas. Transaction Search tarda hasta 3 h en mostrar movimientos y cubre 3 años."
+  },
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": {
+    "plan": "Cuenta business (sin cuota)",
+    "precio": "0 €/mes; comisión por transacción (tarifas de España no verificadas)",
+    "facturacion": "por transacción",
+    "verificado": "parcial"
+  },
+  "coste_resumen": "0 €/mes (comisión por transacción)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developer.paypal.com/ai-tools/mcp-server",
+    "https://developer.paypal.com/ai-tools/agent-tools/",
+    "https://developer.paypal.com/apps-scopes-and-credentials",
+    "https://developer.paypal.com/docs/transaction-search",
+    "https://vorplabs.com/agent-tools/paypal-agent-toolkit"
+  ],
+  "confianza": "media"
+}

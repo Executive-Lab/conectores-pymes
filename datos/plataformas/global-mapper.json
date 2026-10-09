@@ -1,0 +1,46 @@
+{
+  "id": "global-mapper",
+  "nombre": "Global Mapper",
+  "nombre_completo": "Global Mapper (Blue Marble Geographics)",
+  "categoria": "hosteleria-nicho",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "sí",
+    "estilo": "Lenguaje de scripting Global Mapper Script (GMS), 'Python workflow scripting' y grabador de scripts a partir de acciones en la interfaz. El SDK para desarrolladores no aparece en la página actual (no verificado).",
+    "auth": "No aplica (licencia local o Blue Marble Hub)",
+    "requisitos": "'Scripting and workflow automation' va incluido desde el plan Advanced. En qué nivel entra Python no queda claro en la tabla.",
+    "docs_url": "https://www.bluemarblegeo.com/purchase/ (la base de conocimiento de support.globalmapper.com no fue accesible)"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP."
+  },
+  "otras_vias": [
+    "Ficheros GIS, LiDAR y ráster en multitud de formatos",
+    "Ejecución por lotes de scripts .gms (el modo de línea de comandos no se ha verificado)",
+    "QGIS como alternativa gratuita y automatizable"
+  ],
+  "rpa": "no hace falta con el plan Advanced o superior; escritorio con el plan Essentials",
+  "dificultad": "Media",
+  "permisos_acotados": "Es local: usa un usuario del sistema operativo dedicado, copias de los datos y una carpeta de salida aparte. El agente consume una licencia de puesto. No hay permisos dentro de la aplicación.",
+  "pedir_al_informatico": "Comprueba que la licencia es Advanced o Professional (con scripting y Python) y pide un usuario de Windows y una carpeta de trabajo dedicados para lanzar scripts .gms o Python desde el arnés.",
+  "demo_gratis": "Prueba gratuita ('Try for free'). La página no indica la duración: 14 días es un dato habitual pero no verificado. No consta si la prueba incluye el scripting.",
+  "coste_demo": "Suscripción anual en USD: Essentials 599 $/año, Advanced 1.199 $/año (incluye scripting) y Professional 2.199 $/año. No hay pago mensual.",
+  "demo_resumen": "prueba 14 días",
+  "coste_resumen": "1.199 $/año (Advanced, scripting)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Si solo tienes Essentials y no vas a usar las funciones avanzadas, QGIS cubre la automatización gratis.",
+    "alternativas": [
+      "QGIS con PyQGIS y qgis_process"
+    ],
+    "coste_esfuerzo_migracion": "Bajo o medio: rehacer los flujos y formar al técnico."
+  },
+  "fuentes": [
+    "https://www.bluemarblegeo.com/purchase/",
+    "https://www.bluemarblegeo.com/global-mapper-pro/"
+  ],
+  "confianza": "media"
+}

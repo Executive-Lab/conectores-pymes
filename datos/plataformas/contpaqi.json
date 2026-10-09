@@ -1,0 +1,60 @@
+{
+  "id": "contpaqi",
+  "nombre": "CONTPAQi",
+  "nombre_completo": "CONTPAQi (México): Contabilidad, Comercial Start/Pro/Premium, Nóminas",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Contpaq"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "limitada",
+    "estilo": "No hay API REST pública oficial, ni para escritorio ni para nube: contpaqi.com no menciona API ni SDK. Comercial y Factura Electrónica tienen un SDK de escritorio (DLL para Windows) que usan terceros, p. ej. los wrappers .NET de ARSoftware en NuGet (v6.3.0). Los datos de escritorio están en SQL Server.",
+    "auth": "SDK: sesión con usuario y contraseña de CONTPAQi en el equipo donde está instalado. Base de datos: login de SQL Server.",
+    "requisitos": "Un equipo Windows con el sistema instalado y la licencia vigente. No se ha localizado documentación oficial del SDK ni si exige ser socio o distribuidor. El wrapper de ARSoftware cuesta 300 USD por RFC y año según su README.",
+    "docs_url": "Sin docs oficiales. Referencia de terceros: https://github.com/AndresRamos/ARSoftware.Contpaqi.Comercial"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin MCP en GitHub, Glama ni npm. Habría que construir uno de solo lectura sobre SQL Server."
+  },
+  "otras_vias": [
+    "SQL Server directo para leer. ARSoftware publica el esquema de las bases de datos (DbContexts de Entity Framework).",
+    "XML CFDI: descarga del SAT con 'XML en línea' e importación de XML para generar pólizas o compras.",
+    "Reportes y exportación a Excel en cada sistema.",
+    "CONTPAQi Escritorio Virtual (escritorio remoto en la nube).",
+    "n8n/Make/Zapier: sin nodo nativo. Webhooks: no."
+  ],
+  "rpa": "escritorio: solo para escribir en Contabilidad o Nóminas si el SDK no sirve. Para leer basta SQL Server. En las versiones Nube no hay API, así que solo quedaría RPA de navegador.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Para leer: login de SQL Server de solo lectura (db_datareader) limitado a las bases de datos de las empresas necesarias. NO se puede acotar: escribir por SQL directo se salta las reglas de negocio y el timbrado, así que hay que prohibirlo. El SDK actúa con un usuario de CONTPAQi y no está verificado que se pueda limitar a solo lectura. En las versiones Nube no hay API que acotar.",
+  "pedir_al_informatico": "Crear en el SQL Server de CONTPAQi un usuario de SOLO LECTURA (db_datareader) sobre las bases de datos de la empresa y permitir la conexión desde el equipo del arnés (red local o VPN). Confirmar con el distribuidor si la licencia permite usar el SDK y qué versión corresponde.",
+  "demo_gratis": "Contabilidad: prueba de 30 días en escritorio o de 20 días en Nube. Comercial Premium: 20 días por descarga. Nóminas: 30 o 20 días según el plan. No está verificado que la instalación de prueba permita usar el SDK y SQL Server.",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "No hay API de pago. Licencias anuales en '$' (presumiblemente MXN; la página no indica moneda ni si incluye IVA): Contabilidad escritorio Mono-RFC $4,590 al año (Multi-RFC $6,190); Contabilidad Nube Inicial $4,690 al año; Comercial Premium Multi-RFC $10,490 al año; Nóminas Mono-RFC $5,590 al año. Se compra a través de distribuidor.",
+  "coste_resumen": "sin API REST; desde $4.590/año",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "En la renovación anual de la licencia, si la versión no tiene soporte o no admite CFDI 4.0 / Carta Porte 3.1, si hace falta acceso remoto multiusuario sin pagar Escritorio Virtual, si hay crecimiento multiempresa o multipaís, o si el contador trabaja con otro sistema.",
+    "alternativas": [
+      "CONTPAQi Nube (mismo proveedor; API no verificada)",
+      "Odoo con localización mexicana (API JSON-2 + MCP nativo)",
+      "Microsoft Dynamics 365 Business Central con localización MX (no verificado)"
+    ],
+    "coste_esfuerzo_migracion": "6-16 semanas con licencias e implantador (estimación). Riesgos: CFDI y timbrado (PAC), contabilidad electrónica (Anexo 24), catálogos del SAT y cambiar la nómina a mitad de ejercicio."
+  },
+  "verifactu": "No aplica (México). CFDI 4.0: Comercial Premium soporta CFDI 4.0, REP 2.0, Carta Porte 3.1 y cancelación con aceptación; Contabilidad soporta CFDI 4.0; Comercial Start emite CFDI 4.0; Nóminas timbra 'conforme a la Revisión E'.",
+  "fuentes": [
+    "https://www.contpaqi.com/",
+    "https://www.contpaqi.com/contabilidad",
+    "https://www.contpaqi.com/comercial-premium",
+    "https://www.contpaqi.com/comercial-start",
+    "https://www.contpaqi.com/nominas",
+    "https://www.contpaqi.com/listadeprecios",
+    "https://www.nuget.org/packages/ARSoftware.Contpaqi.Comercial.Sdk.Extras/",
+    "https://github.com/AndresRamos/ARSoftware.Contpaqi.Comercial",
+    "https://glama.ai/mcp/servers?query=contpaqi"
+  ],
+  "confianza": "baja"
+}

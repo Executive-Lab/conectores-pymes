@@ -1,0 +1,52 @@
+{
+  "id": "telegram",
+  "nombre": "Telegram",
+  "nombre_completo": "Telegram (Bot API)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Telegram Bot API"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "Bot API sobre HTTP con JSON. Las actualizaciones llegan por getUpdates (polling) o setWebhook, nunca por las dos a la vez. Versión 10.3 (24-ago-2026).",
+    "auth": "Token del bot, que da @BotFather. No hay scopes: el token controla el bot entero.",
+    "requisitos": "Gratis; basta una cuenta de Telegram. Sin verificación ni plan de pago. Solo se pagan los 'paid broadcasts' por encima de 30 msg/s, en Stars.",
+    "docs_url": "https://core.telegram.org/bots/api"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "No hay MCP oficial. Hay MCP comunitarios sobre la Bot API (telegram-bot-mcp, mcp-telegram) que leen y envían, corren en local por stdio y tienen madurez variable. EVITAR los que entran en la cuenta personal por MTProto (kfastov/telegram-mcp-server, los basados en Telethon): tienen acceso total a la cuenta."
+  },
+  "otras_vias": [
+    "n8n: nodos nativos Telegram y Telegram Trigger (filtrable por chat ID y usuario)",
+    "Webhooks de la Bot API",
+    "Make y Zapier",
+    "Exportación manual del historial desde Telegram Desktop"
+  ],
+  "rpa": "no hace falta: la Bot API cubre enviar y recibir. El histórico anterior al bot solo sale exportando a mano.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Usar un bot propio de la empresa, nunca la cuenta personal. Dejar activado el privacy mode: en grupos, el bot solo recibe comandos, menciones y respuestas. Con /setjoingroups se impide que otros lo metan en sus grupos. En canales, hacerlo admin solo con permiso de publicar, y en n8n filtrar por chat ID y user ID. Ojo con el 'guest mode' (Bot API 10.0): permite invocar al bot desde chats donde no está. NO se puede acotar: no hay token de solo lectura ni token limitado a un chat, el bot no lee el historial anterior, y quien tenga el token controla el bot.",
+  "pedir_al_informatico": "Crea un bot de empresa en @BotFather con privacy mode activado y 'join groups' desactivado en cuanto esté añadido. Guarda el token en un gestor de secretos y pásame solo los IDs de los grupos autorizados.",
+  "demo_gratis": "Gratis para siempre con la API completa. Demo de 5 minutos: crear el bot con @BotFather, poner el token en el Telegram Trigger de n8n y contestar con un LLM. Límites: unos 30 msg/s en total, 1 msg/s por chat y 20 msg/min por grupo. Ficheros: hasta 20 MB de descarga y 50 MB de subida.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 €: la API es gratis.",
+  "coste_resumen": "0 €",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Solo si los grupos se usan como gestor de tareas o como archivo: el bot no lee el historial y, con privacy mode, solo ve comandos y menciones. Como canal de avisos o de entrada de peticiones se conecta tal cual.",
+    "alternativas": [
+      "Trello o ClickUp para las tareas, con Telegram solo para avisos",
+      "Google Sheets como registro estructurado"
+    ]
+  },
+  "fuentes": [
+    "https://core.telegram.org/bots/api",
+    "https://core.telegram.org/bots/api-changelog",
+    "https://core.telegram.org/bots/faq",
+    "https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.telegramtrigger/",
+    "https://glama.ai/mcp/servers/pauloFroes/mcp-telegram"
+  ],
+  "confianza": "alta"
+}

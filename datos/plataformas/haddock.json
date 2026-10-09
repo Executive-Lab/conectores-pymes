@@ -1,0 +1,50 @@
+{
+  "id": "haddock",
+  "nombre": "Haddock",
+  "nombre_completo": "Haddock (haddock.app, gestión de costes, escandallos y facturas para restaurantes)",
+  "categoria": "hosteleria-nicho",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "limitada",
+    "estilo": "API REST de entrada para que los fabricantes de TPV envíen catálogo y ventas a Haddock (Swagger). No hay API pública documentada para leer facturas, proveedores, escandallos ni márgenes.",
+    "auth": "HTTP Basic (usuario y contraseña que se generan en los ajustes de integración de Haddock)",
+    "requisitos": "Pensada para proveedores y distribuidores de TPV, que reciben gratis una cuenta de test con entorno de desarrollo. Activar la integración en Haddock es gratis.",
+    "docs_url": "https://pos-api.haddock.app/docs"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP."
+  },
+  "otras_vias": [
+    "Integración nativa Haddock > Holded: envía a Holded las facturas de compra ya procesadas, con su PDF, usando una API key de Holded. Después se leen por la API de Holded.",
+    "Integraciones de TPV: Ágora (agente local), Revo, Square, LastApp, HioPOS (por FTP que configura el distribuidor), Numier, BDP y otras",
+    "Exportación a Excel o CSV desde la web: no verificada",
+    "No se encontró nodo en n8n, Make ni Zapier"
+  ],
+  "rpa": "navegador: para escandallos y márgenes, si no hay exportación ni API de lectura, solo queda un RPA de navegador sobre la web",
+  "dificultad": "Difícil",
+  "permisos_acotados": "La credencial de la API de Haddock solo sirve para escribir ventas, no para leer. Si usas Holded, crea allí una API key exclusiva para Haddock con los permisos mínimos que pide la integración (leer contactos y crear documentos de compra) y otra distinta, lo más restringida posible, para el arnés. Para un RPA, usa un usuario de Haddock dedicado con el rol más bajo que vea compras (los roles de Haddock no se han verificado). No se puede tener un token de solo lectura en Haddock.",
+  "pedir_al_informatico": "Pregunta a soporte@haddock.app si ofrecen API de lectura o exportación programada de facturas, proveedores y escandallos. Si usas Holded, activa la integración Haddock > Holded con una API key exclusiva y lee los datos desde Holded.",
+  "demo_gratis": "No hay prueba gratuita publicada: solo 'Solicitar demostración'. Solo los fabricantes de TPV que integran reciben una cuenta de test gratis. La lectura por API no está disponible en ninguna opción.",
+  "coste_demo": "FINA 149 €/mes (integración de TPV y 500 documentos digitalizados), FINA + OPS 248 €/mes (escandallos dinámicos), ALL IN ONE 299 €/mes. Pago mensual, sin IVA, sin precio anual publicado. No incluye API de lectura. La integración con el TPV es gratis en Haddock, pero el distribuidor del TPV puede cobrarla.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_resumen": "Desde 149 €/mes; sin API de lectura",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Si no usas Holded, Haddock no da exportación programada y necesitas escandallos o costes en tiempo real dentro del arnés.",
+    "alternativas": [
+      "Gstock o tSpoonLab, que ya integran con TPV como Ágora (su API no se verificó)"
+    ],
+    "coste_esfuerzo_migracion": "Medio: hay que rehacer fichas técnicas y escandallos y migrar el histórico de facturas. El riesgo es perder la trazabilidad de los precios de compra."
+  },
+  "fuentes": [
+    "https://support.haddock.app/en/article/generic-integration-for-pos-systems-pm9g20/",
+    "https://pos-api.haddock.app/docs",
+    "https://support.haddock.app/en/article/holded-connect-and-send-documents-en3z46/",
+    "https://support.haddock.app/en/article/hiopos-connect-pos-tnuuwm/",
+    "https://haddock.app/precios"
+  ],
+  "confianza": "media"
+}

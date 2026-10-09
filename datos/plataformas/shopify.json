@@ -1,0 +1,57 @@
+{
+  "id": "shopify",
+  "nombre": "Shopify",
+  "nombre_completo": "Shopify",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "GraphQL Admin API (la REST Admin es legado)",
+    "auth": "Token de acceso de app. Desde el 1-ene-2026 no se pueden crear apps personalizadas 'legacy' desde el admin; se crean en el Dev Dashboard con Client ID y secreto. Si la app y la tienda son de la misma organización: client credentials grant (token de 24 h). Si no: authorization code grant (token offline).",
+    "requisitos": "Disponible en todos los planes. En Basic, 'acceso limitado a los datos': los datos protegidos de clientes de nivel 2 (nombre, email, teléfono, dirección) varían según el plan. Los scopes se declaran en la versión de la app. Para pedidos de más de 60 días hace falta read_all_orders.",
+    "docs_url": "https://shopify.dev/docs/apps/build/dev-dashboard/get-api-access-tokens"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "1) Shopify connector for Claude: se instala desde el directorio de Claude. Productos, colecciones e inventario en lectura y escritura; pedidos, clientes y analítica solo lectura. No hace reembolsos, cancelaciones, pagos, impuestos ni dominios, ni toca el tema publicado. La escritura queda apagada hasta que se aprueba. 2) Shopify AI Toolkit (plugin para Claude Code, abr-2026): docs, validación de código y gestión de la tienda a través de Shopify CLI. 3) Dev MCP local (@shopify/dev-mcp), solo documentación. 4) Storefront MCP y Customer Account MCP, pensados para agentes de compra. Los MCP de Admin API comunitarios (p. ej. GeLi2001/shopify-mcp) no están revisados por Shopify."
+  },
+  "otras_vias": [
+    "Nodos nativos Shopify y Shopify Trigger en n8n (no re-verificado)",
+    "Webhooks",
+    "Export CSV",
+    "Make/Zapier"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear la app en el Dev Dashboard solo con scopes de lectura: read_products, read_orders y read_inventory; read_customers solo si hace falta; read_all_orders para histórico. El token de client credentials caduca a las 24 h, no es permanente. En el conector de Claude, aprobar solo lectura con una cuenta de staff limitada. Lo que NO se puede: limitar por colección; y, según terceros, rebajar un nivel de acceso ya aprobado sin desinstalar la app.",
+  "pedir_al_informatico": "Que el propietario cree en el Dev Dashboard una app 'IA-lectura' solo con scopes read_* y guarde el Client ID y el secreto en un gestor de secretos. O que instale el conector oficial de Shopify en Claude aprobando solo lectura con una cuenta de staff limitada.",
+  "demo_gratis": {
+    "opcion": "Tienda de desarrollo creada desde el Dev Dashboard o una cuenta Partner (sin coste en la práctica, aunque la página oficial no lo dice). Alternativa: prueba de 3 días y luego 1 €/mes durante 3 meses.",
+    "api_incluida": "sí",
+    "limites": "Solo pagos de prueba (pasarela de test), tienda protegida con contraseña, máximo 250 por organización, no se puede convertir en tienda real."
+  },
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": {
+    "plan": "Basic",
+    "precio": "24 €/mes con pago anual o 32 €/mes mensual (Grow: 69 / 92 €)",
+    "facturacion": "anual o mensual",
+    "verificado": "sí (shopify.com/es/precios, oct-2026)"
+  },
+  "coste_resumen": "Basic 24 €/mes (anual) o 32 € mensual",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://shopify.dev/docs/apps/build/dev-dashboard/get-api-access-tokens",
+    "https://community.shopify.dev/t/starting-january-1-2026-you-will-not-be-able-to-create-new-legacy-custom-apps-this-will-not-impact-any-existing-apps/26798",
+    "https://shopify.dev/docs/apps/build/ai-toolkit",
+    "https://help.shopify.com/en/manual/ai-powered-tools/connecting-ai-tools/shopify-connector-for-claude",
+    "https://help.shopify.com/en/manual/apps/connecting-ai-tools",
+    "https://shopify.dev/docs/apps/launch/protected-customer-data",
+    "https://shopify.dev/docs/apps/build/dev-dashboard/development-stores",
+    "https://www.shopify.com/es/precios"
+  ],
+  "confianza": "media"
+}

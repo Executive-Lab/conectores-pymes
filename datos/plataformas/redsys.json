@@ -1,0 +1,53 @@
+{
+  "id": "redsys",
+  "nombre": "Redsys",
+  "nombre_completo": "Redsys (TPV virtual de los bancos españoles)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "TPV virtual"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "limitada",
+    "estilo": "Para cobrar: Redirección, REST (trataPeticionREST), inSite, inApp, MO/TO, PayGold y Bizum, con firma HMAC-SHA256. Para consultar: la documentación pública actual no incluye ninguna operación de consulta (ningún Ds_Merchant_TransactionType lo es). Los datos se leen en el Portal de Administración (canales.redsys.es/portal: operaciones, totales, informes y exportación .xlsx) y con la notificación online, un HTTP POST firmado por cada operación hacia Ds_Merchant_MerchantURL si está activada. Un web service SOAP de consultas que aparecía en manuales antiguos no se ha verificado en la documentación actual.",
+    "auth": "Firma HMAC-SHA256 con la clave secreta del comercio (FUC y terminal). Usuario y contraseña para el portal.",
+    "requisitos": "TPV virtual contratado con un banco. Las credenciales las da el banco.",
+    "docs_url": "https://pagosonline.redsys.es/desarrolladores-inicio/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP."
+  },
+  "otras_vias": [
+    "Notificación online: webhook a un flujo de n8n por cada operación",
+    "Exportación .xlsx desde el Portal de Administración",
+    "Módulos de pago (WooCommerce, PrestaShop y otros) que guardan las operaciones en la tienda",
+    "Portal y extractos del banco"
+  ],
+  "rpa": "navegador: para descargar automáticamente el .xlsx histórico del portal (cuidado: ese portal también permite devoluciones)",
+  "dificultad": "Difícil",
+  "permisos_acotados": "La clave SHA-256 del comercio también firma devoluciones y anulaciones. No debe entrar nunca en el contexto del LLM: verifica la firma de las notificaciones en un flujo de n8n aislado y pasa al arnés solo los datos ya validados. Para el portal, pide al banco un usuario solo de consulta, sin devoluciones (no se ha verificado que existan perfiles por usuario). No se puede tener una clave de solo lectura: hay una única clave por comercio y terminal.",
+  "pedir_al_informatico": "Pide a tu banco o a Redsys que activen la notificación online HTTP hacia una URL tuya y que te den un usuario del Portal de Administración solo de consulta. Pregunta también si existe un servicio web de consulta de operaciones para tu comercio.",
+  "demo_gratis": "Sandbox público: entorno sis-t.redsys.es con el comercio genérico FUC 999008881, terminal 001, clave de test publicada y tarjetas de prueba. También hay una cuenta de prueba del portal válida 7 días. Se pueden probar los cobros y la notificación; la consulta por API, no.",
+  "coste_demo": "Las pruebas cuestan 0 €. En producción hace falta un TPV virtual contratado con un banco: las comisiones las negocia cada banco y Redsys no publica precios.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_resumen": "0 € sandbox; real: comisión bancaria",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Si necesitas conciliación automática diaria y el banco no da ni servicio de consulta ni notificación online, o si quieres claves restringidas por permiso.",
+    "alternativas": [
+      "Stripe (API con claves restringidas y MCP oficial; no verificado)",
+      "Pasarela del propio banco con API de consulta (preguntar)"
+    ],
+    "coste_esfuerzo_migracion": "Bajo o medio: cambiar el plugin de la tienda y revisar comisiones y la compatibilidad con Bizum. El histórico se queda en el portal de Redsys."
+  },
+  "fuentes": [
+    "https://pagosonline.redsys.es/desarrolladores-inicio/",
+    "https://pagosonline.redsys.es/pagina-de-inicio-pagosonline/principal-administracion-y-reporting/",
+    "https://pagosonline.redsys.es/desarrolladores-inicio/integrate-con-nosotros/tarjetas-y-entornos-de-prueba/",
+    "https://pagosonline.redsys.es/desarrolladores-inicio/integrate-con-nosotros/parametros-de-entrada-y-salida/",
+    "https://pagosonline.redsys.es/desarrolladores-inicio/integrate-con-nosotros/area-de-descargas-y-documentacion/"
+  ],
+  "confianza": "media"
+}

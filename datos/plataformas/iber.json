@@ -1,0 +1,49 @@
+{
+  "id": "iber",
+  "nombre": "IBER",
+  "nombre_completo": "IBER (modelo hidráulico 2D de GEAMA-UdC, Flumen-UPC y CEDEX)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "IberGIS"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "no",
+    "estilo": "La web oficial no documenta API, línea de comandos ni Python. Se usa sobre GiD (Iber 3.5.0, Windows y Linux, 05-10-2026) o como plugin de QGIS (IberGIS 1.6.2, Windows, 04-10-2026).",
+    "auth": "No aplica",
+    "requisitos": "Gratis, con registro en iberaula. La licencia prohíbe redistribuir el software. Team Iber no da soporte técnico (solo foro).",
+    "docs_url": "https://www.iberaula.es/54/iber-model/downloads"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró ningún MCP. Pendiente de comprobar en directorios de MCP."
+  },
+  "otras_vias": [
+    "Ficheros de entrada y salida del proyecto (formato no verificado)",
+    "IberGIS corre dentro de QGIS: el pre y el postproceso se podrían automatizar en parte con PyQGIS (no verificado)",
+    "GiD tiene su propio scripting (su uso con Iber no se ha verificado)",
+    "Postproceso de los resultados ráster en QGIS"
+  ],
+  "rpa": "escritorio: para los pasos de interfaz de GiD o IberGIS que no se puedan lanzar por script",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Es local: usa un usuario del sistema operativo o una VM dedicados, con los proyectos originales en solo lectura y las simulaciones en una carpeta aparte. No lo instales en servidores compartidos sin revisar la licencia.",
+  "pedir_al_informatico": "Pide que el modelo corra en un PC o VM dedicado con IberGIS sobre QGIS, con los proyectos originales en solo lectura. Que el técnico documente qué ficheros genera cada simulación para poder automatizar el pre y el postproceso.",
+  "demo_gratis": "Gratis y permanente (descarga con registro).",
+  "coste_demo": "0 €",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (registro en iberaula)",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "No compensa migrar solo por conectividad: es una herramienta de referencia en España. Trabaja con ficheros y PyQGIS.",
+    "alternativas": [
+      "HEC-RAS 2D o TELEMAC (no verificados)"
+    ],
+    "coste_esfuerzo_migracion": "Alto: hay que recalibrar los modelos y validar los resultados."
+  },
+  "fuentes": [
+    "https://www.iberaula.es/",
+    "https://www.iberaula.es/54/iber-model/downloads"
+  ],
+  "confianza": "media"
+}

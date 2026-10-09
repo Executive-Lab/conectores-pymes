@@ -1,0 +1,47 @@
+{
+  "id": "activecampaign",
+  "nombre": "ActiveCampaign",
+  "nombre_completo": "ActiveCampaign",
+  "categoria": "crm-email",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (v3)",
+    "auth": "API key por usuario en la cabecera Api-Token, junto con la URL de API de la cuenta (Ajustes > Developer)",
+    "requisitos": "5 peticiones por segundo por cuenta. Plan mínimo con API no verificado: la página de precios carga los precios de forma dinámica y no muestra qué incluye cada plan.",
+    "docs_url": "https://developers.activecampaign.com/reference/authentication"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "MCP remoto oficial, publicado en oct-2025. Está en el directorio de conectores de Claude como 'Anthropic verified' (añadido en nov-2025) y también funciona con ChatGPT y Cursor. Cada cuenta tiene su propia URL, que se copia en Ajustes > Developer; se conecta haciendo login. Tiene 32 herramientas de lectura y escritura (contactos, etiquetas, listas, campos, campañas, actividad de email) y no tiene modo solo lectura documentado. Ojo: developers.activecampaign.com/mcp es otro MCP, de documentación."
+  },
+  "otras_vias": [
+    "Nodo nativo ActiveCampaign y su Trigger en n8n",
+    "Make y Zapier",
+    "Webhooks",
+    "Exportar a CSV"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "No hay scopes: la API key es la de un usuario. Mitigación: usuario dedicado en un grupo de usuarios con permisos limitados, usando su key y su login para el MCP. No verificado que la API herede los permisos del grupo; hay que probarlo. Lo que no se acota: el MCP no tiene solo lectura y una key de admin da acceso total.",
+  "pedir_al_informatico": "Crea un usuario 'IA' en un grupo con permisos mínimos y conecta el MCP oficial con ese usuario, no con el del dueño. Comprueba con una llamada de prueba que no puede borrar contactos.",
+  "demo_gratis": "Prueba de 14 días sin tarjeta. La página del MCP enlaza a un alta de 'cuenta de desarrollador gratuita'; condiciones, duración y límites no verificados.",
+  "coste_demo": "No verificado: la página oficial de precios muestra marcadores vacíos ('--') y un formulario de presupuesto. Hay planes Starter, Plus, Pro y Enterprise, con pago anual y moneda en € disponibles.",
+  "demo_resumen": "prueba 14 días",
+  "coste_resumen": "no verificado",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.activecampaign.com/page/mcp",
+    "https://developers.activecampaign.com/page/connect-claude",
+    "https://claude.com/connectors/activecampaign",
+    "https://www.activecampaign.com/apps/claude",
+    "https://developers.activecampaign.com/reference/authentication",
+    "https://developers.activecampaign.com/reference/rate-limits",
+    "https://www.activecampaign.com/pricing"
+  ],
+  "confianza": "media"
+}

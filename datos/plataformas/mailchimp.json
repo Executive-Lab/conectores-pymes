@@ -1,0 +1,46 @@
+{
+  "id": "mailchimp",
+  "nombre": "Mailchimp",
+  "nombre_completo": "Mailchimp",
+  "categoria": "crm-email",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (Marketing API v3, https://api.mailchimp.com/3.0/). La Transactional (Mandrill) es aparte.",
+    "auth": "API key, o OAuth2 para apps de terceros",
+    "requisitos": "Solo los roles Manager o superiores pueden generar keys. La página de precios no indica plan mínimo con API (no verificado en qué planes está).",
+    "docs_url": "https://mailchimp.com/developer/marketing/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No hay MCP oficial que acceda a la cuenta. El único oficial es https://mailchimp.com/developer/_mcp/server, que solo busca en la documentación (una herramienta, searchDocs, de solo lectura). Para datos de la cuenta hay MCP comunitarios o puentes como Zapier o Pipedream MCP (no evaluados)."
+  },
+  "otras_vias": [
+    "Nodo nativo Mailchimp y su Trigger en n8n",
+    "Make y Zapier",
+    "Webhooks de audiencia",
+    "Exportar contactos a CSV"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Muy limitado. La documentación dice textualmente que 'las claves API conceden acceso completo a tu cuenta', aunque el acceso depende del nivel del usuario que crea la key, y el nivel mínimo para generarla es Manager. Recomendación: una key por integración con nombre descriptivo, creada desde un usuario Manager dedicado; si se le retira el acceso al usuario, sus keys se borran. Lo que no se acota: no hay keys de solo lectura ni scopes por recurso. La falta de scopes en OAuth no la he verificado.",
+  "pedir_al_informatico": "Crea un usuario Manager dedicado para la IA, genera una API key solo para n8n y guárdala allí. No la pegues en Claude: que el agente pase por flujos n8n concretos.",
+  "demo_gratis": "Plan Free permanente: 250 contactos, 500 envíos al mes y máximo 250 al día. Essentials y Standard tienen prueba de 14 días. Que la API esté en Free no aparece en la página de precios (no verificado; la documentación de API no la restringe por plan).",
+  "coste_demo": "Essentials: la página mostró 11,70 €/mes, pero parece un precio con un 15% de descuento introductorio y sin tramo de contactos claro. No verificado; hay que confirmarlo en vivo con el tramo de 500 contactos.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (Free; API no verificada)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://mailchimp.com/developer/",
+    "https://mailchimp.com/developer/_mcp/server",
+    "https://mailchimp.com/developer/llms.txt",
+    "https://mailchimp.com/help/about-api-keys/",
+    "https://mailchimp.com/developer/marketing/api-concepts/",
+    "https://mailchimp.com/pricing/marketing/"
+  ],
+  "confianza": "media"
+}

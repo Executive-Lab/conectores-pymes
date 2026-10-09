@@ -1,0 +1,63 @@
+{
+  "id": "microsoft-365",
+  "nombre": "Microsoft 365",
+  "nombre_completo": "Microsoft 365 (Outlook, Excel, OneDrive, SharePoint, Teams vía Microsoft Graph)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Outlook",
+    "Excel",
+    "OneDrive",
+    "SharePoint",
+    "Teams",
+    "Office 365",
+    "Microsoft Graph"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST de Microsoft Graph (graph.microsoft.com), con delta queries y change notifications (webhooks). Excel se maneja con la workbook API sobre ficheros guardados en OneDrive o SharePoint.",
+    "auth": "OAuth 2.0 con Microsoft Entra ID. Hay dos tipos de permiso. Delegado: la app actúa en nombre de un usuario y nunca ve más que él. De aplicación (app-only): sin usuario y con alcance de todo el tenant, salvo que se acote. Credencial: secreto, certificado o credencial federada.",
+    "requisitos": "Registrar la app en Entra ID (gratis). Todos los permisos de aplicación y los delegados de alto impacto (*.All) necesitan consentimiento de administrador. Graph va incluido sin coste extra en cualquier plan Microsoft 365 de empresa. Algunas APIs de Teams en modo aplicación (leer mensajes de chats y canales) son 'protegidas' y hay que pedirlas a Microsoft (no lo he vuelto a verificar).",
+    "docs_url": "https://learn.microsoft.com/en-us/graph/auth/auth-concepts"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Microsoft tiene los Work IQ MCP servers (Agent 365), en PREVIEW (doc actualizada el 30-sep-2026): Mail, Calendar, SharePoint, OneDrive, Teams, Word, User y Copilot. Leen y escriben: crean y borran correos, eventos y chats, y suben ficheros. Exigen licencia Microsoft 365 Copilot. Se pueden usar desde Claude Code, VS Code o GitHub Copilot CLI: hay que registrar una app en Entra con el permiso del servidor (p. ej. WorkIQ-MailServer) y usar la URL https://agent365.svc.cloud.microsoft/agents/tenants/{tenantId}/servers/mcp_MailTools. El admin permite o bloquea cada servidor en el centro de administración de Microsoft 365, y cada llamada queda registrada en Defender. Aparte está el Microsoft MCP Server for Enterprise (preview), que solo cubre datos de Entra ID. Alternativas sin licencia Copilot: el conector Microsoft 365 de Claude (hecho por Anthropic, en todos los planes de Claude, SOLO LECTURA por defecto con escritura opcional; exige el consentimiento de un Global Admin y un tenant de empresa) y el comunitario Softeria/ms-365-mcp-server (unas 1k estrellas, con --read-only, --enabled-tools y modo org)."
+  },
+  "otras_vias": [
+    "Nodos nativos en n8n: Microsoft Outlook, Excel 365, OneDrive, SharePoint, Teams y To Do",
+    "Power Automate (los conectores estándar vienen con M365)",
+    "Change notifications de Graph (webhooks)",
+    "Make y Zapier",
+    "Exportación por eDiscovery/PST para el histórico"
+  ],
+  "rpa": "no hace falta para lo que está en la nube. Solo haría falta RPA de escritorio si los datos están en Excel o Access locales, o en Exchange/SharePoint Server on-premise sin publicar.",
+  "dificultad": "Media",
+  "permisos_acotados": "Usar permisos delegados de lectura: User.Read, Mail.ReadBasic o Mail.Read, Calendars.Read, y Files.Read (solo los ficheros del usuario) en lugar de Files.Read.All. SharePoint: Sites.Selected más una concesión 'read' solo en el sitio X (POST /sites/{id}/permissions). Para bajar a una lista, carpeta o fichero: Lists.SelectedOperations.Selected, ListItems.SelectedOperations.Selected o Files.SelectedOperations.Selected (delegados y de aplicación). Sin la concesión explícita, la app no ve nada. Buzones en modo app-only: RBAC for Applications de Exchange Online (sustituye a Application Access Policies) con un management scope o una unidad administrativa. Además hay que quitar el permiso sin acotar en Entra; si no, los dos se suman y el acotado no sirve. En la aplicación empresarial, poner 'Asignación requerida = Sí' y asignar solo al usuario o grupo autorizado. Mejor certificados que secretos. NO se puede acotar: Mail.Read lee todas las carpetas del buzón; Chat.Read lee todos los chats del usuario; para conceder Sites.Selected hace falta un admin con Sites.FullControl.All; con permisos delegados *.All, el agente ve todo lo que ve la persona.",
+  "pedir_al_informatico": "Registra en Entra ID una app para el asistente con permisos delegados de solo lectura (User.Read, Mail.Read, Calendars.Read, Files.Read) y, para SharePoint, Sites.Selected con rol 'read' solo en el sitio X. Da el consentimiento de administrador y activa 'Asignación requerida' solo para mi usuario. Si es un proceso sin usuario, limita los buzones con RBAC for Applications de Exchange.",
+  "demo_gratis": "Hay prueba de Microsoft 365 Business de 1 mes (es lo habitual, pero no lo verifiqué: las páginas de precios de Microsoft no cargaban). Gratis para siempre, pero limitado: una cuenta Microsoft personal (outlook.com) permite usar Graph con correo, calendario y OneDrive personal; no hay SharePoint, Teams ni consentimiento de admin, y el conector de Claude no admite cuentas personales. El sandbox E5 del Microsoft 365 Developer Program (25 licencias, 90 días renovables) solo lo reciben suscriptores de Visual Studio Pro/Enterprise, partners elegibles y clientes Premier/Unified (FAQ del 4-sep-2026), así que casi ninguna pyme califica. Work IQ MCP no entra en ninguna opción gratuita.",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "Graph: 0 € extra con cualquier plan de empresa. Microsoft subió los precios de lista el 1-jul-2026 (lo confirma su blog, pero las cifras solo aparecen en una imagen). Business Basic, unos 7 $/usuario/mes con compromiso anual: no verificado, y el precio en € tampoco. Work IQ MCP exige Microsoft 365 Copilot (unos 30 $/usuario/mes según terceros; no verificado).",
+  "coste_resumen": "0 € API; M365 Basic ~7 $/u/mes (n.v.)",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Solo si el correo o los ficheros siguen en Exchange/SharePoint Server on-premise, en un servidor de ficheros local o en Excel sueltos en el PC. Graph y los MCP solo ven la nube.",
+    "alternativas": [
+      "OneDrive/SharePoint Online y Exchange Online",
+      "Excel guardado en OneDrive en lugar de en el disco local"
+    ]
+  },
+  "fuentes": [
+    "https://learn.microsoft.com/microsoft-agent-365/tooling-servers-overview",
+    "https://support.claude.com/en/articles/12542951-enable-and-use-the-microsoft-365-connector",
+    "https://learn.microsoft.com/en-us/graph/permissions-selected-overview",
+    "https://learn.microsoft.com/en-us/exchange/permissions-exo/application-rbac",
+    "https://learn.microsoft.com/en-us/graph/auth/auth-concepts",
+    "https://learn.microsoft.com/en-us/office/developer-program/microsoft-365-developer-program-faq",
+    "https://github.com/Softeria/ms-365-mcp-server",
+    "https://office365itpros.com/2025/12/11/mcp-server-for-enterprise/",
+    "https://www.microsoft.com/en-us/microsoft-365/blog/2025/12/04/advancing-microsoft-365-new-capabilities-and-pricing-update/"
+  ],
+  "confianza": "media"
+}

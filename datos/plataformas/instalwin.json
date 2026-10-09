@@ -1,0 +1,57 @@
+{
+  "id": "instalwin",
+  "nombre": "InstalWin",
+  "nombre_completo": "InstalWin (Informel, Zaragoza; gestión para empresas instaladoras)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Informel"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "no",
+    "estilo": "No hay API pública de InstalWin. La API REST de Infordat (también de Informel) es otro producto: un catálogo de más de un millón de artículos de fabricantes, no los datos de la empresa.",
+    "auth": "No aplica.",
+    "requisitos": "No aplica.",
+    "docs_url": "https://www.informel.es/instalwin-software-de-gestion-dirigido-a-instaladores/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "Sin resultados en Glama para 'instalwin'."
+  },
+  "otras_vias": [
+    "Importar Excel; importar BC3 con el módulo Import_FieBDC (146 €, pago único).",
+    "Exportar asientos a Infconta.",
+    "El generador de informes SQL indica que la base de datos se puede consultar, pero el motor no está verificado.",
+    "App de partes IDM (web app móvil más IDM Manager en local). Lector de códigos de barras.",
+    "No hay nodo de n8n ni app de Make o Zapier. El dominio instalwin.es no resuelve: el producto está en informel.es."
+  ],
+  "rpa": "escritorio: para escribir (crear presupuestos o partes) no hay otra vía. Para leer, mejor exportaciones o informes SQL.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Sin API no hay tokens. Mínimo privilegio: exportaciones programadas a una carpeta, o un login de base de datos de solo lectura si Informel confirma el motor. Para RPA, un usuario propio de InstalWin con permisos limitados (roles internos no verificados). NO se puede acotar qué campos salen en las exportaciones ni auditar qué consulta la IA.",
+  "pedir_al_informatico": "Preguntar a Informel qué motor de base de datos usa InstalWin 7.x, si pueden dar un usuario de solo lectura o vistas, si hay exportación automática o por línea de comandos, y si tienen o planean una API.",
+  "demo_gratis": "Demo gratuita en la web de Informel ('Prueba gratuitamente nuestra DEMO'), sin duración indicada.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "Precios públicos anuales sin IVA por 1 puesto: Starter 270 €, Estándar 508 €, Profesional 687 €, PYME 855 €; cada puesto adicional, 85 €/año. Módulo FEB2B (VERI*FACTU + factura B2B): 700 € de pago único para 1 empresa. Ningún plan incluye API. Venta directa, sin partner.",
+  "coste_resumen": "sin API; desde 270 €/año",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Si hacen falta integraciones en tiempo real, una API o una app de campo moderna; si hay más de 10 técnicos de campo; o si, puestos a pagar el FEB2B, Informel sigue sin ofrecer API.",
+    "alternativas": [
+      "STEL Order (SaaS para instaladores y SAT con API REST; no verificado)",
+      "Odoo Field Service (API JSON-2 y nodo n8n)"
+    ],
+    "coste_esfuerzo_migracion": "2-10 k€ y 1-3 meses (estimación no verificada). Riesgos: perder la integración con Infordat, las certificaciones de obra y TicketBAI en el País Vasco."
+  },
+  "verifactu": "Informel dice estar adaptado mediante el módulo FEB2B (requiere la v7.07 o superior y certificado digital) y habla de 'autocertificación'; no se ha encontrado publicada la declaración responsable. Tiene certificación TicketBAI. Informel ya sitúa VERI*FACTU en octubre de 2028, en línea con el anuncio de Hacienda del 5-oct-2026, que todavía no tiene norma.",
+  "fuentes": [
+    "https://www.informel.es/",
+    "https://www.informel.es/instalwin-software-de-gestion-dirigido-a-instaladores/",
+    "https://www.informel.es/precios/",
+    "https://www.informel.es/factura-electronica/",
+    "https://www.informel.es/app-partes-trabajo-idm-informel-data-mobile/",
+    "https://www.softwaredoit.es/informel/informel.html",
+    "https://glama.ai/mcp/servers?query=instalwin"
+  ],
+  "confianza": "media"
+}

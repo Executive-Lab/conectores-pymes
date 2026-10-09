@@ -1,0 +1,56 @@
+{
+  "id": "google-ads",
+  "nombre": "Google Ads",
+  "nombre_completo": "Google Ads",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "AdWords"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "gRPC/REST con GAQL (Google Ads Query Language)",
+    "auth": "OAuth2 (usuario o service account). El developer token dejó de usarse el 9-sep-2026: el acceso depende ahora del proyecto de Google Cloud.",
+    "requisitos": "Gratis. El alta se hace en la página 'Google Ads API Overview' de Google Cloud Console, no en el API Center del MCC. Niveles del proyecto Cloud: Test (solo cuentas de prueba, 15.000 ops/día). Explorer (producción 2.880 ops/día; sin planificador de palabras clave, creación de cuentas, gestión de usuarios ni facturación; Google puede concederlo automáticamente). Basic (15.000 ops/día; exige verificación de marca y se aprueba en minutos). Standard (ilimitado; auditoría manual de unos 10 días hábiles). Ya no hace falta cuenta MCC. La cabecera developer-token se ignora y se rechazará en una versión futura. Según terceros, una política del 31-ago-2026 exige un proyecto Cloud dedicado por integración.",
+    "docs_url": "https://developers.google.com/google-ads/api/docs/api-policy/access-levels"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "googleads/google-ads-mcp (GitHub), documentado en developers.google.com (actualizado 30-sep-2026). SOLO LECTURA ('strictly read-only'): no cambia pujas, no pausa campañas, no crea activos. Herramientas: list_accessible_customers, search (GAQL) y get_resource_metadata. Corre en local por stdio con pipx o autoalojado en Cloud Run (HTTP). La última versión ya no pide developer token."
+  },
+  "otras_vias": [
+    "Nodo nativo Google Ads en n8n (operaciones limitadas; no re-verificado)",
+    "Informes programados por email/CSV y export a Google Sheets desde la interfaz",
+    "Make/Zapier"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "La API tiene un único scope OAuth (adwords) sin variante de solo lectura, así que se acota con el usuario. Invitar a una cuenta de Google dedicada con nivel de acceso 'Solo lectura' a la cuenta de Google Ads concreta (no al MCC) y autorizar el MCP con ella; además, el MCP oficial ya es de solo lectura por diseño. Lo que NO se puede acotar: la lectura por campaña, ni el scope OAuth.",
+  "pedir_al_informatico": "Que añada a una cuenta de Google dedicada con acceso 'Solo lectura' a la cuenta de Ads y cree un proyecto de Google Cloud propio para el arnés con nivel Explorer. Si el proyecto es nuevo, que compruebe que las credenciales OAuth salen del mismo proyecto que tiene el nivel aprobado.",
+  "demo_gratis": {
+    "opcion": "Cuenta de prueba (test manager account), gratis. Para datos reales: nivel Explorer sobre la cuenta real del alumno, solo lectura y sin gasto.",
+    "api_incluida": "sí",
+    "limites": "Las cuentas de prueba no sirven anuncios: impresiones, coste y conversiones salen vacíos. Máximo 50 cuentas por jerarquía; nivel Test 15.000 ops/día. Explorer: 2.880 ops/día en producción."
+  },
+  "demo_resumen": "gratis permanente",
+  "coste_demo": {
+    "plan": "Ninguno",
+    "precio": "0 €; API y MCP gratis, solo se paga la inversión publicitaria",
+    "facturacion": "n/a",
+    "verificado": "sí"
+  },
+  "coste_resumen": "0 € (solo inversión en anuncios)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.google.com/google-ads/api/docs/developer-toolkit/mcp-server",
+    "https://github.com/googleads/google-ads-mcp",
+    "https://developers.google.com/google-ads/api/docs/api-policy/developer-token",
+    "https://developers.google.com/google-ads/api/docs/api-policy/access-levels",
+    "https://developers.google.com/google-ads/api/docs/best-practices/test-accounts",
+    "https://ppc.land/google-drops-developer-tokens-from-ads-api-access-decisions/"
+  ],
+  "confianza": "alta"
+}

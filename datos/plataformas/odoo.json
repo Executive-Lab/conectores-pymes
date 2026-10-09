@@ -1,0 +1,68 @@
+{
+  "id": "odoo",
+  "nombre": "Odoo",
+  "nombre_completo": "Odoo (incluye Odoo CRM e Inventario)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Odoo CRM",
+    "Odoo Inventario",
+    "OpenERP"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "JSON-2 desde Odoo 19: POST /json/2/<modelo>/<método> (p. ej. crm.lead, sale.order, stock.quant, stock.picking, product.product), con documentación dinámica de cada base de datos en /doc. XML-RPC y JSON-RPC (/xmlrpc, /xmlrpc/2, /jsonrpc) siguen funcionando pero están en retirada: la doc 19.0 prevé eliminarlos en Odoo 22 (otoño de 2028). Un post del foro decía que en la 20; manda la doc oficial.",
+    "auth": "API key por usuario (Preferencias > Seguridad de la cuenta > Nueva clave API) en Authorization: Bearer, más la cabecera X-Odoo-Database si hay varias bases de datos. La caducidad es obligatoria: como máximo 3 meses en las claves manuales, así que hay que rotarlas. Scopes: 'rpc' (API) y MCP. XML-RPC acepta usuario y contraseña o API key.",
+    "requisitos": "Odoo Online: solo el plan Personalizado (22,90 €/usuario/mes con pago anual; 27,90 € mensual). 'Una aplicación gratis' y Estándar NO incluyen la API externa. Odoo.sh y on-premise (Community gratis o Enterprise): sin restricción de plan. Sin alta de partner.",
+    "docs_url": "https://www.odoo.com/documentation/19.0/developer/reference/external_api.html"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor MCP nativo en Odoo 20 (presentado el 24-sep-2026) y en Odoo Online saas-19.4. Endpoint https://<bd>.odoo.com/mcp con API key de scope MCP; la doc incluye Claude Desktop y Claude Code. Las herramientas son acciones de servidor. Por defecto solo hay herramientas de consulta (Get Models, Get Fields, Retrieve initial context, Search, Read group); las de escritura se exponen a mano ('Available in MCP'). La casilla 'Readonly Tool' solo evita que el cliente pida confirmación: NO es un control de seguridad. El MCP actúa con los permisos del usuario dueño de la clave. La doc no confirma qué edición ni qué plan hacen falta (según el foro, Enterprise y plan Personalizado; la app de IA no está en Community). Las funciones de IA consumen créditos IAP; no está claro si el MCP también. Comunitarios: erpipe-org/mcp-odoo (PyPI odoo-mcp 1.3.0, jul-2026, MIT, 41 herramientas, Odoo 16-19, JSON-2 opcional; escrituras desactivadas por defecto, con flujo preview/validate/execute) e ivnvxd/mcp-server-odoo (PyPI 0.8.0, ago-2026, MPL-2.0, XML-RPC, CRUD; necesita un módulo en Odoo o el modo de pruebas 'YOLO', que tiene opción 'read')."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Odoo (Contacto, Oportunidad, Nota y Recurso personalizado; credencial con API key y nombre de la base de datos; se puede usar como herramienta de un agente de IA). En Odoo Online exige el plan Personalizado.",
+    "Make: app Odoo verificada (20 módulos, con leads, lotes e inventario). Zapier: app 'Odoo CRM' (nuevo lead, crear lead, buscar contacto).",
+    "Webhooks de entrada y salida con las acciones automatizadas de Studio (Studio solo existe en Enterprise o en el plan Personalizado).",
+    "Importar y exportar CSV/XLSX de forma nativa desde cualquier vista de lista.",
+    "On-premise y Odoo.sh: PostgreSQL directo con un rol de solo lectura."
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Usuario interno 'bot' dedicado (lo recomienda la doc; puede quedarse sin contraseña para que no inicie sesión) con los grupos mínimos: p. ej. CRM/Ventas 'Usuario: solo sus documentos' e Inventario 'Usuario', sin acceso a Ajustes. Clave con scope rpc o MCP y caducidad corta. En el MCP nativo, no exponer herramientas de escritura. En on-premise, además, rol de PostgreSQL de solo lectura y firewall o IP allowlist. NO se puede acotar: no existen API keys de solo lectura; la clave hereda TODO lo que puede hacer el usuario, así que el límite real lo ponen los grupos, las reglas de registro y los permisos de campo. En Odoo Online el bot es un usuario interno y paga licencia. IP allowlist en Odoo Online: no verificado.",
+  "pedir_al_informatico": "Crear un usuario interno 'IA-bot' sin contraseña, con permisos solo de lectura en CRM, Ventas e Inventario, y generar desde su perfil una clave API con scope MCP (o rpc) y caducidad de 3 meses. Confirmar que estamos en el plan Personalizado (o en Odoo.sh / on-premise) y en la versión 19 o superior (JSON-2) o en la 20 / saas-19.4 (MCP nativo).",
+  "demo_gratis": "Odoo Community 19/20 instalado en local (Docker) es gratis para siempre e incluye la API JSON-2 completa, pero no la app de IA ni el MCP nativo. Odoo Online tiene prueba gratuita sin tarjeta (/trial no publica la duración; suele ser de 15 días, no verificado; tampoco está verificado que la API funcione en la prueba). 'Una aplicación gratis' es permanente, pero SIN API.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "Community on-premise: 0 € de licencia, más el alojamiento. Odoo Online con API y MCP: plan Personalizado a 22,90 €/usuario/mes con pago anual o 27,90 € en mensual (precios es_ES, oct-2026; descuento en la primera compra durante 12 meses). Sin partner.",
+  "coste_resumen": "0 € Community; Online 22,90 €/usu/mes",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Odoo es un destino, no un origen. Dentro de Odoo: pasar de Estándar a Personalizado para tener API; actualizar a 19/20 si la versión es antigua, no tiene soporte o no tiene el módulo VERI*FACTU; y pasar las integraciones de XML-RPC a JSON-2 antes de Odoo 22.",
+    "alternativas": [
+      "Microsoft Dynamics 365 Business Central (si Odoo se queda corto)"
+    ],
+    "coste_esfuerzo_migracion": "Subir de versión mayor: servicio de upgrade de Odoo (incluido en Enterprise) más 2-6 semanas de pruebas si hay módulos a medida (estimación). Riesgos: módulos de terceros u OCA sin portar e integraciones que siguen en XML-RPC."
+  },
+  "verifactu": "Sí: módulo oficial l10n_es_edi_verifactu (Odoo 18/19 y posteriores; para el TPV, l10n_es_edi_verifactu_pos), con la declaración responsable de Odoo descargable en la doc. Arranca en modo de prueba y necesita certificado. No aplica a quien está en el SII ni en TicketBAI. También genera Facturae (l10n_es_edi_facturae).",
+  "fuentes": [
+    "https://www.odoo.com/documentation/19.0/developer/reference/external_api.html",
+    "https://www.odoo.com/documentation/20.0/applications/productivity/ai/mcp_server.html",
+    "https://www.odoo.com/documentation/saas-19.4/applications/productivity/ai/mcp_server.html",
+    "https://www.odoo.com/odoo-20-release-notes",
+    "https://www.odoo.com/forum/help-1/odoo-mcp-server-overview-awesome-list-309347",
+    "https://www.odoo.com/es_ES/pricing",
+    "https://www.odoo.com/es_ES/trial",
+    "https://www.odoo.com/documentation/19.0/es/applications/finance/fiscal_localizations/spain.html",
+    "https://www.odoo.com/documentation/19.0/applications/studio/automated_actions/webhooks.html",
+    "https://docs.n8n.io/integrations/builtin/credentials/odoo/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.odoo/",
+    "https://www.make.com/en/integrations/odoo",
+    "https://zapier.com/apps/odoo/integrations",
+    "https://github.com/erpipe-org/mcp-odoo",
+    "https://pypi.org/pypi/odoo-mcp/json",
+    "https://github.com/ivnvxd/mcp-server-odoo",
+    "https://pypi.org/pypi/mcp-server-odoo/json"
+  ],
+  "confianza": "alta"
+}

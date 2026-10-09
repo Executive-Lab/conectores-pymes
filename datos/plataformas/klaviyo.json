@@ -1,0 +1,47 @@
+{
+  "id": "klaviyo",
+  "nombre": "Klaviyo",
+  "nombre_completo": "Klaviyo",
+  "categoria": "crm-email",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (versionada por fecha, p. ej. 2026-04-15)",
+    "auth": "Clave privada (pk_…) con scopes Read-only, Full o Custom por recurso. OAuth para partners.",
+    "requisitos": "Solo los roles Owner, Admin o Manager crean claves. Una clave no se puede editar: para cambiar scopes hay que borrarla y crear otra. Que la API esté en el plan gratis no lo indica la página de precios (no verificado).",
+    "docs_url": "https://developers.klaviyo.com/en/docs/authenticate_"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Remoto (recomendado): https://mcp.klaviyo.com/mcp con OAuth y registro dinámico de cliente. Requiere rol Owner, Admin o Manager. Admite parámetros en la URL: read-only=true, disable-tools-with-user-generated-content=true, toolsets=profiles:read,campaigns:read y core-tools-only. Local: uvx klaviyo-mcp-server con PRIVATE_API_KEY y READ_ONLY=true. Ojo: el conector listado en Claude no admite esos parámetros; para usarlos hay que añadirlo como conector personalizado (planes Pro, Max, Team o Enterprise)."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo; usar HTTP Request",
+    "Make y Zapier",
+    "Webhooks y flows",
+    "Integraciones nativas con Shopify y WooCommerce",
+    "Exportar perfiles a CSV"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "El mejor del grupo. En el MCP remoto: ?read-only=true&disable-tools-with-user-generated-content=true&toolsets=profiles:read,campaigns:read,metrics:read. En el local o en n8n: clave privada Custom con solo Read en Accounts, Campaigns, Flows, Lists, Metrics, Profiles y Segments. Lo que no se acota: el MCP remoto exige rol Owner, Admin o Manager (no sirve un usuario Analyst), y la clave privada no caduca sola.",
+  "pedir_al_informatico": "Añade Klaviyo a Claude como conector personalizado con la URL https://mcp.klaviyo.com/mcp?read-only=true&disable-tools-with-user-generated-content=true. Para n8n, crea una clave privada 'Custom' solo con permisos Read.",
+  "demo_gratis": "Plan gratis indefinido: 250 perfiles activos y 500 emails al mes, más 5 US$ de SMS y 5 US$ de Composer al mes. No verificado en la página de precios que la API y el MCP estén incluidos (probable, porque no hay restricción documentada).",
+  "coste_demo": "Plan Email de pago: la página oficial no mostró precios en la descarga (USD). Precio y modalidad no verificados.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 $ (Free; API no verificada)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.klaviyo.com/en/docs/klaviyo_mcp_server",
+    "https://developers.klaviyo.com/en/docs/connect_to_the_klaviyo_mcp_server",
+    "https://developers.klaviyo.com/en/docs/authenticate_",
+    "https://community.klaviyo.com/accounts-and-settings-2/how-to-restrict-claude-s-data-access-when-using-the-klaviyo-mcp-connector-19365",
+    "https://www.klaviyo.com/pricing",
+    "https://n8n.io/integrations/klaviyo/"
+  ],
+  "confianza": "alta"
+}

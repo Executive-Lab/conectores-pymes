@@ -1,0 +1,62 @@
+{
+  "id": "data-studio",
+  "nombre": "Data Studio",
+  "nombre_completo": "Looker Studio (desde abril de 2026 vuelve a llamarse Data Studio)",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "Looker Studio",
+    "Google Data Studio"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "limitada",
+    "estilo": "REST (Data Studio API: assets:search y gestión de permisos de activos)",
+    "auth": "OAuth2 con delegación de dominio (domain-wide delegation)",
+    "requisitos": "Solo para usuarios de una organización con Google Workspace o Cloud Identity. Un admin de Workspace autoriza el Client ID y los scopes en la consola de administración. La API solo busca y gestiona activos (informes, fuentes de datos); NO devuelve los datos de los informes. Página actualizada 13-may-2026.",
+    "docs_url": "https://developers.google.com/looker-studio/integrate/api"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No hay MCP oficial para Data Studio. Google solo tiene MCP oficial para Looker (el producto enterprise): el Looker-managed MCP server, en preview desde el 27-may-2026. Hay intermediarios comerciales (viaSocket) que no aportan acceso a los datos que la API no da."
+  },
+  "otras_vias": [
+    "Conectar la IA directamente a las fuentes (GA4 con MCP, BigQuery, Google Sheets)",
+    "Envío programado de informes por email en PDF",
+    "Descarga CSV o a Sheets de cada gráfico",
+    "Conectores comunitarios (Apps Script) para meter datos en Data Studio"
+  ],
+  "rpa": "navegador, solo si hay que 'ver' o capturar el dashboard; normalmente no hace falta porque los datos ya están en las fuentes",
+  "dificultad": "Difícil",
+  "permisos_acotados": "En la API existe el scope datastudio.readonly (más estrecho que datastudio), pero la delegación de dominio autoriza la app para toda la organización. Mínimo privilegio real: no conectar Data Studio y dar lectura en las fuentes (Lector en GA4, lector en la hoja o el dataset). Lo que NO se puede: leer los datos de un informe a través de la API.",
+  "pedir_al_informatico": "No pedir acceso a la API de Data Studio. Pedir acceso de solo lectura a las fuentes que alimentan los dashboards: propiedad GA4, Google Sheets y dataset de BigQuery.",
+  "demo_gratis": {
+    "opcion": "Producto gratuito permanente.",
+    "api_incluida": "limitada",
+    "limites": "La API exige Workspace o Cloud Identity y delegación de dominio. Que Cloud Identity Free sirva para esto no está verificado. La API no da datos."
+  },
+  "demo_resumen": "gratis permanente",
+  "coste_demo": {
+    "plan": "Data Studio gratis; Data Studio Pro (antes Looker Studio Pro)",
+    "precio": "Gratis. Pro: unos 9 $ por usuario y proyecto al mes (no verificado)",
+    "facturacion": "no verificado",
+    "verificado": "no"
+  },
+  "coste_resumen": "0 € (API sin datos; requiere Workspace)",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Si el objetivo es que la IA lea o genere dashboards: Data Studio no expone los datos por API.",
+    "alternativas": [
+      "Leer directamente las fuentes (GA4, BigQuery, Sheets) y dejar Data Studio solo como visor",
+      "Power BI (MCP oficial) o Looker (MCP gestionado en preview) si necesitan BI con IA"
+    ]
+  },
+  "fuentes": [
+    "https://developers.google.com/looker-studio/integrate/api",
+    "https://cloud.google.com/looker-studio",
+    "https://docs.cloud.google.com/looker/docs/mcp",
+    "https://www.dataslayer.ai/blog/looker-studio-data-studio-rebrand-2026",
+    "https://www.usecarly.com/blog/claude-looker-studio-integration/"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,63 @@
+{
+  "id": "holded",
+  "nombre": "Holded",
+  "nombre_completo": "Holded",
+  "categoria": "erp-contabilidad",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON. API v2 con especificación OpenAPI (https://api.holded.com/api/v2), unas 350 operaciones: ventas, compras, pagos, tesorería, contabilidad, catálogo, equipo, CRM, proyectos y webhooks. La v1 (cabecera 'key') figura como deprecada en holded.com/llms.txt.",
+    "auth": "Token personal (PAT 'pat_<id>_<secret>') en Authorization: Bearer (v2). Se crea en Ajustes > Desarrolladores > Credenciales > Añadir token API, eligiendo permisos por módulo. Límite de 100 peticiones/min por clave según el README de un MCP comunitario (no verificado oficialmente).",
+    "requisitos": "Cualquier plan de pago (no el Free). Usuario con rol Developer o rol personalizado con acceso a 'Desarrolladores'. Autoservicio, sin alta de partner. Límite mensual de llamadas según plan (visible en Ajustes > Desarrolladores > Uso de API).",
+    "docs_url": "https://help.holded.com/es/articles/6896051 ; https://developers.holded.com (redirige a https://www.holded.com/es/desarrolladores)"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "Holded no publica MCP oficial (ni en su web de desarrolladores ni en llms.txt). Comunitarios: (1) @t4dhg/mcp-holded v2.1.1 (npm, 8-sep-2026, MIT): solo API v2, 15 herramientas incluidos webhooks y 'holded_request' para llamar a cualquier endpoint; lee y escribe, con una confirmación (confirm:true) que el propio autor dice que 'no es una frontera de autorización'. (2) energio-es/holded-mcp (@energio/holded-mcp v1.5.1, 1-jul-2026, MIT, stdio): lee, escribe y borra; filtra módulos con HOLDED_MODULES; sin modo de solo lectura; no indica versión de API (probablemente v1)."
+  },
+  "otras_vias": [
+    "Make: app Holded verificada (38 módulos de crear, leer, listar, actualizar y borrar, más 'Make an API Call').",
+    "Zapier: app Holded (6 disparadores: nuevo contacto, deal, factura de venta, factura de compra, pedido y ticket de venta; 18 acciones).",
+    "n8n: sin nodo nativo verificado; usar el nodo HTTP Request con Bearer.",
+    "Webhooks: disponibles en la API v2 (suscripciones a eventos); la v1 no los tenía.",
+    "Importar y exportar Excel/CSV desde la interfaz.",
+    "Agregadores: Nango (holded-v2)."
+  ],
+  "rpa": "no hace falta: la API v2 cubre casi todos los módulos.",
+  "dificultad": "Media",
+  "permisos_acotados": "Crear un token v2 por uso, con permiso de 'lectura' solo en los módulos necesarios (Ventas, Inventario, Contabilidad, Tesorería, Contactos, CRM y Proyectos admiten lectura, escritura o todo). Otro token aparte, con escritura solo en el módulo que se vaya a automatizar. Revocar las claves v1 antiguas. NO se puede acotar: el token no hereda el rol del usuario y ve todos los endpoints de la cuenta dentro de los módulos concedidos; no hay filtro por registro, IP allowlist ni caducidad documentada; el límite de llamadas es por cuenta. Conflicto: un análisis de terceros (Supergood, sep-2026) dice que las claves no se pueden acotar y que solo la primera escribe; la ayuda oficial lo contradice.",
+  "pedir_al_informatico": "Que el administrador cree en Ajustes > Desarrolladores > Credenciales un token API v2 'IA-lectura' con permiso solo de lectura en Ventas, Contactos y Contabilidad, y otro distinto con escritura solo en el módulo que vayamos a automatizar. Que revoque cualquier clave v1 antigua que siga activa.",
+  "demo_gratis": "Prueba de 14 días sin tarjeta en todos los planes. No está verificado que la sección Desarrolladores funcione durante la prueba: la ayuda exige un 'plan activo distinto de Free' y Supergood dice que la API no está incluida en la prueba. No hay sandbox ni cuenta de desarrollador.",
+  "demo_resumen": "prueba 14 días",
+  "coste_demo": "El plan más barato con API es Plus (autónomos, 1 usuario): 15 €/mes sin IVA, o 7,50 €/mes los 3 primeros meses con la promoción vigente en septiembre de 2026. Para pymes, Básico: 29 €/mes (2 usuarios). Periodicidad mensual o anual no verificada. Sin alta de partner. Que Plus incluya la API se deduce de la ayuda ('todos los planes de pago'); la tabla de precios no lo dice.",
+  "coste_resumen": "15 €/mes (Plus, sin IVA)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Casi nunca por conectividad. Solo si la empresa pasa a necesitar un ERP (fabricación compleja, multialmacén avanzado, consolidación multiempresa, más de 15 usuarios) o si la gestoría exige otro sistema.",
+    "alternativas": [
+      "Odoo (plan Personalizado)",
+      "Microsoft Dynamics 365 Business Central"
+    ],
+    "coste_esfuerzo_migracion": "Si se migrase: 4-12 semanas con partner y 3-15 k€ (estimación, no verificada). Riesgos: el histórico contable (migrar saldos de apertura y guardar los libros exportados), cerrar las series VERI*FACTU y la formación."
+  },
+  "verifactu": "Adaptado según Holded: 'todos los planes incluyen facturación con Verifactu' (verificado por guiafacturacion.es el 23-sep-2026). Declaración responsable no localizada públicamente: pedirla.",
+  "fuentes": [
+    "https://help.holded.com/es/articles/6896051",
+    "https://help.holded.com/en/articles/6896051",
+    "https://www.holded.com/llms.txt",
+    "https://supergood.ai/api-report-card/holded",
+    "https://nango.dev/docs/api-integrations/holded-v2/connect",
+    "https://github.com/t4dhg/mcp-holded",
+    "https://registry.npmjs.org/@t4dhg/mcp-holded",
+    "https://registry.npmjs.org/@energio/holded-mcp",
+    "https://mcp.directory/servers/holded-mcp",
+    "https://glama.ai/mcp/servers/hixup2ipta",
+    "https://apps.make.com/holded",
+    "https://zapier.com/apps/holded/integrations",
+    "https://guiafacturacion.es/software/holded/",
+    "https://guiafacturacion.es/"
+  ],
+  "confianza": "media"
+}

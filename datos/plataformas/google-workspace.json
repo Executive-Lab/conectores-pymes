@@ -1,0 +1,65 @@
+{
+  "id": "google-workspace",
+  "nombre": "Google Workspace",
+  "nombre_completo": "Google Workspace (Gmail, Drive, Sheets, Calendar, Meet)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Gmail",
+    "Drive",
+    "Sheets",
+    "Calendar",
+    "Meet",
+    "G Suite"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST por servicio (Gmail, Drive, Sheets, Calendar, Meet REST API). Avisos push: Gmail por Pub/Sub, watch de Drive y Calendar, y Workspace Events API para Meet.",
+    "auth": "OAuth 2.0 de usuario o cuenta de servicio. Sin delegación de dominio, la cuenta de servicio solo ve lo que se le comparte. Con delegación de dominio puede suplantar a cualquier usuario.",
+    "requisitos": "Proyecto de Google Cloud gratis; las APIs no cuestan nada dentro de la cuota. Con pantalla de consentimiento 'Interna' (solo Workspace) no hace falta verificación. Con 'Externa' publicada sí hace falta, y los scopes restringidos (gmail.readonly, drive.readonly) exigen además una evaluación de seguridad anual. En 'Testing' externo hay un máximo de 100 usuarios de prueba y los refresh tokens caducan a los 7 días. Desde el 1-may-2026 Gmail, Drive y Calendar tienen cuotas por niveles. Más adelante en 2026 lo que supere la cuota estándar se cobrará, con 90 días de aviso.",
+    "docs_url": "https://developers.google.com/workspace/guides/configure-mcp-servers"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidores MCP remotos de Google en Developer Preview, desplegados desde el 1-may-2026: gmailmcp, drivemcp, docsmcp, sheetsmcp, slidesmcp, calendarmcp y chatmcp (.googleapis.com/mcp/v1), más People. Funcionan por Streamable HTTP con OAuth y un cliente OAuth propio. Requieren cuenta Workspace y alta en el Workspace Developer Preview Program, que se aprueba en un par de días. La escritura está acotada: Gmail lee, crea borradores y etiqueta, pero NO envía. Drive lee, crea y copia. Sheets lee y actualiza valores y fórmulas. Calendar lee, crea, modifica y borra eventos. Meet no tiene servidor MCP. Alternativas: los conectores de Google Workspace de Claude (hechos por Anthropic, en todos los planes; Gmail envía previa aprobación) y el comunitario taylorwilsdon/google_workspace_mcp (unas 3,3k estrellas, con --read-only, niveles de herramientas, OAuth 2.1 y delegación de dominio)."
+  },
+  "otras_vias": [
+    "Nodos nativos en n8n: Gmail, Google Drive, Google Sheets y Google Calendar, con triggers",
+    "Make y Zapier: conectores nativos",
+    "Apps Script dentro de Workspace",
+    "Meet REST API: registros de reunión, grabaciones y transcripciones (se guardan en el Drive del organizador)",
+    "Google Takeout para exportar"
+  ],
+  "rpa": "no hace falta: todos los servicios tienen API.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Usar scopes estrechos: drive.file (no sensible; solo ve los ficheros que crea la app o que elige el usuario), gmail.metadata o gmail.readonly, spreadsheets.readonly y calendar.events.readonly. Para hojas o carpetas concretas, lo más limpio es una cuenta de servicio SIN delegación de dominio y compartir con ella solo esa carpeta u hoja como Lector. En admin.google.com > Seguridad > Acceso y control de datos > Controles de API: poner la app en 'Datos específicos de Google' (solo los scopes indicados), restringir Gmail y Drive a las apps de confianza y bloquear los scopes de alto riesgo (enviar correo, borrar ficheros). Todo esto se puede aplicar por unidad organizativa. Si el agente necesita buzón propio, usar un usuario dedicado. NO se puede acotar: gmail.readonly da el buzón entero (no hay scope por etiqueta); calendar.readonly da todos los calendarios del usuario; la delegación de dominio limita scopes pero NO qué usuarios se suplantan (Google recomienda evitarla); y el MCP oficial hereda todos los permisos del usuario que lo autoriza.",
+  "pedir_al_informatico": "En admin.google.com > Controles de API, da a la app del asistente acceso 'Datos específicos de Google' con solo scopes de lectura (gmail.readonly, drive.file, spreadsheets.readonly, calendar.events.readonly), y crea el proyecto de Google Cloud con pantalla de consentimiento 'Interna'. Para las hojas o carpetas concretas, compártelas solo con una cuenta de servicio sin delegación de dominio.",
+  "demo_gratis": "Gratis para siempre con una cuenta Gmail personal y un proyecto de Google Cloud: las APIs y los nodos de n8n funcionan, pero en 'Testing' externo el refresh token caduca a los 7 días y no hay consola de admin. Para enseñar los controles de admin, prueba de Google Workspace de 14 días. El MCP oficial (preview) pide cuenta Workspace y alta en el Developer Preview Program. Los conectores Google de Claude funcionan en todos los planes de Claude.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "APIs: 0 €. Business Starter: 6,80 €/usuario/mes en plan flexible (pago mensual), sin IVA. Con compromiso anual sale un 16 % más barato. La web enseña además una promoción temporal a 5,44 € (workspace.google.com/intl/es/pricing, consultada el 9-oct-2026).",
+  "coste_resumen": "0 € API; Workspace 6,80 €/u/mes",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Solo si la empresa trabaja con cuentas @gmail.com personales o con Excel sueltos y carpetas en el PC. En ese caso conviene pasar a Workspace (consola de admin, app interna sin verificación, MCP oficial) y a Drive y Sheets compartidos.",
+    "alternativas": [
+      "Google Workspace Business Starter con unidad compartida",
+      "Google Sheets en lugar de Excel local"
+    ]
+  },
+  "fuentes": [
+    "https://workspaceupdates.googleblog.com/2026/05/agent-tools-and-security-updates-for-workspace-developers.html",
+    "https://developers.google.com/workspace/guides/configure-mcp-servers",
+    "https://developers.google.com/workspace/tools-safety",
+    "https://developers.google.com/workspace/preview",
+    "https://developers.google.com/identity/protocols/oauth2",
+    "https://support.google.com/cloud/answer/13464321",
+    "https://knowledge.workspace.google.com/admin/apps/control-which-apps-access-google-workspace-data",
+    "https://knowledge.workspace.google.com/admin/apps/domain-wide-delegation-best-practices",
+    "https://developers.google.com/workspace/meet/api/guides/overview",
+    "https://support.claude.com/en/articles/10166901-use-google-workspace-connectors",
+    "https://github.com/taylorwilsdon/google_workspace_mcp",
+    "https://workspace.google.com/intl/es/pricing"
+  ],
+  "confianza": "alta"
+}

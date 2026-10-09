@@ -1,0 +1,63 @@
+{
+  "id": "whatsapp-business",
+  "nombre": "WhatsApp Business",
+  "nombre_completo": "WhatsApp Business (app) / WhatsApp Business Platform (Cloud API de Meta)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "WhatsApp",
+    "WhatsApp Business Platform",
+    "WhatsApp Cloud API"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "La app WhatsApp Business NO tiene API. La WhatsApp Business Platform sí: Cloud API, que es REST sobre la Graph API de Meta, más webhooks. No hay endpoint para leer el historial: los mensajes llegan por webhook a partir del momento en que se conecta. En coexistencia se pueden importar los chats 1:1 de los últimos 180 días al darse de alta.",
+    "auth": "Token de un usuario del sistema (System User) del Meta Business portfolio, con los permisos whatsapp_business_messaging y whatsapp_business_management.",
+    "requisitos": "Hace falta un Meta Business portfolio, una app en developers.facebook.com, nombre visible aprobado y método de pago; verificar la empresa sube los límites de envío. Se puede dar de alta directamente con Meta, sin BSP. Pero para mantener el número en la app (coexistencia) el alta tiene que hacerla un Solution Partner o Tech Provider, es decir, en la práctica un BSP. Para iniciar conversación hay que usar plantillas aprobadas; los mensajes libres solo caben en la ventana de 24 h desde el último mensaje del cliente. Se puede automatizar, siempre que haya escalado a un humano. Desde el 15-ene-2026 está prohibido ofrecer asistentes de IA generalistas como función principal; los bots de atención de la propia empresa siguen permitidos.",
+    "docs_url": "https://developers.facebook.com/documentation/business-messaging/whatsapp/get-started"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "No he encontrado ningún MCP oficial de Meta. Hay servidores comunitarios que envuelven la Cloud API oficial (codechap/mcp-server-whatsapp, networkerman/whatsapp-cloud-api-mcp-server): son poco maduros, leen y envían, y respetan plantillas y ventana. El más popular, lharries/whatsapp-mcp (unas 5,9k estrellas, con whatsmeow), en cambio se conecta como WhatsApp Web escaneando un QR: incumple los términos y pone en riesgo el número."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo WhatsApp Business Cloud (enviar, enviar plantilla, enviar y esperar respuesta, media) y WhatsApp Trigger (mensajes, estado de plantillas, calidad del número)",
+    "Make y Zapier",
+    "BSPs (Twilio, Vonage, 360dialog, etc.) con bandeja compartida y API propia",
+    "Anuncios Click-to-WhatsApp (abren una ventana gratuita de 72 h)",
+    "Exportación manual de chats desde la app (sin API)"
+  ],
+  "rpa": "no hace falta con la Cloud API. Para la app sin API, la única vía es automatizar WhatsApp Web en el navegador (whatsapp-web.js, Baileys, whatsmeow): incumple los términos, Meta detecta clientes no oficiales y el bloqueo va al número, a veces para siempre. Hay casos incluso con poco volumen. No se recomienda.",
+  "dificultad": "Media",
+  "permisos_acotados": "Crear un usuario del sistema dedicado en el Business Manager, asignarle SOLO la WABA (cuenta de WhatsApp Business) y la app, y darle solo los dos permisos. Un token por integración, guardado en un gestor de secretos, y validar la firma de los webhooks con el app secret. Si el agente solo tiene que leer, darle únicamente el flujo del webhook (p. ej. WhatsApp Trigger de n8n) y no el token de envío. Las plantillas pasan por aprobación de Meta, así que los envíos en frío ya están limitados. En coexistencia, lo que escriben las personas desde la app también llega a la API: la integración ve todos los chats 1:1 (los grupos no). NO se puede acotar: no existe scope de solo lectura (whatsapp_business_messaging envía y recibe), no se puede limitar a ciertos contactos y el token del sistema vale hasta que se revoca.",
+  "pedir_al_informatico": "Da de alta nuestro número en la WhatsApp Business Platform en modo coexistencia, a través de un BSP o Tech Provider, para seguir usando la app en el móvil. Crea un usuario del sistema con acceso solo a esa WABA y los permisos whatsapp_business_messaging y whatsapp_business_management, y guarda el token en un gestor de secretos. Nada de librerías no oficiales (whatsapp-web.js, Baileys).",
+  "demo_gratis": "Al añadir WhatsApp a una app de Meta se recibe gratis un número de prueba de la Cloud API (+1 555…) con una WABA de prueba que no factura. Puede enviar a un máximo de 5 números verificados y trae la plantilla hello_world aprobada. Funciona con los nodos de n8n. Los clientes no pueden escribirle, y las plantillas que se creen no pasan después al número real. No confundirlo con el sandbox de Embedded Signup (30 días y sin mensajería).",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "La Cloud API directa no tiene cuota fija; Meta cobra por cada plantilla entregada según el país del destinatario. España, en EUR y sin IVA, con tarifas desde el 1-jul-2026: marketing entre 0,051 y 0,059 € y utilidad/autenticación unos 0,0166 €. Estas cifras son de terceros; no pude abrir el CSV de Meta, así que están sin verificar. Mensajes de servicio (respuestas libres en la ventana de 24 h): gratis hasta el 30-sep-2026. Según varios BSP (Vonage, Wati, SendPulse, respond.io), desde el 1-oct-2026 los 1.000 primeros al mes por número siguen gratis y el resto se cobra a tarifa de utilidad; además, las plantillas de utilidad dentro de la ventana dejan de ser gratis. La página de precios de Meta que pude leer todavía no lo recoge: verificar. Lo que se envía desde la app en coexistencia sigue siendo gratis. Si hay BSP, se suma su cuota (no verificada).",
+  "coste_resumen": "0 € fijo; ~0,017-0,06 €/plantilla",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Si solo usan la app WhatsApp Business y quieren que la IA lea o responda, hay que pasar el número a la Cloud API en coexistencia. Siguen con la app en el móvil, pero: necesita app 2.24.17 o superior y alta mediante partner; el envío queda en 20 msg/s fijos; se desactivan las listas de difusión, los mensajes temporales y los de 'ver una vez'; los grupos no se sincronizan; y si el móvil pasa unos 14 días sin abrir la app, se desconecta.",
+    "alternativas": [
+      "Número nuevo dedicado solo a la API, sin coexistencia",
+      "Bot de Telegram para avisos internos del equipo"
+    ]
+  },
+  "fuentes": [
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/pricing",
+    "https://developers.facebook.com/documentation/business-messaging/whatsapp/embedded-signup/onboarding-business-app-users",
+    "https://developers.facebook.com/docs/whatsapp/cloud-api/get-started/",
+    "https://whatsappbusiness.com/es-la/products/platform-pricing/",
+    "https://whatsappbusiness.com/policy/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.whatsapp/",
+    "https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.whatsapptrigger/",
+    "https://www.dragapp.com/blog/whatsapp-mcp-server/",
+    "https://techcrunch.com/2025/10/18/whatssapp-changes-its-terms-to-bar-general-purpose-chatbots-from-its-platform/",
+    "https://chatmaxima.com/whatsapp-api-pricing/spain/",
+    "https://sendpulse.com/blog/whatsapp-service-message-pricing",
+    "https://help.meetergo.com/en/integrations/automation/whatsapp-pricing",
+    "https://telnyx.com/release-notes/whatsapp-coexistence"
+  ],
+  "confianza": "media"
+}

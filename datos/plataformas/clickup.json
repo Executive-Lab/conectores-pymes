@@ -1,0 +1,46 @@
+{
+  "id": "clickup",
+  "nombre": "ClickUp",
+  "nombre_completo": "ClickUp",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST con JSON. La v2 es el núcleo (en ella 'team' significa workspace) y la v3 cubre partes nuevas, como Docs. Tiene webhooks.",
+    "auth": "Dos opciones, ninguna con scopes. Token personal (pk_…): no caduca y vale para todos los workspaces del usuario. OAuth 2.0: la app la crea un owner o admin, cada usuario elige los workspaces y el token tampoco caduca.",
+    "requisitos": "Incluida en todos los planes, Free Forever incluido. Límite por token: 100 peticiones/min en Free, Unlimited y Business; 1.000 en Business Plus; 10.000 en Enterprise.",
+    "docs_url": "https://developer.clickup.com/docs/authentication"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "ClickUp MCP Server remoto en https://mcp.clickup.com/mcp. Solo acepta OAuth 2.1 con PKCE (rechaza tokens personales) y solo clientes de una lista blanca: Claude Code, Claude Desktop, Cursor, VS Code, ChatGPT, Copilot Studio y Make, entre otros. Lee y escribe tareas, Docs, comentarios, time tracking y listas. Su única herramienta destructiva es borrar tarea, que pide confirmación. Está en todos los planes. Cupo por workspace, compartido entre todos los clientes: 100 llamadas cada 24 h en Free, 300 en Unlimited, 1.000 en Business y 2.500 en Business Plus. No dice si es beta o GA (doc del 07-10-2026)."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo ClickUp",
+    "Webhooks",
+    "Make y Zapier",
+    "Exportación CSV/Excel"
+  ],
+  "rpa": "no hace falta.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "No hay scopes ni tokens de solo lectura. La única forma de acotar es un usuario dedicado 'bot-ia' con acceso solo a los Spaces, Folders y Lists necesarios (con permiso de ver o comentar si el plan lo permite) y, en OAuth, autorizar solo un workspace. Por MCP no se ven los espacios privados. NO se puede acotar: no hay token de solo lectura, la herramienta de borrar tarea no se puede quitar, en Free no se pueden cambiar los permisos de los invitados, y no consta ningún interruptor de admin para apagar el MCP.",
+  "pedir_al_informatico": "Crea un usuario 'bot-ia' que solo tenga acceso a los espacios o listas que vamos a usar y conéctalo por OAuth, nunca con el token personal del dueño. Revisa de vez en cuando las apps autorizadas en Ajustes > Apps.",
+  "demo_gratis": "Free Forever, gratis para siempre, con API (100 peticiones/min) y MCP (100 llamadas cada 24 h por workspace, compartidas). En clase, un workspace por alumno, o el cupo se acaba enseguida.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € con Free. Unlimited: 7 $/usuario/mes anual o 10 $ mensual. La misma página enseña también 'Core' a 8 $ anual: los precios están cambiando, hay que comprobarlos al comprar. El add-on Everything AI, que sube los cupos del MCP, cuesta 28 $/usuario/mes.",
+  "coste_resumen": "0 € (Free Forever)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developer.clickup.com/docs/connect-an-ai-assistant-to-clickups-mcp-server",
+    "https://developer.clickup.com/docs/authentication",
+    "https://developer.clickup.com/docs/rate-limits",
+    "https://clickup.com/pricing",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.clickup/",
+    "https://help.clickup.com/hc/en-us/articles/38503227973655-Connect-an-MCP-server-to-your-Workspace"
+  ],
+  "confianza": "alta"
+}

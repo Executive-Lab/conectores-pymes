@@ -1,0 +1,54 @@
+{
+  "id": "power-automate",
+  "nombre": "Power Automate",
+  "nombre_completo": "Power Automate",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Microsoft Flow"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "Disparador HTTP 'When an HTTP request is received' (premium) para lanzar un flujo; la gestión de flujos se hace por conectores o Dataverse.",
+    "auth": "El disparador HTTP admite tres modos: 'Specific users in my tenant' (usuarios o service principal), 'Any user in my tenant' o 'Anyone' (heredado; el único secreto es la URL con firma SAS). Con OAuth de Entra, el token debe llevar aud https://service.flow.microsoft.com/.",
+    "requisitos": "Licencia Premium: el disparador HTTP y los conectores personalizados son premium, y Microsoft 365 solo trae los estándar. Además, registro de app en Entra y un administrador del tenant.",
+    "docs_url": "https://learn.microsoft.com/en-us/power-automate/oauth-authentication"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Oficial pero INDIRECTO: los flujos de nube no se exponen como MCP de forma nativa. CONSUME a través de Copilot Studio (solo streamable HTTP, gobernado por DLP); los agentes pueden usar agent flows como herramientas. EXPONE, todo en preview: el canal 'MCP client' de Copilot Studio (publica un agente como servidor MCP, solo en entornos early release, gasta Copilot Credits) y el Microsoft MCP Management server de Agent 365, que crea servidores MCP a partir de conectores, Graph o REST y hoy solo pueden publicar los administradores del tenant."
+  },
+  "otras_vias": [
+    "Disparador HTTP (premium)",
+    "Más de 1.000 conectores y conectores personalizados (OpenAPI)",
+    "Agent flows de Copilot Studio",
+    "Power Automate Desktop"
+  ],
+  "rpa": "no hace falta para los flujos de nube. OJO: Power Automate Desktop ES una herramienta RPA de escritorio. Es gratis en Windows para lanzarla a mano, pero lanzarla desde la nube exige Premium (attended) o Process (unattended). El arnés solo llega a un flujo de PAD a través de un flujo de nube.",
+  "dificultad": "Media",
+  "permisos_acotados": "Disparador HTTP en 'Specific users in my tenant' con un service principal o usuario dedicado, un flujo por acción, conexiones de cuenta de servicio con mínimo privilegio, entornos separados y DLP para limitar conectores. En Agent 365, aprobar o bloquear servidores MCP en el centro de administración de M365. NO se puede acotar: en modo 'Anyone' cualquiera con la URL lanza el flujo; en servidores MCP propios (BYO) todavía no se pueden bloquear herramientas sueltas; y el canal MCP de Copilot Studio expone el agente entero.",
+  "pedir_al_informatico": "Necesito una licencia Power Automate Premium (o un entorno Developer Plan para pruebas), un flujo con disparador HTTP restringido a 'Specific users in my tenant' con una cuenta de servicio, y un registro de app en Entra ID para pedir el token.",
+  "demo_gratis": "Power Apps Developer Plan: gratis y sin caducidad mientras se use. Incluye conectores premium y personalizados y Dataverse, con 750 ejecuciones de flujo al mes. No incluye RPA, no sirve para producción y pide cuenta de trabajo o educativa. También hay prueba de Power Automate de 30 días, pero solo con conectores estándar.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "Power Automate Premium: 13,00 €/usuario/mes con pago anual, sin IVA. Process (bot desatendido): 130 €/bot/mes con pago anual (microsoft.com/es-es, oct-2026). El coste de Copilot Studio para la vía MCP no está verificado.",
+  "coste_resumen": "0 € dev plan; Premium 13 €/u/mes",
+  "migracion": {
+    "veredicto": "valorar migración",
+    "cuando_migrar": "Cuando los procesos viven en Power Automate Desktop (RPA) o cuando no hay licencias Premium y solo se necesita que el arnés lance flujos.",
+    "alternativas": [
+      "Pasar los flujos de escritorio a flujos de nube con disparador HTTP",
+      "n8n (MCP nativo, sin licencia por usuario)"
+    ]
+  },
+  "fuentes": [
+    "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp",
+    "https://learn.microsoft.com/en-us/microsoft-copilot-studio/mcp-management",
+    "https://learn.microsoft.com/en-us/microsoft-copilot-studio/agents-experience/publication-channels-mcp-agent-to-agent",
+    "https://learn.microsoft.com/en-us/microsoft-365/admin/manage/manage-byo-mcp-server",
+    "https://learn.microsoft.com/en-us/power-automate/oauth-authentication",
+    "https://learn.microsoft.com/en-us/power-platform/developer/plan",
+    "https://www.microsoft.com/es-es/power-platform/products/power-automate/pricing"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "business-central",
+  "nombre": "Business Central",
+  "nombre_completo": "Microsoft Dynamics 365 Business Central (online)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Dynamics 365 Business Central",
+    "Dynamics 365",
+    "Navision",
+    "Dynamics NAV"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/OData v4: API v2.0 (https://api.businesscentral.dynamics.com/v2.0/{entorno}/api/v2.0/companies({id})/...), API de automatización, APIs personalizadas y servicios web.",
+    "auth": "OAuth2 con Microsoft Entra ID. Dos modos: delegado (Authorization Code) o de servicio a servicio (client credentials), con el permiso de aplicación API.ReadWrite.All (más Automation.ReadWrite.All para la API de automatización) y consentimiento de administrador. La app se da de alta en la página 'Aplicaciones de Microsoft Entra' de BC con permission sets; no se le puede dar SUPER.",
+    "requisitos": "Suscripción a BC online o una prueba. Un usuario con rol de desarrollador de aplicaciones para registrar la app y un administrador del tenant para el consentimiento.",
+    "docs_url": "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Business Central MCP Server en https://mcp.businesscentral.dynamics.com (HTTP streamable). Preview pública el 31-oct-2025 y versión mejorada disponible (GA) desde abril de 2026 (2026 wave 1); doc actualizada el 2-oct-2026. Por defecto solo trae herramientas dinámicas de lectura sobre las APIs a las que el usuario tiene acceso. Para escribir hay que activar 'Unblock Edit Tools' y marcar Allow Create, Modify, Delete o Actions en cada API. 'Data Query Tools' (en preview) permite consultas de solo lectura contra las tablas. Autenticación: OAuth Authorization Code + PKCE con la identidad del usuario (no hay modo de solo aplicación). Claude aparece como cliente soportado, pero hay que registrar una app propia en Entra con permiso delegado Financials.ReadWrite.All. Se configura en la página 8350 y hace falta el permission set 'MCP - Admin'. Además hay 18 o más MCP comunitarios en Glama."
+  },
+  "otras_vias": [
+    "Conector oficial de Power Automate/Logic Apps (Premium): disparadores al crear, modificar o borrar registros, eventos de negocio, aprobaciones y acción MCP.",
+    "Make: app oficial de BC, pero solo en el plan Enterprise de Make.",
+    "n8n: sin nodo nativo; usar HTTP Request con OAuth2 (client credentials).",
+    "Webhooks de la API (suscripciones), importación y exportación con Excel y paquetes de configuración (RapidStart); Chift."
+  ],
+  "rpa": "no hace falta: API completa, MCP oficial y conectores.",
+  "dificultad": "Media",
+  "permisos_acotados": "En el MCP: un usuario de BC dedicado ('agente IA') con permission sets mínimos y una configuración MCP propia con APIs explícitas, solo Allow Read, 'Unblock Edit Tools' desactivado, 'Discover Read-Only Objects' desactivado y Data Query Tools desactivado. Hay que pasar siempre ConfigurationName, porque la configuración por defecto deja leer todo lo que el usuario pueda leer. Para n8n y scripts: una app S2S con permission sets mínimos (nunca SUPER). NO se puede acotar: en Entra el permiso siempre es ReadWrite (Financials.ReadWrite.All / API.ReadWrite.All) y no existe uno de solo lectura, así que el límite real está en los permission sets y en la configuración MCP. Tampoco se puede limitar a registros concretos desde el MCP. El MCP necesita un usuario con licencia y el consentimiento de administrador se da para todo el tenant.",
+  "pedir_al_informatico": "Registrar en Entra una app 'BC MCP - Claude' (redirect http://localhost:<puerto>/callback, permiso delegado Financials.ReadWrite.All con consentimiento de administrador) y pasarnos el Client ID, el TenantId y el nombre del entorno. En BC: crear un usuario 'agente IA' con permission sets de solo lectura y una configuración MCP 'IA-Lectura' activa, con las APIs acordadas y solo Allow Read.",
+  "demo_gratis": "Prueba completa de 30 días, ampliable 30 días por el cliente y otros 30 por un partner (hasta 90). Además hay una evaluación 'viral' gratuita que se borra tras 45 días sin uso. Se pueden crear sandboxes con datos de demostración CRONUS. Hace falta una cuenta de trabajo o un tenant de Entra. La API v2.0 está incluida; que el MCP funcione en la prueba es probable, pero no está confirmado.",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "Precios de lista en España, con pago anual y sin IVA: Essentials 69,30 €/usuario/mes; Premium 95,30 €/usuario/mes; Team Members 6,90 €/usuario/mes. Incluye 1 entorno de producción y 3 sandbox. La API y el MCP no tienen coste extra. Normalmente se contrata a través de un partner CSP.",
+  "coste_resumen": "69,30 €/usu/mes (Essentials, anual)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No compensa salir de BC: es la plataforma mejor conectada del grupo. Solo hay que migrar si se está en BC on-premise o en NAV y se quiere el MCP, que solo existe en BC online.",
+    "alternativas": [
+      "BC online (desde on-premise o NAV)"
+    ],
+    "coste_esfuerzo_migracion": "De on-premise a online: 4-12 semanas con partner (herramienta de migración a la nube). Riesgos: extensiones a medida incompatibles y pasar de licencias perpetuas a suscripción."
+  },
+  "verifactu": "Sí: la localización española (Learn, actualizada el 29-may-2026) marca como disponibles 'VERI*FACTU with external service integration', 'Enable embedded VERI*FACTU mode' y la declaración responsable del sistema de facturación. También tiene SII y Factura-E.",
+  "fuentes": [
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/ai/mcp-overview",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/ai/configure-mcp-server",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/ai/use-mcp-server-non-microsoft",
+    "https://learn.microsoft.com/en-us/dynamics365/release-plan/2026wave1/smb/dynamics365-business-central/create-agentic-experiences-enhanced-mcp-server",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/automation-apis-using-s2s-authentication",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/dev-itpro/administration/trials-subscriptions",
+    "https://learn.microsoft.com/en-us/dynamics365/business-central/localfunctionality/spain/spain-local-functionality",
+    "https://learn.microsoft.com/en-us/connectors/dynamicssmbsaas/",
+    "https://www.microsoft.com/es-es/dynamics-365/products/business-central/pricing",
+    "https://apps.make.com/microsoft-dynamics-365-business-central",
+    "https://glama.ai/mcp/servers?query=business%20central"
+  ],
+  "confianza": "alta"
+}

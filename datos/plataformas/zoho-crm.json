@@ -1,0 +1,49 @@
+{
+  "id": "zoho-crm",
+  "nombre": "Zoho CRM",
+  "nombre_completo": "Zoho CRM",
+  "categoria": "crm-email",
+  "alias": [
+    "Zoho"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST (v8)",
+    "auth": "OAuth2. Para uso propio, un 'Self Client' en la API Console; el grant token caduca en 3-10 min y el access token en 1 h, con refresh token.",
+    "requisitos": "Va por créditos de API cada 24 h. La edición Free tiene 5.000 créditos fijos (la tabla lo implica; no hay frase explícita de que Free incluya API). Standard: 50.000 + 250 por licencia, con máximo 100.000. Hay que elegir el centro de datos (las cuentas españolas suelen estar en .eu).",
+    "docs_url": "https://www.zoho.com/crm/developer/docs/api/v8/scopes.html"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Cuatro servidores MCP prealojados por Zoho: Data Insights (solo lectura: COQL, módulos, esquemas), Data Operations (CRUD y operaciones masivas), Module Customization (escritura) y Workflow & Process Automation (escritura). Login OAuth en el primer uso. Respetan el rol y el perfil del usuario y gastan créditos de API. Un post de la comunidad dice que el despliegue va por fases y por centro de datos; disponibilidad en el DC de la UE no verificada. Existe también la plataforma genérica Zoho MCP (zoho.com/mcp), con OAuth y alta gratuita; no verificado si permite elegir herramientas una a una."
+  },
+  "otras_vias": [
+    "Nodo nativo Zoho CRM en n8n (OAuth2)",
+    "Make y Zapier",
+    "Zoho Flow",
+    "Webhooks y workflows nativos",
+    "Exportar a CSV"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Instalar solo el servidor Data Insights, que es el de solo lectura. Para scripts, Self Client con scopes ZohoCRM.modules.READ, o por módulo como ZohoCRM.modules.leads.READ, más ZohoCRM.settings.READ y ZohoCRM.coql.READ. Combinarlo con un usuario dedicado con perfil y rol restringidos. Lo que no se acota: los servidores de escritura heredan todo lo que el usuario pueda hacer, y los créditos de API son compartidos con el resto de integraciones.",
+  "pedir_al_informatico": "Conecta a Claude solo el MCP 'Data Insights' con un usuario 'IA' de perfil restringido. Para n8n, crea un Self Client en la API Console del centro de datos .eu con scopes READ y vigila el consumo de créditos.",
+  "demo_gratis": "Edición Free permanente para 3 usuarios, con 5.000 créditos de API cada 24 h y concurrencia 5. Las ediciones de pago tienen prueba gratuita, pero la página no indica cuántos días (no verificado).",
+  "coste_demo": "0 € con la edición Free. Standard: la página oficial se sirve geolocalizada y solo mostró precios en ₹ (₹800 por usuario y mes); dice que el pago anual ahorra hasta un 34%. Precio en € no verificado.",
+  "demo_resumen": "gratis permanente",
+  "coste_resumen": "0 € (Free, 3 usuarios)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://www.zoho.com/crm/developer/docs/mcp/overview.html",
+    "https://help.zoho.com/portal/es/community/topic/zoho-crm-with-built-in-mcp-support",
+    "https://www.zoho.com/mcp/",
+    "https://www.zoho.com/crm/developer/docs/api/v8/scopes.html",
+    "https://www.zoho.com/crm/developer/docs/api/v8/api-limits.html",
+    "https://www.zoho.com/crm/zohocrm-pricing.html"
+  ],
+  "confianza": "media"
+}

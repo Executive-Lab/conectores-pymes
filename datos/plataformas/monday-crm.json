@@ -1,0 +1,52 @@
+{
+  "id": "monday-crm",
+  "nombre": "monday CRM",
+  "nombre_completo": "monday CRM (monday.com)",
+  "categoria": "crm-email",
+  "alias": [
+    "monday.com",
+    "monday"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "GraphQL",
+    "auth": "Token personal (Perfil > Developers > My access tokens) u OAuth2 con app propia y scopes (boards:read, boards:write…)",
+    "requisitos": "Hay contradicción. Los docs de límites dan 1.000 llamadas/día a Free, Basic y Standard; 10.000 a Pro; 25.000 a Enterprise. La página de precios de work management lista la API solo desde Standard. Las llamadas MCP cuentan contra ese mismo límite diario.",
+    "docs_url": "https://developer.monday.com/api-reference/docs/authentication"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto https://mcp.monday.com/mcp (Streamable HTTP) con OAuth o token personal por Bearer. Más de 60 herramientas de lectura y escritura; el servidor alojado no tiene modo solo lectura. También hay un paquete local oficial @mondaydotcomorg/monday-api-mcp (repo mondaycom/mcp) con flag --read-only. El admin puede desactivar el conector alojado por defecto y obligar a pasar por una app OAuth propia."
+  },
+  "otras_vias": [
+    "Nodo nativo monday.com en n8n",
+    "Make y Zapier",
+    "Webhooks de tablero",
+    "Exportar tableros a Excel"
+  ],
+  "rpa": "no hace falta",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Opción buena: crear una app OAuth propia en el Developer Center (activar 'New OAuth flow'), marcar solo boards:read, desactivar el conector alojado genérico y conectar el MCP con esas credenciales. Los scopes de la app limitan lo que puede hacer el MCP aunque el usuario tenga más permisos. Alternativa: el MCP local con --read-only. Lo que no se acota: el token personal no tiene scopes y replica todo lo que el usuario ve y hace. Una fuente de terceros dice que los usuarios viewer reciben 403 en la API.",
+  "pedir_al_informatico": "No uses el token personal del dueño. Crea una app OAuth con solo boards:read, desactiva el conector MCP genérico en Admin y conecta Claude a mcp.monday.com con esa app.",
+  "demo_gratis": "monday CRM no tiene plan gratis: prueba de 14 días sin tarjeta. monday work management tiene un Free permanente de 2 licencias y 3 tableros, pero su página de precios no lista API en Free (los docs de desarrollador sí: 1.000/día y complejidad 1M/min en Free y trial). No verificado si la API funciona en la prueba de CRM; probablemente sí, con límites de trial.",
+  "coste_demo": "monday CRM en €: Basic 12 €/licencia/mes anual (18 € mensual), Standard 17 € anual (25 € mensual), Pro 28 € anual (41 € mensual), mínimo 3 licencias. La página de CRM solo menciona la API en Ultimate. Por la página de work management, lo seguro es Standard: 3 × 17 € = 51 €/mes en pago anual. Que Basic incluya API no está verificado.",
+  "demo_resumen": "prueba 14 días",
+  "coste_resumen": "51 €/mes (Standard 3×17 €, anual)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developer.monday.com/api-reference/docs/integrate-with-monday-mcp",
+    "https://developer.monday.com/api-reference/docs/control-mcp-access-with-oauth-app",
+    "https://developer.monday.com/api-reference/docs/mcp-api-token",
+    "https://developer.monday.com/api-reference/docs/rate-limits",
+    "https://developer.monday.com/apps/docs/oauth",
+    "https://github.com/mondaycom/mcp",
+    "https://monday.com/crm/pricing",
+    "https://www.monday.com/pricing",
+    "https://www.scalekit.com/blog/monday-mcp-vs-api"
+  ],
+  "confianza": "media"
+}
