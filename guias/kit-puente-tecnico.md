@@ -119,14 +119,17 @@ Para un alumno suelto, **el puente propio sale más barato**. Para Executive Lab
 
 Lo ideal: que el robot **solo exporte**, y que el resto lo haga el arnés sobre el fichero.
 
-## Lo que Executive Lab puede empaquetar
+## El kit, empaquetado
 
-1. Script SQL o PowerShell `crear-login-lectura` y plantillas de vistas por programa (Sage 50, Sage 200, ICG, Prevengos, CONTPAQi), validadas con cada distribuidor.
-2. Instalador del puente: DBHub como servicio de Windows, con un `dbhub.toml` de plantilla por programa y la carpeta `01-TOOLS/<PROGRAMA>/` lista.
-3. Plantillas de *grants* de Tailscale y de `cloudflared` + Access.
-4. Scripts de copia nocturna (restaurar en `ERP_IA`; Access a SQLite) y de exportación CSV.
-5. Checklist "qué pedir al informático o al distribuidor" y el test de solo lectura.
-6. Guía de cuándo negociar con Chift en vez de montar el puente.
+Todo lo anterior está listo para copiar en **[kit-puente/](https://github.com/Executive-Lab/conectores-pymes/tree/main/kit-puente)** del repositorio público:
+
+- `sqlserver/`: login `ia_lectura`, usuario, esquema `ia` y vistas de plantilla (idempotente), prueba de aceptación y copia nocturna. Ojo: la restauración nocturna **borra** usuario y vistas de la copia, así que el script los vuelve a crear y repite la prueba.
+- `access/`: Access → SQLite.
+- `dbhub/`: `dbhub.toml` con herramientas de SQL predefinido. DBHub escucha en `0.0.0.0` por defecto: indica siempre `--host`. `execute_sql` no se puede quitar según la documentación: va en `readonly` con tope de filas.
+- `red/`: *grants* de Tailscale y `cloudflared` + Access.
+- `01-TOOLS-plantilla/`: `.env.example` y `test_connection.sh`.
+
+Pendiente: plantillas de vistas **por programa** (Sage 50, Sage 200, ICG, Prevengos, CONTPAQi, a3ERP), validadas con cada distribuidor. Los esquemas de tablas no son públicos.
 
 ## Relacionado
 - [Mi programa no tiene API](./mi-programa-no-tiene-api.md) (versión para el dueño) · [Escribir en contabilidad por importación](./escribir-en-contabilidad-por-importacion.md) · [Catálogo](https://executive-lab.github.io/conectores-pymes/)
