@@ -1,0 +1,81 @@
+{
+  "id": "microsoft-planner-project",
+  "nombre": "Microsoft Planner y Project",
+  "nombre_completo": "Microsoft Planner (planes básicos y premium, antes Project para la web) y Microsoft Project",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Planner",
+    "Microsoft Planner",
+    "Planner Premium",
+    "Project para la web",
+    "Project for the web",
+    "Project Online",
+    "Microsoft Project",
+    "Planner Plan 1",
+    "Planner and Project Plan 3"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "Dos APIs distintas. Planes básicos: REST de Microsoft Graph (/planner/plans, /planner/tasks, /groups/{id}/planner/plans), con etags obligatorios (If-Match) en cada escritura. Planes premium (lo que era Project para la web): viven en Dataverse (tablas msdyn_project, msdyn_projecttask, msdyn_projectbucket...). Se leen con la Web API de Dataverse (OData v4) y se escriben con la Project schedule API (msdyn_PssCreateV1/V2, msdyn_PssUpdateV1/V2, msdyn_PssDeleteV1/V2 dentro de un OperationSet). Graph NO da acceso a planes premium.",
+    "auth": "OAuth 2.0 con Microsoft Entra ID. Graph (básicos): delegados Tasks.Read (mínimo para leer) y Tasks.ReadWrite (crear y editar), o Group.Read.All/Group.ReadWrite.All como alternativa más amplia; de aplicación, Tasks.Read.All y Tasks.ReadWrite.All (sí existen y figuran en la doc de cada endpoint). Las cuentas Microsoft personales no están soportadas. Dataverse (premium): roles de seguridad del entorno; la Project schedule API solo la pueden usar usuarios con licencia de Project, no usuarios de aplicación ni de integración.",
+    "requisitos": "Registrar la app en Entra ID (gratis). Consentimiento de administrador para permisos de aplicación y *.All. Planner básico va incluido en los planes Microsoft 365 de empresa. Premium exige licencia Planner Plan 1, Planner and Project Plan 3 o Plan 5. Project schedule API: máximo 200 operaciones por OperationSet y 10 OperationSets abiertos por usuario. Límites de Planner por plan (tareas, buckets, asignados) devuelven 403.",
+    "docs_url": "https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0 ; https://learn.microsoft.com/en-us/dynamics365/project-operations/project-management/schedule-api-preview"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "No he encontrado en fuente primaria un MCP de Microsoft dedicado solo a Planner. Hay dos oficiales que lo cubren en parte. (1) Work IQ MCP (doc del 20-ago-2026): un endpoint con 10 herramientas genéricas (fetch, create_entity, update_entity, delete_entity, do_action...) sobre rutas de Microsoft 365, con Entra ID. Un artículo republicado del 24-jun-2026 (fuente secundaria) dice que incluye un 'Planner MCP Server' que crea y actualiza planes y tareas con los permisos del usuario. La licencia exigida para Planner no está verificada (la ficha Microsoft 365 indica que Work IQ pide Microsoft 365 Copilot). (2) Dataverse MCP server: remoto en https://{org}.crm.dynamics.com/api/mcp; el admin lo activa por entorno y elige clientes permitidos (Claude Code y Claude Desktop incluidos). Herramientas read_query, search_data, create_record, update_record y delete_record (borrar pide aprobación). Sirve para leer los planes premium; no está verificado que escribir tareas premium con create_record funcione, porque esas tablas se escriben con la Project schedule API. Desde el 15-dic-2025 se cobra en créditos de Copilot si el agente no es de Copilot Studio, salvo con licencia Microsoft 365 Copilot o Dynamics 365 Premium. Comunitario: aixolotl/microsoft-planner-mcp (GitHub, local por HTTP, solo planes básicos vía Graph, lee y escribe; versión y fecha no verificadas)."
+  },
+  "otras_vias": [
+    "n8n: no hay nodo 'Planner'. El nodo nativo Microsoft Teams tiene el recurso Task (crear, borrar, leer, listar y actualizar tareas de un plan del equipo). El nodo nativo Microsoft To Do sirve para tareas personales, no para Planner. Para lo demás, nodo HTTP Request con credencial Microsoft. Hay un nodo comunitario @blickwerk/n8n-nodes-microsoft-planner.",
+    "Power Automate: conector Planner estándar (solo planes básicos; 100 llamadas/min por conexión; disparadores por sondeo cada 6 min). Para premium, conector Dataverse más la Project schedule API.",
+    "Power BI y conectores de Power Platform sobre Dataverse para los planes premium",
+    "Make y Zapier: no verificado",
+    "Exportar un plan a Excel desde Planner"
+  ],
+  "rpa": "no hace falta: Graph cubre los planes básicos y Dataverse los premium.",
+  "dificultad": "Media",
+  "permisos_acotados": "Planes básicos: app con permiso delegado Tasks.Read (o Tasks.ReadWrite si hay que escribir), nunca Group.ReadWrite.All. Conectar con un usuario dedicado que solo sea miembro de los grupos de Microsoft 365 cuyos planes interesan: el agente solo ve esos planes. En la aplicación empresarial, 'Asignación requerida = Sí' solo para ese usuario. Planes premium: usuario con licencia de Project y un rol de seguridad de Dataverse mínimo; con el MCP de Dataverse, permitir solo los clientes necesarios en ese entorno. NO se puede acotar: Tasks.Read.All de aplicación lee todos los planes del tenant y no he encontrado un permiso tipo 'Selected' para Planner (no verificado); en un plan básico todos los miembros del grupo pueden crear, editar y borrar tareas, así que Tasks.ReadWrite permite borrar; la Project schedule API no admite usuarios de aplicación, así que la escritura premium exige un usuario con licencia.",
+  "pedir_al_informatico": "Registra en Entra ID una app con permiso delegado Tasks.Read (Tasks.ReadWrite solo si vamos a escribir), da el consentimiento de administrador y crea un usuario 'ia' que solo sea miembro de los grupos de los planes X e Y. Si usamos planes premium, dinos en qué entorno de Dataverse están y si el MCP de Dataverse está activado y con qué clientes.",
+  "demo_gratis": "Planner necesita una cuenta de trabajo: las cuentas Microsoft personales no tienen Planner por Graph. Planner Plan 1 y Planner and Project Plan 3 tienen prueba de un mes con tarjeta (web española). Para Planner básico vale la prueba de Microsoft 365 Empresa (ver ficha microsoft-365; duración no verificada). El sandbox del Microsoft 365 Developer Program solo está al alcance de suscriptores de Visual Studio y partners (ver ficha microsoft-365).",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "Planner básico y su API: 0 € extra con cualquier plan Microsoft 365 de empresa. Premium: Planner Plan 1, 8,70 €/usuario/mes; Planner and Project Plan 3, 26,00 €/usuario/mes; ambos con pago anual y sin IVA (microsoft.com/es-es, oct-2026). Microsoft subió precios de lista el 1-jul-2026: confirmar que estas cifras están al día. Plan 5: precio no verificado. No verificado si Plan 1 basta para usar la Project schedule API (un foro sugiere Plan 3).",
+  "coste_resumen": "0 € API (incluido en M365); premium desde 8,70 €/u/mes",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Project para la web se retiró en agosto de 2025: sus planes pasaron solos a Planner premium, con los datos en el mismo Dataverse y sin migración. Project Online se retiró el 30-sep-2026 (fin de venta el 1-oct-2025; sin sitios PWA nuevos desde el 1-abr-2026); tras la retirada no se puede acceder a los proyectos. Quien siguiera en Project Online sí tiene que migrar: a Planner premium (sin equivalencia completa), a Project Server Subscription Edition (on-premise) o a otra herramienta.",
+    "alternativas": [
+      "Planner premium (Planner and Project Plan 3)",
+      "Project Server Subscription Edition (on-premise)",
+      "Dynamics 365 Project Operations",
+      "Asana, Smartsheet o ClickUp"
+    ],
+    "coste_esfuerzo_migracion": "Solo para quien venga de Project Online: de 2 a 8 semanas con partner para una pyme, según el número de proyectos y si hay informes a medida (estimación, no verificada). Las filas de Project Online no se pueden añadir a los portfolios de Planner."
+  },
+  "fuentes": [
+    "https://learn.microsoft.com/en-us/graph/api/resources/planner-overview?view=graph-rest-1.0",
+    "https://learn.microsoft.com/en-us/graph/api/plannerplan-list-tasks?view=graph-rest-1.0",
+    "https://learn.microsoft.com/en-us/graph/api/planner-post-tasks?view=graph-rest-1.0",
+    "https://learn.microsoft.com/en-us/graph/permissions-reference",
+    "https://learn.microsoft.com/en-us/dynamics365/project-operations/project-management/schedule-api-preview",
+    "https://learn.microsoft.com/en-us/dynamics365/project-operations/project-management/scheduling-apis-powerautomate",
+    "https://learn.microsoft.com/en-us/answers/questions/5601878/how-can-i-access-planner-premium-data-dependencies",
+    "https://techcommunity.microsoft.com/blog/plannerblog/transitioning-to-microsoft-planner-and-retiring-microsoft-project-for-the-web/4410149",
+    "https://techcommunity.microsoft.com/blog/plannerblog/microsoft-project-online-is-retiring-what-you-need-to-know/4450558",
+    "https://techcommunity.microsoft.com/blog/plannerblog/changes-to-project-web-app-site-creation-and-unused-sites-effective-april-1-2026/4501341",
+    "https://learn.microsoft.com/en-us/lifecycle/products/project-online",
+    "https://support.microsoft.com/en-us/planner/frequently-asked-questions-about-microsoft-planner",
+    "https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/work-iq/mcp/overview",
+    "https://azurefeeds.com/2026/06/24/enable-agentic-work-management-with-microsoft-planner-mcp-server/",
+    "https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-mcp",
+    "https://github.com/aixolotl/microsoft-planner-mcp",
+    "https://learn.microsoft.com/en-us/connectors/planner/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.microsoftteams/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.microsofttodo",
+    "https://community.n8n.io/t/new-community-node-microsoft-planner-for-n8n-by-blickwerk-media/213516",
+    "https://www.microsoft.com/es-es/microsoft-365/planner/project-plan-3",
+    "https://www.microsoft.com/es-es/microsoft-365/planner/microsoft-planner-business-plans-and-pricing"
+  ],
+  "confianza": "media"
+}
