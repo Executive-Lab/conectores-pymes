@@ -1,0 +1,65 @@
+{
+  "id": "mercado-libre",
+  "nombre": "Mercado Libre",
+  "nombre_completo": "Mercado Libre (marketplace líder de Latinoamérica, también Mercado Livre en Brasil) y su API pública para vendedores",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "MercadoLibre",
+    "Mercado Livre",
+    "MeLi",
+    "API de Mercado Libre",
+    "Mercado Libre DevCenter"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON en api.mercadolibre.com: usuarios, publicaciones (items), preguntas y mensajes, pedidos y envíos, reclamos y devoluciones, promociones, publicidad, métricas y facturación. Notificaciones por webhook ('tópicos': orders, items, questions, shipments, etc.).",
+    "auth": "OAuth 2.0 con authorization code (PKCE opcional, recomendado) y refresh token. Se crea una app en el DevCenter ('Mis aplicaciones') y se obtienen client_id y client_secret; el redirect URI debe ser HTTPS y fijo. Scopes: read (GET), write (PUT, POST, DELETE) y offline_access (para tener refresh token). Access token de 6 horas; refresh token de un solo uso (cada renovación devuelve uno nuevo) que caduca a los 6 meses. Los tokens se invalidan si cambia la contraseña, se renueva el client_secret, se revoca el permiso o la app no llama a la API en 4 meses.",
+    "requisitos": "Cuenta de Mercado Libre en uno de sus países. La autorización la debe dar el usuario administrador de la cuenta; un operador o colaborador da error invalid_operator_user_id. En Argentina, México, Brasil y Chile solo se puede crear la app tras validar los datos del titular. Desde el 30-ago-2026 las apps de Mercado Libre y de Mercado Pago deben estar separadas. Sin aprobación previa para uso propio. Límites de llamadas por endpoint no publicados de forma general: hay que gestionar el error 429.",
+    "docs_url": "https://developers.mercadolibre.com.ar/es_ar/autenticacion-y-autorizacion ; https://developers.mercadolibre.com.ar/es_ar/crea-una-aplicacion-en-mercado-libre-es ; https://developers.mercadolibre.com.ar/es_ar/primeros-pasos-in-house"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "MCP Server de Mercado Libre (oficial, página actualizada el 10-sep-2026): remoto por HTTP en https://mcp.mercadolibre.com/devsite/v1/mcp, con OAuth 2.0 desde el propio cliente (Claude, Cursor, Windsurf, ChatGPT, etc.). Solo documentación: dos herramientas, search_documentation y get_documentation_page, para buscar en la documentación y generar código. No lee pedidos ni publicaciones de la cuenta. No funciona con usuarios de test. Mercado Pago tiene otro MCP oficial (https://mcp.mercadopago.com/mcp) para integrar pagos (documentación, apps, webhooks, usuarios de prueba, calidad); no da datos de ventas del marketplace. Comunitarios con datos de la cuenta: @nahuelalbornoz/mercadolibre-mcp-read v1.0.0 (18-abr-2026, MIT), solo lectura, 7 herramientas (publicaciones, pedidos, preguntas, métricas, reputación, competencia y categorías); @nahuelalbornoz/mercadolibre-mcp v1.1.1 (1-jul-2026), con escritura; mercadolibre-mcp v0.1.3 (repo lumile/mercadolibre-mcp, may-2025). Ninguno está revisado por Mercado Libre."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo verificado; usar el nodo HTTP Request con OAuth2. Hay un nodo comunitario en npm (@sg_innova/n8n-nodes-mercadolibre v0.1.1, jul-2026), no revisado.",
+    "Make: no se encontró una app oficial de Mercado Libre en apps.make.com (no verificado a fondo); usar el módulo HTTP.",
+    "Zapier: no se encontró una app de Mercado Libre en zapier.com/apps.",
+    "Notificaciones (webhooks) por tópicos; responder HTTP 200 en menos de 500 ms. Las perdidas se recuperan con missed_feeds (2 días).",
+    "Informes y exportaciones de ventas en Excel desde el panel del vendedor (no verificado en detalle).",
+    "Integradores y ERP certificados del Developer Partner Program (multicanal)."
+  ],
+  "rpa": "no hace falta: la API cubre publicaciones, pedidos, preguntas, envíos y métricas.",
+  "dificultad": "Media",
+  "permisos_acotados": "Crear la app en la cuenta de la empresa (no en la personal de un empleado: las apps no se pueden transferir). Activar solo los permisos funcionales necesarios (por ejemplo, 'Ventas y envíos' y 'Métricas del negocio') con scope de solo lectura (read) y offline_access. Guardar client_secret y refresh token en un gestor de secretos; programar la renovación del secreto. NO se puede acotar: la autorización la tiene que dar el administrador de la cuenta (no un colaborador con permisos limitados); el token ve todos los recursos de los permisos activados, sin filtro por publicación; el permiso 'Usuarios' viene activado por defecto; la lista blanca de IPs solo está disponible para integradores autorizados por Mercado Libre.",
+  "pedir_al_informatico": "Que con la cuenta de vendedor de la empresa (usuario administrador) cree una app en el DevCenter de Mercado Libre con scope de solo lectura y offline_access, y solo los permisos 'Ventas y envíos' y 'Métricas del negocio'. Que la autorice, guarde client_id, client_secret y refresh token en un gestor de secretos y tenga en cuenta que el refresh token cambia en cada renovación.",
+  "demo_gratis": "No hay sandbox. Se usan usuarios de test en producción: hasta 10 por cuenta, creados con la API (POST /users/test_user), que pueden publicar, comprar y vender entre ellos sin cargos. Caducan si no tienen actividad en 60 días. Hay tarjetas de prueba para simular pagos. La API es gratuita. El MCP oficial no funciona con usuarios de test.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "La API es gratuita; crear la app no cuesta nada. Se paga por vender: cargos por venta según país, categoría y tipo de publicación, más los envíos (no verificados en detalle). Mercado Libre no opera en España: sus 18 países son Argentina, Bolivia, Brasil, Chile, Colombia, Costa Rica, República Dominicana, Ecuador, Guatemala, Honduras, México, Nicaragua, Panamá, Paraguay, Perú, El Salvador, Uruguay y Venezuela. Una pyme española necesita una cuenta en cada país, normalmente con sociedad o socio local, o el programa Global Selling. Según fuentes de terceros, Global Selling es por invitación y para empresas registradas en EE. UU., China o Hong Kong; no verificado que admita empresas españolas. Verificado el 9-oct-2026.",
+  "coste_resumen": "API gratis; comisión por venta",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.mercadolibre.com.ar/es_ar/autenticacion-y-autorizacion",
+    "https://developers.mercadolibre.com.ar/es_ar/crea-una-aplicacion-en-mercado-libre-es",
+    "https://developers.mercadolibre.com.ar/es_ar/permisos-funcionales",
+    "https://developers.mercadolibre.com.ar/es_ar/realiza-pruebas",
+    "https://developers.mercadolibre.com.ar/es_ar/primeros-pasos-in-house",
+    "https://developers.mercadolibre.com.ar/es_ar/gestionar-ips-de-una-aplicacion",
+    "https://developers.mercadolibre.com.ar/es_ar/buenas-practicas-para-uso-de-la-plataforma",
+    "https://developers.mercadolibre.com.ar/es_ar/mcp-server",
+    "https://global-selling.mercadolibre.com/devsite/mcp-server-from-mercado-libre",
+    "https://github.com/mercadolibre/mercadolibre-mcp-server",
+    "https://www.mercadopago.com.ar/developers/es/docs/mcp-server/overview",
+    "https://www.mercadolibre.com/",
+    "https://registry.npmjs.org/@nahuelalbornoz/mercadolibre-mcp-read",
+    "https://registry.npmjs.org/@nahuelalbornoz/mercadolibre-mcp",
+    "https://registry.npmjs.org/-/v1/search?text=n8n-nodes%20mercadolibre",
+    "https://nocnocstore.com/resources/mercado-libre-global-selling",
+    "https://jaguarsheet.com/es/blog/vender-varios-paises-mercado-libre"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,69 @@
+{
+  "id": "prestashop",
+  "nombre": "PrestaShop",
+  "nombre_completo": "PrestaShop (software libre de tienda online, de origen francés; versión autoalojada 'Classic' y oferta alojada 'Hosted', antes 'PrestaShop Edition')",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "Prestashop",
+    "PrestaShop Hosted",
+    "PrestaShop Edition",
+    "PrestaShop Classic"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "Dos API. (1) Webservice: API CRUD clásica (GET, POST, PUT, PATCH, DELETE, HEAD) por recursos (productos, pedidos, clientes...). Responde en XML; JSON solo de salida (output_format=JSON o cabecera Output-Format): desde la 8.1 no lee JSON de entrada. (2) Admin API (PrestaShop 9): REST sobre API Platform 3 con OpenAPI (docs.html / docs.json); los endpoints viven en el módulo ps_apiresources (0.5.0 en la 9.1, publicada el 23-mar-2026). Su cobertura aún es incompleta según terceros.",
+    "auth": "Webservice: clave de 32 caracteres usada como usuario de HTTP Basic, sin contraseña (mejor en cabecera Authorization). Se crea en Parámetros avanzados > Webservice ('Activar el webservice de PrestaShop' = Sí, viene desactivado), con permisos por recurso y por método. Admin API: OAuth2 client credentials. Se crea un 'API Client' en Parámetros avanzados > Admin API ('Add new API Client'), con client ID, secreto (se ve una sola vez), scopes tipo product_read / product_write y duración del token en segundos (3600 en el ejemplo). El token es un JWT que se pide en POST /admin-api/access_token.",
+    "requisitos": "Gratis en la versión autoalojada. Webservice en PrestaShop 1.7/8/9. Admin API solo en PrestaShop 9 (activada por defecto) y exige HTTPS en modo producción. Hace falta un empleado con acceso a Parámetros avanzados. Límites de llamadas: no documentados (dependen del servidor). En la oferta Hosted, acceso a Parámetros avanzados y al webservice no verificado.",
+    "docs_url": "https://devdocs.prestashop-project.org/9/webservice/ ; https://devdocs.prestashop-project.org/9/admin-api/ ; https://devdocs.prestashop-project.org/9/admin-api/how-to-use/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Módulo gratuito 'PrestaShop MCP Server' (ps_mcp_server) del fabricante, disponible desde el 19-nov-2025 en PrestaShop Marketplace y desde el back office (fecha según prensa francesa). Requisitos: PrestaShop 8.2+ o 9 según la ayuda oficial (la prensa dice 8+), el módulo MBO y los módulos PrestaShop Account, EventBus y MCP Tools; el webservice debe estar activado (el módulo crea su propia clave). Remoto: la tienda expone una URL (Streamable HTTP; también hay modo STDIO). Autenticación OAuth 2.0 con PrestaShop Accounts (scopes mcp.discover, mcp.read, mcp.write) o, si el cliente no admite OAuth, un token estático por miembro que no caduca. Solo entra quien esté en la página 'Members', con rol Viewer (solo lectura) o Editor (lectura y escritura). Herramientas por defecto: productos (listar, buscar, crear, actualizar, imágenes), pedidos (listar, detalle, seguimiento, cambiar estado), clientes (listar, crear, actualizar) e idiomas; se activan o desactivan en 'Modules & Features'. Probado con Claude, Claude Code, ChatGPT y Gemini CLI. Documentación actualizada el 30-abr-2026; paquete de stubs v1.0.3 (9-jul-2026). Hay un complemento de pago de un tercero (MCP Tools Plus) y MCP comunitarios (p. ej. latinogino/prestashop-mcp; no revisados)."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo verificado; usar el nodo HTTP Request contra el webservice o la Admin API.",
+    "Make: app PrestaShop (32 módulos: 5 disparadores de vigilancia de carritos, clientes, fabricantes, pedidos y productos, y 27 acciones, más 'Make an API Call'); se conecta con una clave del webservice.",
+    "Zapier: sin app oficial según el foro de Zapier (no verificado en el directorio); usar Webhooks by Zapier o un módulo de terceros del Marketplace.",
+    "Exportar CSV desde los listados del back office (pedidos, clientes, productos).",
+    "Módulos de Marketplace que añaden webhooks o conectores (de terceros, de pago en muchos casos)."
+  ],
+  "rpa": "no hace falta: el webservice, la Admin API y el MCP oficial cubren catálogo, pedidos y clientes.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Webservice: una clave por uso, marcando solo la columna de lectura (GET/HEAD) en los recursos necesarios (orders, products, stock_availables, customers solo si hace falta); en multitienda, limitarla a una tienda. Admin API: un API Client por integración, solo con scopes *_read y una duración de token corta. MCP: dar de alta al usuario como 'Viewer' (solo lectura) y apagar en 'Modules & Features' las herramientas que no se usen; preferir OAuth al token estático. Lo que NO se puede acotar: la clave del webservice no caduca y no filtra por campo ni por registro (si tiene 'customers', ve todos los datos personales); el token estático del MCP no expira solo; el acceso OAuth del MCP depende de la cuenta PrestaShop Account del miembro.",
+  "pedir_al_informatico": "Que el administrador active el webservice en Parámetros avanzados > Webservice y cree una clave 'IA-lectura' solo con permiso de lectura en pedidos, productos y stock. Si se quiere el MCP oficial, que instale el módulo PrestaShop MCP Server (tienda 8.2+ o 9 con HTTPS) y nos dé de alta en 'Members' con rol Viewer.",
+  "demo_gratis": "Software libre y gratuito: se puede instalar en local o en un hosting de pruebas con webservice, Admin API (en la 9) y MCP incluidos. Hay una demo online oficial (demo.prestashop.com) para ver la tienda y el back office, sin API propia. La oferta Hosted tiene prueba de 14 días; pide datos de pago al registrarse y cobra al acabar la prueba.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € de licencia en la versión autoalojada (Classic); el coste es el hosting, aparte. Oferta Hosted (alojada en Gandi, 50 GB, PrestaShop 8): 29 €/mes sin IVA en pago mensual sin permanencia, o 24 €/mes sin IVA con pago anual (290 €/año). Verificado en prestashop.com el 9-oct-2026. No verificado que la oferta Hosted permita activar el webservice o instalar el módulo MCP.",
+  "coste_resumen": "0 € (software libre; hosting aparte)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://devdocs.prestashop-project.org/9/webservice/",
+    "https://devdocs.prestashop-project.org/9/webservice/getting-started/",
+    "https://devdocs.prestashop-project.org/9/webservice/tutorials/creating-access/",
+    "https://devdocs.prestashop-project.org/9/admin-api/",
+    "https://devdocs.prestashop-project.org/9/admin-api/how-to-use/",
+    "https://devdocs.prestashop-project.org/9/admin-api/authorization_server/internal_authorization/",
+    "https://build.prestashop-project.org/news/2026/prestashop-9-1-0-available/",
+    "https://github.com/prestashop/prestashop",
+    "https://docs.mcp.prestashop.com/en/0-getting-started/introduction/",
+    "https://docs.mcp.prestashop.com/en/0-getting-started/installation/",
+    "https://docs.mcp.prestashop.com/en/0-getting-started/setup/",
+    "https://docs.mcp.prestashop.com/en/0-getting-started/security/",
+    "https://docs.mcp.prestashop.com/en/0-getting-started/ai-connection/",
+    "https://help-center.prestashop.com/hc/en-us/articles/31149331401234--PrestaShop-MCP-Server-Guided-Tour (requisito 8.2+/9 visto en resultados de búsqueda; la página devolvió 403)",
+    "https://packagist.org/packages/prestashop/ps-mcp-server-stubs",
+    "https://www.ecommerce-nation.fr/prestashop-serveur-mcp-commerce-ia/ (prensa, fecha de lanzamiento)",
+    "https://siecledigital.fr/2025/11/19/prestashop-un-pas-decisif-vers-la-boutique-e-commerce-pilotee-par-lia/ (prensa)",
+    "https://addons.prestashop.com/en/2/96638-mcp-tools-plus.html",
+    "https://glama.ai/mcp/servers/latinogino/prestashop-mcp",
+    "https://apps.make.com/prestashop",
+    "https://community.zapier.com/how-do-i-3/prestashop-9078",
+    "https://prestashop.com/prestashop-offers/hosted/",
+    "https://demo.prestashop.com/"
+  ],
+  "confianza": "media"
+}

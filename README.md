@@ -24,14 +24,16 @@ datos/
   plataformas/<id>.json     una ficha por herramienta: la única fuente de verdad
   categorias/<id>.json      hallazgos, normativa y asistentes de IA de cada categoría
   cambios/<fecha>.md        registro de lo que cambia en cada verificación
-guias/                      las guías en markdown
+guias/                      las guías y recetas en markdown (se publican desde la wiki interna)
+skill/conectar-herramienta/ el método como skill de Claude Code
+kit-puente/                 scripts y plantillas para leer un programa de escritorio en solo lectura
 scripts/
   validar.py                comprueba los datos (sale con error si algo falla)
   construir.py              genera la web en sitio/
   seleccionar.py            elige qué fichas revisar en la verificación semanal
 .github/workflows/
   publicar.yml              valida, construye y publica la web en GitHub Pages
-  verificar.yml             verificación semanal con Claude, que abre un pull request
+  verificar.yml             verificación semanal con Claude: sube una rama y abre un issue para crear el PR
 ```
 
 Los scripts solo usan Python 3 y su librería estándar: no hay que instalar nada.

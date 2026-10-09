@@ -1,0 +1,65 @@
+{
+  "id": "asana",
+  "nombre": "Asana",
+  "nombre_completo": "Asana (gestión de trabajo y proyectos)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Asana Personal",
+    "Asana Starter",
+    "Asana Advanced"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON (app.asana.com/api/1.0) con webhooks y Events API. Cubre tareas, proyectos, secciones, portfolios, objetivos, campos personalizados, comentarios (stories), adjuntos, usuarios y equipos.",
+    "auth": "Tres vías. (1) Personal Access Token (PAT): se crea en la consola de desarrollador (app.asana.com/0/my-apps), actúa con todo el acceso del usuario, no tiene scopes y no caduca hasta que se revoca. (2) OAuth 2.0: app registrada en la consola; se puede dejar 'Full permissions' o desactivarlo y elegir scopes por recurso (tasks:read, projects:read, stories:read, users:read, workspaces:read, etc.). Los scopes granulares están en preview para apps nuevas desde el 9-abr-2025; la GA se anunció para julio de 2025 sin fecha confirmada. Token de acceso de 1 hora con refresh token. (3) Service accounts: solo plan Enterprise, las crea un super admin; para tareas y proyectos exigen 'Full permissions' (ven todos los datos de la organización, privados incluidos).",
+    "requisitos": "Disponible en todos los planes, Personal (gratis) incluido. Límites por token: 150 peticiones/min en dominios gratuitos y 1.500/min en dominios de pago; búsqueda, 60/min; además hay límites de concurrencia (50 GET y 15 escrituras a la vez) y de coste por petición. Autoservicio, sin aprobación. Para que un usuario autorice una app OAuth, la app tiene que estar disponible en su workspace.",
+    "docs_url": "https://developers.asana.com/docs/oauth-scopes ; https://developers.asana.com/docs/personal-access-token ; https://developers.asana.com/docs/rate-limits"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "MCP remoto de Asana V2 en https://mcp.asana.com/v2/mcp (Streamable HTTP), GA desde el 4-feb-2026. OAuth con clientes pre-registrados en la consola de desarrollador (ya no hay registro dinámico); el token del MCP no sirve para la API REST. Cada sesión ve un solo workspace. Lee tareas, proyectos, portfolios, usuarios y estado de proyectos (search_objects, search_tasks, get_status_overview, get_task, get_projects...) y escribe: create_task, update_task, create_project. En feb-2026 no tenía comentarios (Asana dijo que estaban previstos). No hay modo de solo lectura documentado. Figura en el directorio de conectores de Claude (hecho por Asana, verificado, añadido en nov-2025, '30+ tools'); según el foro, ahora algunas creaciones pasan por una vista previa ('_preview') que el usuario aprueba. El MCP beta V1 (https://mcp.asana.com/sse) está retirado: la doc decía 11-may-2026 y el foro lo movió al 5-ago-2026. Control de admin: en Enterprise+ y Enterprise legacy se permite o bloquea cada cliente MCP en App Management; en otros planes hay que pedirlo a soporte (solo super admin)."
+  },
+  "otras_vias": [
+    "n8n: nodos nativos Asana y Asana Trigger (credencial PAT u OAuth2)",
+    "Make: app Asana con más de 70 módulos y 6 'Watch'",
+    "Zapier: app Asana (15 disparadores y 26 acciones)",
+    "Webhooks y Events API",
+    "Exportación CSV desde la interfaz"
+  ],
+  "rpa": "no hace falta: API y MCP cubren tareas y proyectos.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Para scripts y n8n: una app OAuth con 'Full permissions' desactivado y solo scopes de lectura (tasks:read, projects:read, stories:read, users:read, workspaces:read), autorizada con un usuario dedicado 'ia' que solo sea miembro de los equipos y proyectos necesarios. Para escribir, otra app con tasks:write y nada más. Para el MCP: conectar con ese mismo usuario dedicado y elegir un solo workspace. NO se puede acotar: el PAT no tiene scopes y hace todo lo que puede el usuario; los scopes no cubren aún todos los endpoints (p. ej. status updates, según el foro); el MCP no tiene interruptor de solo lectura y sus herramientas de crear y actualizar no se pueden quitar desde Asana; las service accounts con 'Full permissions' ven toda la organización; bloquear clientes MCP desde el panel solo es posible en Enterprise+.",
+  "pedir_al_informatico": "Crea en Asana un usuario 'ia' que solo esté en los proyectos X e Y y registra una app OAuth sin 'Full permissions', solo con tasks:read, projects:read, stories:read y users:read. Si usamos el MCP en Claude, conéctalo con ese usuario y no con el del administrador.",
+  "demo_gratis": "Plan Personal gratis para siempre: hoy 2 puestos (el plan Personal antiguo tenía 10). La API va incluida (150 peticiones/min). La ayuda de Asana lista el conector de Claude como disponible en Personal. Además hay prueba gratuita de Starter y Advanced sin tarjeta; la duración de 30 días sale de una página de referidos de Asana y del foro, no de la ayuda (no verificado).",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € con Personal. Starter: 10,99 US$/usuario/mes con pago anual o 13,49 US$ con pago mensual (asana.com/pricing, oct-2026); Advanced: 24,99 / 30,49 US$. La web oficial muestra dólares; varias comparativas dan las mismas cifras en euros (no verificado). Mínimo de 2 puestos en los planes de pago según terceros (no verificado). Asana puede añadir IVA según el país.",
+  "coste_resumen": "0 € (Personal)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.asana.com/docs/using-asanas-mcp-server",
+    "https://forum.asana.com/t/new-v2-mcp-server-now-generally-available/1122647",
+    "https://developers.asana.com/docs/oauth-scopes",
+    "https://developers.asana.com/docs/oauth",
+    "https://forum.asana.com/t/new-oauth-permission-scopes/1048556",
+    "https://developers.asana.com/docs/personal-access-token",
+    "https://developers.asana.com/docs/rate-limits",
+    "https://developers.asana.com/docs/authentication",
+    "https://claude.com/connectors/asana",
+    "https://asana.com/resources/claude-asana-integration.md",
+    "https://help.asana.com/s/article/asana-app-in-claude",
+    "https://asana.com/pricing",
+    "https://help.asana.com/s/article/how-to-sign-up-for-a-free-asana-trial?language=en_US",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.asana/",
+    "https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.asanatrigger/",
+    "https://docs.n8n.io/integrations/builtin/credentials/asana/",
+    "https://apps.make.com/asana",
+    "https://zapier.com/apps/asana/integrations",
+    "https://www.scalekit.com/blog/asana-mcp-vs-api",
+    "https://www.gend.co/blog/asana-pricing"
+  ],
+  "confianza": "alta"
+}

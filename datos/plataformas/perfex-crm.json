@@ -1,0 +1,71 @@
+{
+  "id": "perfex-crm",
+  "nombre": "Perfex CRM",
+  "nombre_completo": "Perfex CRM (MSTdev; CRM autoalojado en PHP y MySQL que se vende en CodeCanyon: clientes, leads, presupuestos, facturas, proyectos y tickets)",
+  "categoria": "crm-email",
+  "alias": [
+    "Perfex",
+    "PerfexCRM"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "sí",
+    "estilo": "Perfex no trae API REST de serie (las notas de la versión 3.4.0, de 8-sep-2025, no la mencionan). La API la añade un módulo de pago de terceros: 'REST API module for Perfex CRM - Connect Apps and Automate Workflows with third party applications' (autor themesic, CodeCanyon item 25278359), versión 3.1.4 actualizada el 9-oct-2026. REST/JSON con especificación OpenAPI 3.0 en GET /api/openapi (74 rutas, 144 operaciones): clientes, contactos, leads, facturas, presupuestos, pagos, propuestas, contratos, proyectos, tareas, tickets, gastos, personal y más. Incluye webhooks, endpoint batch (50 operaciones) y servidor MCP. Hay otros módulos de API de terceros (por ejemplo 'PerfexCRM API & Webhooks' de OBS Technologies o 'WON API'); no verificados.",
+    "auth": "Token creado en Perfex en Setup > API > API Management. Se envía en la cabecera 'authtoken' (recomendado), como parámetro ?authtoken= o, en MCP y automatizaciones, como Bearer. Cada token lleva permisos por recurso (get, post, put y delete por separado). Caducidad del token no verificada.",
+    "requisitos": "Licencia de Perfex propia, servidor con PHP 8.1 o superior y MySQL 5.1 o superior, y comprar el módulo (licencia ligada a un dominio; cambiar de dominio exige resetear la licencia con el autor). Solo un administrador crea tokens. El módulo envía cabeceras X-RateLimit; los límites concretos no están publicados. Soporte del autor por tickets, respuesta en hasta 2 días laborables.",
+    "docs_url": "https://perfexcrm.themesic.com/apiguide/ ; https://github.com/themesic/perfex-rest-api-examples ; https://codecanyon.net/item/rest-api-for-perfex-crm/25278359"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "MSTdev (el fabricante de Perfex) no publica MCP. Opciones de terceros: (1) El módulo REST API de themesic (de pago) trae servidor MCP desde la v3.0 en POST https://<tu-dominio>/api/mcp: Streamable HTTP (JSON-RPC 2.0), 148 herramientas que listan, leen, buscan, crean, actualizan y borran en 22 recursos, filtradas por los permisos del token (un token de solo lectura solo ve herramientas de lectura). Se activa en Setup > API > Settings. Themesic ofrece además un puente alojado en https://perfex-mcp.themesic.com/mcp con OAuth, donde se pegan la URL del CRM y el token: el tráfico pasa por servidores de themesic. (2) karamble/perfex-mcp-connector v1.0.0 (GitHub, 2-sep-2026, MIT): módulo gratuito para Perfex 3.x con 110 herramientas por HTTP; cada clave actúa como un empleado concreto con sus permisos de Perfex, interruptores globales para escritura y borrado, lista de IP por clave y registro de auditoría. (3) mcp-perfex-crm (npm 1.0.1, 28-ago-2025, MIT, repo Descomplicar-Marketing-e-Tecnologia): local por stdio, ataca directamente la base de datos MySQL y su ejemplo usa un usuario de solo lectura; también trae herramientas de escritura. (4) cavishal04/perfex-crm-mcp: módulo gratuito en beta (4-oct-2026). Ninguno está revisado por MSTdev."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo (n8n.io/integrations/perfex-crm da 404). Nodo comunitario @themesic/n8n-nodes-perfex-crm 0.1.9 (npm, 8-oct-2026, MIT), que necesita el módulo REST API de themesic; hay otros nodos comunitarios. Si no, nodo HTTP Request con la cabecera authtoken.",
+    "Zapier: app 'Perfex CRM' (10 disparadores como nuevo cliente, lead, factura o ticket, y 12 acciones). La página no dice quién la publica ni qué módulo exige (no verificado).",
+    "Make: sin app en apps.make.com (404). El módulo de themesic expone endpoints de sondeo /api/zapier/* pensados para Make, Zapier y n8n.",
+    "Webhooks: los da el módulo de themesic (124 eventos, envíos firmados con HMAC y con reintentos). Perfex sin módulo no los trae.",
+    "Base de datos MySQL propia: consulta directa con un usuario de solo lectura (vía puente para leer sin comprar el módulo).",
+    "Perfex 3.4.0 exporta facturas y abonos en JSON/XML (plantillas e-invoice), uno a uno o en bloque.",
+    "Exportar listados a Excel o CSV desde las tablas de la interfaz (no verificado en la documentación oficial)."
+  ],
+  "rpa": "no hace falta: con el módulo REST API o con lectura directa de MySQL se cubre todo.",
+  "dificultad": "Media",
+  "permisos_acotados": "Con el módulo de themesic, crear un token por uso con solo 'get' en los recursos necesarios (por ejemplo clientes, leads, facturas y tickets); el MCP solo mostrará herramientas de lectura. Otro token aparte con 'post' o 'put' solo en el recurso que se automatice, y nunca 'delete'. Con el conector gratuito de karamble, crear un empleado 'IA' con un rol de solo ver y dejar apagados los interruptores de escritura y borrado. Para el puente por base de datos, un usuario MySQL con GRANT SELECT solo sobre las tablas o vistas necesarias, sin tblstaff ni tbloptions (guardan hashes de contraseñas y credenciales de SMTP y pasarelas de pago), y accesible solo desde la IP del servidor de IA. NO se puede acotar: no está verificado que el token de themesic filtre por registro o por empleado (parece ver todos los registros del recurso); no hay caducidad de token documentada; el usuario MySQL salta todos los permisos de Perfex; usar el puente alojado de themesic implica que el token y los datos pasan por un tercero.",
+  "pedir_al_informatico": "Que el administrador compre e instale el módulo 'REST API module for Perfex CRM' de themesic en CodeCanyon, cree en Setup > API > API Management un token 'IA-lectura' solo con permiso 'get' en clientes, leads, facturas y tickets, y active el servidor MCP en Setup > API > Settings. Si no se compra el módulo, que cree un usuario MySQL de solo lectura (SELECT) sobre vistas de esas tablas, sin acceso a tblstaff ni tbloptions, limitado a la IP del servidor de IA.",
+  "demo_gratis": "Demo pública compartida de Perfex en https://perfexcrm.com/demo/admin/ (administración) y https://perfexcrm.com/demo/ (portal de clientes): sirve para ver la aplicación, pero no permite instalar módulos ni probar la API. No hay prueba con datos propios: hay que comprar la licencia. El módulo de themesic tiene 'Live Preview' en CodeCanyon y un playground Swagger que solo funciona una vez instalado. El conector MCP gratuito de karamble se puede probar sin coste en una instalación propia.",
+  "demo_resumen": "no hay",
+  "coste_demo": "Licencia de Perfex en CodeCanyon (9-oct-2026): Regular 89 US$ (uso propio o para un cliente sin cobrar a usuarios finales) o Extended 385 US$; pago único, sin IVA indicado. Módulo REST API de themesic: Regular 79 US$ (Extended 279 US$), pago único; en búsquedas de días anteriores aparecía a 59 US$, así que el precio cambia. Total mínimo para tener API: 168 US$ más el hosting propio. Alternativa sin coste de licencia extra: módulo MCP gratuito de karamble o lectura directa de MySQL.",
+  "coste_resumen": "168 US$ pago único (Perfex 89 + módulo API 79)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Por conectividad no hace falta. Valorar el cambio si la pyme factura en España con Perfex y necesita VERI*FACTU, o si nadie en la empresa puede mantener el servidor, las actualizaciones y la seguridad.",
+    "alternativas": [
+      "Holded (SaaS español con facturación VERI*FACTU y API)",
+      "Odoo (CRM y facturación con API y nodo n8n)"
+    ],
+    "coste_esfuerzo_migracion": "2-6 semanas y 1-5 k€ si se migra (estimación no verificada). Riesgos: módulos de CodeCanyon a medida que no existen en el destino y el histórico de facturas."
+  },
+  "verifactu": "No adaptado de serie: las notas oficiales de la 3.4.0 solo añaden exportación e-invoice en JSON/XML. En los comentarios de CodeCanyon el vendedor respondió 'Not at this time' a la pregunta de hacer las facturas inalterables (comentario sin fecha). Una nota en emprendedores.es habla de un 'Perfex CRM España' con VERI*FACTU y Facturae; es un tercero y no está verificado. Pedir declaración responsable a quien venda el módulo.",
+  "fuentes": [
+    "https://www.perfexcrm.com/",
+    "https://codecanyon.net/item/perfex-crm/14013737",
+    "https://help.perfexcrm.com/version-3-4-0/",
+    "https://codecanyon.net/item/rest-api-for-perfex-crm/25278359",
+    "https://perfexcrm.themesic.com/apiguide/",
+    "https://github.com/themesic/perfex-rest-api-examples",
+    "https://raw.githubusercontent.com/themesic/perfex-rest-api-examples/main/docs/mcp.md",
+    "https://raw.githubusercontent.com/themesic/perfex-rest-api-examples/main/docs/authentication.md",
+    "https://raw.githubusercontent.com/themesic/perfex-rest-api-examples/main/docs/connect-ai-assistants.md",
+    "https://codecanyon.net/comments/31691646 comentarios de compradores del módulo REST API",
+    "https://registry.npmjs.org/@themesic/n8n-nodes-perfex-crm",
+    "https://github.com/karamble/perfex-mcp-connector",
+    "https://github.com/Descomplicar-Marketing-e-Tecnologia/mcp-perfex-crm",
+    "https://github.com/cavishal04/perfex-crm-mcp",
+    "https://zapier.com/apps/perfex-crm/integrations",
+    "https://apps.make.com/perfex-crm (404)",
+    "https://n8n.io/integrations/perfex-crm/ (404)",
+    "https://emprendedores.es/uncategorized/perfex-crm-espana-integra-verifactu-facturae-y-modulos-a-medida-para-la-gestion-empresarial/ nota de tercero, solo apoyo"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,58 @@
+{
+  "id": "brevo",
+  "nombre": "Brevo",
+  "nombre_completo": "Brevo (antes Sendinblue; Francia): email marketing, email transaccional, SMS, WhatsApp y CRM de ventas",
+  "categoria": "crm-email",
+  "alias": [
+    "Sendinblue",
+    "Brevo CRM",
+    "Brevo Sales Platform"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON (API v3): contactos, listas, segmentos, campañas, email y SMS transaccional, plantillas, CRM (negocios, empresas, tareas, notas) y webhooks.",
+    "auth": "Clave API v3 en la cabecera 'api-key'. Es distinta de la clave SMTP y del token MCP. No se ha encontrado documentación de claves de solo lectura ni con scopes: cada clave da acceso completo a la cuenta.",
+    "requisitos": "Disponible en todos los planes, Free incluido ('full API access' en la página de la API de email). Autoservicio, sin aprobación. Límite de 1.000 peticiones/s en todos los planes (2.000 en Pro/Enterprise y 6.000 en Enterprise, según la misma página). Restricción por IP autorizadas en Seguridad > IP autorizadas, con opción 'Bloquear IP desconocidas'; parece de ámbito de cuenta, no por clave (no verificado).",
+    "docs_url": "https://developers.brevo.com/docs/quickstart ; https://developers.brevo.com/docs/ip-security"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto (HTTP) del fabricante: https://mcp.brevo.com/v1/brevo/mcp agrupa 27 módulos, y hay uno por módulo en https://mcp.brevo.com/v1/brevo_<módulo>/mcp (contacts, deals, companies, tasks, campaign_analytics, templates, lists, segments, webhooks_management, etc.). Auth: token MCP como Bearer, que se genera en Cuenta > SMTP y API > Claves API marcando la opción MCP. Lee (analíticas, contactos, negocios) y escribe (crea campañas, importa contactos, añade notas, configura remitentes y dominios). Sin modo de solo lectura: la guía de integración avisa de que el token da acceso completo de lectura y escritura. Se anunció en acceso anticipado para desarrolladores y usuarios seleccionados; un tercero (smtpedia) da como fecha de salida el 14-oct-2025; estado actual (GA o no) no verificado. Para limitar, usar el endpoint de un solo módulo."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Brevo (contactos, atributos, envío de email y plantillas, remitentes) y nodo Brevo Trigger (eventos de email transaccional: enviado, entregado, abierto, clic, rebote, baja).",
+    "Make y Zapier: apps Brevo (no verificado en esta revisión).",
+    "Webhooks de marketing y transaccionales configurables por API o desde la cuenta.",
+    "Exportar contactos e informes a CSV desde la interfaz."
+  ],
+  "rpa": "no hace falta: la API v3 y el MCP cubren contactos, campañas y CRM.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear una clave API v3 exclusiva para la integración, con nombre propio, y revocarla al terminar. Activar 'Bloquear IP desconocidas' y autorizar solo la IP del servidor de n8n. Para el MCP, generar un token aparte y conectar solo los módulos necesarios (por ejemplo brevo_contacts y brevo_campaign_analytics) en vez del endpoint completo. NO se puede acotar: no hay claves ni tokens de solo lectura ni scopes por recurso; cualquier clave puede enviar emails, borrar contactos o cambiar la configuración; la lista de IP autorizadas parece común a todas las claves API y SMTP de la cuenta (no verificado).",
+  "pedir_al_informatico": "Que el propietario de la cuenta cree en SMTP y API > Claves API una clave API v3 'IA-n8n' solo para esta integración y active 'Bloquear IP desconocidas' con la IP de nuestro servidor. Si usamos el MCP, que genere un token MCP aparte y nos conectemos solo a los módulos de contactos y analíticas.",
+  "demo_gratis": "Plan Free permanente, sin tarjeta: 300 emails al día (no se acumulan), hasta 100.000 contactos según la ayuda, logo de Brevo en los correos y estadísticas básicas. Incluye la API v3, webhooks y el MCP (no verificado que el MCP esté abierto a todas las cuentas).",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 €: la API va en el plan Free. Planes de pago (página oficial en dólares, consultada el 9-oct-2026; la web española no se pudo leer): Starter desde 9 US$/mes (5.000 emails/mes, 500 contactos), Standard desde 18 US$/mes y Professional desde 499 US$/mes (150.000 emails/mes). En euros, los datos de la propia página indican Starter 7 € y Standard 15 € al mes (no verificado si es pago anual o mensual). IVA no indicado.",
+  "coste_resumen": "0 € (Free)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.brevo.com/docs/mcp-protocol",
+    "https://developers.brevo.com/docs/integration-guide",
+    "https://www.brevo.com/releases/new-release-brevos-mcp-server/",
+    "https://help.brevo.com/hc/en-us/articles/35030003354130",
+    "https://developers.brevo.com/docs/quickstart",
+    "https://developers.brevo.com/docs/ip-security",
+    "https://help.brevo.com/hc/en-us/articles/5740111683858",
+    "https://help.brevo.com/hc/en-us/articles/208580669",
+    "https://help.brevo.com/hc/en-us/articles/208589409-About-Brevo-s-pricing-plans",
+    "https://www.brevo.com/en/features/email-api/",
+    "https://www.brevo.com/pricing/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.brevo/",
+    "https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.brevotrigger/",
+    "https://smtpedia.com/platforms/brevo/api/ (tercero, fecha del MCP)"
+  ],
+  "confianza": "media"
+}

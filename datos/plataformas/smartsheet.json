@@ -1,0 +1,64 @@
+{
+  "id": "smartsheet",
+  "nombre": "Smartsheet",
+  "nombre_completo": "Smartsheet (hojas de gestión de proyectos y trabajo)",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON, API 2.0. Base https://api.smartsheet.com/2.0; región Europa https://api.smartsheet.eu/2.0 (tokens distintos de los de .com). Hojas, filas, columnas, adjuntos, discusiones, informes, dashboards, espacios de trabajo y webhooks. La Resource Management API es otro producto aparte.",
+    "auth": "Dos vías. (1) Token de acceso 'raw' (Bearer): se genera en Configuración personal > Acceso a API; da lectura y escritura sobre todo lo que ve el usuario, sin scopes. (2) OAuth 2.0 de 3 pasos con scopes: READ_SHEETS, WRITE_SHEETS, CREATE_SHEETS, DELETE_SHEETS, ADMIN_SHEETS, SHARE_SHEETS, READ_SIGHTS, READ_USERS, ADMIN_USERS, ADMIN_WEBHOOKS, ADMIN_WORKSPACES, READ_EVENTS, entre otros. Los scopes no saltan los permisos de uso compartido. Token de acceso de unos 7 días con refresh token.",
+    "requisitos": "Plan Business, Enterprise o Advanced Work Management. Pro NO incluye API. Para registrar apps OAuth (Developer Tools) hace falta el email de un usuario con licencia en Business o superior. Límite: 300 peticiones/min por token (30/min para subir adjuntos e historial de celdas). El admin puede fijar caducidad de los tokens en Admin Center > Seguridad y controles.",
+    "docs_url": "https://developers.smartsheet.com/api/smartsheet/introduction ; https://developers.smartsheet.com/api/smartsheet/guides/basics/authentication ; https://developers.smartsheet.com/api/smartsheet/guides/advanced-topics/oauth"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Smartsheet MCP Server remoto, GA desde el 24-mar-2026. URL por región: https://mcp.smartsheet.com (EE. UU.), https://mcp.smartsheet.eu (UE) y https://mcp.smartsheet.au. Auth: token API en cabecera Authorization: Bearer, u OAuth en Claude, Claude Desktop, ChatGPT, Gemini Enterprise y Microsoft 365 Copilot. Exige plan Business, Enterprise o AWM. Lee y escribe: resúmenes de hoja, búsqueda, filas, columnas, adjuntos, discusiones, informes, dashboards, gráficos, workflows y portfolios (estos dos, solo Enterprise o AWM); unas 42 herramientas, con nuevas cada mes (changelog, última del 2-oct-2026). Tiene herramientas destructivas: delete_rows (máx. 10 filas por llamada), delete_column, delete_attachment, delete_comment, delete_workflow y otras. Cada herramienta exige su scope OAuth (READ_SHEETS, WRITE_SHEETS...). No hay modo de solo lectura en el servidor; solo un filtro read/write en la búsqueda de herramientas. Respeta los permisos del usuario. Está en el directorio de conectores de Claude (hecho por Smartsheet, verificado, añadido en ene-2026). Aparte, Smartsheet publica un MCP local de código abierto: @smartsheet/smar-mcp v1.6.1 (npm, 31-mar-2026, repo smartsheet-platform/smar-mcp), que lee, crea, actualiza y borra hojas y filas."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo; usar el nodo HTTP Request con Bearer (hay un paquete comunitario n8n-nodes-smartsheet, mantenimiento no verificado)",
+    "Make: app Smartsheet (36 módulos, 'Watch Rows' y 'Make an API Call')",
+    "Zapier: app Smartsheet (6 disparadores, 17 acciones y 2 búsquedas)",
+    "Webhooks de la API",
+    "Exportar hojas a Excel o CSV desde la interfaz"
+  ],
+  "rpa": "no hace falta: API y MCP cubren hojas, filas e informes.",
+  "dificultad": "Media",
+  "permisos_acotados": "Usar un usuario de servicio dedicado con licencia, al que solo se compartan las hojas o espacios necesarios con rol Lector. Para scripts, mejor una app OAuth solo con READ_SHEETS (y READ_SIGHTS si hacen falta dashboards) que un token raw. Para el MCP en Claude, conectar por OAuth con ese usuario: como los scopes no saltan el uso compartido, las herramientas de escritura fallan en hojas donde solo es Lector. Pedir al admin una caducidad corta para los tokens API. NO se puede acotar: el token raw no tiene scopes y hace todo lo que puede el usuario, incluido borrar filas por el MCP; no hay token por hoja; el MCP no tiene interruptor de solo lectura; en hojas donde el usuario es Editor, el agente puede borrar.",
+  "pedir_al_informatico": "Crea un usuario de servicio 'ia' con licencia Business y compártele solo las hojas X e Y como Lector. Conecta con él el MCP de Smartsheet en Claude por OAuth (región UE: mcp.smartsheet.eu) y fija en Admin Center una caducidad corta para los tokens API.",
+  "demo_gratis": "No hay plan gratuito para altas nuevas desde el 28-ago-2024. Hay prueba de 30 días sin tarjeta; no está verificado que la API y el MCP funcionen durante la prueba. El 'sandbox' de desarrollador se pide con el registro en Developer Tools, que exige un usuario con licencia Business o superior; en la región UE, según la comunidad, hay que pedirlo a soporte (no verificado).",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "Plan más barato con API: Business, unos 17 €/miembro/mes con pago anual o 22 € con pago mensual, mínimo 3 miembros (smartsheet.com/pricing, oct-2026; la página junta las dos cifras y el reparto anual/mensual se ha deducido). IVA no indicado. Pro (unos 8 €/11 €) no incluye API.",
+  "coste_resumen": "~17 €/miembro/mes (Business, anual, mín. 3)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.smartsheet.com/api/smartsheet/introduction",
+    "https://developers.smartsheet.com/api/smartsheet/guides/basics/authentication",
+    "https://developers.smartsheet.com/api/smartsheet/guides/advanced-topics/oauth",
+    "https://developers.smartsheet.com/api/smartsheet/guides/getting-started",
+    "https://developers.smartsheet.com/api/smartsheet/guides/advanced-topics/scalability-options",
+    "https://developers.smartsheet.com/register",
+    "https://developers.smartsheet.com/ai-mcp/smartsheet/install-the-smartsheet-mcp-server",
+    "https://developers.smartsheet.com/ai-mcp/smartsheet/install-the-smartsheet-mcp-server/connect-claude-code",
+    "https://developers.smartsheet.com/ai-mcp/smartsheet/mcp-server-tools",
+    "https://developers.smartsheet.com/ai-mcp/smartsheet/mcp-server-toolsets",
+    "https://developers.smartsheet.com/ai-mcp/smartsheet/changelog",
+    "https://www.smartsheet.com/content-center/smartsheet-mcp-server-now-generally-available",
+    "https://help.smartsheet.com/articles/2483670-smartsheet-mcp-server",
+    "https://help.smartsheet.com/articles/2482389-generate-API-key",
+    "https://help.smartsheet.com/articles/2482070-admin-center-manage-security-and-controls",
+    "https://help.smartsheet.com/articles/2482687-free-plan",
+    "https://claude.com/connectors/smartsheet",
+    "https://registry.npmjs.org/@smartsheet/smar-mcp",
+    "https://www.smartsheet.com/pricing",
+    "https://es.smartsheet.com/pricing",
+    "https://apps.make.com/smartsheet",
+    "https://zapier.com/apps/smartsheet/integrations",
+    "https://community.n8n.io/t/smartsheet-integration/10396"
+  ],
+  "confianza": "alta"
+}

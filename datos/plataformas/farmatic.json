@@ -1,0 +1,62 @@
+{
+  "id": "farmatic",
+  "nombre": "Farmatic",
+  "nombre_completo": "Farmatic (Consoft, S.A.U., España; software de gestión de oficinas de farmacia para Windows)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "Consoft"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "escritorio/on-premise",
+  "api": {
+    "existe": "no",
+    "estilo": "No hay API pública ni portal de desarrolladores. Solo integraciones cerradas del fabricante: conector Farmatic eCommerce (bidireccional con PrestaShop 1.7+ y Magento 1.9+, sin documentación técnica pública), pedidos a distribuidores por Fedicom, robot dispensador, receta electrónica de todas las comunidades, Bot Plus del CGCOF, StockOnline y bases de datos de proveedores por ficheros o FTP.",
+    "auth": "No aplica.",
+    "requisitos": "Todo pasa por Consoft y su red de distribuidores oficiales. Instalación en Windows con Microsoft SQL Server 2016 o superior (vale la edición Express). Grupo: un expediente de la CNMC de 2016 describía a Consoft como filial de Glintt (Portugal); en 2022 Consoft se presentaba como independiente. Grupo actual no verificado.",
+    "docs_url": "no hay pública; ficha técnica: https://www2.consoft.es/farmatic/caracteristicas-de-farmatic/"
+  },
+  "mcp": {
+    "estado": "ninguno",
+    "detalle": "No se encontró MCP oficial ni comunitario (búsqueda web y Glama, 9-oct-2026). La vía sería un MCP propio de solo lectura sobre vistas de SQL Server preparadas por el distribuidor, sin datos de pacientes."
+  },
+  "otras_vias": [
+    "Base de datos local Microsoft SQL Server 2016 o superior (ficha técnica de Consoft): leer con un login de solo lectura sobre vistas, si el distribuidor lo autoriza. Esquema no documentado públicamente.",
+    "Exportaciones: generadores de informes, listados de clientes y artículos, integración con Excel, Word y Outlook, y exportación de recetas (formatos concretos no verificados).",
+    "Farmatic eCommerce: módulo de pago (precio no publicado) que sincroniza artículos, lotes, promociones, imágenes y ventas web con PrestaShop o Magento. Una tienda PrestaShop podría servir de puente con API (no verificado).",
+    "Integraciones del fabricante: robot dispensador, receta electrónica, pedidos Fedicom, Bot Plus y StockOnline; módulos Grupos (acciones conjuntas entre farmacias) y Multialmacén.",
+    "Farmatic Analyzer solo supervisa la base de datos y las copias de seguridad: no es BI ni exporta datos de negocio.",
+    "n8n, Make y Zapier: sin conector. Nodo HTTP Request solo contra un puente propio (exportación o vista SQL).",
+    "Un directorio de terceros (softwaredoit) lista despliegue en nube; la web de Consoft no menciona versión nube (no verificado)."
+  ],
+  "rpa": "escritorio: solo si el distribuidor no da exportación ni acceso a la base de datos, o para escribir (no hay otra vía). Para leer, mejor vistas SQL o informes exportados.",
+  "dificultad": "Difícil",
+  "permisos_acotados": "Farmatic guarda datos de salud (dispensaciones, recetas, historial de pacientes): categoría especial del art. 9 del RGPD. Mínimo privilegio: un login de SQL Server propio con SELECT solo sobre vistas preparadas por el distribuidor (ventas, stock y artículos, agregados y sin datos de pacientes ni de recetas); nunca 'sa' ni db_owner; accesible solo desde la LAN o el equipo del agente. Para RPA, un usuario de Farmatic con perfil limitado (Consoft cita protección de procesos y registro de accesos; el detalle de roles no está verificado). Antes de enviar datos a un modelo en la nube: contrato de encargado del tratamiento y evaluación de impacto. NO se puede acotar: sin API no hay tokens ni scopes; db_datareader ve todas las tablas, también las de pacientes; no hay auditoría de lo que consulta la IA salvo la que se monte en SQL Server; tocar la base de datos sin el distribuidor puede afectar al soporte.",
+  "pedir_al_informatico": "Pide al distribuidor oficial de Farmatic una vista de solo lectura en SQL Server con ventas, stock y artículos, sin datos de pacientes ni recetas, y un login que solo pueda leer esa vista desde el equipo del agente. Pregúntale si Consoft ofrece exportación programada o servicios web para terceros, y que confirme por escrito que no afecta al soporte.",
+  "demo_gratis": "No hay prueba ni descarga pública. La web de Consoft solo ofrece formulario de contacto; la demostración se pide al distribuidor oficial de la provincia (no verificado que exista una demo formal). No hay API que probar.",
+  "demo_resumen": "evaluación bajo petición",
+  "coste_demo": "Precios no públicos: licencia, mantenimiento y módulos (eCommerce, Grupos, Multialmacén, Analyzer) se piden a Consoft o al distribuidor oficial. No hay plan con API. Verificado el 9-oct-2026.",
+  "coste_resumen": "Precio vía distribuidor (no público)",
+  "migracion": {
+    "veredicto": "conectar con puente (export/BD/partner)",
+    "cuando_migrar": "Casi nunca solo por conectividad: es el software más extendido del sector (42 % de las farmacias según una revista del sector de 2024) y cambiar arrastra receta electrónica, robot, pedidos a distribuidores y el histórico de dispensaciones. Valorarlo solo si el distribuidor niega exportación y acceso a la base de datos, o al renovar el servidor.",
+    "alternativas": [
+      "Nixfarma (Pulso Informática, grupo Glintt; API no verificada)",
+      "Seguir en Farmatic y usar PrestaShop con Farmatic eCommerce como puente para catálogo y stock (no verificado)"
+    ],
+    "coste_esfuerzo_migracion": "Alto: varios meses, formación del equipo, reconexión de robot, receta electrónica y distribuidores, y riesgo sobre el histórico de dispensaciones (estimación no verificada)."
+  },
+  "verifactu": "Consoft dice que Farmatic está 'plenamente adaptado' a Verifactu: una versión nueva que, al activarse según los plazos, opera en modo Verifactu y envía los registros a la AEAT en tiempo real con el certificado de la farmacia; con MultiNif se aplica por empresa. Cita 1-1-2027 (sociedades) y 1-7-2027 (personas físicas). Versión mínima, coste de la actualización y declaración responsable no publicados.",
+  "fuentes": [
+    "https://www2.consoft.es/",
+    "https://www2.consoft.es/farmatic/caracteristicas-de-farmatic/",
+    "https://www2.consoft.es/farmatic/farmatic-ecommerce/",
+    "https://www2.consoft.es/servicios/farmatic-analyzer/",
+    "https://verifactu.farmatic.es/",
+    "https://www.softwaredoit.es/farmatic/farmatic.html",
+    "https://www.imfarmacias.es/uploads/farmatic_ecommerce_conecta_7552_23111757.pdf",
+    "https://imfarmacias.es/uploads/2024/05/imfarmacias_mercado_demandar_35678_16160816.pdf",
+    "https://www.imfarmacias.es/uploads/2022/06/farmacia_continua_necesitando_28779_20220603084323.pdf",
+    "https://www.cnmc.es/sites/default/files/953539_0.pdf"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,68 @@
+{
+  "id": "factorial",
+  "nombre": "Factorial",
+  "nombre_completo": "Factorial (empresa española con sede en Barcelona; software de RR. HH. en la nube con módulos de fichaje, ausencias, nómina, talento, gastos, finanzas, proyectos y facturación)",
+  "categoria": "erp-contabilidad",
+  "alias": [
+    "Factorial HR",
+    "FactorialHR",
+    "Factorial One"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON con versión por fecha en la ruta (https://api.factorialhr.com/api/2026-10-01/resources/...). Sale una versión cada trimestre y cada una tiene soporte un año; si caduca, la API responde con el esquema más antiguo soportado, sin dar error. Cubre empleados, contratos, documentos, fichajes, ausencias, tareas, proyectos, gastos, finanzas, nómina, formación, selección y más. Webhooks gestionables por API. SDK oficiales en TypeScript (@factorialco/api-client) y Python.",
+    "auth": "Dos métodos. (1) API key en la cabecera x-api-key: la crea un administrador en Configuración > API; da acceso a todos los scopes de la empresa, no se puede limitar y no caduca. (2) OAuth 2.0: aplicaciones en Configuración > Configuración avanzada > Aplicaciones OAuth, con scopes por recurso (employees, contracts, documents, expenses, finance, payroll, tasks, recruitment, banking y otros). Company Token con acceso a toda la empresa o User Token limitado al grupo de permisos de un empleado; ambos duran 1 hora y se renuevan con refresh token. Para integraciones de marketplace, OAuth es obligatorio.",
+    "requisitos": "Hace falta un administrador. Límite publicado: 200 peticiones POST por minuto. En la tabla de factorial.es/plan-de-precios, 'Claves API' aparece como funcionalidad avanzada, lo que apunta al plan Enterprise; no verificado con Factorial, y tampoco está claro si las apps OAuth tienen la misma limitación.",
+    "docs_url": "https://apidoc.factorialhr.com/docs/authentication ; https://apidoc.factorialhr.com/docs/api-keys ; https://apidoc.factorialhr.com/docs/oauth-scopes ; https://apidoc.factorialhr.com/docs/faqs"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor remoto oficial https://mcp.factorialhr.com, anunciado en el changelog de la API el 14-jul-2026 (guía actualizada el 14-sep-2026). Streamable HTTP, OAuth 2.0 con registro dinámico de cliente: cada persona entra con su cuenta de Factorial y todo se ejecuta con sus permisos, nunca como administrador. Herramientas: fichar entrada y salida y ver el estado; ver y crear tareas; ver ausencias, tipos de ausencia y pedir vacaciones; buscar compañeros por nombre o email; y delegar preguntas a Factorial One (políticas, contratos, informes), que exige un plan con Factorial One y consume créditos. Es un MCP de autoservicio del empleado: no da acceso a finanzas, gastos ni facturas. Sin modo de solo lectura documentado. Aún no está en el directorio de conectores de Claude: se añade a mano por URL. Comunitario: @t4dhg/mcp-factorial 11.0.1 (npm, 8-sep-2026, MIT), local, usa una API key y ofrece 14 herramientas con 117 operaciones de lectura, escritura y borrado, con confirmación en las operaciones de riesgo."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo (n8n.io/integrations/factorial da 404). Usar el nodo HTTP Request con la cabecera x-api-key o con credencial OAuth2.",
+    "Make: app Factorial con 29 módulos (21 acciones y 8 disparadores instantáneos, como empleado creado, ausencia o fichaje); conexión por API key u OAuth2.",
+    "Zapier: app Factorial con 111 disparadores y 228 acciones; la página no dice quién la publica.",
+    "Webhooks: suscripciones creadas por API, con versión de API fija por suscripción, reintentos y avisos de fallo.",
+    "Exportaciones e informes desde la interfaz (exportación de ausencias; informes personalizados, marcados como funcionalidad avanzada).",
+    "Agregadores: Nango (factorial-api-key)."
+  ],
+  "rpa": "no hace falta: la API cubre casi todos los módulos y hay MCP oficial para el uso del empleado.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Para scripts y n8n: crear una aplicación OAuth solo con los scopes necesarios (por ejemplo employees y tasks) y autorizarla con un empleado 'IA' cuyo grupo de permisos solo pueda ver lo imprescindible (User Token); los campos sin permiso salen como null. Para el MCP oficial: cada persona conecta su propia cuenta y hereda sus permisos. NO se puede acotar: los scopes no distinguen lectura de escritura (todos dan las dos); la API key da acceso total a la empresa, no caduca y no admite scopes; el Company Token también ve toda la empresa; el MCP oficial no tiene modo de solo lectura y puede fichar, crear tareas o pedir ausencias en nombre del usuario.",
+  "pedir_al_informatico": "Que el administrador cree en Configuración > Configuración avanzada > Aplicaciones OAuth una app 'IA' solo con los scopes que vayamos a usar, y un empleado 'IA' con un grupo de permisos de solo ver, con el que se autorice la app. Que no genere API keys para la IA, porque dan acceso total y no caducan, y que nos confirme si nuestro plan incluye 'Claves API' y aplicaciones OAuth.",
+  "demo_gratis": "Entorno demo para desarrolladores (app.demo.factorial.dev, API en api.eu2.demo.factorial.dev): lo da el account manager o el comercial, con una empresa de prueba y credenciales OAuth; los datos se pueden borrar en cualquier momento. Además, prueba gratuita sin tarjeta con el plan Enterprise y todas las funcionalidades; la FAQ oficial no dice cuántos días dura (terceros hablan de 7 o 14 días, no verificado). No verificado que la prueba permita crear API keys.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "Precio oficial en factorial.es/plan-de-precios (9-oct-2026): 'desde 5 € al mes por persona' en la cabecera y 'Paga desde 5.5€ al mes por persona' en el cuerpo; los impuestos se aplican aparte. El plan se monta a medida según módulos (Business o Enterprise), con pago mensual o anual. El precio del plan Enterprise, que parece el que incluye las 'Claves API', no está publicado: hay que pedir presupuesto. Ejemplo de cálculo propio con 25 personas: unos 137,50 €/mes sin módulos extra ni impuestos (no verificado).",
+  "coste_resumen": "desde 5,5 €/persona/mes (sin impuestos); API quizá solo en Enterprise",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "verifactu": "Factorial emite facturas de venta (módulo de facturación y desde Proyectos). Su anexo a los términos 'Envío de facturas a Verifactu' (versión de 12-dic-2025) dice que las facturas se mandan a un 'Tercer Proveedor' sin nombre que las remite a la AEAT; Factorial se presenta como facilitador y enlaza una declaración responsable que no se ha revisado.",
+  "fuentes": [
+    "https://apidoc.factorialhr.com/docs/authentication",
+    "https://apidoc.factorialhr.com/docs/api-keys",
+    "https://apidoc.factorialhr.com/docs/oauth-2",
+    "https://apidoc.factorialhr.com/docs/oauth-scopes",
+    "https://apidoc.factorialhr.com/docs/faqs",
+    "https://apidoc.factorialhr.com/docs/production-and-demo",
+    "https://apidoc.factorialhr.com/docs/mcp-server",
+    "https://apidoc.factorialhr.com/changelog/introducing-the-factorial-mcp-server",
+    "https://apidoc.factorialhr.com/changelog",
+    "https://apidoc.factorialhr.com/llms.txt",
+    "https://help.factorialhr.com/en_US/factorial-mcp-—-connect-one-to-chatgpt-claude-or-any-mcp-compatible-ai-assistant",
+    "https://registry.npmjs.org/@t4dhg/mcp-factorial",
+    "https://registry.npmjs.org/-/v1/search?text=factorial%20hr búsqueda de @factorialco/api-client y otros paquetes",
+    "https://apps.make.com/factorial",
+    "https://zapier.com/apps/factorial/integrations",
+    "https://n8n.io/integrations/factorial/ (404)",
+    "https://nango.dev/docs/api-integrations/factorial-api-key/connect",
+    "https://factorial.es/plan-de-precios",
+    "https://factorial.es/anexo-tc-envio-facturas-verifactu",
+    "https://factorial.es/product-launches/create-sales-invoices-straight-from-projects",
+    "https://omr.com/en/reviews/product/factorial/pricing apoyo de terceros sobre la duración de la prueba"
+  ],
+  "confianza": "media"
+}

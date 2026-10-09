@@ -1,0 +1,62 @@
+{
+  "id": "woocommerce",
+  "nombre": "WooCommerce",
+  "nombre_completo": "WooCommerce (plugin gratuito de tienda online para WordPress, de Automattic)",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "Woo",
+    "WooCommerce REST API"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON en /wp-json/wc/v3 (productos, pedidos, clientes, cupones, informes, webhooks...). La API REST 'legacy' ya no está en el núcleo (hay un plugin aparte).",
+    "auth": "Claves de la API REST (consumer key y consumer secret) creadas en WooCommerce > Ajustes > Avanzado > API REST > Añadir clave. Cada clave va ligada a un usuario de WordPress y tiene permiso Lectura, Escritura o Lectura/Escritura; además respeta los roles y capacidades de ese usuario. Por HTTPS se usa HTTP Basic (key como usuario, secret como contraseña); por HTTP, OAuth 1.0a 'one-legged'. El secreto se ve una sola vez. También funcionan las contraseñas de aplicación de WordPress (5.6+) sobre HTTPS: oficial para el MCP; para /wc/v3 solo lo confirman terceros.",
+    "requisitos": "Gratis, en cualquier tienda WooCommerce. Enlaces permanentes distintos de 'Simple' y HTTPS recomendado. Crear claves requiere un usuario con capacidad de gestionar WooCommerce (administrador o gestor de tienda). Si se borra el usuario, la clave deja de funcionar. Límites de llamadas: no documentados (dependen del hosting).",
+    "docs_url": "https://developer.woocommerce.com/docs/apis/rest-api/authentication/ ; https://woocommerce.com/document/woocommerce-rest-api/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Integración MCP en el núcleo de WooCommerce, todavía en 'developer preview' (doc oficial consultada el 9-oct-2026; versión actual 11.2.0, del 7-oct-2026). Apareció en beta en la 10.3; la 10.9 (23-jun-2026) añadió las abilities canónicas sobre la Abilities API de WordPress (6.9+): de lectura woocommerce/products-query y orders-query; de escritura product-create, product-update, product-delete (a la papelera salvo force:true), order-update-status y order-add-note. Se expone con el WordPress MCP Adapter (incluido como paquete) en /wp-json/mcp/mcp-adapter-default-server, mediante tres herramientas genéricas (discover, get-info, execute-ability). Viene apagado: se activa en WooCommerce > Ajustes > Avanzado > Características o con WP-CLI (woocommerce_feature_mcp_integration_enabled). Transporte local STDIO (wp mcp-adapter serve) o remoto HTTP con el proxy @automattic/mcp-wordpress-remote (Node.js 22+ según el blog de WooCommerce). Autenticación con contraseña de aplicación de WordPress, no con claves REST; exige HTTPS en remoto. El endpoint antiguo /wp-json/woocommerce/mcp (clave REST en la cabecera X-MCP-API-Key) está deprecado. No hay modo de solo lectura: cada ability comprueba los permisos del usuario. No está en el directorio de conectores de Claude (según terceros, jul-2026)."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo WooCommerce (clientes, pedidos y productos: crear, borrar, obtener, listar, actualizar) y nodo WooCommerce Trigger (12 eventos de creación, actualización y borrado de cupones, clientes, pedidos y productos).",
+    "Make: app WooCommerce (56 módulos: 5 disparadores y 51 acciones, más 'Make an API Call'); pide clave REST con Lectura/Escritura y SSL.",
+    "Zapier: app WooCommerce (11 disparadores y 33 acciones); según Zapier requiere una extensión de pago en la tienda (precio no verificado).",
+    "Webhooks nativos de WooCommerce (Ajustes > Avanzado > Webhooks), que usa el disparador de n8n.",
+    "WP-CLI y exportación/importación CSV de productos en el núcleo.",
+    "Agregadores: Nango (woocommerce)."
+  ],
+  "rpa": "no hace falta: la API REST, el MCP y los conectores cubren productos, pedidos y clientes.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear un usuario dedicado (no administrador) y ligarle una clave REST con permiso solo de 'Lectura'; la clave no puede hacer más que su usuario. Para el MCP, según una guía de terceros (oct-2026): usuario dedicado con un rol propio de solo lectura (read, read_private_products, read_private_shop_orders), contraseña de aplicación propia y un servidor MCP que exponga solo products-query y orders-query; probar antes en staging. Revocar claves y contraseñas que no se usen. Lo que NO se puede acotar: la clave REST no se limita por recurso ni por endpoint (una clave de lectura ve también clientes y pedidos con datos personales), no caduca y no tiene lista de IP; la contraseña de aplicación hereda todos los permisos del rol; el MCP no tiene interruptor de solo lectura.",
+  "pedir_al_informatico": "Que el administrador cree un usuario 'ia-lectura' sin rol de administrador y, en WooCommerce > Ajustes > Avanzado > API REST, una clave con permiso 'Lectura' ligada a ese usuario. Si queremos probar el MCP, que lo active primero en una copia de staging y genere una contraseña de aplicación para ese mismo usuario.",
+  "demo_gratis": "Gratis: WooCommerce es un plugin libre. Se puede montar en local (Docker, LocalWP) o en un hosting de pruebas, con API REST, webhooks y MCP incluidos. Las contraseñas de aplicación y el MCP remoto necesitan HTTPS, salvo en local.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 €: el plugin es gratis y sin cuota mensual; la API REST y el MCP van incluidos. El coste es el hosting de WordPress (WooCommerce lo estima en 25-350 US$/mes para la mayoría de tiendas) y las extensiones opcionales (29-299 US$/año cada una). WooCommerce alojado en WordPress.com requiere plan de pago (precio no verificado). Verificado en woocommerce.com/pricing el 9-oct-2026.",
+  "coste_resumen": "0 € (plugin; hosting aparte)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developer.woocommerce.com/docs/apis/rest-api/authentication/",
+    "https://woocommerce.com/document/woocommerce-rest-api/",
+    "https://developer.woocommerce.com/docs/features/mcp/",
+    "https://developer.woocommerce.com/2026/05/12/mcp-abilities-api-10-9/",
+    "https://developer.woocommerce.com/2026/06/23/woocommerce-10-9/",
+    "https://developer.woocommerce.com/release-posts/",
+    "https://woocommerce.com/es/posts/woocommerce-mcp/",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.woocommerce/",
+    "https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.woocommercetrigger/",
+    "https://docs.n8n.io/integrations/builtin/credentials/woocommerce/",
+    "https://apps.make.com/woocommerce",
+    "https://zapier.com/apps/woocommerce/integrations",
+    "https://woocommerce.com/pricing/",
+    "https://nango.dev/docs/integrations/all/woocommerce/connect",
+    "https://www.usecarly.com/blog/claude-woocommerce-integration/ (tercero)",
+    "https://blog.elest.io/woocommerce-mcp-give-ai-agents-read-only-store-access/ (tercero)",
+    "https://stackharbor.com/en/knowledge-base/wp-woocommerce-rest-api-auth/ (tercero, contraseñas de aplicación en /wc/v3)"
+  ],
+  "confianza": "alta"
+}

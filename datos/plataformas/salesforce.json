@@ -1,0 +1,64 @@
+{
+  "id": "salesforce",
+  "nombre": "Salesforce",
+  "nombre_completo": "Salesforce Sales Cloud / Agentforce Sales (Salesforce, EE. UU.): CRM de ventas en la nube",
+  "categoria": "crm-email",
+  "alias": [
+    "Sales Cloud",
+    "Agentforce Sales",
+    "Salesforce CRM",
+    "SFDC"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON (más Bulk API 2.0 para volúmenes grandes, SOAP, GraphQL y Streaming/Pub-Sub). SOQL para consultas.",
+    "auth": "OAuth 2.0 mediante una External Client App (ECA). Para servidor a servidor: flujo client credentials con un usuario 'Run As' (todas las llamadas usan sus permisos) o JWT bearer. Desde Spring '26 la creación de Connected Apps nuevas está bloqueada por defecto (UI y Metadata API); reactivarla exige pedirlo a Soporte. Las ECA no admiten el flujo usuario/contraseña.",
+    "requisitos": "API incluida por defecto en Enterprise, Performance, Unlimited y Developer Edition (y, por deducción no verificada, en las nuevas Core, Advanced y Max). Professional/Pro Suite: solo con el complemento 'Web Services API' (25 US$/usuario/mes según la página de precios). Free Suite y Starter Suite: sin API según fuentes de terceros (no verificado en fuente oficial). El perfil del usuario necesita el permiso 'API Enabled'. Límite diario de llamadas por organización según edición y licencias.",
+    "docs_url": "https://developer.salesforce.com/docs/platform/api-rest/guide/intro-rest-compatible-editions.html ; https://docs.n8n.io/integrations/builtin/credentials/salesforce/"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Salesforce Hosted MCP Servers: remotos (streamable HTTP) en https://api.salesforce.com/platform/mcp/v1/platform/<servidor> (sandbox: .../v1/sandbox/...). Piloto en primavera 2025, beta en oct-2025 y GA en abr-2026 (anuncio en el blog de desarrolladores; un tercero da el 29-abr-2026). Para Enterprise y superiores, y gratis en Developer Edition; sin precio aparte localizado. Vienen desactivados: el admin los activa en Setup > API Catalog > MCP Servers. Auth OAuth 2.0 por usuario con una External Client App con scopes mcp_api y refresh_token (las Connected Apps no sirven). Servidores SObject: sobject-reads (solo lectura: esquema, SOQL, búsqueda y relaciones), sobject-mutations, sobject-deletes y sobject-all; más servidores de Data 360, Tableau Next y otros, y servidores propios con Flows o Apex. Cada llamada respeta permisos, FLS y reglas de compartición del usuario y consume la cuota de API. Aparte está el Salesforce DX MCP Server local (npm @salesforce/mcp, stdio, para desarrolladores con Salesforce CLI); su README anuncia fin de vida el 2-nov-2026: no usarlo para proyectos nuevos."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Salesforce (cuentas, contactos, leads, oportunidades, casos, tareas, objetos personalizados, Flows y consultas SOQL) y nodo Salesforce Trigger (altas y cambios). Credencial OAuth2 o JWT, documentada ya con External Client App.",
+    "Make y Zapier: apps Salesforce nativas (no revisadas en detalle).",
+    "Eventos salientes: Flows con llamadas HTTP, Platform Events, Change Data Capture y Outbound Messages.",
+    "Exportar a CSV: Data Export semanal o Data Loader."
+  ],
+  "rpa": "no hace falta: API y MCP cubren CRM, casos y objetos personalizados.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear un usuario de integración con licencia 'Salesforce Integration' (5 gratis en Enterprise, Performance y Unlimited; 1 en Developer Edition, según guías de terceros) y perfil 'Minimum Access - API Only Integrations'. Darle un permission set con licencia 'Salesforce API Integration' y solo 'Read' en los objetos necesarios, con seguridad a nivel de campo. Usarlo como 'Run As' del flujo client credentials en una ECA solo con el scope 'api'. Para el MCP, activar solo sobject-reads y limitar la ECA a usuarios aprobados por permission set. NO se puede acotar: el scope 'api' no distingue lectura de escritura (lo limita el usuario, no el token); el MCP hereda lo que pueda hacer el usuario conectado; la cuota de API es de toda la organización; la licencia de integración no cubre todos los objetos (algunos de Industries o personalizados piden un permission set adicional, según la comunidad).",
+  "pedir_al_informatico": "Que el administrador cree un usuario 'IA-lectura' con licencia Salesforce Integration y un permission set de solo lectura en Cuentas, Contactos, Oportunidades y Casos. Que active en API Catalog > MCP Servers solo el servidor sobject-reads y cree una External Client App con scopes mcp_api y refresh_token, restringida a ese usuario. Para n8n, otra External Client App con client credentials y 'Run As' ese mismo usuario.",
+  "demo_gratis": "Developer Edition gratis y permanente: incluye API (unas 15.000 llamadas/día y 5 MB de datos según fuentes de terceros, no verificado), Hosted MCP Servers, Agentforce y Data 360 desde 2026; no es para uso comercial. Además, prueba de Sales Cloud de 30 días sin tarjeta (página de precios UE). La Free Suite (2 usuarios) no parece incluir API (no verificado).",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "Precios oficiales en euros (página española, consultada el 9-oct-2026), por usuario y mes, sin mención al IVA: Starter Suite 25 € (mensual o anual), Pro Suite 100 € (anual), Core 195 €, Advanced (Avanzado) 395 € y Max 550 € (anual). Core, Advanced y Max se anunciaron el 3-sep-2026 y sustituyen en la práctica a Enterprise y Unlimited para clientes nuevos. Plan más barato con API: Pro Suite más el complemento Web Services API (25 US$/usuario/mes según la página; precio en euros no verificado). Con API incluida y MCP alojado: Core, 195 €/usuario/mes con pago anual.",
+  "coste_resumen": "0 € (Developer Edition); 195 €/usuario/mes (Core, anual)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://www.salesforce.com/es/sales/pricing/",
+    "https://www.salesforce.com/eu/sales/pricing/",
+    "https://www.salesforce.com/news/stories/salesforce-simplifies-editions-2026/",
+    "https://developer.salesforce.com/blogs/2026/04/salesforce-hosted-mcp-servers-are-now-generally-available",
+    "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/hosted-mcp-servers-overview.html",
+    "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/sobject-reads.html",
+    "https://developer.salesforce.com/docs/platform/hosted-mcp-servers/guide/beta-to-ga-transition.html",
+    "https://github.com/forcedotcom/mcp-hosted",
+    "https://github.com/salesforcecli/mcp",
+    "https://developer.salesforce.com/blogs/2026/04/new-developer-edition-agentforce-vibes-claude-mcp",
+    "https://www.salesforce.com/blog/spring-26-release-architect-highlights/",
+    "https://developer.salesforce.com/docs/atlas.en-us.pkg1_dev.meta/pkg1_dev/connected_apps.htm",
+    "https://developer.salesforce.com/docs/platform/api-rest/guide/intro-rest-compatible-editions.html",
+    "https://developer.salesforce.com/blogs/2023/03/using-the-client-credentials-flow-for-easier-api-authentication",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.salesforce/",
+    "https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.salesforcetrigger/",
+    "https://docs.n8n.io/integrations/builtin/credentials/salesforce/",
+    "https://www.cleanlist.ai/blog/2026-10-05-salesforce-mcp-server-review (tercero, resume la documentación oficial)",
+    "https://gearset.com/blog/what-are-salesforce-integration-user-licenses/ (tercero, licencias de integración)"
+  ],
+  "confianza": "media"
+}

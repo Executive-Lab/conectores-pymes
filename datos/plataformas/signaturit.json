@@ -1,0 +1,62 @@
+{
+  "id": "signaturit",
+  "nombre": "Signaturit",
+  "nombre_completo": "Signaturit (Signaturit Solutions, España; Signaturit Group, en integración en Namirial): firma electrónica, burofax online y email o SMS certificado",
+  "categoria": "ofimatica-mensajeria",
+  "alias": [
+    "Signaturit Group",
+    "Signaturit Solutions"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON v3 (algún endpoint ya en v4, p. ej. GET /v4/templates). Cubre firmas (crear, recordar, cancelar, borrar, descargar documento firmado y audit trail), email y SMS certificados, plantillas, contactos, equipo y grupos, branding, ficheros certificados, créditos y suscripciones a eventos. Paginación: hasta 100 por página en firmas y limit + offset de 10.000 como máximo. La docs v3 lista SDK de Python, PHP, Node, Ruby, Java y .NET (versiones no verificadas).",
+    "auth": "Token de acceso que la docs llama OAuth2, pero que se copia del panel (pestaña Integraciones de los ajustes de la cuenta) y se envía como Authorization: Bearer <token>. Token distinto en sandbox y en producción. Sin scopes ni caducidad documentados.",
+    "requisitos": "Sandbox gratis en https://api.sandbox.signaturit.com/v3 con todos los métodos. Producción en https://api.signaturit.com/v3: el centro de ayuda dice que hace falta cuenta Enterprise, y la página de precios solo pone 'Integración API' en Enterprise (precio 'A determinar'). Límites de llamadas no publicados. Algunas funciones (firma biométrica, Massive Direct Access) hay que activarlas en la cuenta.",
+    "docs_url": "https://docs.signaturit.com/api/latest ; https://docs.signaturit.com/getting-started"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "Signaturit ni Namirial publican MCP oficial (no aparece en su docs ni en búsquedas a 9-oct-2026). Comunitario: jmartin82/signaturit-mcp (Go, Apache-2.0, 2 commits, 1 estrella; el README dice que no es oficial). 4 herramientas: get_signature (lee), create_signature desde plantilla, send_signature_reminder y cancel_signature (escriben). Token en la variable SIGNATURIT_SECRET_TOKEN. Binario local: transporte no indicado (probablemente stdio, no verificado) y no explica cómo elegir sandbox o producción. Última actualización listada: 28-abr-2025 (mcp.aibase.com). También hay MCP alojados de terceros (Pipedream, viaSocket, Boost.space) con herramientas no verificadas."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo; n8n.io solo propone el nodo HTTP Request con Bearer.",
+    "Make: app Signaturit (disparador 'Watch Document Events'; crear solicitud de firma, crearla desde plantilla, crear email certificado, enviar recordatorio, cancelar y 'Make an API Call'). Se conecta con el token de la pestaña Integraciones.",
+    "Zapier: app Signaturit (disparador 'New Signed Document'; 5 acciones: crear solicitud de firma, crearla desde plantilla, email certificado, recordatorio y cancelar). La página de precios incluye 'Integración con Zapier' desde Business+; no verificado si funciona sin la API de Enterprise.",
+    "Webhooks: URL de eventos por solicitud y suscripciones (/v3/subscriptions) a eventos como document_opened, document_signed, document_completed, document_declined y document_expired. Llegan en JSON si la URL acaba en .json y salen siempre de la IP 34.241.96.22 (sandbox y producción).",
+    "Firma embebida en iframe con eventos postMessage (ready, signed, declined, completed, close).",
+    "Descarga manual del documento firmado y del audit trail desde la web."
+  ],
+  "rpa": "no hace falta: la API cubre envío, estado, recordatorios y descarga.",
+  "dificultad": "Media",
+  "permisos_acotados": "Hacer todas las pruebas en sandbox, con su propio token. En producción, crear un usuario dedicado con rol 'member' (no 'admin') y usar su token; que solo vea sus propios envíos no está verificado (la docs no describe permisos por rol). En los webhooks, aceptar solo llamadas de la IP 34.241.96.22. Con el MCP comunitario, exigir confirmación en el cliente antes de create_signature o cancel_signature. NO se puede acotar: no hay scopes ni token de solo lectura documentados; el token permite crear, cancelar y borrar firmas y, si el usuario es admin, gestionar equipo y contactos; no hay caducidad ni lista de IP permitidas en la API documentadas.",
+  "pedir_al_informatico": "Pide a Signaturit (Namirial) que confirme por escrito si vuestro plan permite usar la API en producción o si hace falta Enterprise, y a qué precio. Crea una cuenta sandbox gratis para las pruebas y, en producción, un usuario 'member' solo para el asistente, con su token guardado en un gestor de secretos.",
+  "demo_gratis": "Sandbox gratuito para desarrolladores (api.sandbox.signaturit.com) con todos los métodos de la API: los documentos llevan marca de agua y los datos no están certificados. Aparte, prueba gratis sin tarjeta del producto web: una página de Signaturit habla de 7 días con las funciones de Business+ y otra (Signaturit Universign) de 14 días con Business; contradicción no resuelta. No verificado que la prueba web incluya la API.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "0 € en sandbox. Producción con API: plan Enterprise, precio 'A determinar' (a presupuesto). Referencia sin API: Business 35 €/usuario/mes en pago mensual o 420 €/usuario/año; Business+ 57 €/usuario/mes o 684 €/usuario/año (incluye Zapier). La página no dice si lleva IVA. Verificado el 9-oct-2026.",
+  "coste_resumen": "0 € sandbox; API en Enterprise (a presupuesto)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Solo si la empresa está en Business o Business+, el presupuesto de Enterprise no compensa y Zapier o Make no bastan.",
+    "alternativas": [
+      "DocuSign (MCP oficial y cuenta developer gratis)",
+      "Zapier o Make sobre Business+ (sin integración propia)"
+    ],
+    "coste_esfuerzo_migracion": "Bajo o medio: rehacer plantillas y flujos de envío en 1-3 semanas (estimación no verificada). Riesgo: guardar los documentos firmados y los audit trail antiguos, que se quedan en Signaturit."
+  },
+  "fuentes": [
+    "https://docs.signaturit.com/api/latest",
+    "https://docs.signaturit.com/getting-started",
+    "https://help.signaturit.com/hc/en-us/articles/115001596865",
+    "https://www.signaturit.com/es/precios",
+    "https://www.signaturit.com/products/signature/signaturit/free",
+    "https://apps.make.com/signaturit",
+    "https://zapier.com/apps/signaturit/integrations",
+    "https://n8n.io/integrations/signaturit/",
+    "https://github.com/jmartin82/signaturit-mcp",
+    "https://mcp.aibase.com/server/1916341265811349506",
+    "https://mcp.pipedream.com/app/signaturit"
+  ],
+  "confianza": "media"
+}

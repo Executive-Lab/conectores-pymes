@@ -1,0 +1,60 @@
+{
+  "id": "tiktok-shop",
+  "nombre": "TikTok Shop",
+  "nombre_completo": "TikTok Shop (comercio dentro de la app de TikTok, de ByteDance), con TikTok Shop Partner Center y la TikTok Shop Open API para vendedores y desarrolladores",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "TikTok Shop Open API",
+    "TikTok Shop Partner Center",
+    "TikTok Shop Seller Center",
+    "TikTok Shop Seller Center España"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON (TikTok Shop Open API, versiones con fecha, p. ej. 202309): tienda autorizada, productos, pedidos, logística y envíos, devoluciones, finanzas, promociones y analítica, más webhooks. La documentación oficial está en Partner Center (partner.tiktokshop.com) y no se pudo leer sin navegador; los detalles vienen sobre todo de guías de integradores.",
+    "auth": "App key y app secret de la app (más un 'service ID'), OAuth 2.0: el vendedor autoriza la app desde Seller Center y se canjea el código por access token y refresh token. Cada llamada va firmada con HMAC-SHA256 usando el app secret. Según guías de terceros, el access token dura unos 7 días y el refresh token lo que dure la autorización que elige el vendedor (no verificado en la documentación oficial).",
+    "requisitos": "Cuenta de vendedor en TikTok Shop con tienda activa y una cuenta de desarrollador en Partner Center del mercado correspondiente (partner.tiktokshop.com; EE. UU. tiene otro portal, partner.us.tiktokshop.com, con credenciales distintas). Tipos de app: 'Custom' (para la propia tienda o vendedores concretos, se distribuye con un enlace de autorización) o 'Public' (para la App Store de TikTok Shop, con revisión). Según guías de terceros, existe una categoría de 'desarrollador in-house del vendedor' con aprobación inmediata al verificar con el email de administrador de la tienda; las demás categorías piden documentos y tardan 2-3 días hábiles; y las apps Custom pasan revisión si son de categoría 'Connector' o llegan a 25 autorizaciones (no verificado oficialmente). Los permisos se piden por paquetes de API en 'Manage API' de cada app. Límites de llamadas: no verificados.",
+    "docs_url": "https://partner.tiktokshop.com (Partner Center: documentación tras inicio de sesión o con navegador; no se pudo leer)"
+  },
+  "mcp": {
+    "estado": "comunitario",
+    "detalle": "TikTok no publica un MCP oficial para TikTok Shop. Su MCP oficial (TikTok for Business / TikTok Ads MCP, anunciado en mayo de 2026) es para publicidad, no para la tienda. Comunitarios: @aisar-labs/tiktok-shop-mcp v0.1.2 (npm, 26-feb-2026, MIT), local por stdio, con 9 herramientas que leen y escriben (listar y crear productos, pedidos, actualizar stock, confirmar envíos, procesar devoluciones y reembolsos); pide app key, app secret, shop ID y access token; sin modo de solo lectura. Hay también conectores alojados de pago (MintMCP: lectura por defecto y escritura solo si se activa TIKTOK_SHOP_ENABLE_WRITES). Ninguno está revisado por TikTok."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo de TikTok Shop; usar el nodo HTTP Request (la firma HMAC obliga a añadir un nodo Code). Los nodos comunitarios de TikTok que existen son para publicidad, no para la tienda.",
+    "Make: no se encontró app de TikTok Shop en apps.make.com; las apps de TikTok de Make son de anuncios, Lead Forms y conversiones.",
+    "Zapier: no se encontró app de TikTok Shop en zapier.com/apps.",
+    "Webhooks de la Open API (pedidos, devoluciones, productos), según guías de integradores.",
+    "Exportaciones de pedidos y datos desde Seller Center (no verificado en detalle).",
+    "Conectores y agregadores: la App Store de TikTok Shop, plataformas multicanal y APIs unificadas (Apideck, Unified.to, MintMCP), de pago."
+  ],
+  "rpa": "no hace falta: la Open API cubre productos, pedidos, envíos y finanzas.",
+  "dificultad": "Media",
+  "permisos_acotados": "Crear una app de tipo Custom solo para la propia tienda y pedir en 'Manage API' solo los paquetes de lectura necesarios (por ejemplo, información de la tienda, productos básicos y pedidos). Guardar app secret y tokens en un gestor de secretos y elegir la duración de autorización más corta que sea práctica. NO se puede acotar (según la información disponible, no verificada en la documentación oficial): los paquetes de permisos no separan siempre lectura y escritura; el token da acceso a toda la tienda autorizada, sin filtro por producto; la categoría de la app no se puede cambiar después; no se ha visto lista blanca de IPs.",
+  "pedir_al_informatico": "Que el administrador de la tienda de TikTok Shop dé de alta una cuenta de desarrollador en Partner Center (partner.tiktokshop.com, mercado Europa/España) como desarrollador in-house del vendedor y cree una app 'Custom' pidiendo solo los permisos de lectura de tienda, productos y pedidos. Que autorice la app en su tienda y guarde app key, app secret y tokens en un gestor de secretos.",
+  "demo_gratis": "La API no tiene coste y abrir la tienda es gratis. No se verificó si Partner Center ofrece sandbox o tiendas de prueba para Europa: las guías consultadas no lo mencionan. Lo práctico es probar con la propia tienda y permisos de solo lectura.",
+  "demo_resumen": "no hay",
+  "coste_demo": "La API es gratuita y la tienda no tiene cuota mensual. Se paga comisión por venta: según guías de terceros, la mayoría de categorías pagan el 9 % en Europa (antes 5 %), con descuentos temporales para vendedores nuevos; no verificado en la web oficial. TikTok Shop funciona en España desde el 10-dic-2024 (primer país de la UE, al principio solo para empresas con sede en España y con invitación), Irlanda a la vez y después Alemania, Francia e Italia; desde el 15-jun-2026 también en Austria, Países Bajos, Bélgica y Polonia (prensa del sector). Verificado el 9-oct-2026.",
+  "coste_resumen": "API gratis; comisión por venta (9 % según terceros)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://partner.tiktokshop.com/docv2/page/seller-api-overview",
+    "https://unified.to/blog/how_to_setup_a_tiktok_shop_application.md",
+    "https://developers.apideck.com/connectors/tiktok/docs/application_owner+oauth_credentials",
+    "https://www.mintmcp.com/docs/tiktok-shop-mcp-setup",
+    "https://registry.npmjs.org/@aisar-labs/tiktok-shop-mcp",
+    "https://ads.tiktok.com/resources/help/article/about-tiktok-for-business-mcp-server",
+    "https://digiday.com/media/tiktok-launches-mcp-server-to-let-ai-agents-run-campaigns/",
+    "https://techcrunch.com/2024/12/10/tiktoks-e-commerce-shop-platform-launches-in-spain",
+    "https://retailtimes.co.uk/tiktok-introduces-tiktok-shop-exclusively-for-businesses-based-in-spain/",
+    "https://fashionunited.de/nachrichten/business/tiktok-shop-expandiert-in-europa-start-in-osterreich-den-niederlanden-belgien-und-polen/2026052866932",
+    "https://www.edesk.com/es/blog/cuanto-cuesta-vender-en-tiktok-shop-espana/",
+    "https://seller-es.tiktok.com/university/home",
+    "https://www.make.com/en/integrations/category/tiktok"
+  ],
+  "confianza": "baja"
+}

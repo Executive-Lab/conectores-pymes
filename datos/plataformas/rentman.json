@@ -1,0 +1,61 @@
+{
+  "id": "rentman",
+  "nombre": "Rentman",
+  "nombre_completo": "Rentman (Países Bajos; software en la nube de alquiler de equipos, planificación de personal y proyectos para eventos y producción audiovisual)",
+  "categoria": "hosteleria-nicho",
+  "alias": [
+    "Rentman.io"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON ('Rentman Public API') en https://api.rentman.net. Lee y escribe: proyectos, contactos, equipos, stock, citas, costes, contratos y facturas. Paginación: hasta 1.500 elementos por petición (300 por defecto) con URL de página siguiente; parámetro expand para traer relacionados. Límite de llamadas sin cifra pública: el changelog avisa de que algunos endpoints devuelven 403 por exceso.",
+    "auth": "Token personal en Authorization: Bearer (que sea JWT no está verificado). Se genera en Configuración > Cuenta > Integraciones > API > Conectar > Mostrar token. Los tokens nuevos duran 10 años; regenerarlo invalida el anterior.",
+    "requisitos": "Incluida en la tarifa de plataforma: la página de precios lista 'API' entre sus funciones, sin complemento de pago. La activa un admin. Según la ayuda, el acceso de cada llamada depende del rol del usuario que generó el token. La docs de api.rentman.net se carga con JavaScript y no se pudo leer entera: límites exactos no verificados.",
+    "docs_url": "https://api.rentman.net ; https://support.rentman.io/hc/en-us/articles/360013767839-The-Rentman-API ; https://rentman.io/integrations/api"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Rentman MCP, publicado por Rentman y en beta pública. URL remota única para todos los workspaces: https://mcp.rentman.net/mcp (HTTP remoto; variante de transporte no verificada). Se entra con la cuenta de Rentman y se elige el workspace (no dice si es OAuth). Requisitos: un admin marca 'Access for AI assistant via MCP' en Configuración > Roles de usuario y el workspace necesita un token API activo; la nota de producto pide la versión 530. Lee datos en vivo y escribe (añadir contactos, crear solicitudes de proyecto, borradores); aún no crea presupuestos ni facturas de principio a fin. Clientes: Claude, ChatGPT o cualquier cliente MCP. Fecha de lanzamiento no publicada. Hay además un 'Rentman MCP Server' comunitario en Glama (proyecto interno de una empresa, autor no verificado) y conectores de Zapier MCP y Composio."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo (no aparece en n8n.io/integrations); nodo HTTP Request con Bearer.",
+    "Make: app Rentman con 26 módulos (obtener, listar, crear, actualizar y borrar contactos, citas y costes; obtener proyectos, equipos, contratos y facturas; 'Make an API Call').",
+    "Zapier: app Rentman (4 disparadores: fichero subido o actualizado, elemento creado, actualizado o borrado; 3 acciones y 1 búsqueda genéricas por tipo de elemento).",
+    "Webhooks oficiales (Public API Webhooks): Configuración > Integraciones > Webhooks; llaman a tu URL cuando se crea, cambia o borra cualquier entidad que expone la API. El soporte de Rentman no ayuda a implementarlos.",
+    "Importación de datos desde la interfaz; exportación automática a QuickBooks y Xero con el complemento de cotización y finanzas.",
+    "Terceros: Pipedream y Composio."
+  ],
+  "rpa": "no hace falta: la API y el MCP cubren lectura y escritura.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Crear un rol personalizado (Configuración > Roles de usuario) solo con los módulos necesarios y sin permisos de edición, asignarlo a un usuario dedicado al asistente y generar el token API con ese usuario, porque el acceso de cada llamada depende del rol de quien lo generó. Que ese rol de solo lectura bloquee las escrituras por API no está verificado: probarlo antes. Marcar 'Access for AI assistant via MCP' solo en ese rol. NO se puede acotar: no hay scopes ni token de solo lectura documentados; el token dura 10 años si no se regenera; Rentman avisa de que el MCP no añade restricciones sobre el token y quien lo usa lee y modifica todo lo que expone la API; borrar la conexión en Claude o ChatGPT no revoca el permiso en Rentman.",
+  "pedir_al_informatico": "Que el admin de Rentman cree un rol 'Asistente IA' con los módulos mínimos, un usuario con ese rol y, con ese usuario, el token API; y que marque 'Access for AI assistant via MCP' solo en ese rol. Que compruebe durante la prueba si ese rol sin edición bloquea de verdad las escrituras por API.",
+  "demo_gratis": "Prueba gratis de 30 días sin tarjeta y con todas las funciones. La API figura como función de la plataforma; no verificado que esté activa durante la prueba. No hay sandbox aparte.",
+  "demo_resumen": "prueba 30 días",
+  "coste_demo": "Tarifa de plataforma 39 €/mes (incluye API, app móvil y CRM) más al menos un módulo por usuario avanzado: Inventory Standard 14 €/mes, Crew Essential 14 € u Organize Standard 14 €. Usuarios básicos gratis. Precios sin impuestos; pago mensual, o anual con un 8 % de descuento el primer año. Complemento de cotización y finanzas: 9 €/usuario avanzado/mes. Verificado el 9-oct-2026.",
+  "coste_resumen": "39 €/mes + desde 14 €/usuario/mes (sin IVA)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "No por conectividad: tiene API incluida, webhooks y MCP oficial."
+  },
+  "verifactu": "Rentman factura y dice cumplir Veri*Factu y TicketBAI a través de Fiskaly, colaborador registrado en la AEAT. Se activa en Configuración > Facturación electrónica firmando un acuerdo; las facturas finalizadas quedan bloqueadas y se corrigen con abonos. Su ayuda cita los plazos 1-1-2027 (sociedades) y 1-7-2027 (resto). Declaración responsable no localizada públicamente. No verificado qué plan o complemento hace falta.",
+  "fuentes": [
+    "https://rentman.io/integrations/api",
+    "https://support.rentman.io/hc/en-us/articles/360013767839-The-Rentman-API",
+    "https://support.rentman.io/hc/en-us/articles/26707946497042-Rentman-API-Changelog",
+    "https://support.rentman.io/hc/en-us/articles/15274709111826-Public-API-Webhooks",
+    "https://rentman.io/pricing",
+    "https://rentman.io/es/precios",
+    "https://rentman.io/product-updates/introducing-the-rentman-mcp",
+    "https://support.rentman.io/hc/en-us/articles/35485155508370-Rentman-MCP-Beta-Version",
+    "https://support.rentman.io/hc/en-us/articles/35742036984082-Rentman-MCP-A-few-things-to-keep-in-mind",
+    "https://mcp.rentman.net/connect",
+    "https://glama.ai/mcp/servers/mzwz0h8fc5",
+    "https://apps.make.com/rentman",
+    "https://zapier.com/apps/rentman/integrations",
+    "https://rentman.io/integrations/veri-factu-ticketbai",
+    "https://support.rentman.io/hc/en-us/articles/27697046471314"
+  ],
+  "confianza": "media"
+}

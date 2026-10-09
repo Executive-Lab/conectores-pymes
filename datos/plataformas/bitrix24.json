@@ -1,0 +1,62 @@
+{
+  "id": "bitrix24",
+  "nombre": "Bitrix24",
+  "nombre_completo": "Bitrix24 (Bitrix24): suite de CRM, tareas, proyectos, intranet y comunicaciones, en la nube o autoalojada (Self-Hosted)",
+  "categoria": "crm-email",
+  "alias": [
+    "Bitrix",
+    "Bitrix24 CRM",
+    "Bitrix24 Self-Hosted"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "híbrido",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON (métodos tipo crm.item.list, tasks.task.add), con webhooks entrantes y salientes, y eventos.",
+    "auth": "Webhook entrante (URL secreta https://<portal>.bitrix24.com/rest/<id_usuario>/<código>/<método>.json, con los scopes elegidos al crearlo y los permisos de su creador; admite fecha de caducidad) o aplicación local/Market con OAuth 2.0. Webhooks salientes con token de aplicación para validar el origen.",
+    "requisitos": "Cambio importante en 2026: la documentación oficial dice que 'la línea Essentials no incluye acceso a la REST API' y que para acceso continuado en la nube hay que elegir un plan Vibe+. Las cuentas que pagaron o renovaron un plan anual antes del 1-sep-2026 mantienen la API hasta fin del periodo; las mensuales o trimestrales, hasta el fin de la transición (30-nov-2026 según la ayuda; otra versión de la misma página decía 17-nov-2026). El plan Free no tiene REST ni webhooks (no lo dice la página actual; sí el aviso oficial de 2021 y la documentación anterior). Crear webhooks: el administrador o empleados autorizados en Ajustes > Seguridad > Integraciones. Límite de peticiones tipo 'leaky bucket' por portal y por IP (unas 2 por segundo de forma sostenida).",
+    "docs_url": "https://apidocs.bitrix24.com/first-steps/access-to-rest-api.html ; https://apidocs.bitrix24.com/local-integrations/local-webhooks.html ; https://apidocs.bitrix24.com/limits.html"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Dos servidores del fabricante. (1) MCP de datos, remoto (streamable HTTP) en https://mcp.bitrix24.com/mcp/, en el registro oficial MCP como io.github.bitrix24/bitrix24 v1.0.0 (23-ene-2026). El administrador lo activa en Ajustes > Servidores MCP ('Permitir la conexión de IA externas'); viene desactivado. Cada empleado conecta con OAuth (ejemplo de ChatGPT) o con un token de conexión (Aplicaciones > Conexiones MCP). Lee y escribe en CRM (negocios, embudos), tareas, estructura de la empresa, invitaciones y correo; actúa con los permisos del usuario. Sin modo de solo lectura documentado. Según la ayuda (actualizada el 5-oct-2026) y la web de precios, es exclusivo de los planes Vibe+. Un usuario en Glama reportó fallos de OAuth (404) en este conector (no verificado). (2) MCP de documentación https://mcp-dev.bitrix24.com/mcp (io.github.bitrix24/bitrix-mcp-rest, 26-nov-2025): solo consulta la documentación de la REST API, sin acceso a datos ni autenticación. Comunitarios: @rcs-kz/bitrix24-mcp (45 herramientas, licencia comercial) y @theyahia/bitrix24-mcp (CRM y tareas vía webhook), ambos stdio."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo; usar el nodo HTTP Request con la URL del webhook entrante. Hay nodos comunitarios (n8n-nodes-bitrix 1.3.0 solo CRM; @tuanltntu/n8n-nodes-bitrix24 0.5.1), solo en n8n autoalojado.",
+    "Make y Zapier: apps Bitrix24 (no verificado en esta revisión).",
+    "Webhooks salientes: envían eventos (alta de negocio, tarea, etc.) a una URL pública.",
+    "Exportar a CSV/Excel desde las listas del CRM.",
+    "Bitrix24 Market: más de 750 apps de partners (limitadas en Essentials, ilimitadas en Vibe+)."
+  ],
+  "rpa": "no hace falta: la REST API y el MCP cubren CRM y tareas, siempre que el plan sea Vibe+.",
+  "dificultad": "Media",
+  "permisos_acotados": "Crear un empleado dedicado 'IA' con un rol de acceso al CRM solo de lectura (los roles del CRM permiten leer, añadir, editar y borrar por entidad). Que ese usuario cree un webhook entrante solo con los scopes necesarios (por ejemplo 'crm' y 'user') y con fecha de caducidad. Para el MCP, conectar con ese mismo usuario: actúa con sus permisos. NO se puede acotar: los scopes van por módulo y no separan lectura de escritura (lo limita el rol del usuario); la URL del webhook es un secreto que da acceso a cualquiera que la tenga, sin restricción por IP documentada; el interruptor del MCP es global para todo el portal (no verificado que se pueda limitar a ciertos usuarios); el límite de peticiones es por portal.",
+  "pedir_al_informatico": "Que el administrador confirme que el portal está en un plan Vibe+ (o que su plan anual anterior aún incluye la API). Que cree un usuario 'IA' con rol de CRM solo lectura y, con ese usuario, un webhook entrante solo con los scopes 'crm' y 'user' y fecha de caducidad. Si se usa el MCP, que lo active en Ajustes > Servidores MCP y nos conectemos con ese usuario.",
+  "demo_gratis": "Prueba única de 15 días del plan Professional Vibe+, con REST API y MCP; no pausa una suscripción existente. El plan Free (1-2 usuarios, 5 GB) es permanente pero no incluye REST API ni webhooks. Los partners tecnológicos pueden pedir una clave NFR de pruebas con REST API.",
+  "demo_resumen": "prueba 15 días",
+  "coste_demo": "Precios oficiales en euros (bitrix24.eu, consultados el 9-oct-2026), por organización y mes, sin mención al IVA: plan más barato con REST API y MCP es Basic Vibe+ (5 usuarios), 89 €/mes con pago mensual o 59 €/mes con pago anual (oferta de lanzamiento del 1-sep al 10-dic-2026; la renovación va a precio normal). Standard Vibe+ (50 usuarios): 199 €/120 €; Professional Vibe+ (100 usuarios): 399 €/240 €. Los planes Essentials (Basic 69 €/49 €, Standard 144 €/99 €, Professional 289 €/199 €) ya no incluyen REST API. La web española (bitrix24.es) muestra los mismos importes en US$.",
+  "coste_resumen": "89 €/mes (Basic Vibe+, mensual; 59 €/mes anual en promoción)",
+  "migracion": {
+    "veredicto": "conectar tal cual",
+    "cuando_migrar": "Si la empresa está en Free o Essentials y no quiere pagar Vibe+ solo para tener API, compensa comparar con CRM que dan API en planes bajos o gratis (HubSpot Free, Zoho CRM) antes de subir de plan."
+  },
+  "fuentes": [
+    "https://apidocs.bitrix24.com/first-steps/access-to-rest-api.html",
+    "https://apidocs.bitrix24.com/local-integrations/local-webhooks.html",
+    "https://apidocs.bitrix24.com/limits.html",
+    "https://apidocs.bitrix24.com/sdk/mcp.html",
+    "https://helpdesk.bitrix24.com/open/25866707",
+    "https://helpdesk.bitrix24.com/open/26027119/",
+    "https://www.bitrix24.com/about/blogs/bitrix24-tips-and-updates/meet-the-new-bitrix24-vibe-plans-designed-for-ai-ready-businesses.php",
+    "https://www.bitrix24.com/tools/hr_automation/mcp-server.php",
+    "https://www.bitrix24.eu/prices/",
+    "https://www.bitrix24.es/prices/",
+    "https://www.bitrix24.com/about/blogs/bitrix24-tips-and-updates/how-a-free-bitrix24-plan-is-going-to-change-after-january-1-2021.php",
+    "https://registry.modelcontextprotocol.io/v0/servers?search=bitrix24",
+    "https://n8n.io/integrations/bitrix24/",
+    "https://npmjs.com/package/n8n-nodes-bitrix",
+    "https://unpkg.com/@tuanltntu/n8n-nodes-bitrix24@0.5.1/README.md",
+    "https://glama.ai/mcp/servers/p55jcfo1vr (tercero, directorio MCP)"
+  ],
+  "confianza": "media"
+}

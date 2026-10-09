@@ -1,0 +1,71 @@
+{
+  "id": "amazon-seller",
+  "nombre": "Amazon Seller Central",
+  "nombre_completo": "Amazon Seller Central (marketplace de Amazon para vendedores terceros) y su Selling Partner API (SP-API)",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "Amazon SP-API",
+    "Selling Partner API",
+    "Amazon Seller",
+    "Seller Central",
+    "Amazon MWS (antigua API)"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON (SP-API), con modelos OpenAPI publicados en GitHub (amzn/selling-partner-api-models). Pedidos, catálogo, listados, precios, inventario FBA, finanzas, informes (Reports API), feeds, Data Kiosk y notificaciones (SQS/EventBridge). La documentación se ha movido a developer-docs.amazon (con índice llms.txt para agentes).",
+    "auth": "Login with Amazon (LWA): client_id y client_secret de la app + refresh token. Para una app privada, el refresh token se obtiene con 'autorización propia' (self-authorization): en Seller Central > Aplicaciones y servicios > Desarrollar aplicaciones > 'Authorize app'; debe hacerlo el usuario principal de la cuenta. El refresh token se canjea en api.amazon.com/auth/o2/token por un access token de 1 hora. Las operaciones con datos personales (PII) exigen además un Restricted Data Token (RDT) pedido a la Tokens API. El client_secret de LWA hay que rotarlo periódicamente: si vence, todas las llamadas se bloquean.",
+    "requisitos": "Cuenta de vendedor con plan Profesional (las cuentas Individual no pueden tener apps privadas). Alta como desarrollador privado ('Private Developer: I build application(s) that integrate my own company') en el perfil de desarrollador (Seller Central o Solution Provider Portal): datos de la empresa, casos de uso, controles de seguridad y aceptación de la Acceptable Use Policy y la Data Protection Policy. Amazon revisa el perfil y aprueba los roles; no publica plazos y hay que responder en 5 días si pide más información. La guía de alta en el Solution Provider Portal incluye verificación de identidad con documento y videollamada. Roles restringidos (con PII): Direct-to-Consumer Shipping, Tax Invoicing, Tax Remittance y Professional Services; exigen documentación extra de seguridad y RDT. App privada: máximo 10 autorizaciones propias. Límites de llamadas por operación (token bucket, rate y burst por app y vendedor); sandbox: 5 peticiones/s, ráfaga 15.",
+    "docs_url": "https://developer-docs.amazon/sp-api/docs/register-as-a-private-developer ; https://developer-docs.amazon/sp-api/docs/self-authorization ; https://developer-docs.amazon/sp-api/docs/roles-in-the-selling-partner-api ; https://developer-docs.amazon/sp-api/llms.txt"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Amazon publica en su GitHub (amzn/selling-partner-api-samples, carpeta use-cases/sp-api-dev-mcp) el paquete npm @amazon-sp-api-release/sp-api-dev-mcp v1.0.5 (creado 12-may-2026, última versión 18-ago-2026, Apache-2.0). Es local (stdio vía npx, Node 20+). Incluye dos servidores: 'sp-api-dev-assistant-mcp-server' (busca en la documentación, explora endpoints, genera código, ayuda a migrar versiones y revisa código; y 'sp_api_execute', que ejecuta llamadas reales a la SP-API, de lectura o escritura, con las credenciales LWA y el refresh token) y 'sp-api-workflow-mcp-server' (crea y ejecuta flujos de varias llamadas). Sin modo de solo lectura: el límite lo ponen los roles de la app. Amazon avisa de que son 'ejemplos' educativos y no un producto con soporte. Comunitarios: @ailumia/amazon-sp-api-mcp v1.0.0 (20-jul-2026, Apache-2.0, no afiliado a Amazon): cubre 353 operaciones; lee y escribe, pero pide confirmación explícita para escrituras y borrados y tiene modo de prueba ('dry run'). El MCP oficial de Amazon Ads es otro producto (publicidad), no da acceso a Seller Central."
+  },
+  "otras_vias": [
+    "n8n: sin nodo nativo verificado de Amazon Seller Central/SP-API; usar el nodo HTTP Request gestionando el canje LWA del refresh token.",
+    "Make: app 'Amazon Seller Central' (vigilar pedidos nuevos y actualizados; buscar y obtener pedidos, catálogo y precios; crear y descargar informes; 'Make an API Call'). Admite credenciales propias y sandbox. Make no tiene acceso a PII: los informes restringidos dan error 403.",
+    "Zapier: app 'Amazon Seller Central' con un solo disparador (New Order) y sin acciones; solo cuentas de Amazon.com (EE. UU.).",
+    "Notificaciones de la SP-API (Amazon SQS o EventBridge) para pedidos, cambios de listado, etc.",
+    "Informes descargables desde Seller Central (pedidos, inventario, liquidaciones) en CSV/TXT, y la Reports API para automatizarlos.",
+    "Agregadores y conectores de pago (Nango, CData, Pipedream, Apideck): no verificados en detalle."
+  ],
+  "rpa": "no hace falta: la SP-API cubre pedidos, inventario, precios, finanzas e informes.",
+  "dificultad": "Media",
+  "permisos_acotados": "Pedir en el perfil de desarrollador solo los roles necesarios: para BI, 'Inventory and Order Tracking', 'Finance and Accounting', 'Pricing' y 'Selling Partner Insights' (no restringidos). No pedir roles restringidos (Direct-to-Consumer Shipping, Tax Invoicing, Tax Remittance) salvo que haga falta el nombre o la dirección del comprador. Usar una app distinta para cada uso y guardar el refresh token y el client_secret en un gestor de secretos. NO se puede acotar: los roles no distinguen lectura de escritura (el rol de listados permite leer y modificar listados); el refresh token da acceso a todo lo que permiten los roles de la app en esa cuenta y en todos sus marketplaces de la región; la autorización propia la tiene que hacer el usuario principal de la cuenta; no hay filtro por IP ni por registro.",
+  "pedir_al_informatico": "Que el usuario principal de la cuenta de vendedor Profesional se registre como desarrollador privado en Seller Central (Aplicaciones y servicios > Desarrollar aplicaciones) pidiendo solo los roles de pedidos, finanzas e informes, sin roles restringidos. Cuando Amazon lo apruebe, que cree una app privada, la autorice para la cuenta y guarde el client_id, el client_secret y el refresh token en un gestor de secretos, con aviso para rotar el secreto antes de que caduque.",
+  "demo_gratis": "Sandbox gratuito de la SP-API: estático (respuestas simuladas fijas) y dinámico (respuestas realistas según los parámetros, en pocas APIs como FBA Inventory o Fulfillment Outbound), más un 'sample AI sandbox' que se instala en local. Se puede registrar una app de tipo 'Sandbox' en el Solution Provider Portal mientras se revisa el perfil de desarrollador, pero hace falta una cuenta de Amazon y el alta de desarrollador. No hay cuenta de vendedor de prueba gratuita: para datos reales hace falta la cuenta Profesional.",
+  "demo_resumen": "sandbox/cuenta dev",
+  "coste_demo": "La SP-API no tiene coste para el vendedor que la usa para su propia empresa. Hace falta el plan de venta Profesional de amazon.es: 39 € al mes sin IVA, más las tarifas de venta por pedido (sell.amazon.es/precios, consultado el 9-oct-2026). Cuota de desarrollador: Amazon anunció el 3-nov-2025 una cuota anual de 1.400 USD (desde el 31-ene-2026) y cobros por llamadas GET (desde el 30-abr-2026; Basic con 2,5 millones de GET al mes incluidos, Pro 1.000 USD/mes, Plus 10.000 USD/mes, exceso a 0,40 USD por cada mil). Según el anuncio de Amazon y prensa del sector, eso no afectaba a los vendedores que desarrollan solo para su negocio. Amazon lo aplazó en enero y el 9-mar-2026, y después lo canceló: 'will not move forward with the SP-API usage and annual fees at this time' (developer.amazonservices.com, mayo de 2026). Las fechas del aplazamiento y la cancelación vienen de prensa del sector; el aviso oficial no las indica.",
+  "coste_resumen": "API gratis; plan Profesional 39 €/mes sin IVA",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developer-docs.amazon/sp-api/docs/register-as-a-private-developer",
+    "https://developer-docs.amazon/sp-api/docs/sp-api-registration-overview",
+    "https://developer-docs.amazon/sp-api/docs/self-authorization",
+    "https://developer-docs.amazon/sp-api/docs/roles-in-the-selling-partner-api.md",
+    "https://developer-docs.amazon/sp-api/docs/authorization-with-the-restricted-data-token.md",
+    "https://developer-docs.amazon/sp-api/docs/application-authorization-limits.md",
+    "https://developer-docs.amazon/sp-api/docs/sp-api-sandbox.md",
+    "https://developer-docs.amazon/sp-api/docs/usage-plans-and-rate-limits.md",
+    "https://developer-docs.amazon/sp-api/docs/lwa-credentials-faq.md",
+    "https://developer-docs.amazon/sp-api/docs/onboarding-step-1-prepare-for-registration.md",
+    "https://developer-docs.amazon/sp-api/docs/onboarding-step-2-create-an-spp-account.md",
+    "https://developer-docs.amazon/sp-api/docs/onboarding-step-4-register-your-first-sandbox-application.md",
+    "https://developer-docs.amazon/sp-api/llms.txt",
+    "https://developer.amazonservices.com/cancellation-of-sp-api-fees",
+    "https://ppc.land/amazon-introduces-fees-for-third-party-developer-api-access-in-2026/",
+    "https://ppc.land/amazon-drops-sp-api-fees-after-developer-pushback",
+    "https://novadata.io/resources/news/amazon-cancels-sp-api-fees-may-2026",
+    "https://github.com/amzn/selling-partner-api-samples",
+    "https://registry.npmjs.org/@amazon-sp-api-release/sp-api-dev-mcp",
+    "https://registry.npmjs.org/@ailumia/amazon-sp-api-mcp",
+    "https://apps.make.com/amazon-seller-central",
+    "https://zapier.com/apps/amazon-seller-central/integrations",
+    "https://sell.amazon.es/precios"
+  ],
+  "confianza": "media"
+}

@@ -1,0 +1,66 @@
+{
+  "id": "webflow",
+  "nombre": "Webflow",
+  "nombre_completo": "Webflow (diseñador web visual sin código con CMS y tienda online, de Estados Unidos)",
+  "categoria": "ads-ecommerce-bi",
+  "alias": [
+    "Webflow CMS",
+    "Webflow Ecommerce"
+  ],
+  "verificado_el": "2026-10-09",
+  "tipo": "SaaS",
+  "api": {
+    "existe": "sí",
+    "estilo": "REST/JSON, Data API v2 (api.webflow.com/v2): sitios, páginas, CMS (colecciones e items), assets, componentes, formularios, comentarios, usuarios, ecommerce (productos, pedidos, inventario) y webhooks. La v1 está deprecada.",
+    "auth": "Bearer. Tres vías: (1) site token: lo crea un administrador del sitio en Site settings > Apps & integrations > API access > Generate API token, eligiendo scopes (normalmente pares :read / :write por recurso); máximo 5 por sitio, vale para un solo sitio y caduca tras 365 días sin uso. (2) Apps OAuth (Data Client) registradas en el workspace, con flujo authorization code, para varios sitios. (3) Workspace tokens, de solo lectura a nivel de workspace (según la documentación de scopes).",
+    "requisitos": "Autoservicio y sin aprobación. Límite por plan del sitio: 60 peticiones/min en Starter y Basic, 120 en planes con CMS, Ecommerce y Business (antiguos) y a medida en Enterprise. Que la API funcione en el plan Starter gratis es probable (la tabla de límites lo incluye) pero no está confirmado de forma explícita; un tercero dice que hace falta plan de pago. Los endpoints de ecommerce requieren plan Ecommerce (no verificado). Los site tokens no acceden a custom code ni a endpoints de autorización.",
+    "docs_url": "https://developers.webflow.com/data/reference/site-token ; https://developers.webflow.com/data/reference/scopes ; https://developers.webflow.com/data/reference/rate-limits"
+  },
+  "mcp": {
+    "estado": "oficial",
+    "detalle": "Servidor MCP oficial de Webflow (código abierto, MIT, repo webflow/mcp-server), remoto en https://mcp.webflow.com/mcp (pasó de SSE a HTTP en nov-2025). Primera versión el 8-abr-2025; soporte del Designer el 4-sep-2025; v1.0.1 (17-ene-2026) redujo las herramientas de datos a 19; v1.2 (1-abr-2026) añadió elementos, variables y webhooks. Autenticación OAuth: cada autorización da acceso a un solo workspace y la app MCP Bridge se instala sola en los sitios autorizados. Lee y escribe: sitios, páginas, CMS, assets, componentes, estilos, variables, formularios, comentarios y SEO; algunas funciones (capturas, selección, canvas) exigen tener el Designer abierto con la Bridge App. Respeta los permisos y roles del usuario y registra los cambios en el activity log del sitio. No tiene modo de solo lectura. Hay conector de Webflow en el directorio de Claude (lanzado el 9-feb-2026 según CMSWire). Alternativa local: paquete npm webflow-mcp-server con un token de API (Node.js 22.3+)."
+  },
+  "otras_vias": [
+    "n8n: nodo nativo Webflow (items del CMS: crear, borrar, obtener, listar, actualizar) y nodo Webflow Trigger; credencial con token de API o OAuth2 (la opción 'Legacy' es para la v1 deprecada).",
+    "Make: app Webflow con OAuth (unos 40 módulos: sitios, colecciones, items, productos, pedidos, inventario, assets, formularios, páginas, comentarios, 'Watch Events' por webhook).",
+    "Zapier: app Webflow (5 disparadores como nuevo envío de formulario o nuevo pedido, 6 acciones y 2 búsquedas).",
+    "Webhooks de la Data API (formularios, publicación del sitio, items del CMS, pedidos...).",
+    "Exportar colecciones del CMS a CSV desde el Designer (no re-verificado)."
+  ],
+  "rpa": "no hace falta: la Data API, el MCP oficial y los conectores cubren CMS, formularios y tienda.",
+  "dificultad": "Fácil",
+  "permisos_acotados": "Para scripts y n8n, un site token por uso, solo con scopes de lectura (sites:read, pages:read, cms:read, forms:read y ecommerce:read si hay tienda) y para un único sitio; revocarlo en API access cuando no se use. Para un agente que solo deba leer, usar el MCP local (webflow-mcp-server) con ese token de lectura. Para el MCP remoto, autorizar con un usuario dedicado de rol limitado y activar la aprobación manual de acciones en el cliente IA. Lo que NO se puede acotar: el site token no caduca salvo tras 365 días sin uso y no se limita por colección ni por campo (forms:read da todos los envíos de formularios, con datos personales); el MCP remoto hereda todo lo que pueda hacer el usuario en el workspace y no tiene interruptor de solo lectura. La ayuda de Webflow se contradice sobre qué roles pueden autorizar el MCP (no verificado).",
+  "pedir_al_informatico": "Que un administrador del sitio genere en Site settings > Apps & integrations > API access un token 'IA-lectura' solo con permisos de lectura (Sites, Pages, CMS, Forms y Ecommerce si aplica) y lo guarde en un gestor de secretos. Si se usa el conector MCP en Claude, que lo autorice con un usuario de rol limitado y deje la aprobación manual de acciones activada.",
+  "demo_gratis": "Plan Starter gratis y permanente (subdominio webflow.io, pocas páginas, límites de CMS y formularios). Permite crear site tokens y usar el MCP según la tabla de límites y guías de terceros; no está confirmado de forma explícita en la página de precios. Sin sandbox de ecommerce gratis verificado.",
+  "demo_resumen": "gratis permanente",
+  "coste_demo": "0 € con Starter, si basta (API probable, no confirmada del todo). Desde mayo de 2026 los planes de sitio son Starter, Basic, Premium (fusiona los antiguos CMS y Business), Team y Enterprise, más los de Ecommerce. Premium: 25 US$/mes con pago anual o 39 US$/mes mensual (blog oficial de Webflow, may-2026). Basic: 15 US$/mes anual o 25 US$/mes mensual (según terceros, ago-2026). Precios en dólares; IVA y precios en euros no verificados. Precios de los planes Ecommerce no verificados. No se pudo abrir webflow.com/pricing el 9-oct-2026.",
+  "coste_resumen": "0 € (Starter; API no confirmada) o Basic 15 US$/mes (anual)",
+  "migracion": {
+    "veredicto": "conectar tal cual"
+  },
+  "fuentes": [
+    "https://developers.webflow.com/data/reference/site-token",
+    "https://developers.webflow.com/data/reference/scopes",
+    "https://developers.webflow.com/data/reference/rate-limits",
+    "https://developers.webflow.com/data/docs/ai-tools",
+    "https://developers.webflow.com/mcp/reference/how-it-works",
+    "https://github.com/webflow/mcp-server",
+    "https://developers.webflow.com/changelog/04082025-mcp-server",
+    "https://developers.webflow.com/home/changelog/2025/9/4",
+    "https://developers.webflow.com/mcp/changelog/20260117",
+    "https://developers.webflow.com/home/changelog/2026/4/1",
+    "https://help.webflow.com/hc/en-us/articles/52637346869779-Connect-Claude-to-Webflow (visto en resultados; la página devolvió 403)",
+    "https://www.cmswire.com/digital-experience/webflow-adds-claude-connector-for-ai-driven-site-management (prensa, fecha del conector)",
+    "https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.webflow/",
+    "https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.webflowtrigger/",
+    "https://docs.n8n.io/integrations/builtin/credentials/webflow/",
+    "https://apps.make.com/webflow",
+    "https://zapier.com/apps/webflow/integrations",
+    "https://webflow.com/blog/simplified-plans-and-updated-pricing-2026 (precio de Premium visto en resultados de búsqueda)",
+    "https://community.webflow.com/updates/post/updates-to-webflow-plans-and-pricing-mmTMW66ihrRXZ0o",
+    "https://www.flowninja.com/blog/webflow-pricing-demystified (tercero, precios Basic y Premium)",
+    "https://webflow.com/blog/getting-started-webflow-cms-api",
+    "https://supergood.ai/api-report-card/webflow (tercero)"
+  ],
+  "confianza": "media"
+}
