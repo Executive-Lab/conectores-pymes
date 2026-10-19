@@ -20,3 +20,6 @@ Thumbs.db
 
 # Temporales
 .tmp/
+
+# Worktrees: cada trabajo en su rama y en su carpeta (.worktrees/<rama>/)
+.worktrees/
